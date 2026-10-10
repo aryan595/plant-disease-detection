@@ -1,0 +1,52 @@
+﻿# API keys and environment secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+venv/
+.venv/
+
+# Python cache and testing
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# React dependencies and build output
+node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Downloaded datasets and generated data
+PlantVillage-Dataset/
+data/external/
+data/processed/
+data/splits/
+
+# Trained model checkpoints
+models/*.pth
+models/*.pt
+models/*.onnx
+models/*.safetensors
+
+# Generated evaluation reports
+models/combined_*report*.json
+models/combined_*report*.csv
+models/combined_*confusion_matrix*.csv
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+# Generated evaluation artifacts
+data/*.png
+data/*report*.txt
+data/*manifest*.csv
+models/*summary*.json
+
+# Backup files
+app/disease_info.backup.json

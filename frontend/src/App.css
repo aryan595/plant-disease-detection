@@ -1,0 +1,1785 @@
+.app {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================
+   Header
+   ========================================= */
+
+.header {
+  width: 100%;
+
+  padding: 15px 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: white;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+.logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+
+.header-subtitle {
+  margin-top: 2px;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+}
+
+
+.model-badge {
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 0.75rem;
+
+  font-weight: 650;
+}
+
+
+/* =========================================
+   Main
+   ========================================= */
+
+.main-content {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 28px 40px 55px;
+
+  flex: 1;
+}
+
+
+/* =========================================
+   Hero
+   ========================================= */
+
+.hero {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+
+.hero-badge {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  margin-bottom: 10px;
+
+  border-radius: 999px;
+
+  background: #eef6f0;
+
+  color: #287a45;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+}
+
+
+.hero h1 {
+  margin: 0;
+
+  font-size: 2.45rem;
+
+  line-height: 1.1;
+
+  font-weight: 850;
+
+  letter-spacing: -1.2px;
+}
+
+
+.hero p {
+  max-width: 620px;
+
+  margin: 10px auto 0;
+
+  color: #64748b;
+
+  font-size: 0.9rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   Main workspace
+   ========================================= */
+
+.workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 20px;
+
+  align-items: stretch;
+}
+
+
+/* =========================================
+   Panels
+   ========================================= */
+
+.image-panel,
+.result-panel,
+.disease-info-section,
+.gradcam-section {
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 19px;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.045);
+}
+
+
+.image-panel,
+.result-panel {
+
+  padding: 22px;
+}
+
+
+/* =========================================
+   Panel heading
+   ========================================= */
+
+.panel-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 16px;
+}
+
+
+.panel-header h2 {
+  margin: 0;
+
+  font-size: 1.12rem;
+}
+
+
+.panel-header p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+}
+
+
+.step-number {
+  color: #94a3b8;
+
+  font-size: 0.73rem;
+
+  font-weight: 800;
+}
+
+
+/* =========================================
+   Upload area
+   ========================================= */
+
+.upload-area {
+  min-height: 310px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 18px;
+
+  text-align: center;
+
+  border: 2px dashed #cbd5e1;
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  background: #fafafa;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.upload-area:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+}
+
+
+.upload-area input {
+  display: none;
+}
+
+
+.upload-icon {
+  font-size: 2.6rem;
+
+  margin-bottom: 8px;
+}
+
+
+.upload-area h3 {
+  margin: 0;
+
+  font-size: 1rem;
+}
+
+
+.upload-area p {
+  margin: 6px 0 15px;
+
+  color: #64748b;
+
+  font-size: 0.8rem;
+}
+
+
+.upload-button {
+  padding: 9px 16px;
+
+  border-radius: 9px;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 0.8rem;
+
+  font-weight: 650;
+}
+
+
+/* =========================================
+   Preview image
+   ========================================= */
+
+.main-preview-image {
+  width: 100%;
+
+  max-height: 300px;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+}
+
+
+/* =========================================
+   File
+   ========================================= */
+
+.selected-file {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 10px;
+
+  color: #64748b;
+
+  font-size: 0.75rem;
+}
+
+
+.file-name {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   Analyze button
+   ========================================= */
+
+.predict-button {
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.predict-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  opacity: 0.93;
+}
+
+
+.predict-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.6;
+}
+
+
+/* =========================================
+   Empty result
+   ========================================= */
+
+.empty-result {
+  min-height: 370px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+
+.empty-icon,
+.loading-icon {
+  font-size: 2.6rem;
+
+  margin-bottom: 12px;
+}
+
+
+.empty-result h2 {
+  margin: 0 0 8px;
+
+  font-size: 1.12rem;
+}
+
+
+.empty-result p {
+  max-width: 300px;
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   Result
+   ========================================= */
+
+.result-content {
+  height: 100%;
+}
+
+
+.result-status-badge {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+}
+
+
+/* High confidence */
+
+.result-status-badge.high {
+  background: #ecfdf3;
+
+  color: #15803d;
+}
+
+
+/* Low confidence */
+
+.result-status-badge.low {
+  background: #fff7ed;
+
+  color: #c2410c;
+}
+
+
+/* =========================================
+   Prediction summary
+   ========================================= */
+
+.prediction-summary {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+}
+
+
+.prediction-main {
+  padding: 12px 0;
+
+  border-bottom: 1px solid #eef2f7;
+}
+
+
+.prediction-main .label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 0.75rem;
+}
+
+
+.prediction-main strong {
+  font-size: 1rem;
+}
+
+
+/* =========================================
+   Confidence
+   ========================================= */
+
+.confidence-box {
+  margin-top: 14px;
+
+  padding: 14px;
+
+  border-radius: 13px;
+
+  background: #f8fafc;
+}
+
+
+.confidence-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+
+.confidence-header span {
+  color: #64748b;
+
+  font-size: 0.76rem;
+}
+
+
+.confidence-header strong {
+  font-size: 1rem;
+}
+
+
+.confidence-bar {
+  width: 100%;
+
+  height: 6px;
+
+  margin-top: 9px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e2e8f0;
+}
+
+
+.confidence-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #111827;
+}
+
+
+/* =========================================
+   Confidence warning
+   ========================================= */
+
+.confidence-warning {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: 12px;
+
+  padding: 11px 12px;
+
+  border-radius: 10px;
+
+  background: #fff7ed;
+
+  color: #9a3412;
+
+  font-size: 0.75rem;
+
+  line-height: 1.45;
+}
+
+
+.confidence-warning p {
+  margin: 0;
+}
+
+
+/* =========================================
+   Top predictions
+   ========================================= */
+
+.top-predictions {
+  margin-top: 16px;
+}
+
+
+.top-predictions h3 {
+  margin: 0 0 9px;
+
+  font-size: 0.86rem;
+}
+
+
+.prediction-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px 11px;
+
+  margin-bottom: 6px;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  font-size: 0.75rem;
+}
+
+
+.prediction-item strong {
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   New Analysis
+   ========================================= */
+
+.reset-button {
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 10px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #334155;
+
+  font-size: 0.8rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.reset-button:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+}
+
+
+/* =========================================
+   Error
+   ========================================= */
+
+.error-message {
+  margin-top: 18px;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #fef2f2;
+
+  color: #b91c1c;
+
+  font-size: 0.78rem;
+}
+
+
+/* =========================================
+   Disease information
+   ========================================= */
+
+.disease-info-section {
+  margin-top: 20px;
+
+  padding: 22px;
+}
+
+
+.section-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  margin-bottom: 16px;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: 1.12rem;
+}
+
+
+.section-heading p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+}
+
+
+/* Description */
+
+.description-card {
+  padding: 16px;
+
+  margin-bottom: 14px;
+
+  border-radius: 13px;
+
+  background: #f8fafc;
+}
+
+
+.description-card h3 {
+  margin: 0 0 6px;
+
+  font-size: 0.95rem;
+}
+
+
+.description-card p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+
+/* Disease grid */
+
+.disease-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 13px;
+}
+
+
+.disease-info-card {
+  padding: 16px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 13px;
+
+  background: white;
+}
+
+
+.disease-card-icon {
+  font-size: 1.35rem;
+
+  margin-bottom: 7px;
+}
+
+
+.disease-info-card h3 {
+  margin: 0 0 8px;
+
+  font-size: 0.86rem;
+}
+
+
+.disease-info-card ul {
+  margin: 0;
+
+  padding-left: 17px;
+}
+
+
+.disease-info-card li {
+  margin-bottom: 6px;
+
+  color: #64748b;
+
+  font-size: 0.76rem;
+
+  line-height: 1.45;
+}
+
+
+/* Disclaimer */
+
+.disclaimer {
+  display: flex;
+
+  gap: 8px;
+
+  align-items: flex-start;
+
+  margin-top: 14px;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #fff7ed;
+
+  color: #92400e;
+
+  font-size: 0.73rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   Grad-CAM
+   ========================================= */
+
+.gradcam-section {
+  margin-top: 20px;
+
+  padding: 22px;
+}
+
+
+.gradcam-content {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(220px, 0.6fr);
+
+  gap: 22px;
+
+  align-items: center;
+}
+
+
+.gradcam-image {
+  width: 100%;
+
+  max-height: 430px;
+
+  object-fit: contain;
+
+  border-radius: 13px;
+}
+
+
+.gradcam-info h3 {
+  margin: 0 0 8px;
+
+  font-size: 0.95rem;
+}
+
+
+.gradcam-info p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+
+  line-height: 1.55;
+}
+
+
+/* Legend */
+
+.heatmap-legend {
+  margin-top: 20px;
+
+  color: #64748b;
+
+  font-size: 0.7rem;
+}
+
+
+.legend-gradient {
+  height: 9px;
+
+  margin: 7px 0;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0b1b9a,
+      #16a085,
+      #f1c40f,
+      #e74c3c
+    );
+}
+
+
+/* =========================================
+   Initial info cards
+   ========================================= */
+
+.info-section {
+  margin-top: 20px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+
+.info-card {
+  display: flex;
+
+  gap: 13px;
+
+  padding: 17px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+}
+
+
+.info-number {
+  font-size: 1.15rem;
+
+  font-weight: 800;
+}
+
+
+.info-card h3 {
+  margin: 0 0 5px;
+
+  font-size: 0.84rem;
+}
+
+
+.info-card p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.74rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   Footer
+   ========================================= */
+
+.footer {
+  padding: 16px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 0.72rem;
+
+  border-top: 1px solid #e5e7eb;
+
+  background: white;
+}
+
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+
+  .disease-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .gradcam-content {
+    grid-template-columns: 1fr;
+  }
+
+
+  .info-section {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .main-content {
+    padding: 22px 14px 40px;
+  }
+
+
+  .header {
+    padding: 13px 16px;
+  }
+
+
+  .model-badge {
+    display: none;
+  }
+
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+
+  .prediction-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .image-panel,
+  .result-panel,
+  .disease-info-section,
+  .gradcam-section {
+    padding: 17px;
+  }
+
+
+  .upload-area {
+    min-height: 260px;
+  }
+
+}
+
+/* =========================================
+   Hidden file input
+   ========================================= */
+
+.hidden-file-input {
+  display: none;
+}
+
+
+/* =========================================
+   Drag & Drop
+   ========================================= */
+
+.upload-area {
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.upload-area.dragging {
+  background: #eef6f0;
+
+  border-color: #4caf68;
+
+  transform: scale(1.01);
+}
+
+
+.upload-area.disabled {
+  cursor: not-allowed;
+
+  opacity: 0.75;
+}
+
+
+/* =========================================
+   Upload format text
+   ========================================= */
+
+.upload-formats {
+  display: block;
+
+  margin-top: 14px;
+
+  color: #94a3b8;
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================================
+   Image action buttons
+   ========================================= */
+
+.image-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 2fr;
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+
+.change-image-button {
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #334155;
+
+  font-size: 0.84rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.change-image-button:hover:not(:disabled) {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+}
+
+
+.change-image-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.6;
+}
+
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .image-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* =========================================
+   Healthy status
+   ========================================= */
+
+.result-status-badge.healthy {
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+
+/* =========================================
+   Healthy message
+   ========================================= */
+
+.healthy-message {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  background: #ecfdf3;
+
+  color: #166534;
+
+  font-size: 0.78rem;
+
+  line-height: 1.45;
+}
+
+
+.healthy-message strong {
+  display: block;
+
+  margin-bottom: 3px;
+}
+
+
+.healthy-message p {
+  margin: 0;
+
+  color: #4d7c5b;
+}
+
+
+/* =========================================
+   Better disease/health title
+   ========================================= */
+
+.disease-info-section .description-card h3 {
+  font-weight: 750;
+}
+
+/* =========================================
+   STEP 34 - UX POLISH
+   ========================================= */
+
+
+/* =========================================
+   Completed analyze button
+   ========================================= */
+
+.predict-button.analyzed {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+
+/* =========================================
+   Completed analysis note
+   ========================================= */
+
+.analysis-complete-note {
+  margin-top: 10px;
+
+  padding: 9px 11px;
+
+  border: 1px solid #d8e4ef;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+  font-size: 0.74rem;
+
+  line-height: 1.4;
+}
+
+
+.analysis-complete-note strong {
+  color: #334155;
+}
+
+
+/* =========================================
+   Better loading state
+   ========================================= */
+
+.loading-result {
+  min-height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 45px 25px;
+}
+
+
+.loading-result h2 {
+  margin: 14px 0 6px;
+
+  font-size: 1.25rem;
+
+  color: #0f172a;
+}
+
+
+.loading-result p {
+  max-width: 390px;
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.84rem;
+
+  line-height: 1.5;
+}
+
+
+.loading-spinner {
+  width: 58px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 4px solid #e2e8f0;
+
+  border-top-color: #0f172a;
+
+  border-radius: 50%;
+
+  font-size: 1.65rem;
+
+  animation: detectorSpin 0.9s linear infinite;
+}
+
+
+@keyframes detectorSpin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+.loading-progress {
+  width: 230px;
+
+  height: 5px;
+
+  overflow: hidden;
+
+  margin-top: 20px;
+
+  border-radius: 999px;
+
+  background: #e2e8f0;
+}
+
+
+.loading-progress-fill {
+  width: 45%;
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: #0f172a;
+
+  animation: detectorProgress 1.3s ease-in-out infinite;
+}
+
+
+@keyframes detectorProgress {
+
+  0% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(120%);
+  }
+
+  100% {
+    transform: translateX(310%);
+  }
+
+}
+
+
+.loading-caption {
+  margin-top: 9px;
+
+  color: #94a3b8;
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================================
+   Top predictions header
+   ========================================= */
+
+.subsection-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 9px;
+}
+
+
+.subsection-header h3 {
+  margin: 0;
+}
+
+
+.subsection-header span {
+  font-size: 0.67rem;
+
+  color: #94a3b8;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================
+   Prediction ranking
+   ========================================= */
+
+.prediction-item {
+  gap: 12px;
+}
+
+
+.prediction-rank {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 21px;
+
+  height: 21px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: #e2e8f0;
+
+  color: #64748b;
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+}
+
+
+.prediction-item.top-result .prediction-rank {
+  background: #0f172a;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   Description label
+   ========================================= */
+
+.description-label {
+  margin-bottom: 5px;
+
+  font-size: 0.64rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.08em;
+
+  color: #94a3b8;
+}
+
+
+/* =========================================
+   Disease card top
+   ========================================= */
+
+.disease-card-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 9px;
+}
+
+
+/* =========================================
+   Grad-CAM
+   ========================================= */
+
+.section-mini-label {
+  margin-bottom: 4px;
+
+  font-size: 0.62rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.1em;
+
+  color: #94a3b8;
+}
+
+
+.gradcam-image-wrap {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 330px;
+
+  padding: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  background: #f8fafc;
+}
+
+
+.gradcam-image {
+  display: block;
+
+  width: 100%;
+
+  max-width: 470px;
+
+  max-height: 430px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+}
+
+
+.gradcam-info {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 14px;
+}
+
+
+.gradcam-explanation-box {
+  display: flex;
+
+  gap: 12px;
+
+  align-items: flex-start;
+
+  padding: 15px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+}
+
+
+.explanation-icon {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 10px;
+
+  background: #f1f5f9;
+
+  font-size: 1.15rem;
+}
+
+
+.gradcam-explanation-box h3 {
+  margin: 0 0 5px;
+
+  font-size: 0.92rem;
+
+  color: #0f172a;
+}
+
+
+.gradcam-explanation-box p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.77rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   Grad-CAM points
+   ========================================= */
+
+.gradcam-points {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+.gradcam-point {
+  display: flex;
+
+  gap: 10px;
+
+  align-items: flex-start;
+}
+
+
+.point-icon {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 25px;
+
+  height: 25px;
+
+  border-radius: 7px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 0.58rem;
+
+  font-weight: 750;
+}
+
+
+.gradcam-point strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #1e293b;
+
+  font-size: 0.76rem;
+}
+
+
+.gradcam-point p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.71rem;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================
+   Grad-CAM note
+   ========================================= */
+
+.gradcam-note {
+  display: flex;
+
+  gap: 8px;
+
+  align-items: flex-start;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+  font-size: 0.69rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   Responsive Grad-CAM
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .gradcam-content {
+    grid-template-columns: 1fr !important;
+  }
+
+
+  .gradcam-image-wrap {
+    min-height: 260px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .loading-progress {
+    width: 190px;
+  }
+
+
+  .gradcam-image-wrap {
+    min-height: 220px;
+
+    padding: 10px;
+  }
+
+
+  .gradcam-note {
+    font-size: 0.66rem;
+  }
+
+}

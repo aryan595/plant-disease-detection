@@ -1783,3 +1783,116 @@
   }
 
 }
+
+/* =========================================
+   Header actions and language selector
+   ========================================= */
+
+.header-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* Language label and dropdown */
+.language-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.language-control label {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Styled dropdown */
+.language-selector {
+  appearance: none;
+  -webkit-appearance: none;
+
+  min-width: 138px;
+  max-width: 180px;
+
+  padding: 10px 36px 10px 13px;
+
+  border: 1px solid #dbe3ed;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 16px;
+
+  color: #172033;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  outline: none;
+
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.04);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.language-selector:hover {
+  border-color: #86b99a;
+  background-color: #fbfefc;
+}
+
+.language-selector:focus-visible {
+  border-color: #25834c;
+  box-shadow: 0 0 0 3px rgba(37, 131, 76, 0.15);
+}
+
+.language-selector option {
+  padding: 10px;
+  background-color: #ffffff;
+  color: #172033;
+}
+
+/* Keep the model badge beside the language selector */
+.header-actions .model-badge {
+  margin: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+  .header-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .language-control {
+    gap: 6px;
+  }
+
+  .language-selector {
+    min-width: 125px;
+    max-width: 155px;
+    padding: 9px 32px 9px 10px;
+    font-size: 13px;
+  }
+
+  .language-control label {
+    font-size: 13px;
+  }
+}

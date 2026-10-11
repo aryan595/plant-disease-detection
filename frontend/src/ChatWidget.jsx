@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "./ChatWidget.css";
+// import { LANGUAGES } from "./translations";
 
 const API_URL = "http://127.0.0.1:8000/chat";
 
@@ -12,32 +13,7 @@ const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
 const MAX_STORED_MESSAGES = 50;
 const MAX_REQUEST_MESSAGES = 10;
 
-const LANGUAGES = [
-  { value: "auto", label: "Auto-detect" },
-  { value: "en", label: "English" },
-  { value: "hi", label: "Hindi — हिन्दी" },
-  { value: "mr", label: "Marathi — मराठी" },
-  { value: "bn", label: "Bengali — বাংলা" },
-  { value: "te", label: "Telugu — తెలుగు" },
-  { value: "ta", label: "Tamil — தமிழ்" },
-  { value: "gu", label: "Gujarati — ગુજરાતી" },
-  { value: "kn", label: "Kannada — ಕನ್ನಡ" },
-  { value: "ml", label: "Malayalam — മലയാളം" },
-  { value: "pa", label: "Punjabi — ਪੰਜਾਬੀ" },
-  { value: "or", label: "Odia — ଓଡ଼ିଆ" },
-  { value: "ur", label: "Urdu — اردو" },
-  { value: "as", label: "Assamese — অসমীয়া" },
-  { value: "ne", label: "Nepali — नेपाली" },
-  { value: "kok", label: "Konkani" },
-  { value: "mai", label: "Maithili" },
-  { value: "mni", label: "Meitei — Manipuri" },
-  { value: "ks", label: "Kashmiri" },
-  { value: "sd", label: "Sindhi" },
-  { value: "sa", label: "Sanskrit" },
-  { value: "brx", label: "Bodo" },
-  { value: "doi", label: "Dogri" },
-  { value: "sat", label: "Santali" },
-];
+
 
 const UI_TEXT = {
   en: {
@@ -588,14 +564,15 @@ function buildPlantContext(result) {
 }
 
 
-export default function ChatWidget({ plantResult = null }) {
+export default function ChatWidget({ plantResult = null, language }) {
+  // const setLanguage = onlanguagechange
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useState(loadSavedLanguage);
   const [messages, setMessages] = useState(loadSavedMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
+  const voiceRestartTimerRef = useRef(null);
   const shouldKeepListeningRef = useRef(false);
   const [voiceDraft, setVoiceDraft] = useState("");
   const [speakingIndex, setSpeakingIndex] = useState(null);
@@ -603,6 +580,25 @@ export default function ChatWidget({ plantResult = null }) {
 
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setMessages((previous) => {
+      const userHasAsked = previous.some(
+        (message) => message.role === "user"
+      );
+
+      if (userHasAsked) {
+        return previous;
+      }
+
+      return [
+        {
+          role: "assistant",
+          content: getGreeting(language),
+        },
+      ];
+    });
+  }, [language]);
 
   const text = getText(language);
   const plantContext = buildPlantContext(plantResult);
@@ -830,76 +826,66 @@ export default function ChatWidget({ plantResult = null }) {
       return;
     }
 
-    // Clicking the microphone again stops recording.
+    // Stop listening without immediately discarding unfinished words.
     if (isListening) {
       shouldKeepListeningRef.current = false;
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      setVoiceDraft("");
+
+      if (voiceRestartTimerRef.current !== null) {
+        window.clearTimeout(voiceRestartTimerRef.current);
+        voiceRestartTimerRef.current = null;
+      }
+
+      try {
+        recognitionRef.current?.stop();
+      } catch {
+        setIsListening(false);
+        setVoiceDraft("");
+      }
+
       return;
     }
 
-    const speechLocales = {
-      auto: "en-IN",
-      en: "en-IN",
-      hi: "hi-IN",
-      mr: "mr-IN",
-      bn: "bn-IN",
-      te: "te-IN",
-      ta: "ta-IN",
-      gu: "gu-IN",
-      kn: "kn-IN",
-      ml: "ml-IN",
-      pa: "pa-IN",
-      or: "or-IN",
-      ur: "ur-IN",
-      as: "as-IN",
-      ne: "ne-NP",
-      kok: "mr-IN",
-      mai: "hi-IN",
-    };
-
     const recognition = new SpeechRecognition();
 
-    recognition.lang = speechLocales[language] || "en-IN";
+    // Use the shared language map so voice input and speech output agree.
+    recognition.lang = getSpeechLanguage(language);
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
     recognition.onstart = () => {
-      shouldKeepListeningRef.current = true;
       setIsListening(true);
       setError("");
     };
 
     recognition.onresult = (event) => {
-      let finalText = "";
-      let interimText = "";
+      const finalParts = [];
+      const interimParts = [];
 
-      // Process every result in this event, not just the first one.
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const speechResult = event.results[i];
-        const transcript = speechResult[0]?.transcript || "";
+        const result = event.results[i];
+        const transcript = result[0]?.transcript?.trim();
 
-        if (speechResult.isFinal) {
-          finalText += transcript;
+        if (!transcript) continue;
+
+        if (result.isFinal) {
+          finalParts.push(transcript);
         } else {
-          interimText += transcript;
+          interimParts.push(transcript);
         }
       }
 
-      if (finalText.trim()) {
-        const finalized = finalText.trim();
+      // Keep finalized speech in the input box.
+      const finalized = finalParts.join(" ").trim();
 
+      if (finalized) {
         setInput((previous) =>
-          [previous.trim(), finalized]
-            .filter(Boolean)
-            .join(" ")
+          [previous.trim(), finalized].filter(Boolean).join(" ")
         );
       }
 
-      // Display temporary words while the browser is still listening.
-      setVoiceDraft(interimText.trim());
+      // Keep temporary words visible until the browser finalizes them.
+      setVoiceDraft(interimParts.join(" ").trim());
     };
 
     recognition.onerror = (event) => {
@@ -912,8 +898,7 @@ export default function ChatWidget({ plantResult = null }) {
           "Microphone access was denied. Allow microphone access in your browser settings."
         );
       } else if (event.error === "no-speech") {
-        // The browser can end a recognition session after silence.
-        // onend below will try to resume it.
+        // onend will attempt to resume listening.
       } else if (event.error !== "aborted") {
         shouldKeepListeningRef.current = false;
         setError(
@@ -923,27 +908,33 @@ export default function ChatWidget({ plantResult = null }) {
     };
 
     recognition.onend = () => {
-      // Some browsers end a session after a pause even when
-      // continuous mode is enabled. Resume while the user is listening.
-      if (shouldKeepListeningRef.current) {
-        setTimeout(() => {
+      // Resume if the browser ends the session while the mic is still active.
+      if (
+        shouldKeepListeningRef.current &&
+        recognitionRef.current === recognition
+      ) {
+        voiceRestartTimerRef.current = window.setTimeout(() => {
+          voiceRestartTimerRef.current = null;
+
           if (
-            shouldKeepListeningRef.current &&
-            recognitionRef.current === recognition
+            !shouldKeepListeningRef.current ||
+            recognitionRef.current !== recognition
           ) {
-            try {
-              recognition.start();
-            } catch {
-              shouldKeepListeningRef.current = false;
-              recognitionRef.current = null;
-              setIsListening(false);
-              setVoiceDraft("");
-              setError(
-                "Listening stopped. Please press the microphone to try again."
-              );
-            }
+            return;
           }
-        }, 300);
+
+          try {
+            recognition.start();
+          } catch {
+            shouldKeepListeningRef.current = false;
+            recognitionRef.current = null;
+            setIsListening(false);
+            setVoiceDraft("");
+            setError(
+              "Listening stopped. Please press the microphone to try again."
+            );
+          }
+        }, 500);
 
         return;
       }
@@ -1019,7 +1010,7 @@ export default function ChatWidget({ plantResult = null }) {
             </button>
           </header>
 
-          <div className="plant-chat-language">
+          {/* <div className="plant-chat-language">
             <label htmlFor="plant-chat-language">
               🌐 {text.language}
             </label>
@@ -1060,20 +1051,20 @@ export default function ChatWidget({ plantResult = null }) {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           {plantContext && (
             <div className="plant-chat-context">
-              <span>🌿 {text.currentAnalysis}</span>
+              {/* <span>🌿 {text.currentAnalysis}</span> */}
               <strong>
                 {plantContext.plant} — {plantContext.disease}
               </strong>
-              {typeof plantContext.confidence === "number" && (
+              {/* {typeof plantContext.confidence === "number" && (
                 <small>
                   Model confidence:{" "}
                   {plantContext.confidence.toFixed(2)}%
                 </small>
-              )}
+              )} */}
             </div>
           )}
 
@@ -1225,7 +1216,7 @@ export default function ChatWidget({ plantResult = null }) {
 
           <footer className="plant-chat-footer">
             <span>{text.footer}</span>
-            <span>{text.powered}</span>
+            {/* <span>{text.powered}</span> */}
           </footer>
         </section>
       )}

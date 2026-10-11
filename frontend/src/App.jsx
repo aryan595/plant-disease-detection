@@ -6,26 +6,89 @@ import ChatWidget from "./ChatWidget";
 const LANGUAGE_STORAGE_KEY = "plantDiseaseDetector.language";
 const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
 
+const CAMERA_TEXT = {
+  en: {
+    takePhoto: "Take Photo",
+    title: "Take a photo of your leaf",
+    hint: "Position the leaf in the frame and capture your photo.",
+    capture: "Capture Photo",
+    close: "Close camera",
+    cancel: "Cancel",
+    unavailable: "Camera access requires a supported browser and localhost or HTTPS.",
+    denied: "Camera permission denied. Allow camera access in your browser settings.",
+    failed: "Could not start the camera. Check whether another app is using it.",
+    notReady: "The camera is not ready yet. Please wait a moment.",
+    captureFailed: "Could not capture the photo. Please try again.",
+  },
+  hi: {
+    takePhoto: "कैमरे से फोटो लें",
+    title: "पत्ते की फोटो लें",
+    hint: "पत्ते को फ्रेम के अंदर रखें और फोटो लें।",
+    capture: "फोटो लें",
+    close: "कैमरा बंद करें",
+    cancel: "रद्द करें",
+    unavailable: "कैमरे के लिए समर्थित ब्राउज़र और localhost या HTTPS आवश्यक है।",
+    denied: "कैमरे की अनुमति नहीं मिली। ब्राउज़र सेटिंग में अनुमति दें।",
+    failed: "कैमरा शुरू नहीं हो सका। जाँचें कि कोई अन्य ऐप कैमरे का उपयोग तो नहीं कर रहा।",
+    notReady: "कैमरा अभी तैयार नहीं है। कृपया प्रतीक्षा करें।",
+    captureFailed: "फोटो नहीं ली जा सकी। कृपया फिर प्रयास करें।",
+  },
+  mr: {
+    takePhoto: "कॅमेऱ्याने फोटो काढा",
+    title: "पानाचा फोटो काढा",
+    hint: "पान फ्रेममध्ये ठेवा आणि फोटो काढा.",
+    capture: "फोटो काढा",
+    close: "कॅमेरा बंद करा",
+    cancel: "रद्द करा",
+    unavailable: "कॅमेऱ्यासाठी समर्थित ब्राउझर आणि localhost किंवा HTTPS आवश्यक आहे.",
+    denied: "कॅमेऱ्याची परवानगी मिळाली नाही. ब्राउझर सेटिंग्जमध्ये परवानगी द्या.",
+    failed: "कॅमेरा सुरू करता आला नाही. दुसरे ॲप कॅमेरा वापरत आहे का ते तपासा.",
+    notReady: "कॅमेरा अजून तयार नाही. कृपया थोडे थांबा.",
+    captureFailed: "फोटो काढता आला नाही. पुन्हा प्रयत्न करा.",
+  },
+  bn: {
+    takePhoto: "ছবি তুলুন",
+    title: "পাতার ছবি তুলুন",
+    hint: "পাতাটি ফ্রেমের মধ্যে রাখুন এবং ছবি তুলুন।",
+    capture: "ছবি তুলুন",
+    close: "ক্যামেরা বন্ধ করুন",
+    cancel: "বাতিল",
+    unavailable: "ক্যামেরার জন্য সমর্থিত ব্রাউজার এবং localhost অথবা HTTPS প্রয়োজন।",
+    denied: "ক্যামেরার অনুমতি দেওয়া হয়নি। ব্রাউজার সেটিংসে অনুমতি দিন।",
+    failed: "ক্যামেরা চালু করা যায়নি। অন্য কোনো অ্যাপ ক্যামেরা ব্যবহার করছে কি না দেখুন।",
+    notReady: "ক্যামেরা এখনও প্রস্তুত নয়। একটু অপেক্ষা করুন।",
+    captureFailed: "ছবি তোলা যায়নি। আবার চেষ্টা করুন।",
+  },
+  ta: {
+    takePhoto: "புகைப்படம் எடுக்கவும்",
+    title: "இலையின் புகைப்படத்தை எடுக்கவும்",
+    hint: "இலையைச் சட்டகத்தின் உள்ளே வைத்து புகைப்படம் எடுக்கவும்.",
+    capture: "புகைப்படம் எடுக்கவும்",
+    close: "கேமராவை மூடவும்",
+    cancel: "ரத்துசெய்",
+    unavailable: "கேமராவிற்கு ஆதரிக்கப்படும் உலாவியும் localhost அல்லது HTTPS இணைப்பும் தேவை.",
+    denied: "கேமரா அனுமதி மறுக்கப்பட்டது. உலாவி அமைப்புகளில் அனுமதிக்கவும்.",
+    failed: "கேமராவைத் தொடங்க முடியவில்லை. வேறு செயலி கேமராவைப் பயன்படுத்துகிறதா எனச் சரிபார்க்கவும்.",
+    notReady: "கேமரா இன்னும் தயாராகவில்லை. சிறிது காத்திருக்கவும்.",
+    captureFailed: "புகைப்படம் எடுக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+  },
+};
+
 function App() {
   const [language, setLanguage] = useState(() => {
     try {
       const saved = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-      return LANGUAGES.some((item) => item.value === saved) ? saved : "en";
+
+      return LANGUAGES.some((item) => item.value === saved)
+        ? saved
+        : "en";
     } catch {
       return "en";
     }
   });
 
   const t = TRANSLATIONS[language] || TRANSLATIONS.en;
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-      localStorage.setItem(CHAT_LANGUAGE_KEY, language);
-    } catch {
-      // The app can still be used when browser storage is unavailable.
-    }
-  }, [language]);
+  const cameraText = CAMERA_TEXT[language] || CAMERA_TEXT.en;
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [result, setResult] = useState(null);
@@ -34,23 +97,129 @@ function App() {
   const [error, setError] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
 
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [cameraReady, setCameraReady] = useState(false);
+  const [cameraError, setCameraError] = useState("");
+
   const fileInputRef = useRef(null);
+  const videoRef = useRef(null);
+  const cameraStreamRef = useRef(null);
+  const cameraRequestRef = useRef(0);
 
-  // Reset everything
-  const handleReset = () => {
-    setSelectedImage(null);
-    setResult(null);
-    setGradcamImage(null);
-    setLoading(false);
-    setError(null);
-    setIsDragging(false);
+  // Remember the selected website language.
+  useEffect(() => {
+    try {
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+      localStorage.setItem(CHAT_LANGUAGE_KEY, language);
+    } catch {
+      console.warn("Could not save the selected language.");
+    }
+  }, [language]);
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+  // Attach the camera stream after the video element has rendered.
+  useEffect(() => {
+    if (
+      !isCameraOpen ||
+      !cameraReady ||
+      !cameraStreamRef.current ||
+      !videoRef.current
+    ) {
+      return;
+    }
+
+    const video = videoRef.current;
+    video.srcObject = cameraStreamRef.current;
+
+    video.play().catch(() => {
+      // The video may begin playing after the browser finishes loading it.
+    });
+  }, [isCameraOpen, cameraReady]);
+
+  // Release the camera if this component unmounts.
+  useEffect(() => {
+    return () => {
+      cameraRequestRef.current += 1;
+
+      if (cameraStreamRef.current) {
+        cameraStreamRef.current
+          .getTracks()
+          .forEach((track) => track.stop());
+
+        cameraStreamRef.current = null;
+      }
+    };
+  }, []);
+
+  // Stop the camera and release its hardware resources.
+  const stopCamera = () => {
+    cameraRequestRef.current += 1;
+
+    if (cameraStreamRef.current) {
+      cameraStreamRef.current
+        .getTracks()
+        .forEach((track) => track.stop());
+
+      cameraStreamRef.current = null;
+    }
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+
+    setCameraReady(false);
+    setCameraError("");
+    setIsCameraOpen(false);
+  };
+
+  // Start the live camera preview.
+  const startCamera = async () => {
+    const requestId = ++cameraRequestRef.current;
+
+    setCameraError("");
+    setCameraReady(false);
+    setIsCameraOpen(true);
+
+    if (
+      !navigator.mediaDevices ||
+      typeof navigator.mediaDevices.getUserMedia !== "function"
+    ) {
+      setCameraError(cameraText.unavailable);
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { ideal: "environment" },
+        },
+        audio: false,
+      });
+
+      // Release a stream if the modal was closed while permission was pending.
+      if (requestId !== cameraRequestRef.current) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+
+      cameraStreamRef.current = stream;
+      setCameraReady(true);
+    } catch (err) {
+      if (requestId !== cameraRequestRef.current) {
+        return;
+      }
+
+      if (
+        err.name === "NotAllowedError" ||
+        err.name === "PermissionDeniedError"
+      ) {
+        setCameraError(cameraText.denied);
+      } else {
+        setCameraError(cameraText.failed);
+      }
     }
   };
 
-  // Process uploaded file
+  // Validate a file, create its preview, and prepare it for analysis.
   const processFile = (file) => {
     if (!file) {
       return;
@@ -107,21 +276,96 @@ function App() {
     image.src = imageUrl;
   };
 
-  // File picker
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    processFile(file);
-  };
+  // Capture the camera frame and pass it through processFile().
+  const capturePhoto = () => {
+    const video = videoRef.current;
 
-  const openFilePicker = () => {
-    if (loading) {
+    if (
+      !video ||
+      !video.videoWidth ||
+      !video.videoHeight
+    ) {
+      setCameraError(cameraText.notReady);
       return;
     }
 
-    fileInputRef.current?.click();
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const context = canvas.getContext("2d");
+
+    if (!context) {
+      setCameraError(cameraText.captureFailed);
+      return;
+    }
+
+    context.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          setCameraError(cameraText.captureFailed);
+          return;
+        }
+
+        const file = new File(
+          [blob],
+          `plant-photo-${Date.now()}.jpg`,
+          {
+            type: "image/jpeg",
+            lastModified: Date.now(),
+          }
+        );
+
+        stopCamera();
+        processFile(file);
+      },
+      "image/jpeg",
+      0.92
+    );
   };
 
-  // Drag and drop
+  // Reset the current analysis.
+  const handleReset = () => {
+    if (isCameraOpen) {
+      stopCamera();
+    }
+
+    setSelectedImage(null);
+    setResult(null);
+    setGradcamImage(null);
+    setLoading(false);
+    setError(null);
+    setIsDragging(false);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  // File picker.
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    processFile(file);
+
+    // Allow selecting the same file again later.
+    event.target.value = "";
+  };
+
+  const openFilePicker = () => {
+    if (!loading) {
+      fileInputRef.current?.click();
+    }
+  };
+
+  // Drag and drop.
   const handleDragOver = (event) => {
     event.preventDefault();
 
@@ -143,11 +387,10 @@ function App() {
       return;
     }
 
-    const file = event.dataTransfer.files[0];
-    processFile(file);
+    processFile(event.dataTransfer.files[0]);
   };
 
-  // Analyze image
+  // Analyze the selected or captured image.
   const handlePredict = async () => {
     if (!selectedImage || loading || result) {
       return;
@@ -189,14 +432,15 @@ function App() {
       setResult(data);
       setGradcamImage(data.gradcam_image || null);
     } catch (err) {
-      console.error(err);
+      console.error("Plant analysis error:", err);
+
       setError(err.message || t.couldNotAnalyze);
     } finally {
       setLoading(false);
     }
   };
 
-  // Translate result status
+  // Translate the result status.
   const getStatusText = () => {
     if (!result) {
       return "";
@@ -219,6 +463,7 @@ function App() {
       <header className="header">
         <div>
           <div className="logo">{t.appTitle}</div>
+
           <div className="header-subtitle">
             {t.appSubtitle}
           </div>
@@ -240,10 +485,7 @@ function App() {
               aria-label={t.language}
             >
               {LANGUAGES.map((item) => (
-                <option
-                  key={item.value}
-                  value={item.value}
-                >
+                <option key={item.value} value={item.value}>
                   {item.label}
                 </option>
               ))}
@@ -290,7 +532,7 @@ function App() {
               className="hidden-file-input"
             />
 
-            {/* Upload and preview area */}
+            {/* Upload / preview area */}
             <div
               className={`upload-area ${
                 isDragging ? "dragging" : ""
@@ -313,6 +555,7 @@ function App() {
                   (event.key === "Enter" ||
                     event.key === " ")
                 ) {
+                  event.preventDefault();
                   openFilePicker();
                 }
               }}
@@ -324,9 +567,7 @@ function App() {
                   </div>
 
                   <h3>
-                    {isDragging
-                      ? t.dropHere
-                      : t.dragDrop}
+                    {isDragging ? t.dropHere : t.dragDrop}
                   </h3>
 
                   <p>{t.browseFiles}</p>
@@ -350,6 +591,18 @@ function App() {
               )}
             </div>
 
+            {/* Camera button */}
+            <div className="camera-action-row">
+              <button
+                type="button"
+                className="camera-button"
+                onClick={startCamera}
+                disabled={loading}
+              >
+                📷 {cameraText.takePhoto}
+              </button>
+            </div>
+
             {/* Selected file */}
             {selectedImage && (
               <div className="selected-file">
@@ -361,7 +614,7 @@ function App() {
               </div>
             )}
 
-            {/* Action buttons */}
+            {/* Image action buttons */}
             {selectedImage && (
               <div className="image-actions">
                 <button
@@ -390,10 +643,10 @@ function App() {
               </div>
             )}
 
-            {/* Successful analysis message */}
+            {/* Analysis complete note */}
             {result && !loading && (
               <div className="analysis-complete-note">
-                {t.analysisSuccess} {t.useAction}{" "}
+                {t.analysisSuccess}{" "}
                 <strong>{t.newAnalysis}</strong>{" "}
                 {t.testAnotherLeaf}
               </div>
@@ -456,10 +709,7 @@ function App() {
                 {/* Plant and condition */}
                 <div className="prediction-summary">
                   <div className="prediction-main">
-                    <span className="label">
-                      {t.plant}
-                    </span>
-
+                    <span className="label">{t.plant}</span>
                     <strong>{result.plant}</strong>
                   </div>
 
@@ -528,32 +778,29 @@ function App() {
                     <span>{t.modelRanking}</span>
                   </div>
 
-                  {result.top_3.map(
-                    (prediction, index) => (
-                      <div
-                        className={`prediction-item ${
-                          index === 0 ? "top-result" : ""
-                        }`}
-                        key={index}
-                      >
-                        <span>
-                          <span className="prediction-rank">
-                            {index + 1}
-                          </span>
+                  {result.top_3.map((prediction, index) => (
+                    <div
+                      className={`prediction-item ${
+                        index === 0 ? "top-result" : ""
+                      }`}
+                      key={index}
+                    >
+                      <span>
+                        <span className="prediction-rank">
+                          {index + 1}
+                        </span>{" "}
+                        {prediction.plant}
+                        {" — "}
+                        {prediction.disease}
+                      </span>
 
-                          {prediction.plant}
-                          {" — "}
-                          {prediction.disease}
-                        </span>
-
-                        <strong>
-                          {Number(
-                            prediction.confidence
-                          ).toFixed(2)}%
-                        </strong>
-                      </div>
-                    )
-                  )}
+                      <strong>
+                        {Number(
+                          prediction.confidence
+                        ).toFixed(2)}%
+                      </strong>
+                    </div>
+                  ))}
                 </div>
 
                 {/* New analysis */}
@@ -569,7 +816,7 @@ function App() {
           </div>
         </section>
 
-        {/* Error message */}
+        {/* General errors */}
         {error && (
           <div className="error-message">
             ⚠️ {error}
@@ -593,7 +840,6 @@ function App() {
               <div className="step-number">03</div>
             </div>
 
-            {/* Description */}
             <div className="description-card">
               <div className="description-label">
                 {result.is_healthy
@@ -602,18 +848,14 @@ function App() {
               </div>
 
               <h3>{result.disease}</h3>
-
               <p>{result.description}</p>
             </div>
 
-            {/* Information cards */}
             <div className="disease-info-grid">
               {/* Symptoms */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">
-                    🔎
-                  </div>
+                  <div className="disease-card-icon">🔎</div>
                 </div>
 
                 <h3>
@@ -632,9 +874,7 @@ function App() {
               {/* Management */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">
-                    🛠️
-                  </div>
+                  <div className="disease-card-icon">🛠️</div>
                 </div>
 
                 <h3>{t.management}</h3>
@@ -649,9 +889,7 @@ function App() {
               {/* Prevention */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">
-                    🛡️
-                  </div>
+                  <div className="disease-card-icon">🛡️</div>
                 </div>
 
                 <h3>{t.prevention}</h3>
@@ -664,7 +902,6 @@ function App() {
               </div>
             </div>
 
-            {/* Disclaimer */}
             <div className="disclaimer">
               <span>⚠️</span>
               <span>{t.disclaimer}</span>
@@ -672,7 +909,7 @@ function App() {
           </section>
         )}
 
-        {/* Grad-CAM explanation */}
+        {/* Grad-CAM */}
         {gradcamImage && (
           <section className="gradcam-section">
             <div className="panel-header">
@@ -682,7 +919,6 @@ function App() {
                 </div>
 
                 <h2>{t.gradcamTitle}</h2>
-
                 <p>{t.gradcamDescription}</p>
               </div>
 
@@ -690,7 +926,6 @@ function App() {
             </div>
 
             <div className="gradcam-content">
-              {/* Image */}
               <div className="gradcam-image-wrap">
                 <img
                   src={gradcamImage}
@@ -699,7 +934,6 @@ function App() {
                 />
               </div>
 
-              {/* Explanation */}
               <div className="gradcam-info">
                 <div className="gradcam-explanation-box">
                   <div className="explanation-icon">🧠</div>
@@ -748,7 +982,7 @@ function App() {
           </section>
         )}
 
-        {/* Initial project information */}
+        {/* Project information */}
         {!selectedImage && (
           <section className="info-section">
             <div className="info-card">
@@ -781,7 +1015,79 @@ function App() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Camera modal */}
+      {isCameraOpen && (
+        <div
+          className="camera-modal-overlay"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              stopCamera();
+            }
+          }}
+        >
+          <section
+            className="camera-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="camera-modal-title"
+          >
+            <div className="camera-modal-header">
+              <h2 id="camera-modal-title">
+                {cameraText.title}
+              </h2>
+
+              <button
+                type="button"
+                className="camera-close-button"
+                onClick={stopCamera}
+                aria-label={cameraText.close}
+                title={cameraText.close}
+              >
+                ×
+              </button>
+            </div>
+
+            <p className="camera-instructions">
+              {cameraText.hint}
+            </p>
+
+            {cameraError && (
+              <div className="camera-error" role="alert">
+                ⚠️ {cameraError}
+              </div>
+            )}
+
+            <video
+              ref={videoRef}
+              className="camera-video"
+              autoPlay
+              playsInline
+              muted
+              aria-label={cameraText.title}
+            />
+
+            <div className="camera-modal-actions">
+              <button
+                type="button"
+                className="camera-cancel-button"
+                onClick={stopCamera}
+              >
+                {cameraText.cancel}
+              </button>
+
+              <button
+                type="button"
+                className="camera-capture-button"
+                onClick={capturePhoto}
+                disabled={!cameraReady || Boolean(cameraError)}
+              >
+                📸 {cameraText.capture}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
       <footer className="footer">
         {t.footerBrand}
       </footer>
@@ -789,7 +1095,6 @@ function App() {
       <ChatWidget
         plantResult={result}
         language={language}
-        // onLanguageChange={setLanguage}
       />
     </div>
   );

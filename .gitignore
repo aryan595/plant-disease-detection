@@ -1,7 +1,9 @@
-﻿# API keys and environment secrets
+# API keys and environment secrets
 .env
 .env.*
 !.env.example
+.streamlit/secrets.toml
+!.streamlit/secrets.toml.example
 
 # Python virtual environments
 venv/
@@ -49,4 +51,9 @@ data/*manifest*.csv
 models/*summary*.json
 
 # Backup files
-app/disease_info.backup.json
+app/disease_info.backup*.json
+*.backup
+*.backup.*
+
+# Temporary / scratch directory
+scratch/

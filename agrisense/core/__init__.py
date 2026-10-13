@@ -1,0 +1,3 @@
+"""
+AgriSense Core Package
+"""

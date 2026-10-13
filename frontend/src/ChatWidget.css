@@ -661,7 +661,7 @@
   gap: 5px;
 
   margin-top: 8px;
-  padding: 5px 9px;
+  padding: 5px 10px;
 
   border: 1px solid #dce8df;
   border-radius: 8px;
@@ -670,17 +670,287 @@
   color: #315c3d;
 
   font-family: inherit;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
   line-height: 1.4;
 
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .plant-chat-speak-button:hover {
-  background: #e9f4ec;
+  background: #e2f0e6;
+  border-color: #9eccaa;
 }
 
-.plant-chat-speak-button:focus-visible {
-  outline: 2px solid #6b987a;
-  outline-offset: 2px;
+.plant-chat-speak-button.playing {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+  animation: pulse-border 1.5s infinite;
 }
+
+.plant-chat-speak-button .pulse-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Active speaking bubble highlight */
+.plant-chat-message.is-speaking-active .plant-chat-bubble {
+  border: 1.5px solid #10b981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.18);
+}
+
+/* Header Actions & Language Picker */
+.plant-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.plant-chat-lang-picker {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 2px 7px 2px 5px;
+}
+
+.plant-chat-lang-icon {
+  font-size: 0.85rem;
+}
+
+.plant-chat-lang-select {
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  max-width: 95px;
+}
+
+.plant-chat-lang-select option {
+  background: #1a2e22;
+  color: #ffffff;
+}
+
+/* 1:1 ChatGPT Voice Mode Toggle */
+.plant-chat-voice-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #d1fae5;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.plant-chat-voice-mode-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.plant-chat-voice-mode-toggle.active {
+  background: #10b981;
+  color: #064e3b;
+  border-color: #34d399;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.8);
+  }
+}
+
+/* 1:1 ChatGPT Live Voice Mode Banner */
+.plant-chat-voice-live-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #064e3b, #047857);
+  color: #ffffff;
+  border-bottom: 1px solid #10b981;
+  animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.plant-chat-voice-live-banner.status-thinking {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.plant-chat-voice-live-banner.status-speaking {
+  background: linear-gradient(135deg, #7c2d12, #ea580c);
+}
+
+.plant-chat-voice-live-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.plant-chat-voice-live-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.voice-status-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.voice-status-sub {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Acoustic Waveform Animation */
+.plant-chat-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+  padding: 0 4px;
+}
+
+.wave-bar {
+  width: 3.5px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 999px;
+  transition: height 0.15s ease;
+}
+
+.wave-bar.listening {
+  animation: wavePulse 0.8s ease-in-out infinite alternate;
+}
+
+.wave-bar.speaking {
+  animation: wavePulse 0.5s ease-in-out infinite alternate;
+  background: #fef08a;
+}
+
+.wave-bar.thinking {
+  animation: waveThinking 1.2s infinite ease-in-out;
+}
+
+.bar-1 { animation-delay: 0.1s; }
+.bar-2 { animation-delay: 0.25s; }
+.bar-3 { animation-delay: 0.4s; }
+.bar-4 { animation-delay: 0.55s; }
+
+@keyframes wavePulse {
+  0% { height: 5px; }
+  100% { height: 20px; }
+}
+
+@keyframes waveThinking {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+  50% { transform: scaleY(1.2); opacity: 1; }
+}
+
+.plant-chat-voice-live-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.plant-chat-voice-interrupt-btn {
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.plant-chat-voice-interrupt-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.plant-chat-voice-send-now-btn {
+  padding: 4px 8px;
+  background: #ffffff;
+  color: #064e3b;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.plant-chat-voice-close-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 3px 6px;
+}
+
+.plant-chat-voice-close-btn:hover {
+  color: #ffffff;
+}
+
+/* Auto-speak toggle button in composer */
+.plant-chat-autospeak-toggle {
+  flex-shrink: 0;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 7px 9px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.plant-chat-autospeak-toggle.active {
+  background: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
+}
+

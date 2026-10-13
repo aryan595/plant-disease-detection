@@ -7,51 +7,257 @@
 
 
 /* =========================================
-   Header
+   Modern Uncluttered Header
    ========================================= */
 
 .header {
   width: 100%;
-
-  padding: 15px 5%;
-
+  padding: 12px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  background: white;
-
-  border-bottom: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03);
 }
 
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
-.logo {
-  font-size: 1.15rem;
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-leaf-icon {
+  font-size: 1.35rem;
+  filter: drop-shadow(0 2px 4px rgba(22, 163, 74, 0.25));
+}
+
+.logo-title {
+  font-size: 1.25rem;
   font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #15803d 0%, #0f5132 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.logo-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #dcfce7;
+  color: #15803d;
+}
 
 .header-subtitle {
-  margin-top: 2px;
-
   color: #64748b;
-
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  font-weight: 500;
 }
 
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
-.model-badge {
-  padding: 7px 13px;
+.toolbar-cluster {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.location-cluster {
+  background: #f8fafc;
+  padding: 4px 6px;
   border-radius: 999px;
+  border: 1px solid #e2e8f0;
+}
 
-  background: #f1f5f9;
+.cluster-icon {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
 
-  color: #475569;
+.district-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+}
 
-  font-size: 0.75rem;
+.district-selector {
+  border: none;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e293b;
+  outline: none;
+  cursor: pointer;
+  max-width: 150px;
+}
 
+.gps-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
   font-weight: 650;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.gps-pill-btn:hover:not(:disabled) {
+  border-color: #16a34a;
+  color: #16a34a;
+  background: #f0fdf4;
+}
+
+.gps-active-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 650;
+  color: #047857;
+}
+
+.gps-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.gps-clear-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.weather-quick-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #166534;
+}
+
+.weather-divider {
+  color: #cbd5e1;
+}
+
+.utility-cluster {
+  gap: 10px;
+}
+
+.language-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.language-selector {
+  border: none;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: #1e293b;
+  outline: none;
+  cursor: pointer;
+}
+
+.model-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.pwa-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pwa-pill-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.pwa-pill-btn.installed {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #15803d;
 }
 
 
@@ -2085,5 +2291,2482 @@
     font-size: 13px;
   }
 }
+
+/* =========================================
+   Major Project: Severity Quantification
+   ========================================= */
+
+.severity-box {
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.severity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.severity-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.severity-badge {
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.severity-metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.severity-metric-row strong {
+  color: #0f172a;
+}
+
+.severity-bar-track {
+  width: 100%;
+  height: 9px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.severity-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.severity-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* =========================================
+   Major Project: Weather & Epidemic Risk Card
+   ========================================= */
+
+.weather-progression-card {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.weather-progression-card.risk-low {
+  border-left: 5px solid #22c55e;
+  background: linear-gradient(to right, #f0fdf4, #ffffff);
+}
+
+.weather-progression-card.risk-moderate {
+  border-left: 5px solid #f59e0b;
+  background: linear-gradient(to right, #fffbeb, #ffffff);
+}
+
+.weather-progression-card.risk-high {
+  border-left: 5px solid #ef4444;
+  background: linear-gradient(to right, #fef2f2, #ffffff);
+}
+
+.weather-progression-card.risk-critical {
+  border-left: 5px solid #7f1d1d;
+  background: linear-gradient(to right, #fef2f2, #fff1f2);
+}
+
+.weather-progression-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.weather-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weather-icon {
+  font-size: 1.6rem;
+}
+
+.weather-title-group h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.weather-location {
+  font-size: 0.76rem;
+  color: #64748b;
+}
+
+.risk-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.risk-pill.risk-low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.risk-pill.risk-moderate {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.risk-pill.risk-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.risk-pill.risk-critical {
+  background: #fecdd3;
+  color: #881337;
+}
+
+.weather-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #f1f5f9;
+}
+
+.weather-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.weather-metric .metric-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.weather-metric .metric-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+.progression-alert-body {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.progression-alert-body strong {
+  display: block;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.progression-alert-body p {
+  margin: 0 0 8px 0;
+}
+
+.progression-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(241, 245, 249, 0.75);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #1e293b;
+}
+
+.progression-action em {
+  font-style: normal;
+}
+
+/* =========================================
+   PDF Report Action
+   ========================================= */
+
+.pdf-report-action {
+  margin-top: 14px;
+}
+
+.download-pdf-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  transition: all 0.2s ease;
+}
+
+.download-pdf-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+
+.download-pdf-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.pdf-message {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #166534;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* =========================================
+   Prescribed Agricultural Treatments Section
+   ========================================= */
+
+.treatments-section {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.treatments-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.treatments-section-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.treatments-section-header p {
+  margin: 2px 0 0 0;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.cib-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #bae6fd;
+}
+
+.treatment-category-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.treatment-category-card.chemical {
+  border-top: 4px solid #3b82f6;
+}
+
+.treatment-category-card.organic {
+  border-top: 4px solid #10b981;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.category-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.badge-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.chemical-tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.organic-tag {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.treatment-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.treatment-item-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  transition: all 0.2s ease;
+}
+
+.treatment-item-card:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.treatment-item-top {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.commercial-name {
+  font-size: 0.95rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.active-ingredient {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+.treatment-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dosage-pill,
+.price-pill,
+.phi-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.dosage-pill {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.dosage-pill.organic-dose {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.price-pill {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.phi-pill {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.treatment-notes {
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* =========================================
+   Real-Time Spray Window Feasibility Card
+   ========================================= */
+
+.spray-window-card {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.spray-window-card.status-optimal {
+  border-left: 5px solid #16a34a;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.spray-window-card.status-caution {
+  border-left: 5px solid #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+}
+
+.spray-window-card.status-avoid {
+  border-left: 5px solid #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+}
+
+.spray-window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.spray-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spray-icon {
+  font-size: 1.5rem;
+}
+
+.spray-title-group h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.spray-summary {
+  font-size: 0.78rem;
+  color: #475569;
+}
+
+.spray-status-badge {
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.spray-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.spray-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.detail-icon {
+  font-size: 1.2rem;
+}
+
+.spray-detail-item strong {
+  display: block;
+  font-size: 0.76rem;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.spray-detail-item p {
+  margin: 2px 0 0 0;
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.35;
+}
+
+/* =========================================
+   Report Actions & WhatsApp Sharing Button
+   ========================================= */
+
+.report-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.whatsapp-share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.28);
+  transition: all 0.2s ease;
+}
+
+.whatsapp-share-button:hover {
+  background: linear-gradient(135deg, #128c7e 0%, #075e54 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.36);
+}
+
+/* =========================================
+   Disease Root Cause & Progression Timeline
+   ========================================= */
+
+.disease-timeline-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.timeline-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.timeline-header p {
+  margin: 2px 0 0 0;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.timeline-urgency-badge {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #fecdd3;
+  text-transform: uppercase;
+}
+
+.timeline-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.timeline-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+}
+
+.timeline-card.stage-past {
+  border-top: 3px solid #64748b;
+}
+
+.timeline-card.stage-current {
+  border-top: 3px solid #f59e0b;
+}
+
+.timeline-card.stage-future {
+  border-top: 3px solid #ef4444;
+}
+
+.stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stage-num {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+.stage-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.stage-badge.past {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.stage-badge.current {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.stage-badge.future {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.timeline-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.timeline-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.curative-window-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #9a3412;
+}
+
+.curative-icon {
+  font-size: 1.3rem;
+}
+
+/* =========================================
+   Knapsack Pump Tank-Mix Calculator
+   ========================================= */
+
+.tank-calculator-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.tank-calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tank-calc-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tank-calc-header p {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.field-ready-badge {
+  background: #f0fdf4;
+  color: #166534;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid #bbf7d0;
+}
+
+.tank-calc-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.pump-size-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pump-tab {
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #334155;
+}
+
+.pump-tab:hover {
+  background: #e2e8f0;
+}
+
+.pump-tab.active {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+
+.acres-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.acre-chip {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+.acre-chip:hover {
+  background: #e2e8f0;
+}
+
+.acre-chip.active {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+}
+
+.tank-output-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.tank-metric-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tank-metric-card.primary {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.tank-metric-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tank-metric-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 4px 0 2px 0;
+}
+
+.tank-metric-card.primary .tank-metric-val {
+  color: #1d4ed8;
+}
+
+.tank-metric-sub {
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+@media (max-width: 600px) {
+  .report-action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   Invalid Image & Non-Plant Rejection Card
+   ========================================= */
+
+.error-card-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.invalid-image-card {
+  background: #ffffff;
+  border: 2px solid #fca5a5;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.08);
+  animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.invalid-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.invalid-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.invalid-card-top h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #991b1b;
+}
+
+.error-detail-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.photo-guidance-box {
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.photo-guidance-box strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #991b1b;
+  margin-bottom: 8px;
+}
+
+.photo-guidance-box ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #475569;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.invalid-card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.retry-upload-button,
+.retry-camera-button {
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retry-upload-button {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 3px 10px rgba(22, 163, 74, 0.2);
+}
+
+.retry-upload-button:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+.retry-camera-button {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+
+.retry-camera-button:hover {
+  background: #f1f5f9;
+}
+
+/* =========================================
+   Maharashtra District Selector & Weather Pill
+   ========================================= */
+
+.district-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.district-control label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.district-selector {
+  border: none;
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0f172a;
+  outline: none;
+  cursor: pointer;
+  max-width: 220px;
+}
+
+.header-weather-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #166534;
+  box-shadow: 0 2px 6px rgba(22, 101, 52, 0.06);
+}
+
+/* =========================================
+   Interactive Sample Leaf Demos
+   ========================================= */
+
+.quick-sample-section {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-radius: 14px;
+  border: 1px dashed #cbd5e1;
+}
+
+.sample-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.sample-chips-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sample-chip {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 7px 15px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.sample-chip:hover:not(:disabled) {
+  border-color: #16a34a;
+  background: #f0fdf4;
+  color: #166534;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   Audio Advisory (Text-to-Speech)
+   ========================================= */
+
+.audio-advisory-control {
+  margin: 14px 0;
+}
+
+.audio-advisory-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+  transition: all 0.2s ease;
+}
+
+.audio-advisory-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+}
+
+.audio-advisory-btn.speaking {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  animation: pulse-speak 1.5s infinite;
+}
+
+@keyframes pulse-speak {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* =========================================
+   APMC Mandi Rates Card
+   ========================================= */
+
+.mandi-rates-card {
+  background: linear-gradient(145deg, #ffffff, #fbfdf9);
+  border: 1px solid #dcfce7;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.06);
+}
+
+.mandi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mandi-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #166534;
+  background: #dcfce7;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.mandi-trend {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #f0fdf4;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+}
+
+.mandi-market-title {
+  font-size: 0.95rem;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+.mandi-price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.mandi-stat-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mandi-stat-box.modal-box {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.mandi-stat-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.mandi-stat-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.mandi-stat-box small {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* =========================================
+   Consult AI Doctor Card
+   ========================================= */
+
+.ai-doctor-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+}
+
+.ai-doctor-text h4 {
+  margin: 0 0 4px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.ai-doctor-text p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.ai-doctor-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(22, 163, 74, 0.3);
+  transition: all 0.2s ease;
+}
+
+.ai-doctor-btn:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   Maharashtra Kisan Helpline Directory
+   ========================================= */
+
+.kisan-helpline-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.kisan-helpline-card h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.helpline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.helpline-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.helpline-item:hover {
+  background: #f0fdf4;
+  border-color: #86efac;
+  transform: translateY(-1px);
+}
+
+.helpline-icon {
+  font-size: 1.5rem;
+}
+
+.helpline-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #0f172a;
+}
+
+.helpline-item span {
+  font-size: 0.8rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+/* =========================================
+   PMFBY Certificate Button
+   ========================================= */
+
+.pmfby-pdf-button {
+  background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25);
+  transition: all 0.2s ease;
+}
+
+.pmfby-pdf-button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+.pmfby-pdf-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   Guntha / Acre Unit Toggle
+   ========================================= */
+
+.unit-toggle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.unit-toggle-pills {
+  display: flex;
+  gap: 6px;
+  background: #e2e8f0;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.unit-pill {
+  border: none;
+  background: transparent;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unit-pill.active {
+  background: #ffffff;
+  color: #166534;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   Pre-Harvest Interval (PHI) Controls
+   ========================================= */
+
+.phi-harvest-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.phi-harvest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.phi-harvest-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.phi-days-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.phi-slider {
+  width: 100%;
+  accent-color: #16a34a;
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.phi-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.treatment-item-card.phi-violation {
+  border: 2px solid #ef4444;
+  background: #fff5f5;
+}
+
+.phi-pill.phi-warn {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.phi-pill.phi-safe {
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.phi-hazard-alert {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+/* =========================================
+   Tank-Mix Compatibility Checker Card
+   ========================================= */
+
+.tankmix-checker-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.tankmix-checker-section h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.tankmix-checker-section p {
+  margin: 0 0 16px 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.tankmix-select-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.compat-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 5px;
+}
+
+.compat-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.compat-check-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.compat-check-btn:hover {
+  background: #15803d;
+}
+
+.compat-result-card {
+  margin-top: 16px;
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid transparent;
+}
+
+.compat-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.compat-result-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.compat-result-card p {
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+.compat-result-card small {
+  display: block;
+  font-size: 0.8rem;
+  color: #475569;
+  font-style: italic;
+}
+
+/* =========================================
+   7-Day Epidemic Forecast Strip
+   ========================================= */
+
+.forecast-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.forecast-section h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.forecast-section p {
+  margin: 0 0 16px 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 12px;
+}
+
+.forecast-day-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.forecast-day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.forecast-day-date {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.forecast-day-temp {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.forecast-day-rain {
+  font-size: 0.75rem;
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.forecast-day-badge {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+/* =========================================
+   Krishi Kendra Directory & Pricing
+   ========================================= */
+
+.krishi-kendra-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.krishi-kendra-section h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.kendras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kendra-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kendra-card strong {
+  font-size: 0.92rem;
+  color: #0f172a;
+}
+
+.kendra-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.kendra-card a {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #166534;
+  text-decoration: none;
+}
+
+.pricing-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.pricing-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #334155;
+}
+
+.pricing-table tr:hover {
+  background: #f8fafc;
+}
+
+/* =========================================
+   Crop Disease Recovery Tracker
+   ========================================= */
+
+.recovery-tracker-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.recovery-tracker-section h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.recovery-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.recovery-dropzone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.recovery-dropzone input {
+  display: none;
+}
+
+.recovery-dropzone img {
+  max-width: 100%;
+  max-height: 140px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.recovery-compare-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 16px auto;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recovery-compare-btn:hover {
+  background: #15803d;
+}
+
+.recovery-result-box {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+
+.recovery-result-box h4 {
+  margin: 0 0 6px 0;
+  color: #166534;
+}
+
+.recovery-result-box p {
+  margin: 0 0 8px 0;
+  font-size: 0.88rem;
+  color: #14532d;
+}
+
+/* ==============================================================================
+   FARMER-FIRST DASHBOARD & OPTIMIZATION STYLES
+   ============================================================================== */
+
+/* Farmer Navigation Tab Dock */
+.farmer-nav-dock {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.farmer-nav-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.farmer-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.farmer-tab-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.farmer-tab-btn.active {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: #ffffff;
+  border-color: #166534;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+}
+
+.farmer-tab-icon {
+  font-size: 1.25rem;
+}
+
+/* Mode Switcher: Farmer Mode vs Expert Mode */
+.mode-switch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.mode-switch-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+.mode-switch-pill {
+  display: flex;
+  background: #e2e8f0;
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-pill-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-pill-btn.active {
+  background: #ffffff;
+  color: #15803d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Hero Voice Consultation Banner */
+.voice-hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border: 2px solid #86efac;
+  border-radius: 16px;
+  padding: 16px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.08);
+}
+
+.voice-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.voice-hero-avatar {
+  font-size: 2.2rem;
+  background: #ffffff;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.voice-hero-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  color: #14532d;
+}
+
+.voice-hero-text p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #166534;
+}
+
+.voice-hero-cta {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.voice-hero-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
+}
+
+/* Audio Voice Prescription Card */
+.spoken-prescription-card {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.spoken-prescription-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spoken-sound-icon {
+  font-size: 1.8rem;
+  animation: pulseSound 1.5s infinite;
+}
+
+@keyframes pulseSound {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.spoken-prescription-text strong {
+  display: block;
+  font-size: 0.96rem;
+  color: #14532d;
+}
+
+.spoken-prescription-text span {
+  font-size: 0.82rem;
+  color: #166534;
+}
+
+.spoken-play-btn {
+  background: #15803d;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.spoken-play-btn:hover {
+  background: #166534;
+}
+
+.spoken-play-btn.speaking {
+  background: #dc2626;
+}
+
+/* Direct Pump Dose Highlight Box for Farmer Mode */
+.farmer-direct-dose-box {
+  background: #eff6ff;
+  border: 2px solid #93c5fd;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.farmer-direct-dose-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.farmer-direct-dose-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #1e40af;
+}
+
+.farmer-dose-pill {
+  background: #1d4ed8;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.farmer-direct-dose-instruction {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+.farmer-direct-dose-tips {
+  font-size: 0.84rem;
+  color: #3b82f6;
+  margin: 0;
+}
+
+/* Quick Tab Crosslinks inside Result */
+.quick-crosslinks-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.quick-crosslink-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.quick-crosslink-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .voice-hero-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .voice-hero-content {
+    flex-direction: column;
+  }
+  .voice-hero-cta {
+    width: 100%;
+    justify-content: center;
+  }
+  .spoken-prescription-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .spoken-prescription-info {
+    flex-direction: column;
+  }
+  .spoken-play-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .farmer-nav-dock {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================
+   PWA Install & Auto GPS Controls
+   ========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gps-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.gps-toggle-btn:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+  transform: translateY(-1px);
+}
+
+.gps-toggle-btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.gps-active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #166534;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: pulse-border 2s infinite;
+}
+
+.gps-clear-btn {
+  background: transparent;
+  border: none;
+  color: #bbf7d0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.gps-clear-btn:hover {
+  color: #ffffff;
+}
+
+.pwa-install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #15803d, #16a34a);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pwa-install-btn:hover {
+  background: linear-gradient(135deg, #166534, #15803d);
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.pwa-install-btn.installed {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  box-shadow: none;
+  cursor: default;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(22, 101, 52, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 101, 52, 0);
+  }
+}
+/* =========================================
+   Crop Selector Dock & Interactive View Mode
+   ========================================= */
+
+.crop-selector-dock {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 18px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.crop-dock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.crop-dock-title {
+  font-size: 0.84rem;
+  font-weight: 750;
+  color: #1e293b;
+}
+
+.clear-crop-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #16a34a;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.crop-chips-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.crop-chips-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.crop-chips-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.crop-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 7px 15px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: #334155;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.crop-pill:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.crop-pill.active {
+  background: #15803d;
+  border-color: #15803d;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(21, 128, 61, 0.25);
+}
+
+.crop-icon {
+  font-size: 1rem;
+}
+
+/* =========================================
+   Image View Mode Bar & Split View
+   ========================================= */
+
+.image-view-mode-bar {
+  display: flex;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.view-mode-btn {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-mode-btn:hover {
+  color: #0f172a;
+}
+
+.view-mode-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.split-view-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.split-view-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.split-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #475569;
+  text-align: center;
+}
+
+.main-preview-image.split {
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.sample-chip.highlight {
+  background: #ecfdf5;
+  border-color: #86efac;
+  color: #15803d;
+  font-weight: 750;
+  box-shadow: 0 2px 6px rgba(21, 128, 61, 0.1);
+}
+
+.sample-chip.highlight:hover {
+  background: #dcfce7;
+  border-color: #4ade80;
+}
+
+/* Inconclusive Alert Box */
+.inconclusive-banner-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  color: #92400e;
+}
+
+.inconclusive-banner-box span {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.inconclusive-banner-box strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 3px;
+  color: #b45309;
+}
+
+.inconclusive-banner-box p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #78350f;
+}
+
 
 

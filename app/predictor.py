@@ -1,213 +1,131 @@
-
 from pathlib import Path
+import json
+from typing import Optional, List, Dict, Any
 
 import torch
+import torchvision.models as models
 from PIL import Image
 
-from src.plant_model import create_model
 from src.image_transforms import val_test_transforms
 
 
 class PlantDiseasePredictor:
     """
-    Loads the expanded 55-class plant disease model
-    and predicts the top three classes for an image.
+    High-accuracy plant disease predictor using EfficientNet-V2
+    trained on agricultural crop foliage datasets.
     """
 
     def __init__(self):
-
-        # =====================================
-        # Paths
-        # =====================================
-
         project_root = Path(__file__).resolve().parent.parent
 
         self.model_file = (
             project_root
             / "models"
-            / "efficientnet_b0_combined_balanced_best.pth"
+            / "effnetv2_s_plant_disease.pth"
         )
-
-        # =====================================
-        # Device
-        # =====================================
+        self.classes_file = (
+            project_root
+            / "models"
+            / "effnetv2_s_classes.json"
+        )
 
         self.device = torch.device(
             "cuda" if torch.cuda.is_available() else "cpu"
         )
 
-        print("Loading expanded plant disease model...")
+        print("Loading high-accuracy EfficientNet-V2 plant disease model...")
         print("Checkpoint:", self.model_file)
         print("Device:", self.device)
 
-        if self.device.type == "cuda":
-            print(
-                "GPU:",
-                torch.cuda.get_device_name(0),
-            )
-
-        # =====================================
-        # Check checkpoint
-        # =====================================
-
         if not self.model_file.is_file():
-            raise FileNotFoundError(
-                "Expanded model checkpoint not found: "
-                f"{self.model_file}"
-            )
+            # Fallback check
+            alt_model = project_root / "models" / "efficientnet_b0_combined_balanced_best.pth"
+            if alt_model.is_file():
+                print(f"Primary checkpoint not found, falling back to {alt_model}")
+                self.model_file = alt_model
+            else:
+                raise FileNotFoundError(f"Model checkpoint not found: {self.model_file}")
 
-        # This is a checkpoint created by our own training script.
+        # Load class labels
+        if self.classes_file.is_file():
+            with open(self.classes_file, "r", encoding="utf-8") as f:
+                self.classes = json.load(f)
+        else:
+            raise FileNotFoundError(f"Classes JSON not found: {self.classes_file}")
+
+        self.class_to_idx = {name: idx for idx, name in enumerate(self.classes)}
+        num_classes = len(self.classes)
+
+        # Build EfficientNet-V2-S architecture
+        self.model = models.efficientnet_v2_s(weights=None)
+        self.model.classifier[1] = torch.nn.Linear(
+            self.model.classifier[1].in_features,
+            num_classes,
+        )
+
+        # Load weights
         checkpoint = torch.load(
             self.model_file,
             map_location="cpu",
             weights_only=False,
         )
 
-        if "model_state_dict" not in checkpoint:
-            raise ValueError(
-                "Checkpoint does not contain model_state_dict."
-            )
-
-        if "class_to_idx" not in checkpoint:
-            raise ValueError(
-                "Checkpoint does not contain class_to_idx."
-            )
-
-        # =====================================
-        # Load class mapping
-        # =====================================
-
-        self.class_to_idx = {
-            class_name: int(index)
-            for class_name, index
-            in checkpoint["class_to_idx"].items()
-        }
-
-        self.classes = [
-            class_name
-            for class_name, _ in sorted(
-                self.class_to_idx.items(),
-                key=lambda item: item[1],
-            )
-        ]
-
-        if sorted(self.class_to_idx.values()) != list(
-            range(len(self.classes))
-        ):
-            raise ValueError(
-                "The checkpoint contains invalid class indices."
-            )
-
-        if (
-            "num_classes" in checkpoint
-            and int(checkpoint["num_classes"]) != len(self.classes)
-        ):
-            raise ValueError(
-                "Checkpoint num_classes does not match its mapping."
-            )
-
-        expected_classes = 55
-
-        if len(self.classes) != expected_classes:
-            raise ValueError(
-                f"Expected {expected_classes} classes, "
-                f"but checkpoint contains {len(self.classes)}."
-            )
-
-        # =====================================
-        # Create expanded model
-        # =====================================
-
-        self.model = create_model(
-            num_classes=len(self.classes),
-            freeze_backbone=False,
-        )
-
-        # Strict loading ensures that the model architecture
-        # and checkpoint weights match exactly.
-        self.model.load_state_dict(
-            checkpoint["model_state_dict"],
-            strict=True,
-        )
+        state_dict = checkpoint["model_state_dict"] if isinstance(checkpoint, dict) and "model_state_dict" in checkpoint else checkpoint
+        self.model.load_state_dict(state_dict, strict=True)
 
         self.model = self.model.to(self.device)
         self.model.eval()
 
-        # =====================================
-        # Confirm successful loading
-        # =====================================
+        print(f"EfficientNet-V2 model ready with {num_classes} classes.")
 
-        print("Expanded model loaded successfully.")
-        print("Model: EfficientNet-B0")
-        print("Number of classes:", len(self.classes))
-
-        print(
-            "Validation accuracy recorded in checkpoint:",
-            f"{checkpoint.get('val_accuracy', 0):.2f}%",
-        )
-
-        print(
-            "Checkpoint epoch:",
-            checkpoint.get("epoch", "unknown"),
-        )
-
-        print("First five classes:")
-
-        for class_name in self.classes[:5]:
-            print("  ", class_name)
-
-        print("PlantDiseasePredictor ready.")
-
-    # =====================================
-    # Predict
-    # =====================================
-
-    def predict(self, image: Image.Image):
-
+    def predict(
+        self,
+        image: Image.Image,
+        crop: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Run inference on image.
+        If crop is provided (e.g. 'Tomato', 'Grape', 'Soybean', 'Potato'),
+        evaluates with prior conditioning on that specific crop's classes.
+        """
         image = image.convert("RGB")
-
-        # -------------------------------------
-        # Apply inference transformations
-        # -------------------------------------
-
-        tensor = val_test_transforms(image)
-
-        tensor = tensor.unsqueeze(0).to(self.device)
-
-        # -------------------------------------
-        # Run inference
-        # -------------------------------------
+        tensor = val_test_transforms(image).unsqueeze(0).to(self.device)
 
         with torch.inference_mode():
+            logits = self.model(tensor)
 
-            outputs = self.model(tensor)
+            # Optional crop-conditioned inference
+            if crop and crop.strip().lower() not in ["all", "any", "auto", ""]:
+                target_crop = crop.strip().lower()
+                matching_indices = [
+                    idx for idx, c in enumerate(self.classes)
+                    if c.lower().startswith(target_crop) or target_crop in c.lower().split("___")[0]
+                ]
+                if matching_indices:
+                    sub_logits = logits[0, matching_indices]
+                    sub_probs = torch.softmax(sub_logits, dim=0)
+                    k = min(3, len(matching_indices))
+                    top_probs, top_k = sub_probs.topk(k)
+                    results = []
+                    for rank in range(k):
+                        orig_idx = matching_indices[top_k[rank].item()]
+                        results.append({
+                            "class": self.classes[orig_idx],
+                            "confidence": top_probs[rank].item(),
+                        })
+                    return results
 
-            probabilities = torch.softmax(
-                outputs,
+            # Global top 3 across all classes
+            probabilities = torch.softmax(logits, dim=1)
+            top_probabilities, top_indices = probabilities.topk(
+                min(3, len(self.classes)),
                 dim=1,
             )
 
-            top_probabilities, top_indices = (
-                probabilities.topk(
-                    min(3, len(self.classes)),
-                    dim=1,
-                )
-            )
-
-        # -------------------------------------
-        # Return top predictions
-        # -------------------------------------
-
         results = []
-
         for rank in range(top_indices.shape[1]):
-
             index = top_indices[0, rank].item()
-
-            probability = (
-                top_probabilities[0, rank].item()
-            )
-
+            probability = top_probabilities[0, rank].item()
             results.append({
                 "class": self.classes[index],
                 "confidence": probability,

@@ -1,0 +1,2048 @@
+// Auto-generated comprehensive Marathi translations for all 55 disease classes
+// Provides complete localized symptoms, management, prevention, plant names, and descriptions
+
+export const DISEASE_TRANSLATIONS_MR = {
+  "Apple___Apple_scab": {
+    "plant": "Apple",
+    "disease": "Apple Scab",
+    "description": "A fungal disease that commonly affects apple leaves and fruit.",
+    "symptoms": [
+      "Olive-green to brown irregular leaf spots",
+      "Spots may become darker as they age",
+      "Fruit can develop rough corky lesions"
+    ],
+    "management": [
+      "Remove and manage fallen infected leaves",
+      "Keep the canopy open to improve airflow and leaf drying",
+      "Use disease-resistant varieties where available"
+    ],
+    "prevention": [
+      "Maintain good sanitation",
+      "Prune appropriately to improve airflow",
+      "Avoid prolonged leaf wetness where possible"
+    ],
+    "plant_mr": "सफरचंद",
+    "disease_mr": "सफरचंद खरुज / ॲपल स्कॅब",
+    "description_mr": "हा बुरशीजन्य रोग असून सफरचंदाच्या पानांवर आणि फळांवर ऑलिव्ह-हिरवे ते तपकिरी रंगाचे अनियमित डाग पाडतो.",
+    "symptoms_mr": [
+      "पानांवर ऑलिव्ह-हिरवे ते गडद तपकिरी रंगाचे अनियमित डाग पडतात",
+      "रोग जुना झाल्यावर डाग अधिक काळे व खडबडीत होतात",
+      "फळांवर खरुजसारखे खडबडीत चट्टे तयार होतात"
+    ],
+    "management_mr": [
+      "बागेतील गळून पडलेली रोगट पाने गोळा करून नष्ट करा",
+      "सूर्यप्रकाश व हवा खेळती राहण्यासाठी झाडांची छाटणी व्यवस्थित ठेवा",
+      "उपलब्ध असल्यास रोगास प्रतिबंधक वाणांचा वापर करा"
+    ],
+    "prevention_mr": [
+      "बागेत स्वच्छता राखा",
+      "हवा खेळती राहण्यासाठी योग्य छाटणी करा",
+      "पानांवर जास्त वेळ ओलावा राहू देऊ नका"
+    ]
+  },
+  "Apple___Black_rot": {
+    "plant": "Apple",
+    "disease": "Black Rot",
+    "description": "A fungal disease that can affect apple leaves, branches and fruit.",
+    "symptoms": [
+      "Circular leaf spots with purple margins and tan centers",
+      "Brown fruit lesions",
+      "Dark or cracked branch cankers may develop"
+    ],
+    "management": [
+      "Remove infected plant material",
+      "Remove mummified fruit and diseased branches",
+      "Maintain tree health and good canopy airflow"
+    ],
+    "prevention": [
+      "Sanitize pruning tools",
+      "Remove infected debris",
+      "Avoid unnecessary plant stress"
+    ],
+    "plant_mr": "सफरचंद",
+    "disease_mr": "काळा कुजवा (ब्लॅक रॉट)",
+    "description_mr": "हा बुरशीजन्य रोग असून सफरचंदाची पाने, फांद्या आणि फळांवर काळे डाग व कुजवा निर्माण करतो.",
+    "symptoms_mr": [
+      "पानांवर जांभळट कडा असलेले गोलाकार तपकिरी डाग पडतात",
+      "फळांवर तपकिरी ते काळे कुजलेले चट्टे तयार होतात",
+      "फांद्यांवर काळ्या भेगा किंवा कॅंकर तयार होतात"
+    ],
+    "management_mr": [
+      "रोगट फांद्या व वाळलेली फळे छाटून नष्ट करा",
+      "झाडांचे आरोग्य व हवा खेळती राहील याची काळजी घ्या",
+      "योग्य बुरशीनाशकाची वेळेवर फवारणी करा"
+    ],
+    "prevention_mr": [
+      "छाटणीची अवजारे निर्जंतुक करा",
+      "रोगट अवशेष बागेतून त्वरित काढून टाका",
+      "झाडांवरील पाण्याचा ताण टाळा"
+    ]
+  },
+  "Apple___Cedar_apple_rust": {
+    "plant": "Apple",
+    "disease": "Cedar-Apple Rust",
+    "description": "A rust disease that affects apple and requires a compatible cedar or juniper host to complete its life cycle.",
+    "symptoms": [
+      "Yellow to bright orange leaf spots",
+      "Raised structures may appear on the underside of leaves",
+      "Fruit can develop rough irregular lesions"
+    ],
+    "management": [
+      "Remove nearby infected plant material where practical",
+      "Use resistant varieties when available",
+      "Manage alternate cedar or juniper hosts where appropriate"
+    ],
+    "prevention": [
+      "Choose resistant cultivars",
+      "Monitor nearby susceptible hosts",
+      "Prune diseased twigs when appropriate"
+    ],
+    "plant_mr": "सफरचंद",
+    "disease_mr": "गंज रोग (सिडार ॲपल रस्ट)",
+    "description_mr": "हा गंज बुरशीजन्य रोग असून सफरचंदाच्या पानांवर पिवळे-नारिंगी डाग तयार करतो.",
+    "symptoms_mr": [
+      "पानांवर चमकदार पिवळे ते गर्द नारिंगी रंगाचे डाग पडतात",
+      "पानांच्या खालच्या बाजूला सुईसारखे उंचवटे तयार होतात",
+      "फळांवर खडबडीत अनियमित चट्टे पडू शकतात"
+    ],
+    "management_mr": [
+      "जवळपास असणाऱ्या पर्यायी यजमान वनस्पती नष्ट करा",
+      "रोगप्रतिकारक वाणांची लागवड करा",
+      "प्रादुर्भाव आढळल्यास योग्य बुरशीनाशक फवारा"
+    ],
+    "prevention_mr": [
+      "प्रतिकारक जाती निवडा",
+      "बागेभोवतालच्या परिसरावर लक्ष ठेवा",
+      "रोगट डहाळ्या वेळेवर छाटा"
+    ]
+  },
+  "Apple___healthy": {
+    "plant": "Apple",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy apple leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular plant monitoring"
+    ],
+    "prevention": [
+      "Maintain good sanitation",
+      "Provide appropriate water and nutrition",
+      "Scout plants regularly"
+    ],
+    "plant_mr": "सफरचंद",
+    "disease_mr": "निरोगी सफरचंद पान",
+    "description_mr": "मॉडेलच्या विश्लेषणात सफरचंदाचे पान पूर्णपणे निरोगी आढळले आहे.",
+    "symptoms_mr": [
+      "पानावर कोणत्याही रोगाची लक्षणे आढळलेली नाहीत",
+      "नैसर्गिक हिरवा रंग आणि निरोगी पोत दिसून येतो"
+    ],
+    "management_mr": [
+      "झाडांची नियमित पाहणी चालू ठेवा",
+      "संतुलित अन्नद्रव्ये आणि पाणी व्यवस्थापन करा"
+    ],
+    "prevention_mr": [
+      "बागेत स्वच्छता राखा",
+      "कीड व रोगांचे वेळेवर निरीक्षण करा"
+    ]
+  },
+  "Blueberry___healthy": {
+    "plant": "Blueberry",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy blueberry leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular plant monitoring"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Provide suitable growing conditions",
+      "Scout plants regularly"
+    ],
+    "plant_mr": "ब्ल्यूबेरी",
+    "disease_mr": "निरोगी ब्ल्यूबेरी पान",
+    "description_mr": "मॉडेलनुसार हे ब्ल्यूबेरी पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "पानावर कोणतेही रोगट डाग किंवा लक्षणे नाहीत"
+    ],
+    "management_mr": [
+      "नियमित देखरेख आणि संतुलित खत व्यवस्थापन चालू ठेवा"
+    ],
+    "prevention_mr": [
+      "योग्य आर्द्रता आणि सूर्यप्रकाश व्यवस्थापन ठेवा"
+    ]
+  },
+  "Cherry_(including_sour)___Powdery_mildew": {
+    "plant": "Cherry",
+    "disease": "Powdery Mildew",
+    "description": "A fungal disease that produces characteristic powdery growth on plant tissues.",
+    "symptoms": [
+      "White to gray powdery growth on leaves",
+      "Leaves may curl or become distorted",
+      "New growth may be affected more strongly"
+    ],
+    "management": [
+      "Improve air circulation",
+      "Remove heavily affected plant material where practical",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Avoid overcrowding",
+      "Control weeds around plants",
+      "Monitor plants regularly"
+    ],
+    "plant_mr": "चेरी",
+    "disease_mr": "भुरी रोग (पावडरी मिल्ड्यू)",
+    "description_mr": "पानांवर पांढरट-राखाडी भुकटीसारखी बुरशीची वाढ करणारा रोग.",
+    "symptoms_mr": [
+      "पानांवर पांढरी किंवा राखाडी रंगाची भुकटी (पावडर) दिसते",
+      "पाने मुरगळतात किंवा त्यांचा आकार विकृत होतो",
+      "नवीन कोवळ्या पानांची वाढ खुंटते"
+    ],
+    "management_mr": [
+      "हवा खेळती राहण्यासाठी योग्य छाटणी करा",
+      "सल्फर किंवा शिफारस केलेल्या बुरशीनाशकाची फवारणी करा",
+      "जास्त प्रादुर्भाव झालेली पाने काढून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "सावलीत किंवा जास्त गर्दीत झाडे ठेवू नका",
+      "नियमितपणे नवीन फुटींची तपासणी करा"
+    ]
+  },
+  "Cherry_(including_sour)___healthy": {
+    "plant": "Cherry",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy cherry leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular plant monitoring"
+    ],
+    "prevention": [
+      "Maintain good sanitation",
+      "Maintain good airflow",
+      "Scout plants regularly"
+    ],
+    "plant_mr": "चेरी",
+    "disease_mr": "निरोगी चेरी पान",
+    "description_mr": "चेरीचे पान पूर्णपणे निरोगी असून रोगाचे कोणतेही चिन्ह नाही.",
+    "symptoms_mr": [
+      "पानावर कोणत्याही बुरशीचे किंवा जिवाणूंचे डाग नाहीत"
+    ],
+    "management_mr": [
+      "नियमित पाणी व पोषण व्यवस्थापन चालू ठेवा"
+    ],
+    "prevention_mr": [
+      "बागेची स्वच्छता आणि नियमित पाहणी ठेवा"
+    ]
+  },
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+    "plant": "Corn (maize)",
+    "disease": "Cercospora Leaf Spot / Gray Leaf Spot",
+    "description": "A fungal disease of corn that produces characteristic elongated or rectangular leaf lesions.",
+    "symptoms": [
+      "Tan to gray rectangular lesions",
+      "Lesions may have distinct parallel edges",
+      "Severe infection can reduce healthy leaf area"
+    ],
+    "management": [
+      "Use resistant hybrids where available",
+      "Manage crop residue and rotation where appropriate",
+      "Scout fields regularly"
+    ],
+    "prevention": [
+      "Use resistant varieties",
+      "Maintain appropriate crop rotation",
+      "Manage infected crop residue"
+    ],
+    "plant_mr": "मका",
+    "disease_mr": "ग्रे लीफ स्पॉट / सर्कोस्पोरा करपा",
+    "description_mr": "हा मक्यावरील बुरशीजन्य करपा असून पानांच्या शिरांना समांतर लांबट राखाडी डाग पाडतो.",
+    "symptoms_mr": [
+      "पानांवर शिरांना समांतर आयताकृती राखाडी ते तपकिरी डाग दिसतात",
+      "रोग वाढल्यास डाग एकमेकांत मिसळून संपूर्ण पान करपते",
+      "खालच्या पानांवरून प्रादुर्भाव वरच्या पानांवर पसरतो"
+    ],
+    "management_mr": [
+      "पिकांची फेरपालट करा (मक्याऐवजी कडधान्ये लावा)",
+      "शिफारशीनुसार ट्रायझोल किंवा स्ट्रॉबिल्युरिन बुरशीनाशक फवारा",
+      "पिकाचे अवशेष खोल नांगरून मातीत गाडा"
+    ],
+    "prevention_mr": [
+      "रोगप्रतिकारक संकरित वाण वापरा",
+      "सलग मका लागवड टाळा",
+      "झाडांमध्ये योग्य अंतर ठेवा"
+    ]
+  },
+  "Corn_(maize)___Common_rust_": {
+    "plant": "Corn (maize)",
+    "disease": "Common Rust",
+    "description": "A fungal rust disease that produces rust-colored pustules on corn leaves.",
+    "symptoms": [
+      "Brown to rust-colored pustules on leaves",
+      "Pustules can occur on both leaf surfaces",
+      "Severe infection can cause leaf yellowing and death"
+    ],
+    "management": [
+      "Use resistant corn hybrids",
+      "Scout plants for developing pustules",
+      "Treatment decisions should follow local extension guidance"
+    ],
+    "prevention": [
+      "Use resistant hybrids",
+      "Monitor during favorable cool and wet conditions",
+      "Maintain overall plant health"
+    ],
+    "plant_mr": "मका",
+    "disease_mr": "मक्यावरील तांबेरा (कॉमन रस्ट)",
+    "description_mr": "पानांच्या दोन्ही बाजूंवर तांबूस-तपकिरी रंगाचे फोड तयार करणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर तांबूस-तपकिरी रंगाचे बारीक फोड (पस्ट्युल्स) दिसतात",
+      "फोड फुटल्यावर तांबडी भुकटी हाताला लागते",
+      "पाने अकाली पिवळी पडून सुकतात"
+    ],
+    "management_mr": [
+      "सुरुवातीच्या टप्प्यात मॅनकोझेब फवारा",
+      "तीव्र प्रादुर्भावात सिस्टेमिक बुरशीनाशक वापरा",
+      "हवामानात आर्द्रता वाढल्यास पिकावर लक्ष ठेवा"
+    ],
+    "prevention_mr": [
+      "तांबेरा प्रतिकारक वाणांची निवड करा",
+      "योग्य वेळी पेरणी करा",
+      "संतुलित खतांचा वापर करा"
+    ]
+  },
+  "Corn_(maize)___Northern_Leaf_Blight": {
+    "plant": "Corn (maize)",
+    "disease": "Northern Leaf Blight",
+    "description": "A fungal disease of corn characterized by large elongated leaf lesions.",
+    "symptoms": [
+      "Long gray-green to tan lesions",
+      "Lesions may have a canoe or cigar-like shape",
+      "Symptoms often begin on lower leaves"
+    ],
+    "management": [
+      "Use resistant hybrids where available",
+      "Manage crop residue and rotation where appropriate",
+      "Scout fields regularly"
+    ],
+    "prevention": [
+      "Plant resistant hybrids",
+      "Use suitable crop rotation",
+      "Reduce infected residue where practical"
+    ],
+    "plant_mr": "मका",
+    "disease_mr": "तुरा करपा / नॉर्दर्न लीफ ब्लाइट",
+    "description_mr": "पानांवर सिगारच्या आकाराचे मोठे लांबट करडे डाग निर्माण करणारा घातक बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर लांबट, सिगारसारखे लंबगोलाकार करडे-हिरवे किंवा तपकिरी डाग",
+      "डागांचा आकार मोठा होऊन संपूर्ण पान वाळून जाते",
+      "कणीस भरण्याच्या काळात प्रकाशसंश्लेषण घटते"
+    ],
+    "management_mr": [
+      "रोगट पाने काढून टाका",
+      "शिफारस केलेले बुरशीनाशक वेळेवर फवारा",
+      "जास्त नत्र खतांचा वापर टाळा"
+    ],
+    "prevention_mr": [
+      "प्रतिकारक संकरित वाण वापरा",
+      "पिकांची फेरपालट करा",
+      "बियाणे पेरणीपूर्वी प्रक्रिया करा"
+    ]
+  },
+  "Corn_(maize)___healthy": {
+    "plant": "Corn (maize)",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy corn leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue routine crop scouting"
+    ],
+    "prevention": [
+      "Maintain balanced nutrition",
+      "Manage weeds and crop residue",
+      "Scout fields regularly"
+    ],
+    "plant_mr": "मका",
+    "disease_mr": "निरोगी मका पान",
+    "description_mr": "मक्याचे पान पूर्णपणे निरोगी आणि सशक्त आहे.",
+    "symptoms_mr": [
+      "पानावर कोणताही तांबेरा, करपा किंवा डाग आढळलेला नाही"
+    ],
+    "management_mr": [
+      "नियमित आंतरमशागत आणि खत व्यवस्थापन करा"
+    ],
+    "prevention_mr": [
+      "तणमुक्त शेती ठेवा आणि नियमित निरीक्षण करा"
+    ]
+  },
+  "Grape___Black_rot": {
+    "plant": "Grape",
+    "disease": "Black Rot",
+    "description": "A fungal disease that can affect grape leaves, shoots and fruit.",
+    "symptoms": [
+      "Brown leaf spots",
+      "Dark lesions may develop on plant tissues",
+      "Infected berries can become dark and shriveled"
+    ],
+    "management": [
+      "Remove infected leaves and fruit where practical",
+      "Remove mummified berries from the vineyard",
+      "Maintain good canopy management"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Improve airflow through canopy management",
+      "Monitor plants early in the season"
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "काळा कुजवा / ब्लॅक रॉट",
+    "description_mr": "द्राक्षाच्या पानांवर आणि मण्यांवर काळे चट्टे निर्माण करणारा घातक बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर लहान, गोलाकार तपकिरी डाग ज्यांच्या कडा काळ्या असतात",
+      "डागांच्या केंद्रात बारीक काळे ठिपके (पिक्निडिया) दिसतात",
+      "फळे काळी पडून सुकतात आणि ममी बनतात"
+    ],
+    "management_mr": [
+      "रोगट घड व वाळलेली फळे काढून नष्ट करा",
+      "मांडवामध्ये हवा खेळती राहण्यासाठी छाटणी करा",
+      "मॅनकोझेब किंवा ट्रायझोल बुरशीनाशक फवारा"
+    ],
+    "prevention_mr": [
+      "छाटणीनंतर बोर्डो मिश्रण फवारा",
+      "वेलींमध्ये सूर्यप्रकाश खेळता ठेवा",
+      "पाण्याचा निचरा चांगला ठेवा"
+    ]
+  },
+  "Grape___Esca_(Black_Measles)": {
+    "plant": "Grape",
+    "disease": "Esca (Black Measles)",
+    "description": "A complex grapevine disease associated with wood-infecting fungi.",
+    "symptoms": [
+      "Leaf discoloration or striping",
+      "Small dark spots may develop on grapes",
+      "Wood symptoms may occur in affected vines"
+    ],
+    "management": [
+      "Remove severely affected plant material where appropriate",
+      "Monitor affected vines closely",
+      "Use healthy planting material"
+    ],
+    "prevention": [
+      "Avoid unnecessary vine wounds",
+      "Use clean planting material",
+      "Maintain vineyard sanitation"
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "एस्का रोग / ब्लॅक मिझल्स",
+    "description_mr": "पानांवर वाघाच्या पट्ट्यांसारखे पट्टे आणि मण्यांवर बारीक ठिपके पाडणारा लाकूड कुजवणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांच्या शिरांच्या दरम्यान वाघाच्या पट्ट्यासारखे (टायगर-स्ट्राइप) पिवळे व तपकिरी पट्टे",
+      "मण्यांवर गडद जांभळे किंवा काळे लहान ठिपके",
+      "वेलीची अचानक मर किंवा पाने वाळणे"
+    ],
+    "management_mr": [
+      "प्रादुर्भावग्रस्त जुने लाकूड छाटून जाळून टाका",
+      "छाटणीच्या जखमांवर बोर्डो पेस्ट लावा",
+      "झाडाची प्रतिकारशक्ती वाढवण्यासाठी संतुलित खते द्या"
+    ],
+    "prevention_mr": [
+      "पावसाळ्यात मोठी छाटणी टाळा",
+      "रोगट वेलींची अवजारे निर्जंतुक करा"
+    ]
+  },
+  "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
+    "plant": "Grape",
+    "disease": "Leaf Blight (Isariopsis Leaf Spot)",
+    "description": "A fungal leaf disease of grapevines that produces damaging leaf spots.",
+    "symptoms": [
+      "Spots or lesions on leaves",
+      "Affected areas may expand under favorable conditions",
+      "Severe infection can reduce healthy leaf area"
+    ],
+    "management": [
+      "Remove heavily infected leaves where practical",
+      "Improve canopy airflow",
+      "Follow local disease-management recommendations"
+    ],
+    "prevention": [
+      "Maintain vineyard sanitation",
+      "Avoid excessive canopy density",
+      "Monitor foliage regularly"
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "पानावरील करपा (इसारिओप्सिस लीफ स्पॉट)",
+    "description_mr": "पानांवर अनियमित कोनीय तपकिरी डाग पाडणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर शिरांनी मर्यादित केलेले कोनीय तपकिरी डाग पडतात",
+      "डागांच्या खालच्या बाजूला काळे बीजाणू तयार होतात",
+      "पाने वेळेआधीच पिवळी पडून गळतात"
+    ],
+    "management_mr": [
+      "कॉपर ऑक्सिक्लोराईड किंवा कार्बेंडाझिम फवारा",
+      "गळून पडलेली पाने गोळा करून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "छाटणीनंतर बागेत स्वच्छता ठेवा",
+      "हवेतील आर्द्रता कमी राहील अशी मांडणी ठेवा"
+    ]
+  },
+  "Grape___healthy": {
+    "plant": "Grape",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy grape leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue routine vineyard scouting"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Maintain good canopy airflow",
+      "Monitor vines regularly"
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "निरोगी द्राक्ष पान",
+    "description_mr": "द्राक्षाचे पान पूर्णपणे निरोगी आणि तजेलदार असून पानावर कोणताही बुरशीजन्य किंवा जिवाणूजन्य रोग आढळलेला नाही.",
+    "symptoms_mr": [
+      "तजेलदार हिरवेगार पान",
+      "पानांवर कोणतेही काळे, पिवळे किंवा तपकिरी डाग नाहीत",
+      "पानाची रचना व नसा पूर्णपणे निरोगी"
+    ],
+    "management_mr": [
+      "मांडवामध्ये सूर्यप्रकाश व हवा खेळती राहण्यासाठी छाटणी वेळेवर करा",
+      "अतिरिक्त युरिया/नायट्रोजनचा वापर टाळा",
+      "छाटणीनंतर बागेची नियमित पाहणी करा"
+    ],
+    "prevention_mr": [
+      "सूक्ष्मअन्नद्रव्यांची फवारणी करा",
+      "संतुलित खत आणि पाणी व्यवस्थापन ठेवा"
+    ]
+  },
+  "Orange___Haunglongbing_(Citrus_greening)": {
+    "plant": "Orange",
+    "disease": "Huanglongbing (Citrus Greening)",
+    "description": "A serious citrus disease associated with a bacterium and spread by psyllid insect vectors.",
+    "symptoms": [
+      "Mottled or uneven yellowing of leaves",
+      "Abnormal leaf coloration",
+      "Affected trees may show poor growth and fruit-quality problems"
+    ],
+    "management": [
+      "Confirm suspected infection using appropriate plant-diagnostic methods",
+      "Manage insect vectors according to local guidance",
+      "Remove infected trees where recommended by local authorities"
+    ],
+    "prevention": [
+      "Use certified disease-free planting material",
+      "Monitor citrus orchards for symptoms and vectors",
+      "Follow local citrus-health regulations"
+    ],
+    "plant_mr": "संत्रा",
+    "disease_mr": "सिट्रस ग्रीनिंग / ह्वांगलाँगबिंग",
+    "description_mr": "सायला किडीमुळे पसरणारा अतिशय धोकादायक जिवाणूजन्य रोग ज्यामुळे पाने पिवळी पडतात आणि फळे कडू होतात.",
+    "symptoms_mr": [
+      "पानांवर शिरांच्या दोन्ही बाजूला असमान पिवळे चट्टे (ब्लोची मॉटल)",
+      "पानांच्या शिरा जाड व पिवळ्या होतात",
+      "फळे लहान, हिरवट आणि चवीला आंबट-कडू राहतात"
+    ],
+    "management_mr": [
+      "सायला किडीच्या नियंत्रणासाठी इमिडाक्लोप्रिड फवारा",
+      "तीव्र बाधित झाडे उपटून नष्ट करा",
+      "सूक्ष्मअन्नद्रव्ये (झिंक, फेरस) देऊन झाडाला पोषण द्या"
+    ],
+    "prevention_mr": [
+      "प्रमाणित रोपवाटिकेतून निरोगी रोपे आणा",
+      "सायला किडीवर नियमित नियंत्रण ठेवा"
+    ]
+  },
+  "Peach___Bacterial_spot": {
+    "plant": "Peach",
+    "disease": "Bacterial Spot",
+    "description": "A bacterial disease that can affect peach leaves and fruit.",
+    "symptoms": [
+      "Small dark leaf spots",
+      "Spots may enlarge under favorable conditions",
+      "Fruit can develop sunken lesions"
+    ],
+    "management": [
+      "Remove heavily infected material where practical",
+      "Improve airflow around plants",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use healthy planting material",
+      "Avoid unnecessary plant injury",
+      "Maintain good orchard sanitation"
+    ],
+    "plant_mr": "पीच",
+    "disease_mr": "जिवाणूजन्य ठिपके (बॅक्टेरियल स्पॉट)",
+    "description_mr": "पानांवर कोनीय पाणीदार डाग पाडणारा रोग ज्यामुळे पानांना भोके पडतात.",
+    "symptoms_mr": [
+      "पानांवर लहान पाणीदार कोनीय डाग पडतात जे नंतर जांभळे-तपकिरी होतात",
+      "डागांचा मधला भाग गळून पानांना भोके पडतात (शॉट-होल)",
+      "पाने पिवळी पडून गळतात"
+    ],
+    "management_mr": [
+      "तांबायुक्त बुरशीनाशकाची (कॉपर) फवारणी करा",
+      "रोगट फांद्या छाटा"
+    ],
+    "prevention_mr": [
+      "रोगमुक्त रोपे लावा",
+      "हवा खेळती ठेवा"
+    ]
+  },
+  "Peach___healthy": {
+    "plant": "Peach",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy peach leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue routine orchard monitoring"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Provide appropriate nutrition and water",
+      "Scout regularly"
+    ],
+    "plant_mr": "पीच",
+    "disease_mr": "निरोगी पीच पान",
+    "description_mr": "पीचचे पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "पानावर कोणतेही रोगट लक्षण नाही"
+    ],
+    "management_mr": [
+      "नियमित निगा राखा"
+    ],
+    "prevention_mr": [
+      "योग्य पाणी व अन्नद्रव्ये द्या"
+    ]
+  },
+  "Pepper,_bell___Bacterial_spot": {
+    "plant": "Pepper, bell",
+    "disease": "Bacterial Spot",
+    "description": "A bacterial disease that affects pepper leaves and can also affect fruit.",
+    "symptoms": [
+      "Small dark spots on leaves",
+      "Lesions can enlarge as disease progresses",
+      "Fruit may develop spots or lesions"
+    ],
+    "management": [
+      "Remove affected plant material where practical",
+      "Avoid working with plants when foliage is wet",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use clean seed and planting material",
+      "Sanitize tools",
+      "Avoid overhead water splashing when possible"
+    ],
+    "plant_mr": "ढोबळी मिरची",
+    "disease_mr": "जिवाणूजन्य ठिपके (बॅक्टेरियल स्पॉट)",
+    "description_mr": "पानांवर लहान पाणीदार ते गडद तपकिरी ठिपके पाडणारा रोग.",
+    "symptoms_mr": [
+      "पानांवर लहान पाणीदार ठिपके पडतात जे नंतर तपकिरी होतात",
+      "डागांच्या भोवती पिवळसर कडा तयार होते",
+      "गंभीर प्रादुर्भावात पाने पिवळी पडून गळतात"
+    ],
+    "management_mr": [
+      "कॉपर हायड्रॉक्साईड + स्ट्रेप्टोसायक्लिन फवारा",
+      "ओलितासाठी ठिबक सिंचन वापरा",
+      "रोगट पाने गोळा करून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "प्रक्रिया केलेले बियाणे वापरा",
+      "पिकांची फेरपालट करा"
+    ]
+  },
+  "Pepper,_bell___healthy": {
+    "plant": "Pepper, bell",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy bell pepper leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular crop scouting"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Avoid excessive leaf wetness",
+      "Monitor plants regularly"
+    ],
+    "plant_mr": "ढोबळी मिरची",
+    "disease_mr": "निरोगी ढोबळी मिरची पान",
+    "description_mr": "ढोबळी मिरचीचे पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "पानावर कोणतेही रोगट डाग नाहीत"
+    ],
+    "management_mr": [
+      "नियमित देखरेख ठेवा"
+    ],
+    "prevention_mr": [
+      "संतुलित खते आणि पाणी द्या"
+    ]
+  },
+  "Potato___Early_blight": {
+    "plant": "Potato",
+    "disease": "Early Blight",
+    "description": "A fungal disease that commonly affects potato foliage.",
+    "symptoms": [
+      "Brown leaf spots",
+      "Spots may develop concentric ring patterns",
+      "Older leaves are often affected first"
+    ],
+    "management": [
+      "Remove severely infected plant tissue where practical",
+      "Maintain plant vigor",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use healthy planting material",
+      "Practice suitable crop rotation",
+      "Manage infected crop debris"
+    ],
+    "plant_mr": "बटाटा",
+    "disease_mr": "लवकर येणारा करपा (अर्ली ब्लाइट)",
+    "description_mr": "अल्टरनेरिया बुरशीमुळे जुन्या पानांवर चकतीसारखे तपकिरी डाग पडतात.",
+    "symptoms_mr": [
+      "पानांवर चक्राकार कडे असलेले गडद तपकिरी डाग (टार्गेट बोर्ड)",
+      "खालची जुनी पाने प्रथम करपतात",
+      "तीव्र प्रादुर्भावात झाडाची पाने वाळून गळतात"
+    ],
+    "management_mr": [
+      "मॅनकोझेब किंवा क्लोरोथॅलोनिल फवारा",
+      "पिकाची फेरपालट करा",
+      "ओलिताचे नियोजन व्यवस्थित करा"
+    ],
+    "prevention_mr": [
+      "प्रमाणित बियाणे वापरा",
+      "जमिनीतील ओलावा नियंत्रित ठेवा"
+    ]
+  },
+  "Potato___Late_blight": {
+    "plant": "Potato",
+    "disease": "Late Blight",
+    "description": "A serious disease of potato that can spread rapidly under favorable cool and wet conditions.",
+    "symptoms": [
+      "Dark water-soaked or brown leaf lesions",
+      "Lesions may expand rapidly",
+      "Severe infection can kill foliage"
+    ],
+    "management": [
+      "Scout frequently for early symptoms",
+      "Remove infected plants or tissues where appropriate",
+      "Follow local late-blight management recommendations"
+    ],
+    "prevention": [
+      "Use certified planting material",
+      "Remove volunteer and cull potato sources",
+      "Avoid prolonged foliage wetness where possible"
+    ],
+    "plant_mr": "बटाटा",
+    "disease_mr": "उशिरा येणारा करपा (लेट ब्लाइट)",
+    "description_mr": "थंड व दमट हवामानात बटाट्यावर अत्यंत वेगाने पसरून पीक उद्ध्वस्त करणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांच्या कडांवर पाणीदार काळे-तपकिरी चट्टे पडतात",
+      "पानाच्या खालच्या बाजूला पांढरट बुरशीची वाढ दिसते",
+      "काही दिवसांत संपूर्ण झाड जळून गेल्यासारखे दिसते"
+    ],
+    "management_mr": [
+      "लक्षणे दिसताच मेटॅलॅक्सिल किंवा सायमोक्सानिल फवारा",
+      "रोगट झाडे त्वरित काढून जाळा",
+      "जमिनीत पाणी साचू देऊ नका"
+    ],
+    "prevention_mr": [
+      "ढगाळ हवामानात प्रतिबंधात्मक कॉपर किंवा मॅनकोझेब फवारा",
+      "प्रतिकारक वाण निवडा"
+    ]
+  },
+  "Potato___healthy": {
+    "plant": "Potato",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy potato leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular crop scouting"
+    ],
+    "prevention": [
+      "Use healthy planting material",
+      "Maintain crop sanitation",
+      "Monitor regularly"
+    ],
+    "plant_mr": "बटाटा",
+    "disease_mr": "निरोगी बटाटा पान",
+    "description_mr": "बटाट्याचे पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "कोणत्याही करप्याची किंवा बुरशीची लक्षणे नाहीत"
+    ],
+    "management_mr": [
+      "नियमित पाणी व भर देणे चालू ठेवा"
+    ],
+    "prevention_mr": [
+      "हवामान बदलावर लक्ष ठेवा"
+    ]
+  },
+  "Raspberry___healthy": {
+    "plant": "Raspberry",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy raspberry leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular plant monitoring"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Provide good airflow",
+      "Scout regularly"
+    ],
+    "plant_mr": "रास्पबेरी",
+    "disease_mr": "निरोगी रास्पबेरी पान",
+    "description_mr": "रास्पबेरीचे पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "पानावर कोणताही रोग आढळला नाही"
+    ],
+    "management_mr": [
+      "नियमित निगा राखा"
+    ],
+    "prevention_mr": [
+      "स्वच्छता राखा"
+    ]
+  },
+  "Soybean___healthy": {
+    "plant": "Soybean",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy soybean leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue regular crop scouting"
+    ],
+    "prevention": [
+      "Maintain good field sanitation",
+      "Manage weeds and crop health",
+      "Scout regularly"
+    ],
+    "plant_mr": "सोयाबीन",
+    "disease_mr": "निरोगी सोयाबीन पान",
+    "description_mr": "सोयाबीनचे पान पूर्णपणे निरोगी आणि तजेलदार असून पानावर कोणताही करपा किंवा रोग नाही.",
+    "symptoms_mr": [
+      "पानावर कोणताही तांबेरा, करपा किंवा डाग आढळलेला नाही",
+      "पानाचा नैसर्गिक हिरवा रंग व जोमदार वाढ दिसते"
+    ],
+    "management_mr": [
+      "नियमित कीड व रोग निरीक्षण चालू ठेवा",
+      "संतुलित खतांचा वापर करा"
+    ],
+    "prevention_mr": [
+      "पिकांची योग्य काळजी घ्या",
+      "ओलावा संतुलित ठेवा"
+    ]
+  },
+  "Squash___Powdery_mildew": {
+    "plant": "Squash",
+    "disease": "Powdery Mildew",
+    "description": "A fungal disease that produces white powdery growth on squash leaves.",
+    "symptoms": [
+      "White powdery patches on leaves",
+      "Leaves can become yellow or weakened",
+      "Severe infection can reduce leaf function"
+    ],
+    "management": [
+      "Improve air movement around plants",
+      "Use resistant varieties where available",
+      "Remove heavily affected material where practical"
+    ],
+    "prevention": [
+      "Avoid overcrowding",
+      "Control weeds around plants",
+      "Scout regularly for early symptoms"
+    ],
+    "plant_mr": "भोपळा",
+    "disease_mr": "भुरी रोग (पावडरी मिल्ड्यू)",
+    "description_mr": "भोपळ्याच्या पानांवर पांढरट भुकटीचा थर पसरवणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर पांढऱ्या पावडरसारखे गोलाकार ठिपके",
+      "हळूहळू संपूर्ण पान पांढरे पडून सुकते",
+      "पाने पिवळी पडून लवकर गळतात"
+    ],
+    "management_mr": [
+      "गंधक (सल्फर) किंवा डायफेनोकोनॅझोल फवारा",
+      "वेलींना भरपूर सूर्यप्रकाश मिळेल अशी व्यवस्था करा"
+    ],
+    "prevention_mr": [
+      "रोगप्रतिकारक वाण लावा",
+      "वेलींची गर्दी टाळा"
+    ]
+  },
+  "Strawberry___Leaf_scorch": {
+    "plant": "Strawberry",
+    "disease": "Leaf Scorch",
+    "description": "A strawberry leaf disease characterized by darkening and scorch-like lesions.",
+    "symptoms": [
+      "Dark reddish or brown leaf spots",
+      "Spots may merge into larger damaged areas",
+      "Severe infection can cause leaf scorch"
+    ],
+    "management": [
+      "Remove severely infected leaves where practical",
+      "Maintain good airflow",
+      "Follow local strawberry disease-management guidance"
+    ],
+    "prevention": [
+      "Use healthy planting material",
+      "Maintain sanitation",
+      "Avoid prolonged foliage wetness"
+    ],
+    "plant_mr": "स्ट्रॉबेरी",
+    "disease_mr": "पानावरील करपा (लीफ स्कॉर्च)",
+    "description_mr": "स्ट्रॉबेरीच्या पानांवर जांभळट ते तपकिरी डाग पडून पाने जळाल्यासारखी दिसतात.",
+    "symptoms_mr": [
+      "पानांवर लहान जांभळे डाग जे नंतर तपकिरी होतात",
+      "पानांच्या कडा करपून जळाल्यासारख्या दिसतात",
+      "झाडाची वाढ खुंटते"
+    ],
+    "management_mr": [
+      "रोगट पाने छाटून नष्ट करा",
+      "शिफारशीत बुरशीनाशक फवारा",
+      "मल्चिंग बदला"
+    ],
+    "prevention_mr": [
+      "ठिबक सिंचनाचा वापर करा",
+      "झाडांमध्ये योग्य अंतर ठेवा"
+    ]
+  },
+  "Strawberry___healthy": {
+    "plant": "Strawberry",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy strawberry leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue routine crop scouting"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Provide good airflow",
+      "Monitor plants regularly"
+    ],
+    "plant_mr": "स्ट्रॉबेरी",
+    "disease_mr": "निरोगी स्ट्रॉबेरी पान",
+    "description_mr": "स्ट्रॉबेरीचे पान पूर्णपणे निरोगी आहे.",
+    "symptoms_mr": [
+      "पानावर कोणतेही रोगट डाग नाहीत"
+    ],
+    "management_mr": [
+      "नियमित काळजी घ्या"
+    ],
+    "prevention_mr": [
+      "तणमुक्त शेती ठेवा"
+    ]
+  },
+  "Tomato___Bacterial_spot": {
+    "plant": "Tomato",
+    "disease": "Bacterial Spot",
+    "description": "A bacterial disease that can affect tomato leaves, stems and fruit.",
+    "symptoms": [
+      "Small brown circular leaf spots",
+      "Spots may have yellow halos",
+      "Fruit may develop small lesions"
+    ],
+    "management": [
+      "Remove symptomatic plant tissue where practical",
+      "Avoid working with wet foliage",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use clean seed and transplants",
+      "Sanitize tools and equipment",
+      "Reduce splashing water onto leaves"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "जिवाणूजन्य ठिपके (बॅक्टेरियल स्पॉट)",
+    "description_mr": "पानांवर आणि फळांवर लहान काळे-तपकिरी पाणीदार ठिपके पाडणारा रोग.",
+    "symptoms_mr": [
+      "पानांवर लहान, पाणीदार गोलाकार काळे ठिपके पडतात",
+      "डागांच्या भोवती पिवळसर वलय दिसते",
+      "फळांवर खरुजसारखे खडबडीत काळे डाग पडतात"
+    ],
+    "management_mr": [
+      "कॉपर हायड्रॉक्साईड + स्ट्रेप्टोसायक्लिन फवारा",
+      "पावसाळ्यात तुषार सिंचन टाळा",
+      "बाधित पाने काढून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "प्रमाणित निरोगी रोपे लावा",
+      "पिकांची फेरपालट करा"
+    ]
+  },
+  "Tomato___Early_blight": {
+    "plant": "Tomato",
+    "disease": "Early Blight",
+    "description": "A common fungal disease of tomato that often begins on older foliage.",
+    "symptoms": [
+      "Dark brown leaf spots",
+      "Concentric ring patterns can occur",
+      "Older leaves are often affected first"
+    ],
+    "management": [
+      "Remove infected lower leaves where practical",
+      "Improve airflow",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use healthy planting material",
+      "Water at the base of plants when possible",
+      "Manage infected crop debris"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "लवकर येणारा करपा (अर्ली ब्लाइट)",
+    "description_mr": "महाराष्ट्रातील टोमॅटो पिकावरील अत्यंत सामान्य रोग; पानांवर वर्तुळाकार चकतीसारखे डाग पडतात.",
+    "symptoms_mr": [
+      "पानांवर एकाआड एक गोलाकार कडे असलेले तपकिरी-काळे डाग (टार्गेट बोर्ड)",
+      "डागांच्या भोवती पिवळसर कडा तयार होते",
+      "सुरुवातीला खालच्या पानांवर प्रादुर्भाव होतो व नंतर वरची पाने करपतात"
+    ],
+    "management_mr": [
+      "मॅनकोझेब किंवा अझोक्सिस्ट्रॉबिन फवारा",
+      "झाडांना आधार (स्टेकिंग) देऊन पाने जमिनीपासून वर ठेवा",
+      "खालची रोगट पाने काढून टाका"
+    ],
+    "prevention_mr": [
+      "मल्चिंग पेपरचा वापर करा ज्यामुळे जमिनीतील बुरशी पानांवर उडत नाही",
+      "ठिबक सिंचनाने पाणी द्या"
+    ]
+  },
+  "Tomato___Late_blight": {
+    "plant": "Tomato",
+    "disease": "Late Blight",
+    "description": "A destructive tomato disease that can progress rapidly under favorable wet conditions.",
+    "symptoms": [
+      "Dark irregular leaf lesions",
+      "Brown or water-soaked damaged areas",
+      "Rapid spread can cause severe foliage loss"
+    ],
+    "management": [
+      "Scout plants frequently",
+      "Remove infected plants or tissues where appropriate",
+      "Follow local late-blight management recommendations"
+    ],
+    "prevention": [
+      "Inspect transplants before planting",
+      "Remove infected plant material",
+      "Avoid prolonged leaf wetness where possible"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "उशिरा येणारा करपा (लेट ब्लाइट)",
+    "description_mr": "ढगाळ, थंड व दमट हवेत वेगाने पसरून संपूर्ण झाड काळवंडणारा अत्यंत विनाशकारी रोग.",
+    "symptoms_mr": [
+      "पानांवर मोठे अनियमित पाणीदार काळपट-हिरवे चट्टे पडतात",
+      "पानाच्या खालच्या बाजूला पांढरी बुरशी वाढते",
+      "फळांवर कडक तपकिरी चट्टे पडतात आणि फळे सडतात"
+    ],
+    "management_mr": [
+      "मेटॅलॅक्सिल + मॅनकोझेब किंवा सायमोक्सानिलची तातडीने फवारणी करा",
+      "बाधित झाडे उपटून नष्ट करा",
+      "शेतात ओलावा जास्त राहू देऊ नका"
+    ],
+    "prevention_mr": [
+      "हवामानात बदल झाल्यास प्रतिबंधात्मक बोर्डो मिश्रण किंवा कॉपर फवारा",
+      "प्रतिकारक वाणांचा वापर करा"
+    ]
+  },
+  "Tomato___Leaf_Mold": {
+    "plant": "Tomato",
+    "disease": "Leaf Mold",
+    "description": "A fungal disease that commonly affects tomato leaves, especially under humid conditions.",
+    "symptoms": [
+      "Yellowish areas may appear on upper leaf surfaces",
+      "Olive or brown fungal growth may develop on lower surfaces",
+      "Severe infection can cause leaf decline"
+    ],
+    "management": [
+      "Improve ventilation and airflow",
+      "Reduce excessive humidity where possible",
+      "Remove heavily infected leaves"
+    ],
+    "prevention": [
+      "Avoid overly dense canopies",
+      "Reduce prolonged leaf wetness",
+      "Maintain greenhouse or field sanitation"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "पानावरील बुरशी (लीफ मोल्ड)",
+    "description_mr": "पॉलिहाऊस किंवा दमट हवेत पानाच्या खालच्या बाजूला मखमली बुरशी वाढणारा रोग.",
+    "symptoms_mr": [
+      "पानाच्या वरच्या बाजूला फिकट पिवळे डाग पडतात",
+      "पानाच्या खालच्या बाजूला ऑलिव्ह-तपकिरी किंवा जांभळट मखमली बुरशी वाढते",
+      "पाने वाळून गळतात"
+    ],
+    "management_mr": [
+      "पॉलिहाऊस किंवा शेतात हवा खेळती ठेवा",
+      "क्लोरोथॅलोनिल किंवा कॉपर बुरशीनाशक फवारा",
+      "खालची गर्दी करणारी पाने छाटा"
+    ],
+    "prevention_mr": [
+      "आर्द्रता ८५% च्या खाली ठेवा",
+      "ठिबक सिंचन वापरा"
+    ]
+  },
+  "Tomato___Septoria_leaf_spot": {
+    "plant": "Tomato",
+    "disease": "Septoria Leaf Spot",
+    "description": "A fungal disease that produces numerous small leaf spots on tomato plants.",
+    "symptoms": [
+      "Small circular spots on leaves",
+      "Spots may have darker margins",
+      "Lower leaves are often affected first"
+    ],
+    "management": [
+      "Remove infected lower leaves where practical",
+      "Improve air circulation",
+      "Manage infected plant debris"
+    ],
+    "prevention": [
+      "Water at the soil line when possible",
+      "Avoid working with wet foliage",
+      "Maintain garden sanitation"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "सेप्टोरिया पानावरील ठिपके",
+    "description_mr": "पानांवर मध्यभागी करडे व गडद कडा असलेले असंख्य बारीक ठिपके पाडणारा रोग.",
+    "symptoms_mr": [
+      "पानांवर असंख्य लहान गोलाकार डाग ज्यांचा मध्य करडा आणि कडा गडद तपकिरी असतात",
+      "डागांच्या मध्यभागी बारीक काळे बिंदू दिसतात",
+      "पाने पिवळी पडून लवकर गळतात"
+    ],
+    "management_mr": [
+      "मॅनकोझेब किंवा कॉपर बुरशीनाशक फवारा",
+      "रोगट पाने वेळोवेळी काढून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "पिकांची फेरपालट करा",
+      "मातीतील पाण्याचा निचरा चांगला ठेवा"
+    ]
+  },
+  "Tomato___Target_Spot": {
+    "plant": "Tomato",
+    "disease": "Target Spot",
+    "description": "A fungal tomato disease that produces leaf and fruit lesions.",
+    "symptoms": [
+      "Circular brown leaf lesions",
+      "Lesions may develop concentric rings",
+      "Severe infections can reduce healthy leaf area"
+    ],
+    "management": [
+      "Remove heavily affected foliage where practical",
+      "Improve airflow",
+      "Monitor disease progression"
+    ],
+    "prevention": [
+      "Avoid prolonged foliage wetness",
+      "Maintain sanitation",
+      "Provide adequate plant spacing"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "टार्गेट स्पॉट (चक्री ठिपके)",
+    "description_mr": "कोरीनेस्पोरा बुरशीमुळे पानांवर व फळांवर लक्षासारखे वर्तुळाकार डाग पडतात.",
+    "symptoms_mr": [
+      "पानांवर एकाआड एक गोलाकार कडे असलेले लहान ते मध्यम डाग",
+      "डाग वाढून पानाचा मोठा भाग करपतो",
+      "फळांवर खोलगट तपकिरी खड्डे पडतात"
+    ],
+    "management_mr": [
+      "शिफारशीत ट्रायझोल किंवा स्ट्रॉबिल्युरिन फवारा",
+      "हवा खेळती राहील अशी झाडांची मांडणी ठेवा"
+    ],
+    "prevention_mr": [
+      "संतुलित खते द्या",
+      "ओलिताचे योग्य नियोजन करा"
+    ]
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+    "plant": "Tomato",
+    "disease": "Tomato Yellow Leaf Curl Virus",
+    "description": "A viral tomato disease commonly associated with whitefly transmission.",
+    "symptoms": [
+      "Leaf curling",
+      "Yellowing of newer leaves",
+      "Stunted plant growth"
+    ],
+    "management": [
+      "Remove clearly infected plants where recommended",
+      "Manage whitefly vectors using local integrated pest-management guidance",
+      "Use resistant varieties where available"
+    ],
+    "prevention": [
+      "Use healthy transplants",
+      "Monitor and manage whiteflies",
+      "Remove weed hosts around production areas"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "पर्णगुच्छ रोग / चुरडा-मुरडा (लीफ कर्ल)",
+    "description_mr": "पांढऱ्या माशीमुळे पसरणारा विषाणूजन्य रोग ज्यामुळे पाने वरच्या बाजूला वाटीसारखी मुरगळतात.",
+    "symptoms_mr": [
+      "पाने वरच्या बाजूला वाटीसारखी मुरगळतात (कपिंग)",
+      "पानांचा आकार लहान होऊन कडा पिवळ्या पडतात",
+      "झाडाची वाढ पूर्णपणे खुंटते आणि फुले/फळे लागत नाहीत"
+    ],
+    "management_mr": [
+      "पांढऱ्या माशीच्या नियंत्रणासाठी पिवळे चिकट सापळे लावा",
+      "डायमिथोएट किंवा थायामेथोक्सामची फवारणी करा",
+      "विषाणूग्रस्त झाडे मुळासकट उपटून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "रोपवाटिकेत नायलॉन नेट वापरा",
+      "व्हायरस प्रतिबंधक संकरित वाण लावा"
+    ]
+  },
+  "Tomato___Tomato_mosaic_virus": {
+    "plant": "Tomato",
+    "disease": "Tomato Mosaic Virus",
+    "description": "A viral disease that can cause mottled and distorted tomato foliage.",
+    "symptoms": [
+      "Light and dark green mottling",
+      "Leaf distortion or curling",
+      "Plant growth may be reduced"
+    ],
+    "management": [
+      "Remove infected plants where appropriate",
+      "Sanitize hands and tools",
+      "Use clean planting material"
+    ],
+    "prevention": [
+      "Avoid spreading sap between plants",
+      "Sanitize tools",
+      "Use disease-free seed and transplants"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "टोमॅटो मोझॅक व्हायरस (खवले रोग)",
+    "description_mr": "पानांवर हिरवे-पिवळे चट्टे आणि विकृती निर्माण करणारा संसर्गजन्य विषाणू रोग.",
+    "symptoms_mr": [
+      "पानांवर फिकट पिवळे व गडद हिरवे चट्टे (मोझॅक नक्षी)",
+      "पाने बारीक, लांबट किंवा विकृत (फर्नसारखी) होतात",
+      "फळांचा रंग असमान राहतो"
+    ],
+    "management_mr": [
+      "संसर्ग झालेली झाडे त्वरित उपटून जाळा",
+      "काम करताना हात व अवजारे साबणाच्या पाण्याने धुवा",
+      "तंबाखू खाऊन शेतात काम करणे टाळा"
+    ],
+    "prevention_mr": [
+      "प्रमाणित बियाणे वापरा",
+      "तणमुक्त शेत ठेवा"
+    ]
+  },
+  "Tomato___healthy": {
+    "plant": "Tomato",
+    "disease": "Healthy",
+    "description": "The image is classified as a healthy tomato leaf.",
+    "symptoms": [
+      "No major disease symptoms detected by the model"
+    ],
+    "management": [
+      "Continue routine crop scouting"
+    ],
+    "prevention": [
+      "Maintain sanitation",
+      "Provide suitable water and nutrition",
+      "Monitor plants regularly"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "निरोगी टोमॅटो पान",
+    "description_mr": "टोमॅटोचे पान पूर्णपणे निरोगी आणि तजेलदार असून पानावर कोणताही करपा किंवा विषाणूजन्य चुरडा-मुरडा नाही.",
+    "symptoms_mr": [
+      "गडद हिरवेगार तजेलदार पान",
+      "पानावर कोणत्याही प्रकारचे पिवळे किंवा काळे डाग नाहीत",
+      "पान चुरडलेले किंवा वाळलेले नाही"
+    ],
+    "management_mr": [
+      "झाडांना बांबू व सुतळीच्या साहाय्याने आधार (स्टेकिंग) द्या",
+      "संतुलित ठिबक खते व पोषण चालू ठेवा"
+    ],
+    "prevention_mr": [
+      "पानांवर पाणी उडणार नाही याची काळजी घ्या, ठिबक सिंचन वापरा",
+      "मल्चिंग पेपरचा वापर करा"
+    ]
+  },
+  "Cotton___Alternaria_leaf_spot": {
+    "plant": "Cotton",
+    "disease": "Alternaria Leaf Spot",
+    "description": "A leaf condition associated with Alternaria fungi. Correct identification should be confirmed using symptoms and, when needed, expert assessment.",
+    "symptoms": [
+      "Brown or dark leaf spots may develop.",
+      "Spots can enlarge and develop darker margins.",
+      "Severe damage may contribute to leaf deterioration."
+    ],
+    "management": [
+      "Inspect affected plants and monitor symptom progression.",
+      "Remove heavily affected plant material where appropriate.",
+      "Seek local agricultural advice before selecting a treatment."
+    ],
+    "prevention": [
+      "Use healthy planting material.",
+      "Maintain field sanitation.",
+      "Monitor plants regularly, especially in favorable disease conditions."
+    ],
+    "plant_mr": "कापूस",
+    "disease_mr": "अल्टरनेरिया करपा",
+    "description_mr": "कापसाच्या पानांवर तपकिरी चक्राकार डाग पाडणारा रोग.",
+    "symptoms_mr": [
+      "पानांवर लहान तपकिरी गोलाकार डाग ज्यांच्या कडा गडद असतात",
+      "डागांचा मधला भाग कोरडा पडून गळतो",
+      "पाने अकाली पिवळी पडून गळतात"
+    ],
+    "management_mr": [
+      "मॅनकोझेब किंवा प्रोपिकोनाझोल फवारा",
+      "रोगट अवशेष नष्ट करा"
+    ],
+    "prevention_mr": [
+      "पिकांची फेरपालट करा",
+      "पोटॅश खतांचा संतुलित वापर करा"
+    ]
+  },
+  "Cotton___Bacterial_blight": {
+    "plant": "Cotton",
+    "disease": "Bacterial Blight",
+    "description": "A bacterial disease of cotton that may affect leaves, stems, and other plant tissues.",
+    "symptoms": [
+      "Angular or dark water-soaked leaf lesions may appear.",
+      "Lesions may darken as symptoms develop.",
+      "Affected plant tissues may deteriorate in severe cases."
+    ],
+    "management": [
+      "Inspect plants and confirm the suspected disease.",
+      "Follow locally recommended sanitation and crop-management practices.",
+      "Consult an agricultural specialist about suitable management options."
+    ],
+    "prevention": [
+      "Use certified or otherwise healthy seed.",
+      "Follow locally recommended resistant-variety guidance.",
+      "Avoid moving potentially infected plant material between fields."
+    ],
+    "plant_mr": "कापूस",
+    "disease_mr": "जिवाणूजन्य करपा / दहिया (ब्लॅक आर्म)",
+    "description_mr": "पानांवर कोनीय पाणीदार डाग आणि फांद्यांवर काळे पट्टे निर्माण करणारा जिवाणू रोग.",
+    "symptoms_mr": [
+      "पानांवर शिरांनी मर्यादित कोनीय पाणीदार डाग पडतात",
+      "डाग नंतर काळे पडून वाळतात",
+      "फांद्यांवर काळे पट्टे तयार होतात (ब्लॅक आर्म)"
+    ],
+    "management_mr": [
+      "कॉपर ऑक्सिक्लोराईड + स्ट्रेप्टोसायक्लिन फवारा",
+      "रोगट फांद्या छाटून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "बीजप्रक्रिया करून पेरणी करा",
+      "प्रतिकारक वाण वापरा"
+    ]
+  },
+  "Cotton___Fusarium_wilt": {
+    "plant": "Cotton",
+    "disease": "Fusarium Wilt",
+    "description": "A fungal wilt disease associated with Fusarium species that can interfere with water movement through the plant.",
+    "symptoms": [
+      "Yellowing and wilting may occur.",
+      "Leaves may become discolored or drop.",
+      "Internal vascular discoloration may occur in affected stems."
+    ],
+    "management": [
+      "Confirm the cause of wilting before treatment decisions.",
+      "Seek advice on locally appropriate resistant varieties.",
+      "Manage affected fields according to local agricultural guidance."
+    ],
+    "prevention": [
+      "Use healthy seed and planting material.",
+      "Maintain appropriate crop rotation where effective.",
+      "Clean equipment when moving between potentially affected fields."
+    ],
+    "plant_mr": "कापूस",
+    "disease_mr": "फ्युजॅरियम मर रोग",
+    "description_mr": "जमिनीतील बुरशीमुळे झाडाच्या वाहिन्या बंद पडून संपूर्ण झाड अचानक सुकणारा रोग.",
+    "symptoms_mr": [
+      "पाने पिवळी पडून खालून वरच्या दिशेने कोमेजतात",
+      "खोड कापल्यास आतील वाहिन्या तपकिरी-काळ्या दिसतात",
+      "संपूर्ण झाड अचानक वाळून मरते"
+    ],
+    "management_mr": [
+      "ट्रायकोडर्मा विरिडी शेणखतात मिसळून जमिनीत द्या",
+      "कार्बेंडाझिमचे द्रावण मुळाशी ओता (ड्रेंचिंग करा)",
+      "बाधित झाडे उपटून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "रोगप्रतिकारक वाण निवडा",
+      "पिकांची फेरपालट करा"
+    ]
+  },
+  "Cotton___Verticillium_wilt": {
+    "plant": "Cotton",
+    "disease": "Verticillium Wilt",
+    "description": "A soil-associated fungal wilt disease that can affect water transport and plant vigor.",
+    "symptoms": [
+      "Yellowing may develop between leaf veins.",
+      "Leaves may wilt or show uneven discoloration.",
+      "Plant growth may be reduced."
+    ],
+    "management": [
+      "Obtain confirmation because other problems can cause similar symptoms.",
+      "Check local guidance on suitable varieties and crop management.",
+      "Avoid moving contaminated soil or plant debris between fields."
+    ],
+    "prevention": [
+      "Use healthy planting material.",
+      "Consider locally recommended crop rotation.",
+      "Maintain field and equipment sanitation."
+    ],
+    "plant_mr": "कापूस",
+    "disease_mr": "व्हर्टिसिलियम मर रोग",
+    "description_mr": "पानांच्या कडांवर पिवळसर पट्टे पडून पान वाघाच्या नखासारखे दिसणारा मर रोग.",
+    "symptoms_mr": [
+      "पानांच्या शिरांच्या दरम्यान पिवळे चट्टे पडतात (मोठ्या पानांवर वाघाच्या पट्ट्यासारखे)",
+      "पाने करपून वाळतात",
+      "झाडाच्या खोडातील वाहिन्या तपकिरी होतात"
+    ],
+    "management_mr": [
+      "जमिनीचे सौरीकरण करा (प्लॅस्टिक आच्छादन)",
+      "जैविक ट्रायकोडर्माचा नियमित वापर करा"
+    ],
+    "prevention_mr": [
+      "निचऱ्याची जमीन वापरा",
+      "सलग कापूस लागवड टाळा"
+    ]
+  },
+  "Cotton___healthy": {
+    "plant": "Cotton",
+    "disease": "Healthy",
+    "description": "The model classified this image as a healthy cotton leaf. This prediction does not rule out every possible disease or plant health problem.",
+    "symptoms": [
+      "No major disease symptoms were identified by the model.",
+      "Inspect leaves for discoloration, spots, wilting, or distortion."
+    ],
+    "management": [
+      "Continue routine crop scouting.",
+      "Provide suitable water and nutrition based on crop needs."
+    ],
+    "prevention": [
+      "Maintain field sanitation.",
+      "Monitor plants regularly.",
+      "Use recommended crop-management practices."
+    ],
+    "plant_mr": "कापूस",
+    "disease_mr": "निरोगी कापूस पान",
+    "description_mr": "कापसाचे पान पूर्णपणे निरोगी आणि सशक्त आहे.",
+    "symptoms_mr": [
+      "पानावर करपा, ठिपके किंवा मर रोगाची लक्षणे नाहीत"
+    ],
+    "management_mr": [
+      "नियमित निंदणी व खत व्यवस्थापन ठेवा"
+    ],
+    "prevention_mr": [
+      "रसशोषक किडींचे वेळेवर नियंत्रण करा"
+    ]
+  },
+  "Grape___Bacterial_leaf_spot": {
+    "plant": "Grape",
+    "disease": "Bacterial Leaf Spot",
+    "description": "A possible bacterial leaf condition. Visual symptoms can overlap with fungal diseases and other sources of leaf damage.",
+    "symptoms": [
+      "Dark or water-soaked spots may appear on leaves.",
+      "Lesions may enlarge or develop surrounding discoloration.",
+      "Affected foliage may deteriorate in severe cases."
+    ],
+    "management": [
+      "Confirm the suspected cause before applying treatments.",
+      "Remove affected material where locally recommended.",
+      "Seek advice from a grape-production specialist."
+    ],
+    "prevention": [
+      "Use healthy planting material.",
+      "Maintain vineyard sanitation.",
+      "Avoid unnecessary leaf wetness and monitor disease symptoms."
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "जिवाणूजन्य ठिपके (बॅक्टेरियल लीफ स्पॉट)",
+    "description_mr": "जिवाणूंमुळे पानांवर आणि खोडावर काळे कॅंकर डाग पडतात.",
+    "symptoms_mr": [
+      "पानांवर लहान तेलकट काळे डाग दिसतात",
+      "डागांच्या भोवती पिवळसर वलय असू शकते",
+      "फांद्यांवर लांबट काळ्या भेगा पडतात"
+    ],
+    "management_mr": [
+      "स्ट्रेप्टोमायसीन सल्फेट + कॉपर हायड्रॉक्साईड फवारा",
+      "रोगट फांद्या छाटून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "निरोगी बेणे वापरा",
+      "पावसाळ्यात जखमा होणार नाहीत याची काळजी घ्या"
+    ]
+  },
+  "Grape___Downy_mildew": {
+    "plant": "Grape",
+    "disease": "Downy Mildew",
+    "description": "A grape disease caused by the oomycete Plasmopara viticola. It can affect leaves and other green tissues.",
+    "symptoms": [
+      "Yellowish or oily-looking areas may form on leaf surfaces.",
+      "Whitish growth may appear on the undersides of leaves in suitable conditions.",
+      "Affected leaves may brown or fall prematurely."
+    ],
+    "management": [
+      "Inspect both leaf surfaces and monitor weather conditions.",
+      "Use locally recommended vineyard-management practices.",
+      "Consult regional guidance before choosing any disease-control treatment."
+    ],
+    "prevention": [
+      "Maintain good canopy airflow.",
+      "Monitor during humid and wet weather.",
+      "Remove infected plant material where appropriate."
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "केवडा / डाउनी मिल्ड्यू",
+    "description_mr": "ढगाळ हवेत व जास्त आर्द्रतेत द्राक्षावर वेगाने पसरणारा अत्यंत घातक रोग.",
+    "symptoms_mr": [
+      "पानाच्या वरच्या बाजूला तेलकट पिवळे डाग (ऑईल स्पॉट्स)",
+      "पानाच्या खालच्या बाजूला पांढरी कापसासारखी बुरशीची वाढ",
+      "रोगट पाने तांबूस पडून गळून पडतात"
+    ],
+    "management_mr": [
+      "लक्षणे दिसताच मेटॅलॅक्सिल + मॅनकोझेब किंवा सायमोक्सानिल फवारा",
+      "पानांवर पाणी साचू देऊ नका",
+      "नायट्रोजनयुक्त खतांचा अतिवापर टाळा"
+    ],
+    "prevention_mr": [
+      "पावसाळ्यात बोर्डो मिश्रण (१%) फवारा",
+      "कॅनॉपी व्यवस्थापन व्यवस्थित ठेवा",
+      "सकाळी लवकर औषध फवारा"
+    ]
+  },
+  "Grape___Powdery_mildew": {
+    "plant": "Grape",
+    "disease": "Powdery Mildew",
+    "description": "A fungal disease associated with Erysiphe necator that can affect grape leaves, shoots, and fruit.",
+    "symptoms": [
+      "Pale powdery growth may appear on leaf surfaces.",
+      "Affected tissue may become distorted or discolored.",
+      "Severe infections may affect fruit quality."
+    ],
+    "management": [
+      "Monitor leaves and developing fruit.",
+      "Use regionally recommended vineyard disease-management practices.",
+      "Obtain local advice before applying disease-control products."
+    ],
+    "prevention": [
+      "Maintain an open canopy where appropriate.",
+      "Scout regularly during susceptible growth stages.",
+      "Remove affected plant material when recommended."
+    ],
+    "plant_mr": "द्राक्ष",
+    "disease_mr": "भुरी / पावडरी मिल्ड्यू",
+    "description_mr": "पानांवर व घडांवर पांढरी पावडर पसरवणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर आणि मण्यांवर पांढरी राखाडी पावडरसारखी बुरशी वाढते",
+      "पाने वरच्या बाजूला वाकतात किंवा मुरगळतात",
+      "मण्यांवर बुरशी आल्यास मणी तडकतात"
+    ],
+    "management_mr": [
+      "विद्राव्य गंधक (सल्फर) किंवा डायफेनोकोनॅझोल फवारा",
+      "मांडवामध्ये सूर्यप्रकाश पोहोचेल अशी कॅनॉपी ठेवा",
+      "प्रादुर्भावग्रस्त पाने छाटून टाका"
+    ],
+    "prevention_mr": [
+      "तापमान वाढल्यास आणि हवा कोरडी असताना गंधकाची फवारणी करा",
+      "सेंद्रिय उपायासाठी ट्रायकोडर्मा किंवा ताक वापरा"
+    ]
+  },
+  "Soybean___Bacterial_blight": {
+    "plant": "Soybean",
+    "disease": "Bacterial Blight",
+    "description": "A bacterial soybean disease commonly associated with Pseudomonas savastanoi pv. glycinea.",
+    "symptoms": [
+      "Small water-soaked spots may form on leaves.",
+      "Lesions may become brown and angular.",
+      "Damaged tissue may dry or tear."
+    ],
+    "management": [
+      "Confirm the disease rather than relying on appearance alone.",
+      "Follow locally recommended crop-management practices.",
+      "Consult agricultural guidance if symptoms spread."
+    ],
+    "prevention": [
+      "Use healthy seed where available.",
+      "Maintain field sanitation.",
+      "Avoid unnecessary movement of potentially contaminated plant material."
+    ],
+    "plant_mr": "सोयाबीन",
+    "disease_mr": "जिवाणूजन्य करपा (बॅक्टेरियल ब्लाइट)",
+    "description_mr": "पानांवर लहान पाणीदार ते तपकिरी डाग पाडणारा जिवाणूजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर लहान पाणीदार कोनीय ठिपके ज्यांच्या भोवती पिवळे वलय असते",
+      "डागांचा मधला भाग गळून पानांना छिद्रे पडतात",
+      "पावसाच्या पाण्याने रोग वेगाने पसरतो"
+    ],
+    "management_mr": [
+      "कॉपर ऑक्सिक्लोराईड + स्ट्रेप्टोसायक्लिन फवारा",
+      "पाने ओली असताना शेतात काम करणे टाळा"
+    ],
+    "prevention_mr": [
+      "प्रमाणित बियाणे वापरा",
+      "पिकांची फेरपालट करा"
+    ]
+  },
+  "Soybean___Cercospora_leaf_blight": {
+    "plant": "Soybean",
+    "disease": "Cercospora Leaf Blight",
+    "description": "A fungal disease associated with Cercospora species that may cause leaf discoloration and reduced canopy health.",
+    "symptoms": [
+      "Leaves may show purple, reddish, or bronze discoloration.",
+      "Leaf surfaces may appear bronzed or blotchy.",
+      "Symptoms can become more noticeable later in the growing season."
+    ],
+    "management": [
+      "Monitor disease development through the growing season.",
+      "Consult local recommendations on resistant varieties and management.",
+      "Confirm diagnosis before deciding on treatment."
+    ],
+    "prevention": [
+      "Use locally recommended varieties.",
+      "Maintain crop residue management practices appropriate to the region.",
+      "Scout fields regularly."
+    ],
+    "plant_mr": "सोयाबीन",
+    "disease_mr": "जांभळा करपा / सर्कोस्पोरा ब्लाइट",
+    "description_mr": "पानांवर आणि शेंगांवर जांभळट-तांबूस डाग निर्माण करणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "उन्हात आलेल्या पानांवर जांभळट-तपकिरी रंग पसरतो",
+      "पाने जाड व चामड्यासारखी होतात",
+      "बियाण्यांवर जांभळे डाग पडतात"
+    ],
+    "management_mr": [
+      "कार्बेंडाझिम किंवा थायोफिनेट मिथाईल फवारा",
+      "फुलोरा व शेंगा धरण्याच्या अवस्थेत फवारणी करा"
+    ],
+    "prevention_mr": [
+      "पेरणीपूर्वी बीजप्रक्रिया करा",
+      "रोगमुक्त बियाणे वापरा"
+    ]
+  },
+  "Soybean___Rust": {
+    "plant": "Soybean",
+    "disease": "Soybean Rust",
+    "description": "A fungal disease caused by Phakopsora pachyrhizi that can damage soybean foliage and reduce plant productivity.",
+    "symptoms": [
+      "Small tan or reddish-brown lesions may develop.",
+      "Tiny raised pustules may occur, particularly on leaf undersides.",
+      "Leaves may yellow and drop prematurely."
+    ],
+    "management": [
+      "Confirm suspected rust with an agricultural specialist.",
+      "Monitor regional disease alerts and local guidance.",
+      "Follow locally approved management recommendations."
+    ],
+    "prevention": [
+      "Scout fields regularly during susceptible growth stages.",
+      "Monitor regional disease reports.",
+      "Follow recommended crop and volunteer-plant management."
+    ],
+    "plant_mr": "सोयाबीन",
+    "disease_mr": "सोयाबीन तांबेरा (रस्ट)",
+    "description_mr": "महाराष्ट्रात (कोल्हापूर, सांगली पट्ट्यात) पावसाळ्यात वेगाने पसरून पाने तांबडी पाडणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानाच्या खालच्या बाजूला बारीक वाळूसारखे तांबूस-तपकिरी फोड",
+      "फोड फुटल्यावर तांबडी भुकटी बोटांना लागते",
+      "पाने तांबूस-तपकिरी होऊन संपूर्ण शेत वाळल्यासारखे दिसते"
+    ],
+    "management_mr": [
+      "हेक्साकोनॅझोल किंवा प्रोपिकोनाझोल बुरशीनाशक फवारा",
+      "लक्षणे दिसताच संपूर्ण शेतात फवारणी करा",
+      "रोगट पाने शेतात पसरू देऊ नका"
+    ],
+    "prevention_mr": [
+      "तांबेरा प्रतिकारक वाण (उदा. फुले कल्याणी) वापरा",
+      "वेळेवर पेरणी करा",
+      "हवेतील आर्द्रता वाढल्यास शेताचे नियमित निरीक्षण करा"
+    ]
+  },
+  "Soybean___Sudden_death_syndrome": {
+    "plant": "Soybean",
+    "disease": "Sudden Death Syndrome",
+    "description": "A soybean disease commonly associated with Fusarium virguliforme and related Fusarium species, depending on the region.",
+    "symptoms": [
+      "Interveinal yellowing may develop on leaves.",
+      "Yellow areas may turn brown while veins remain greener.",
+      "Root damage may occur, and foliage symptoms can appear above ground."
+    ],
+    "management": [
+      "Confirm the diagnosis because several problems produce similar symptoms.",
+      "Consult local recommendations for variety selection and field management.",
+      "Review drainage and soil conditions where relevant."
+    ],
+    "prevention": [
+      "Use healthy seed and locally recommended varieties.",
+      "Manage soil and drainage conditions appropriately.",
+      "Scout affected fields and document symptom patterns."
+    ],
+    "plant_mr": "सोयाबीन",
+    "disease_mr": "अचानक वाळणे / सडन डेथ सिंड्रोम (SDS)",
+    "description_mr": "मुळे सडल्यामुळे पाने अचानक पिवळी पडून शिरांच्या दरम्यान करपणारा रोग.",
+    "symptoms_mr": [
+      "पानांच्या शिरांच्या मधील भाग पिवळा पडून नंतर करपतो, शिरा मात्र हिरव्या राहतात",
+      "पाने गळून देठ झाडालाच लटकलेले राहतात",
+      "मुळांची सड होते"
+    ],
+    "management_mr": [
+      "शेतात पाण्याचा निचरा सुधारा",
+      "जैविक बुरशीनाशक ट्रायकोडर्मा शेणखतातून द्या",
+      "बाधित झाडे उपटून टाका"
+    ],
+    "prevention_mr": [
+      "निचऱ्याची जमीन निवडा",
+      "सोयाबीनचे बेणे बदलून लावा"
+    ]
+  },
+  "Sugarcane___Mosaic": {
+    "plant": "Sugarcane",
+    "disease": "Mosaic",
+    "description": "A viral disease category associated with mosaic patterns on sugarcane leaves. The exact causal virus can vary.",
+    "symptoms": [
+      "Light and dark green patches may form a mosaic pattern.",
+      "Leaf color may appear uneven or streaked.",
+      "Severe symptoms may be associated with reduced plant vigor."
+    ],
+    "management": [
+      "Verify the suspected disease with a local sugarcane specialist.",
+      "Follow regional advice on managing affected plants.",
+      "Use certified healthy planting material when available."
+    ],
+    "prevention": [
+      "Use disease-free seed cane.",
+      "Monitor crops for unusual mosaic patterns.",
+      "Follow regional recommendations for resistant varieties and sanitation."
+    ],
+    "plant_mr": "ऊस",
+    "disease_mr": "मोझॅक विषाणू रोग",
+    "description_mr": "पानांवर हिरवे-पिवळे पट्टे तयार करणारा विषाणूजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर शिरांना समांतर फिकट पिवळे व हिरवे पट्टे दिसतात",
+      "पानांचा हिरवा रंग असमान होतो",
+      "कांडी बारीक राहते व उत्पादन घटते"
+    ],
+    "management_mr": [
+      "मावा किडीचे नियंत्रण करा जी विषाणू पसरवते",
+      "रोगट बेटे मुळासकट उपटून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "उष्ण हवा/पाणी प्रक्रिया केलेले बेणे वापरा",
+      "प्रमाणित रोपवाटिकेतून बेणे आणा"
+    ]
+  },
+  "Sugarcane___Red_rot": {
+    "plant": "Sugarcane",
+    "disease": "Red Rot",
+    "description": "A serious sugarcane disease associated with the fungus Colletotrichum falcatum.",
+    "symptoms": [
+      "Internal stalk tissue may show reddish discoloration.",
+      "Pale patches may appear within red tissue.",
+      "Affected stalks may deteriorate and produce an abnormal smell."
+    ],
+    "management": [
+      "Seek prompt expert confirmation if red rot is suspected.",
+      "Use locally recommended disease-management practices.",
+      "Avoid using suspected infected stalks as planting material."
+    ],
+    "prevention": [
+      "Use healthy, disease-free seed cane.",
+      "Follow regional resistant-variety recommendations.",
+      "Sanitize tools and manage infected residue as locally advised."
+    ],
+    "plant_mr": "ऊस",
+    "disease_mr": "तांबरा / लाल कुजव्या रोग (रेड रॉट)",
+    "description_mr": "उसाचा सर्वात घातक रोग; ऊस आतून लाल पडून अल्कोहोलसारखा वास येतो.",
+    "symptoms_mr": [
+      "उसाचा तुरा आणि वरची पाने सुकतात",
+      "ऊस उभा कापल्यास आतील गर लाल रंगाचा दिसतो आणि पांढरे आडवे पट्टे असतात",
+      "उसाला अल्कोहोल किंवा आंबट वास येतो"
+    ],
+    "management_mr": [
+      "बाधित बेटे उपटून जाळून नष्ट करा",
+      "शेतात पाणी साचू देऊ नका",
+      "बाधित शेतात पुढील २-३ वर्षे ऊस लावू नका"
+    ],
+    "prevention_mr": [
+      "रोगमुक्त निरोगी बेणे वापरा",
+      "पेरणीपूर्वी बेणे प्रक्रिया (कार्बेंडाझिम) करा"
+    ]
+  },
+  "Sugarcane___Rust": {
+    "plant": "Sugarcane",
+    "disease": "Rust",
+    "description": "A sugarcane leaf disease category characterized by rust-like pustules. Several rust species can affect sugarcane.",
+    "symptoms": [
+      "Orange, brown, or reddish pustules may occur on leaves.",
+      "Leaf tissue around lesions may become discolored.",
+      "Severe infection may reduce functional leaf area."
+    ],
+    "management": [
+      "Confirm the rust type where possible.",
+      "Follow locally recommended variety and crop-management guidance.",
+      "Seek local expert advice before treatment decisions."
+    ],
+    "prevention": [
+      "Monitor leaves for developing pustules.",
+      "Use locally recommended varieties where available.",
+      "Maintain field sanitation and crop monitoring."
+    ],
+    "plant_mr": "ऊस",
+    "disease_mr": "उसावरील तांबेरा (रस्ट)",
+    "description_mr": "पानांवर तांबूस लांबट फोड तयार करणारा बुरशीजन्य रोग.",
+    "symptoms_mr": [
+      "पानांवर लांबट तांबूस-तपकिरी रंगाचे फोड दिसतात",
+      "फोड फुटल्यावर तांबडी भुकटी बाहेर पडते",
+      "गंभीर प्रादुर्भावात पाने सुकतात"
+    ],
+    "management_mr": [
+      "मॅनकोझेब किंवा प्रोपिकोनाझोल फवारा",
+      "नत्राचा अतिवापर टाळा"
+    ],
+    "prevention_mr": [
+      "तांबेरा प्रतिकारक वाण (उदा. को ८६०३२) निवडा",
+      "पिकाची योग्य निगा राखा"
+    ]
+  },
+  "Sugarcane___Yellow_disease": {
+    "plant": "Sugarcane",
+    "disease": "Yellow Disease",
+    "description": "A yellowing-related sugarcane condition in this dataset. The label alone does not establish the exact cause, which may require expert diagnosis.",
+    "symptoms": [
+      "Leaves may develop yellow discoloration.",
+      "Yellowing may vary in distribution and severity.",
+      "Plant vigor may decline depending on the underlying cause."
+    ],
+    "management": [
+      "Inspect plants and confirm the underlying cause.",
+      "Check for nutritional, water-related, pest, and disease problems.",
+      "Seek region-specific sugarcane management advice."
+    ],
+    "prevention": [
+      "Use healthy planting material.",
+      "Maintain suitable soil nutrition and irrigation.",
+      "Monitor crop symptoms and consult local agricultural services."
+    ],
+    "plant_mr": "ऊस",
+    "disease_mr": "पिवळा रोग (यलो लीफ व्हायरस)",
+    "description_mr": "पानाची मधली मुख्य शीर पिवळी पडून नंतर संपूर्ण पात्यावर पिवळेपणा पसरवणारा रोग.",
+    "symptoms_mr": [
+      "पानाची मधली मुख्य शीर (मिडरिब) पिवळी पडते",
+      "हळूहळू पात्यावर पिवळेपणा पसरतो आणि टोके सुकतात",
+      "कांडी लहान पडते व साखर उतारा घटतो"
+    ],
+    "management_mr": [
+      "मावा किडीच्या नियंत्रणासाठी कीटकनाशक फवारा",
+      "बाधित बेटे काढून नष्ट करा"
+    ],
+    "prevention_mr": [
+      "टिशू कल्चर किंवा निरोगी बेणे वापरा",
+      "संतुलित सूक्ष्मअन्नद्रव्ये द्या"
+    ]
+  },
+  "Sugarcane___healthy": {
+    "plant": "Sugarcane",
+    "disease": "Healthy",
+    "description": "The model classified this image as a healthy sugarcane leaf. The prediction does not rule out every possible disease or plant health problem.",
+    "symptoms": [
+      "No major disease symptoms were identified by the model.",
+      "Inspect leaves for unusual spots, streaks, pustules, or yellowing."
+    ],
+    "management": [
+      "Continue routine crop scouting.",
+      "Maintain appropriate water and nutrition."
+    ],
+    "prevention": [
+      "Use healthy seed cane.",
+      "Monitor plants regularly.",
+      "Maintain field sanitation and suitable growing conditions."
+    ],
+    "plant_mr": "ऊस",
+    "disease_mr": "निरोगी ऊस पान",
+    "description_mr": "उसाचे पान पूर्णपणे निरोगी आणि सशक्त आहे.",
+    "symptoms_mr": [
+      "पानावर कोणत्याही रोगाचे लक्षण किंवा डाग नाहीत"
+    ],
+    "management_mr": [
+      "नियमित पाणी, खत आणि बाळबांधणी करा"
+    ],
+    "prevention_mr": [
+      "तण व किडींचे वेळेवर नियंत्रण करा"
+    ]
+  },
+  "Tomato___Spider_mites Two-spotted_spider_mite": {
+    "plant": "Tomato",
+    "disease": "Two-Spotted Spider Mite",
+    "description": "A pest infestation rather than a fungal or bacterial disease. Spider mites feed on plant tissue and can weaken leaves.",
+    "symptoms": [
+      "Fine yellow or pale stippling on leaves",
+      "Leaves may bronze or dry under severe infestation",
+      "Fine webbing may be visible"
+    ],
+    "management": [
+      "Inspect leaf undersides for mites",
+      "Reduce plant stress where possible",
+      "Use locally recommended integrated pest-management methods"
+    ],
+    "prevention": [
+      "Monitor plants regularly",
+      "Manage weeds that may host mites",
+      "Avoid unnecessary plant stress"
+    ],
+    "plant_mr": "टोमॅटो",
+    "disease_mr": "लाल कोळी (स्पायडर माइट्स)",
+    "description_mr": "पानाच्या खालून रस शोषून बारीक जाळे विणणारे अतिसूक्ष्म लाल कीटक.",
+    "symptoms_mr": [
+      "पानांच्या वरच्या बाजूला पिवळसर बारीक ठिपके (स्टिपलिंग)",
+      "पानाच्या खालच्या बाजूला बारीक कोळ्याचे जाळे दिसते",
+      "पाने वाळून चॉकलेटी होतात व गळतात"
+    ],
+    "management_mr": [
+      "प्रोपारगाइट किंवा फेनाझाक्विन या कोळीनाशकाची फवारणी करा",
+      "पानांच्या खालच्या बाजूवर चांगला औषधाचा थर बसेल असे फवारा",
+      "सेंद्रिय उपायासाठी कडुनिंब तेल फवारा"
+    ],
+    "prevention_mr": [
+      "शेतात धूळ साचू देऊ नका",
+      "नियमित ओलावा टिकवून ठेवा"
+    ]
+  }
+};
+
+// Plant name translations (English -> Marathi)
+export const PLANT_NAMES_MR = {
+  "Apple": "सफरचंद",
+  "Blueberry": "ब्ल्यूबेरी",
+  "Cherry": "चेरी",
+  "Cherry (including sour)": "चेरी",
+  "Corn": "मका",
+  "Corn (maize)": "मका",
+  "Grape": "द्राक्ष",
+  "Orange": "संत्रा",
+  "Peach": "पीच",
+  "Pepper, bell": "ढोबळी मिरची",
+  "Potato": "बटाटा",
+  "Raspberry": "रास्पबेरी",
+  "Soybean": "सोयाबीन",
+  "Squash": "भोपळा",
+  "Strawberry": "स्ट्रॉबेरी",
+  "Tomato": "टोमॅटो",
+  "Cotton": "कापूस",
+  "Sugarcane": "ऊस",
+};
+
+// Helper: Normalize key for searching
+function normalize(str) {
+  return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+// Find entry in database
+export function findDiseaseEntry(diseaseName, plantName = null, classKey = null) {
+  if (classKey && DISEASE_TRANSLATIONS_MR[classKey]) {
+    return DISEASE_TRANSLATIONS_MR[classKey];
+  }
+
+  // Direct match by class key pattern
+  if (plantName && diseaseName) {
+    const cleanPlant = plantName.replace(/[(),]/g, "").replace(/ +/g, "_");
+    const cleanDisease = diseaseName.replace(/[(),]/g, "").replace(/ +/g, "_");
+    const combinedKey = `${cleanPlant}___${cleanDisease}`;
+    if (DISEASE_TRANSLATIONS_MR[combinedKey]) {
+      return DISEASE_TRANSLATIONS_MR[combinedKey];
+    }
+  }
+
+  // Exact or fuzzy match
+  const targetDisease = normalize(diseaseName);
+  const targetPlant = plantName ? normalize(plantName) : null;
+
+  for (const [key, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
+    const entryDisease = normalize(entry.disease);
+    const entryPlant = normalize(entry.plant);
+
+    if (targetPlant) {
+      if (entryPlant === targetPlant && entryDisease === targetDisease) {
+        return entry;
+      }
+    } else {
+      if (entryDisease === targetDisease) {
+        return entry;
+      }
+    }
+  }
+
+  // Partial match fallback
+  for (const [key, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
+    const entryDisease = normalize(entry.disease);
+    if (targetDisease && (targetDisease.includes(entryDisease) || entryDisease.includes(targetDisease))) {
+      return entry;
+    }
+  }
+
+  return null;
+}
+
+export function getLocalizedPlant(plantName, lang = "en") {
+  if (lang !== "mr") return plantName;
+  if (!plantName) return "";
+  return PLANT_NAMES_MR[plantName] || plantName;
+}
+
+export function getLocalizedDisease(diseaseName, lang = "en", classKey = null, plantName = null) {
+  if (lang !== "mr") return diseaseName;
+  if (!diseaseName) return "";
+  if (diseaseName.toLowerCase() === "healthy") return "निरोगी";
+  const entry = findDiseaseEntry(diseaseName, plantName, classKey);
+  return entry?.disease_mr || diseaseName;
+}
+
+export function getLocalizedDescription(diseaseName, lang = "en", defaultDesc = "", classKey = null, plantName = null) {
+  if (lang !== "mr") return defaultDesc;
+  const entry = findDiseaseEntry(diseaseName, plantName, classKey);
+  return entry?.description_mr || defaultDesc;
+}
+
+export function getLocalizedSymptoms(diseaseName, lang = "en", defaultSymptoms = [], classKey = null, plantName = null) {
+  if (lang !== "mr") return defaultSymptoms;
+  const entry = findDiseaseEntry(diseaseName, plantName, classKey);
+  if (entry?.symptoms_mr && entry.symptoms_mr.length > 0) {
+    return entry.symptoms_mr;
+  }
+  return defaultSymptoms;
+}
+
+export function getLocalizedManagement(diseaseName, lang = "en", defaultManagement = [], classKey = null, plantName = null) {
+  if (lang !== "mr") return defaultManagement;
+  const entry = findDiseaseEntry(diseaseName, plantName, classKey);
+  if (entry?.management_mr && entry.management_mr.length > 0) {
+    return entry.management_mr;
+  }
+  return defaultManagement;
+}
+
+export function getLocalizedPrevention(diseaseName, lang = "en", defaultPrevention = [], classKey = null, plantName = null) {
+  if (lang !== "mr") return defaultPrevention;
+  const entry = findDiseaseEntry(diseaseName, plantName, classKey);
+  if (entry?.prevention_mr && entry.prevention_mr.length > 0) {
+    return entry.prevention_mr;
+  }
+  return defaultPrevention;
+}

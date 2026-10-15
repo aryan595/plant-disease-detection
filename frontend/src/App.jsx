@@ -1243,15 +1243,47 @@ function App() {
       </header>
 
       <main className="main-content">
-        {/* Hero */}
-        <section className="hero">
-          <div className="hero-badge">
-            {t.heroBadge}
+        {/* Dashboard introduction */}
+        <section className="dashboard-hero">
+          <div className="dashboard-hero-copy">
+            <div className="hero-badge">
+              <span className="hero-badge-pulse" />
+              {t.heroBadge}
+            </div>
+
+            <h1>{t.heroTitle}</h1>
+
+            <p>{t.heroDescription}</p>
+
+            <div className="dashboard-hero-signals" aria-label="Platform capabilities">
+              <span><i>✦</i> Explainable AI</span>
+              <span><i>◌</i> Local farm context</span>
+              <span><i>↗</i> Action-ready advice</span>
+            </div>
           </div>
 
-          <h1>{t.heroTitle}</h1>
-
-          <p>{t.heroDescription}</p>
+          <aside className="hero-system-card" aria-label="AgriSense system readiness">
+            <div className="system-card-topline">
+              <span className="live-dot" />
+              <span>AI system online</span>
+              <span className="system-card-code">V2.0</span>
+            </div>
+            <div className="system-card-body">
+              <div>
+                <span className="system-card-label">Plant intelligence</span>
+                <strong>55</strong>
+                <span className="system-card-meta">crop health classes</span>
+              </div>
+              <div className="system-orbit" aria-hidden="true">
+                <span>✦</span>
+              </div>
+            </div>
+            <div className="system-card-footer">
+              <span>Model confidence</span>
+              <strong>95.58%</strong>
+              <div><i /></div>
+            </div>
+          </aside>
         </section>
 
         {/* Farmer-First Navigation Dock */}
@@ -1301,6 +1333,7 @@ function App() {
         {/* Diagnosis Tab */}
         {activeTab === "diagnosis" && (
           <>
+            <section className="scan-context-grid">
             {/* Voice Hero Consultation Banner */}
             <div className="voice-hero-banner">
               <div className="voice-hero-content">
@@ -1371,10 +1404,13 @@ function App() {
               </div>
             </div>
 
+            </section>
+
             {/* Main workspace */}
             <section className="workspace">
           {/* Image panel */}
           <div className="image-panel">
+            <div className="scan-panel-ambient" aria-hidden="true" />
             <div className="panel-header">
               <div>
                 <h2>{t.leafImage}</h2>

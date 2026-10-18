@@ -1,6 +1,19 @@
 from pathlib import Path
 import json
+import os
 from typing import Optional, List, Dict, Any
+
+# Keep the production worker within the memory and CPU budget of a small web
+# service. These are defaults only, so a larger host can deliberately override
+# them through its environment.
+for _thread_env in (
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+):
+    os.environ.setdefault(_thread_env, "1")
+os.environ.setdefault("MALLOC_ARENA_MAX", "2")
 
 import torch
 import torch.nn as nn
@@ -34,6 +47,17 @@ class PlantDiseasePredictor:
         self.device = torch.device(
             "cuda" if torch.cuda.is_available() else "cpu"
         )
+
+        # A single request is processed at a time by the API worker. Limiting
+        # native thread pools avoids unnecessary per-thread memory on Render's
+        # compact instances and is more predictable under concurrent traffic.
+        try:
+            torch.set_num_threads(int(os.getenv("TORCH_NUM_THREADS", "1")))
+            torch.set_num_interop_threads(1)
+        except RuntimeError:
+            # PyTorch only allows changing inter-op threads before parallel
+            # work begins. It is safe to retain its existing setting otherwise.
+            pass
 
         print("Loading plant disease model...")
         print("Device:", self.device)

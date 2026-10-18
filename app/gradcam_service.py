@@ -1,3 +1,4 @@
+import os
 from typing import Optional, Dict, Any
 import numpy as np
 import torch
@@ -21,12 +22,61 @@ class GradCAMService:
 
         self.activations = None
         self.gradients = None
+        self.enabled = os.getenv("ENABLE_GRADCAM", "true").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        }
 
         # Final convolutional feature layer of EfficientNet-V2
         if hasattr(self.model, "features"):
             self.target_layer = self.model.features[-1]
         else:
             self.target_layer = list(self.model.children())[-2]
+
+    @staticmethod
+    def _visual_condition_map(image: Image.Image) -> np.ndarray:
+        """Create a compact, non-model visual lesion guide for low-memory hosts.
+
+        Grad-CAM needs a full backward pass and can exceed the memory allowance
+        of an entry-level hosting instance. This map deliberately uses only the
+        uploaded image's visible colour anomalies; callers label it as a visual
+        condition guide rather than model explainability.
+        """
+        rgb = np.asarray(image.convert("RGB"), dtype=np.float32) / 255.0
+        red, green, blue = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+
+        # Yellow/brown lesions generally have red dominance, reduced chlorophyll
+        # (green excess), and meaningful saturation. Combining those cues gives
+        # a helpful visual aid without retaining a neural-network gradient graph.
+        green_excess = 2.0 * green - red - blue
+        chlorophyll_loss = np.clip((0.16 - green_excess) / 0.45, 0.0, 1.0)
+        warm_shift = np.clip((red - blue + 0.08) / 0.55, 0.0, 1.0)
+        saturation = (rgb.max(axis=-1) - rgb.min(axis=-1))
+        focus = (0.60 * chlorophyll_loss) + (0.30 * warm_shift) + (0.10 * saturation)
+
+        low, high = np.percentile(focus, (5, 95))
+        if high > low:
+            focus = (focus - low) / (high - low)
+        else:
+            focus = np.zeros_like(focus)
+        return np.clip(focus, 0.0, 1.0).astype(np.float32)
+
+    def _lightweight_analysis(
+        self,
+        image: Image.Image,
+        crop: Optional[str],
+    ) -> Dict[str, Any]:
+        predictions = self.predictor.predict(image, crop=crop)
+        best = predictions[0]
+        return {
+            "class": best["class"],
+            "confidence": best["confidence"],
+            "top_3": predictions,
+            "heatmap": self._visual_condition_map(image),
+            "explanation_mode": "visual_condition_guide",
+        }
 
     def _forward_hook(self, module, input, output):
         self.activations = output
@@ -44,7 +94,12 @@ class GradCAMService:
         """
         image = image.convert("RGB")
 
+        if not self.enabled:
+            return self._lightweight_analysis(image, crop)
+
         # Register forward and backward hooks
+        self.activations = None
+        self.gradients = None
         forward_handle = self.target_layer.register_forward_hook(self._forward_hook)
         backward_handle = self.target_layer.register_full_backward_hook(self._backward_hook)
 
@@ -100,16 +155,17 @@ class GradCAMService:
             if self.activations is None or self.gradients is None:
                 raise RuntimeError("Failed to capture feature activations or gradients for Grad-CAM.")
 
-            activation = self.activations[0]
-            gradient = self.gradients[0]
+            # Detach immediately so the backward graph can be released before
+            # the image rendering and advisory work begins.
+            activation = self.activations[0].detach()
+            gradient = self.gradients[0].detach()
 
             # Channel-wise pooling weights
-            weights = gradient.mean(dim=(1, 2))
+            weights = gradient.mean(dim=(1, 2), keepdim=True)
 
-            # Weighted linear combination
-            cam = torch.zeros(activation.shape[1:], device=self.device)
-            for ch in range(activation.shape[0]):
-                cam += weights[ch] * activation[ch]
+            # Vectorized weighted linear combination avoids an unnecessary
+            # sequence of intermediate tensors.
+            cam = (weights * activation).sum(dim=0)
 
             # Rectified Linear Unit (ReLU)
             cam = F.relu(cam)
@@ -143,11 +199,14 @@ class GradCAMService:
                 "confidence": confidence,
                 "top_3": top_3,
                 "heatmap": heatmap_full,
+                "explanation_mode": "gradcam",
             }
 
         finally:
             forward_handle.remove()
             backward_handle.remove()
+            self.activations = None
+            self.gradients = None
 
     def generate(self, image: Image.Image, crop: Optional[str] = None) -> Dict[str, Any]:
         """Alias for analyze() to ensure backward compatibility."""

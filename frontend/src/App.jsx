@@ -146,6 +146,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [result, setResult] = useState(null);
   const [gradcamImage, setGradcamImage] = useState(null);
+  const [explainabilityMode, setExplainabilityMode] = useState("gradcam");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -155,6 +156,11 @@ function App() {
   const [farmAcres, setFarmAcres] = useState(1);
   const [selectedCrop, setSelectedCrop] = useState("all");
   const [imageViewMode, setImageViewMode] = useState("original"); // "original" | "heatmap" | "split"
+
+  const usesVisualConditionGuide = explainabilityMode === "visual_condition_guide";
+  const visualGuideLabel = usesVisualConditionGuide
+    ? (language === "mr" ? "पान स्थिती मार्गदर्शक" : "Leaf Condition Guide")
+    : (language === "mr" ? "उष्णता नकाशा" : "AI Heatmap");
 
   const [selectedDistrict, setSelectedDistrict] = useState("Pune (पुणे)");
   const [districts, setDistricts] = useState([
@@ -588,6 +594,7 @@ function App() {
 
       setResult(null);
       setGradcamImage(null);
+      setExplainabilityMode("gradcam");
       setError(null);
     };
 
@@ -858,6 +865,7 @@ function App() {
       const data = await apiRes.json();
       setResult(data);
       setGradcamImage(data.gradcam_image || null);
+      setExplainabilityMode(data.explainability_mode || "gradcam");
     } catch (err) {
       setError(err.message || "Failed to analyze sample image.");
     } finally {
@@ -933,6 +941,7 @@ function App() {
 
       setResult(data);
       setGradcamImage(data.gradcam_image || null);
+      setExplainabilityMode(data.explainability_mode || "gradcam");
       if (data.gradcam_image) {
         setImageViewMode("heatmap");
       }
@@ -1489,7 +1498,7 @@ function App() {
                   className={`view-mode-btn ${imageViewMode === "heatmap" ? "active" : ""}`}
                   onClick={() => setImageViewMode("heatmap")}
                 >
-                  🔥 {language === "mr" ? "उष्णता नकाशा" : "AI Heatmap"}
+                  🔥 {visualGuideLabel}
                 </button>
                 <button
                   type="button"
@@ -1560,8 +1569,12 @@ function App() {
                         <img src={selectedImage.preview} alt="Original Leaf" className="main-preview-image split" />
                       </div>
                       <div className="split-view-col">
-                        <span className="split-label">🔥 {language === "mr" ? "AI उष्णता नकाशा" : "AI Heatmap"}</span>
-                        <img src={gradcamImage} alt="Grad-CAM Lesion Heatmap" className="main-preview-image split" />
+                        <span className="split-label">🔥 {visualGuideLabel}</span>
+                        <img
+                          src={gradcamImage}
+                          alt={usesVisualConditionGuide ? "Leaf condition guide" : "Grad-CAM lesion heatmap"}
+                          className="main-preview-image split"
+                        />
                       </div>
                     </div>
                   ) : (

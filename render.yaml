@@ -11,5 +11,17 @@ services:
         value: 3.10.13
       - key: CORS_ORIGINS
         value: "*"
+      - key: ENABLE_GRADCAM
+        value: "false"
+      - key: TORCH_NUM_THREADS
+        value: "1"
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: MKL_NUM_THREADS
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: MALLOC_ARENA_MAX
+        value: "2"
       - key: GROQ_API_KEY
         sync: false

@@ -50,6 +50,7 @@ MAX_FILE_SIZE = 10 * 1024 * 1024
 
 MAX_IMAGE_WIDTH = 6000
 MAX_IMAGE_HEIGHT = 6000
+MAX_ANALYSIS_DIMENSION = 1600
 
 LOW_CONFIDENCE_THRESHOLD = 0.70
 
@@ -430,6 +431,16 @@ async def validate_image(file: UploadFile):
                 "Image dimensions are too large. "
                 "Maximum allowed dimensions are 6000 × 6000."
             ),
+        )
+
+    # Full-resolution phone photos can create several large OpenCV arrays while
+    # Grad-CAM overlays are rendered. The classifier itself receives 224px
+    # crops, so a 1600px working image preserves visible lesions while keeping
+    # cloud inference reliable on a small instance.
+    if max(width, height) > MAX_ANALYSIS_DIMENSION:
+        image.thumbnail(
+            (MAX_ANALYSIS_DIMENSION, MAX_ANALYSIS_DIMENSION),
+            Image.Resampling.LANCZOS,
         )
 
     return image
@@ -997,6 +1008,7 @@ async def analyze(
         "prevention_mr": prevention_mr,
         "top_3": top_predictions,
         "gradcam_image": gradcam_image,
+        "explainability_mode": result.get("explanation_mode", "gradcam"),
         # New Major Project Features:
         "severity": {
             "level": severity_data["level"],

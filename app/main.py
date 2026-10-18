@@ -9,13 +9,14 @@ from PIL import Image
 import cv2
 import numpy as np
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.predictor import PlantDiseasePredictor
 from app.gradcam_service import GradCAMService
 from app.chat_routes import router as chat_router
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from agrisense.core.severity import estimate_severity
 from agrisense.core.weather import (
@@ -45,6 +46,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DISEASE_INFO_FILE = (
     PROJECT_ROOT / "app" / "disease_info.json"
 )
+FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 
 MAX_FILE_SIZE = 10 * 1024 * 1024
 
@@ -84,6 +86,11 @@ app = FastAPI(
     version="1.1.0",
 )
 app.include_router(chat_router)
+ 
+@app.get("/health")
+async def health_check():
+    """Cloud platform health check endpoint."""
+    return {"status": "ok", "app": "AgriSense", "version": "1.1.0"}
 
 cors_origins_env = os.getenv("CORS_ORIGINS", "").strip()
 cors_origins_list = [
@@ -523,19 +530,26 @@ def get_display_information(class_name):
 
 
 # =========================================
-# Root endpoint
+# Root and API status endpoints
 # =========================================
 
-@app.get("/")
-def root():
-
+@app.get("/api/status")
+def api_status():
     return {
         "message": "Plant Disease Detection API is running!",
-        "model": "EfficientNet-V2-S",
+        "model": "EfficientNet-B0",
         "classes": len(predictor.classes),
         "device": str(predictor.device),
         "disease_info_classes": len(disease_info),
     }
+
+
+@app.get("/")
+def root():
+    index_file = FRONTEND_DIST / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    return api_status()
 
 
 # =========================================
@@ -1262,4 +1276,53 @@ async def download_pmfby_certificate_endpoint(
         media_type="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="{clean_filename}"'}
     )
+
+
+# =========================================
+# Frontend Production Single Page App (SPA)
+# =========================================
+
+API_PREFIXES = (
+    "/analyze",
+    "/predict",
+    "/weather",
+    "/forecast",
+    "/districts",
+    "/krishi-kendras",
+    "/mandi-rates",
+    "/tts",
+    "/download-report",
+    "/download-pmfby-certificate",
+    "/check-compatibility",
+    "/compare-recovery",
+    "/chat",
+    "/health",
+    "/docs",
+    "/openapi.json",
+    "/redoc",
+    "/api",
+)
+
+if FRONTEND_DIST.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIST), html=True), name="frontend_spa")
+
+    @app.exception_handler(404)
+    async def spa_404_handler(request: Request, exc):
+        path = request.url.path
+        if path.startswith(API_PREFIXES):
+            return Response(
+                content=json.dumps({"detail": "Not Found"}),
+                status_code=404,
+                media_type="application/json",
+            )
+        index_file = FRONTEND_DIST / "index.html"
+        if index_file.exists():
+            return FileResponse(index_file)
+        return Response(
+            content=json.dumps({"detail": "Not Found"}),
+            status_code=404,
+            media_type="application/json",
+        )
+
+
 

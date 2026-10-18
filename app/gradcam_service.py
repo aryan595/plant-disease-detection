@@ -22,7 +22,14 @@ class GradCAMService:
 
         self.activations = None
         self.gradients = None
-        self.enabled = os.getenv("ENABLE_GRADCAM", "true").strip().lower() in {
+        # Render's compact instances can serve inference reliably but may be
+        # terminated by the extra backward-pass memory Grad-CAM requires. Use
+        # the safe visual guide there even when an older Render service has not
+        # yet synchronized the blueprint environment variables.
+        gradcam_default = "false" if (
+            os.getenv("RENDER") or os.getenv("RENDER_SERVICE_ID")
+        ) else "true"
+        self.enabled = os.getenv("ENABLE_GRADCAM", gradcam_default).strip().lower() in {
             "1",
             "true",
             "yes",

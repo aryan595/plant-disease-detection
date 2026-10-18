@@ -17,7 +17,8 @@ __pycache__/
 
 # React dependencies and build output
 node_modules/
-frontend/dist/
+# frontend/dist/ tracked for zero-dependency standalone container & Render deployment
+!frontend/dist/
 frontend/.env
 frontend/.env.*
 !frontend/.env.example

@@ -4613,7 +4613,7 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 15px;
   scrollbar-width: thin;
 }
 
@@ -6615,6 +6615,104 @@ body {
   .district-selector {
     max-width: 145px;
   }
+}
+
+/* Tab-suite consistency: native controls, localized copy, and vector iconography. */
+.app-icon {
+  display: block;
+  width: 1.1em;
+  height: 1.1em;
+  flex: 0 0 auto;
+}
+
+.logo-leaf-icon .app-icon {
+  width: 21px;
+  height: 21px;
+  color: #ecfff4;
+}
+
+.farmer-tab-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: #86efbd;
+}
+
+.farmer-tab-btn.active .farmer-tab-icon {
+  color: #eafff3;
+}
+
+.crop-icon {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  color: #78eeb5;
+}
+
+.crop-pill.active .crop-icon {
+  color: #effff7;
+}
+
+.sample-chip .app-icon {
+  width: 15px;
+  height: 15px;
+  color: #80efbc;
+}
+
+.recovery-upload-icon {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 10px;
+  color: #90f3c2;
+}
+
+.tankmix-checker-section h3,
+.forecast-section h3,
+.krishi-kendra-section h3,
+.recovery-tracker-section h3,
+.krishi-kendra-section h4 {
+  color: #effff8 !important;
+}
+
+.tankmix-checker-section > p,
+.forecast-section > p,
+.recovery-tracker-section > p {
+  color: #a9c2ba !important;
+}
+
+.tankmix-checker-section label,
+.forecast-day-date {
+  color: #b8cec6 !important;
+}
+
+.forecast-day-temp {
+  color: #effff8 !important;
+}
+
+.forecast-day-rain {
+  color: #77d8ff !important;
+}
+
+.kendra-card a,
+.pricing-fair-price {
+  color: #8df2bf !important;
+}
+
+.compat-field select,
+.tankmix-checker-section select {
+  appearance: auto;
+  color-scheme: dark;
+  border-color: rgba(157, 239, 216, 0.18) !important;
+  background: rgba(7, 25, 28, 0.9) !important;
+  color: #dff5ec !important;
+}
+
+.compat-field select option,
+.tankmix-checker-section select option {
+  background: #08191c;
+  color: #dff5ec;
 }
 
 

@@ -56,8 +56,13 @@ class GradCAMService:
 
             probabilities = torch.softmax(outputs, dim=1)
 
-            # Check optional crop filter
+            # Crop selection changes the probability space shown to the grower.
+            # Keep the displayed confidence and top predictions in that same space;
+            # previously we selected a crop-specific class but reported its much
+            # smaller global probability across every model class.
             target_class_idx = None
+            top_confidences = None
+            top_class_indices = None
             if crop and crop.strip().lower() not in ["all", "any", "auto", ""]:
                 target_crop = crop.strip().lower()
                 matching = [
@@ -67,14 +72,26 @@ class GradCAMService:
                 if matching:
                     sub_logits = outputs[0, matching]
                     sub_probs = torch.softmax(sub_logits, dim=0)
-                    top_sub_k = sub_probs.argmax().item()
-                    target_class_idx = matching[top_sub_k]
+                    k = min(3, len(matching))
+                    top_confidences, top_positions = sub_probs.topk(k)
+                    top_class_indices = [
+                        matching[position.item()]
+                        for position in top_positions
+                    ]
+                    target_class_idx = top_class_indices[0]
 
             if target_class_idx is None:
-                target_class_idx = outputs.argmax(dim=1).item()
+                k = min(3, len(self.classes))
+                top_confidences, top_indices = probabilities.topk(k, dim=1)
+                top_confidences = top_confidences[0]
+                top_class_indices = [
+                    index.item()
+                    for index in top_indices[0]
+                ]
+                target_class_idx = top_class_indices[0]
 
             predicted_class = self.classes[target_class_idx]
-            confidence = probabilities[0, target_class_idx].item()
+            confidence = top_confidences[0].item()
 
             # Backward pass for Grad-CAM
             target_score = outputs[0, target_class_idx]
@@ -113,14 +130,12 @@ class GradCAMService:
             heatmap_img = heatmap_img.resize((width, height), Image.Resampling.BILINEAR)
             heatmap_full = np.array(heatmap_img) / 255.0
 
-            # Compute top-3 predictions
-            top_probs, top_idxs = probabilities.topk(min(3, len(self.classes)), dim=1)
+            # The candidates mirror the probability space used for the displayed score.
             top_3 = []
-            for rank in range(top_idxs.shape[1]):
-                idx = top_idxs[0, rank].item()
+            for rank, idx in enumerate(top_class_indices):
                 top_3.append({
                     "class": self.classes[idx],
-                    "confidence": top_probs[0, rank].item(),
+                    "confidence": top_confidences[rank].item(),
                 })
 
             return {

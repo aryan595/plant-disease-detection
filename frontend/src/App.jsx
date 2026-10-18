@@ -82,6 +82,50 @@ const CAMERA_TEXT = {
   },
 };
 
+function AppIcon({ name, className = "" }) {
+  const svgProps = {
+    className: `app-icon ${className}`.trim(),
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": true,
+  };
+
+  switch (name) {
+    case "spray":
+      return <svg {...svgProps}><path d="M7 9h7l3 3-3 3H7z" /><path d="M9 9V6h4" /><path d="M17 12h3" /><path d="M20 9.5v5" /><path d="M5 13H3" /></svg>;
+    case "forecast":
+      return <svg {...svgProps}><path d="M7 17a4 4 0 1 1 .9-7.9A5 5 0 0 1 18 11.2 3 3 0 0 1 17 17H7z" /><path d="M9 20l-.5 1" /><path d="M13 20l-.5 1" /><path d="M17 20l-.5 1" /></svg>;
+    case "market":
+      return <svg {...svgProps}><path d="M4 10h16v10H4z" /><path d="M3 10l2-5h14l2 5" /><path d="M8 14h3v6H8z" /><path d="M15 14h2" /><path d="M15 17h2" /></svg>;
+    case "recovery":
+      return <svg {...svgProps}><path d="M4 19V5" /><path d="M4 19h16" /><path d="m7 15 4-4 3 2 5-6" /><path d="M16 7h3v3" /></svg>;
+    case "camera":
+      return <svg {...svgProps}><path d="M4 8h4l1.4-2h5.2L16 8h4v11H4z" /><circle cx="12" cy="13" r="3.1" /></svg>;
+    case "tomato":
+      return <svg {...svgProps}><circle cx="12" cy="14" r="6.2" /><path d="M12 7.8V4" /><path d="m12 7.8-3-2.1" /><path d="m12 7.8 3-2.1" /><path d="m12 7.8 0-3" /></svg>;
+    case "grape":
+      return <svg {...svgProps}><path d="M12 4v4" /><path d="m12 5 3-2" /><circle cx="9" cy="10" r="2" /><circle cx="14" cy="10" r="2" /><circle cx="7.5" cy="14" r="2" /><circle cx="12" cy="14" r="2" /><circle cx="16.5" cy="14" r="2" /><circle cx="10" cy="18" r="2" /><circle cx="14" cy="18" r="2" /></svg>;
+    case "potato":
+      return <svg {...svgProps}><path d="M6.5 8.5c2.4-2.7 7.9-3.2 10.2-.4 2.2 2.7.8 8.9-2.5 10.4-3.3 1.6-8.1-.3-8.7-4.1-.4-2.2-.3-4.2.9-5.9Z" /><path d="M9 12h.01M14.5 15h.01M13 10h.01" /></svg>;
+    case "soybean":
+      return <svg {...svgProps}><path d="M12 20V8" /><path d="M12 12c-4 0-6-2.3-7-5 3.9-.2 6.5 1.4 7 5Z" /><path d="M12 16c3.9 0 6.1-2.4 7-5-3.8-.1-6.6 1.4-7 5Z" /><path d="M12 9c2.7 0 4.4-1.7 5-4-2.7 0-4.7 1.1-5 4Z" /></svg>;
+    case "corn":
+      return <svg {...svgProps}><path d="M10 5c4.1 0 6 3.1 6 7s-1.9 7-6 7-5-3.1-5-7 1.1-7 5-7Z" /><path d="M10 5c-2.4 1.3-4 3.8-4 7 0 3.2 1.5 5.6 4 7" /><path d="M13 6v12M10 7v10" /><path d="M16 9c2 1 3 2.5 3 4.5-1 1.3-2.2 2.3-3.8 2.8" /></svg>;
+    case "apple":
+      return <svg {...svgProps}><path d="M12 8c2-2.4 4.7-2.2 6.2-.8 2.2 2.1 1.5 7.9-1.2 10.4-2.6 2.5-5 1-5 1s-2.5 1.5-5-1C4.3 15.1 3.6 9.3 5.8 7.2 7.3 5.8 10 5.6 12 8Z" /><path d="M12 8c-.2-2.6 1.2-4.2 3.6-4.8" /></svg>;
+    case "capsicum":
+      return <svg {...svgProps}><path d="M12 7c-3.9-2.1-7 1.2-7 5.2 0 4.1 2.4 6.8 7 6.8s7-2.7 7-6.8C19 8.2 15.9 4.9 12 7Z" /><path d="M12 7V4" /><path d="M12 4c1.5-1 3-.8 3.8.2" /><path d="M12 7c-1.7 2.3-1.6 7.2.3 10.8" /></svg>;
+    case "scan":
+      return <svg {...svgProps}><path d="M12 20V8" /><path d="M12 14c-4 0-6.2-2.5-7-6 4.1-.2 6.6 1.8 7 6Z" /><path d="M12 11c2.8 0 4.7-1.8 5.4-4.8-3 0-5.1 1.5-5.4 4.8Z" /><path d="M4 4v3M4 4h3M20 4v3M20 4h-3" /></svg>;
+    default:
+      return <svg {...svgProps}><path d="M12 20V9" /><path d="M12 15c-4.3 0-6.7-2.6-7.5-6.5C8.8 8.2 11.5 10.6 12 15Z" /><path d="M12 11c3.4 0 5.8-2.1 6.5-5.5-3.5 0-6 1.7-6.5 5.5Z" /></svg>;
+  }
+}
+
 function App() {
   const [language, setLanguage] = useState(() => {
     try {
@@ -1131,7 +1175,7 @@ function App() {
       <header className="header">
         <div className="brand-group">
           <div className="logo-wrap">
-            <span className="logo-leaf-icon">🌱</span>
+            <span className="logo-leaf-icon"><AppIcon name="sprout" /></span>
             <div className="logo-text">
               <span className="logo-title">AgriSense AI</span>
               <span className="logo-badge">PRO</span>
@@ -1223,9 +1267,9 @@ function App() {
             </div>
 
             {/* Neural Model Status Badge */}
-            <div className="model-status-badge" title="Trained on 38 PlantVillage Classes">
+            <div className="model-status-badge" title="Trained on 55 crop health classes">
               <span className="pulse-indicator"></span>
-              <span>EfficientNet-V2</span>
+              <span>EfficientNet-B0</span>
             </div>
 
             {/* PWA Install Button */}
@@ -1266,7 +1310,7 @@ function App() {
             <div className="system-card-topline">
               <span className="live-dot" />
               <span>AI system online</span>
-              <span className="system-card-code">V2.0</span>
+              <span className="system-card-code">ML / 55</span>
             </div>
             <div className="system-card-body">
               <div>
@@ -1293,7 +1337,7 @@ function App() {
             className={`farmer-tab-btn ${activeTab === "diagnosis" ? "active" : ""}`}
             onClick={() => setActiveTab("diagnosis")}
           >
-            <span className="farmer-tab-icon">🌿</span>
+            <span className="farmer-tab-icon"><AppIcon name="scan" /></span>
             <span>{language === "mr" ? "रोग निदान (Scanner)" : language === "hi" ? "रोग निदान" : "Diagnosis"}</span>
           </button>
           <button
@@ -1301,7 +1345,7 @@ function App() {
             className={`farmer-tab-btn ${activeTab === "spray_mix" ? "active" : ""}`}
             onClick={() => setActiveTab("spray_mix")}
           >
-            <span className="farmer-tab-icon">🧪</span>
+            <span className="farmer-tab-icon"><AppIcon name="spray" /></span>
             <span>{language === "mr" ? "फवारणी व मिश्रण (Spray)" : language === "hi" ? "स्प्रे एवं मिश्रण" : "Spray & Tank-Mix"}</span>
           </button>
           <button
@@ -1309,7 +1353,7 @@ function App() {
             className={`farmer-tab-btn ${activeTab === "forecast" ? "active" : ""}`}
             onClick={() => setActiveTab("forecast")}
           >
-            <span className="farmer-tab-icon">⛅</span>
+            <span className="farmer-tab-icon"><AppIcon name="forecast" /></span>
             <span>{language === "mr" ? "हवामान अंदाज (Forecast)" : language === "hi" ? "मौसम जोखिम" : "7-Day Risk"}</span>
           </button>
           <button
@@ -1317,7 +1361,7 @@ function App() {
             className={`farmer-tab-btn ${activeTab === "mandi_kendras" ? "active" : ""}`}
             onClick={() => setActiveTab("mandi_kendras")}
           >
-            <span className="farmer-tab-icon">🏪</span>
+            <span className="farmer-tab-icon"><AppIcon name="market" /></span>
             <span>{language === "mr" ? "बाजारभाव व केंद्रे (Mandi)" : language === "hi" ? "मंडी व केंद्र" : "Mandi & Dealers"}</span>
           </button>
           <button
@@ -1325,7 +1369,7 @@ function App() {
             className={`farmer-tab-btn ${activeTab === "recovery" ? "active" : ""}`}
             onClick={() => setActiveTab("recovery")}
           >
-            <span className="farmer-tab-icon">📈</span>
+            <span className="farmer-tab-icon"><AppIcon name="recovery" /></span>
             <span>{language === "mr" ? "सुधारणा ट्रॅकर (Recovery)" : language === "hi" ? "सुधार ट्रैकर" : "Recovery"}</span>
           </button>
         </nav>
@@ -1382,14 +1426,14 @@ function App() {
               </div>
               <div className="crop-chips-scroll">
                 {[
-                  { id: "all", name: "All Crops", name_mr: "सर्व पिके", icon: "🌱" },
-                  { id: "Tomato", name: "Tomato", name_mr: "टोमॅटो", icon: "🍅" },
-                  { id: "Grape", name: "Grapes", name_mr: "द्राक्ष", icon: "🍇" },
-                  { id: "Potato", name: "Potato", name_mr: "बटाटा", icon: "🥔" },
-                  { id: "Soybean", name: "Soybean", name_mr: "सोयाबीन", icon: "🌿" },
-                  { id: "Corn_(maize)", name: "Corn", name_mr: "मका", icon: "🌽" },
-                  { id: "Apple", name: "Apple", name_mr: "सफरचंद", icon: "🍎" },
-                  { id: "Pepper,_bell", name: "Capsicum", name_mr: "मिरची", icon: "🌶️" },
+                  { id: "all", name: "All Crops", name_mr: "सर्व पिके", icon: "sprout" },
+                  { id: "Tomato", name: "Tomato", name_mr: "टोमॅटो", icon: "tomato" },
+                  { id: "Grape", name: "Grapes", name_mr: "द्राक्ष", icon: "grape" },
+                  { id: "Potato", name: "Potato", name_mr: "बटाटा", icon: "potato" },
+                  { id: "Soybean", name: "Soybean", name_mr: "सोयाबीन", icon: "soybean" },
+                  { id: "Corn_(maize)", name: "Corn", name_mr: "मका", icon: "corn" },
+                  { id: "Apple", name: "Apple", name_mr: "सफरचंद", icon: "apple" },
+                  { id: "Pepper,_bell", name: "Capsicum", name_mr: "मिरची", icon: "capsicum" },
                 ].map((c) => (
                   <button
                     key={c.id}
@@ -1397,7 +1441,7 @@ function App() {
                     className={`crop-pill ${selectedCrop === c.id ? "active" : ""}`}
                     onClick={() => setSelectedCrop(c.id)}
                   >
-                    <span className="crop-icon">{c.icon}</span>
+                    <span className="crop-icon"><AppIcon name={c.icon} /></span>
                     <span className="crop-name">{language === "mr" ? c.name_mr : c.name}</span>
                   </button>
                 ))}
@@ -1555,7 +1599,7 @@ function App() {
                   disabled={loading}
                   title="Test Tomato Septoria Leaf Spot sample"
                 >
-                  🍅 {language === "mr" ? "टोमॅटो सेप्टोरिया (User Photo)" : "Tomato Septoria (User Photo)"}
+                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो सेप्टोरिया (User Photo)" : "Tomato Septoria (User Photo)"}
                 </button>
                 <button
                   type="button"
@@ -1564,7 +1608,7 @@ function App() {
                   disabled={loading}
                   title="Test Tomato Early Blight sample"
                 >
-                  🍅 {language === "mr" ? "टोमॅटो करपा" : "Tomato Early Blight"}
+                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो करपा" : "Tomato Early Blight"}
                 </button>
                 <button
                   type="button"
@@ -1573,7 +1617,7 @@ function App() {
                   disabled={loading}
                   title="Test Grape Black Rot sample"
                 >
-                  🍇 {language === "mr" ? "द्राक्ष काळा करपा" : "Grape Black Rot"}
+                  <AppIcon name="grape" /> {language === "mr" ? "द्राक्ष काळा करपा" : "Grape Black Rot"}
                 </button>
                 <button
                   type="button"
@@ -1582,7 +1626,7 @@ function App() {
                   disabled={loading}
                   title="Test Soybean Rust sample"
                 >
-                  🌱 {language === "mr" ? "सोयाबीन तांबेरा" : "Soybean Rust"}
+                  <AppIcon name="soybean" /> {language === "mr" ? "सोयाबीन तांबेरा" : "Soybean Rust"}
                 </button>
                 <button
                   type="button"
@@ -1591,7 +1635,7 @@ function App() {
                   disabled={loading}
                   title="Test Healthy Control Leaf"
                 >
-                  🍃 {language === "mr" ? "निरोगी पान" : "Healthy Leaf"}
+                  <AppIcon name="sprout" /> {language === "mr" ? "निरोगी पान" : "Healthy Leaf"}
                 </button>
               </div>
             </div>
@@ -3196,7 +3240,7 @@ function App() {
                         <tr key={idx}>
                           <td><strong>{p.formulation}</strong></td>
                           <td>{p.pack_size}</td>
-                          <td><span style={{ color: '#166534', fontWeight: 'bold' }}>{p.fair_mrp_inr}</span></td>
+                          <td><span className="pricing-fair-price">{p.fair_mrp_inr}</span></td>
                           <td>{p.popular_brands}</td>
                         </tr>
                       ))}
@@ -3232,7 +3276,7 @@ function App() {
                   <img src={recoveryBefore.preview} alt="Before Spray" />
                 ) : (
                   <div>
-                    <span style={{ fontSize: "2rem" }}>📸</span>
+                    <AppIcon name="camera" className="recovery-upload-icon" />
                     <p><strong>{language === "mr" ? "१. फवारणीपूर्वीचा फोटो (Day 0)" : "1. Before Spray Photo"}</strong></p>
                   </div>
                 )}
@@ -3251,7 +3295,7 @@ function App() {
                   <img src={recoveryAfter.preview} alt="After Spray" />
                 ) : (
                   <div>
-                    <span style={{ fontSize: "2rem" }}>🌿</span>
+                    <AppIcon name="sprout" className="recovery-upload-icon" />
                     <p><strong>{language === "mr" ? "२. फवारणीनंतरचा फोटो (Day 4-7)" : "2. After Spray Photo"}</strong></p>
                   </div>
                 )}

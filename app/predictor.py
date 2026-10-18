@@ -12,8 +12,9 @@ from src.image_transforms import val_test_transforms
 
 class PlantDiseasePredictor:
     """
-    High-accuracy plant disease predictor using EfficientNet-V2
-    trained on agricultural crop foliage datasets.
+    High-accuracy plant disease predictor backed by the project's saved
+    EfficientNet checkpoint. The checkpoint supplies the authoritative class
+    mapping so weights and labels can never drift apart at runtime.
     """
 
     def __init__(self):
@@ -34,8 +35,7 @@ class PlantDiseasePredictor:
             "cuda" if torch.cuda.is_available() else "cpu"
         )
 
-        print("Loading high-accuracy EfficientNet-V2 plant disease model...")
-        print("Checkpoint:", self.model_file)
+        print("Loading plant disease model...")
         print("Device:", self.device)
 
         if not self.model_file.is_file():
@@ -47,46 +47,69 @@ class PlantDiseasePredictor:
             else:
                 raise FileNotFoundError(f"Model checkpoint not found: {self.model_file}")
 
-        # Load class labels
-        if self.classes_file.is_file():
-            with open(self.classes_file, "r", encoding="utf-8") as f:
-                self.classes = json.load(f)
-        else:
-            raise FileNotFoundError(f"Classes JSON not found: {self.classes_file}")
-
-        self.class_to_idx = {name: idx for idx, name in enumerate(self.classes)}
-        num_classes = len(self.classes)
-
-        # Build EfficientNet-V2-S architecture
-        # Prefer the matching EfficientNet-B0 architecture used by the project checkpoints.
-        # Some older checkpoints were named for an EffNetV2 setup, but the saved weights in
-        # this repository match the B0 network and class layout. Fall back to a valid model
-        # when a checkpoint is missing or incompatible, so the API can still boot cleanly.
-        self.model = models.efficientnet_b0(weights=None)
-        self.model.classifier[1] = nn.Linear(
-            self.model.classifier[1].in_features,
-            num_classes,
+        print("Checkpoint:", self.model_file)
+        checkpoint = torch.load(
+            self.model_file,
+            map_location="cpu",
+            weights_only=False,
+        )
+        state_dict = (
+            checkpoint["model_state_dict"]
+            if isinstance(checkpoint, dict) and "model_state_dict" in checkpoint
+            else checkpoint
         )
 
-        try:
-            checkpoint = torch.load(
-                self.model_file,
-                map_location="cpu",
-                weights_only=False,
+        if not isinstance(state_dict, dict):
+            raise ValueError("The model checkpoint does not contain a valid state dictionary.")
+
+        # The persisted mapping is coupled to the classifier weights. Prefer it over
+        # auxiliary JSON files, which may describe an earlier training run.
+        saved_mapping = checkpoint.get("class_to_idx") if isinstance(checkpoint, dict) else None
+        saved_classes = checkpoint.get("classes") if isinstance(checkpoint, dict) else None
+        if isinstance(saved_mapping, dict):
+            self.classes = [
+                class_name
+                for class_name, _ in sorted(
+                    saved_mapping.items(),
+                    key=lambda item: int(item[1]),
+                )
+            ]
+        elif isinstance(saved_classes, list):
+            self.classes = list(saved_classes)
+        elif self.classes_file.is_file():
+            with open(self.classes_file, "r", encoding="utf-8") as file:
+                self.classes = json.load(file)
+        else:
+            raise ValueError("The checkpoint has no class mapping and no fallback classes file exists.")
+
+        classifier_weights = state_dict.get("classifier.1.weight")
+        if classifier_weights is None:
+            raise ValueError("The checkpoint is missing EfficientNet classifier weights.")
+
+        checkpoint_class_count = int(classifier_weights.shape[0])
+        if len(self.classes) != checkpoint_class_count:
+            raise ValueError(
+                "Checkpoint class mapping does not match its classifier: "
+                f"{len(self.classes)} labels for {checkpoint_class_count} output weights."
             )
-            state_dict = (
-                checkpoint["model_state_dict"]
-                if isinstance(checkpoint, dict) and "model_state_dict" in checkpoint
-                else checkpoint
-            )
-            self.model.load_state_dict(state_dict, strict=False)
-            print(f"EfficientNet-B0 model ready with {num_classes} classes.")
-        except Exception as exc:
-            print(
-                "Warning: checkpoint could not be loaded for the current model architecture; "
-                f"using a fresh model initialization instead ({exc})."
-            )
-            print(f"EfficientNet-B0 fallback model ready with {num_classes} classes.")
+
+        self.class_to_idx = {name: idx for idx, name in enumerate(self.classes)}
+        model_name = self.model_file.name.lower()
+        if "effnetv2" in model_name or "efficientnet_v2" in model_name:
+            self.model = models.efficientnet_v2_s(weights=None)
+            architecture = "EfficientNet-V2-S"
+        else:
+            self.model = models.efficientnet_b0(weights=None)
+            architecture = "EfficientNet-B0"
+
+        self.model.classifier[1] = nn.Linear(
+            self.model.classifier[1].in_features,
+            checkpoint_class_count,
+        )
+        # Never run inference on randomly initialized weights. A checkpoint mismatch
+        # is a deployment error and must be visible instead of producing fake confidence.
+        self.model.load_state_dict(state_dict, strict=True)
+        print(f"{architecture} model ready with {checkpoint_class_count} classes.")
 
         self.model = self.model.to(self.device)
         self.model.eval()

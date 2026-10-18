@@ -10,6 +10,7 @@ import {
 } from "./diseaseTranslations";
 import "./App.css";
 import ChatWidget from "./ChatWidget";
+import { API_BASE_URL } from "./config";
 
 const LANGUAGE_STORAGE_KEY = "plantDiseaseDetector.language";
 const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
@@ -267,7 +268,7 @@ function App() {
         setGpsLoading(false);
 
         try {
-          const wRes = await fetch(`http://127.0.0.1:8000/weather?lat=${lat}&lon=${lon}`);
+          const wRes = await fetch(`${API_BASE_URL}/weather?lat=${lat}&lon=${lon}`);
           const wData = await wRes.json();
           setDistrictWeather(wData);
 
@@ -275,13 +276,13 @@ function App() {
             setSelectedDistrict(wData.nearest_district);
           }
 
-          const fcRes = await fetch(`http://127.0.0.1:8000/forecast?lat=${lat}&lon=${lon}`);
+          const fcRes = await fetch(`${API_BASE_URL}/forecast?lat=${lat}&lon=${lon}`);
           const fcData = await fcRes.json();
           setForecastData(fcData);
 
           if (wData.nearest_district) {
             const kRes = await fetch(
-              `http://127.0.0.1:8000/krishi-kendras?district=${encodeURIComponent(wData.nearest_district)}`
+              `${API_BASE_URL}/krishi-kendras?district=${encodeURIComponent(wData.nearest_district)}`
             );
             const kData = await kRes.json();
             setKendrasData(kData);
@@ -311,11 +312,11 @@ function App() {
   const handleClearGps = () => {
     setGpsActive(false);
     setGpsCoords(null);
-    fetch(`http://127.0.0.1:8000/weather?district=${encodeURIComponent(selectedDistrict)}`)
+    fetch(`${API_BASE_URL}/weather?district=${encodeURIComponent(selectedDistrict)}`)
       .then((r) => r.json())
       .then((d) => setDistrictWeather(d))
       .catch(() => {});
-    fetch(`http://127.0.0.1:8000/forecast?district=${encodeURIComponent(selectedDistrict)}`)
+    fetch(`${API_BASE_URL}/forecast?district=${encodeURIComponent(selectedDistrict)}`)
       .then((r) => r.json())
       .then((d) => setForecastData(d))
       .catch(() => {});
@@ -354,7 +355,7 @@ function App() {
 
   // Fetch all available districts from backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/districts")
+    fetch(`${API_BASE_URL}/districts`)
       .then((r) => r.json())
       .then((d) => {
         if (d.districts && Array.isArray(d.districts)) {
@@ -363,7 +364,7 @@ function App() {
       })
       .catch(() => {});
 
-    fetch("http://127.0.0.1:8000/compatibility-chemicals")
+    fetch(`${API_BASE_URL}/compatibility-chemicals`)
       .then((r) => r.json())
       .then((d) => {
         if (d.chemicals && Array.isArray(d.chemicals)) {
@@ -375,17 +376,17 @@ function App() {
 
   // Fetch live weather, 7-day forecast & Krishi Kendras for the selected district
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/weather?district=${encodeURIComponent(selectedDistrict)}`)
+    fetch(`${API_BASE_URL}/weather?district=${encodeURIComponent(selectedDistrict)}`)
       .then((r) => r.json())
       .then((d) => setDistrictWeather(d))
       .catch(() => {});
 
-    fetch(`http://127.0.0.1:8000/forecast?district=${encodeURIComponent(selectedDistrict)}`)
+    fetch(`${API_BASE_URL}/forecast?district=${encodeURIComponent(selectedDistrict)}`)
       .then((r) => r.json())
       .then((d) => setForecastData(d))
       .catch(() => {});
 
-    fetch(`http://127.0.0.1:8000/krishi-kendras?district=${encodeURIComponent(selectedDistrict)}`)
+    fetch(`${API_BASE_URL}/krishi-kendras?district=${encodeURIComponent(selectedDistrict)}`)
       .then((r) => r.json())
       .then((d) => setKendrasData(d))
       .catch(() => {});
@@ -722,7 +723,7 @@ function App() {
   const playBackendAudio = async (speechText, lang) => {
     try {
       setIsSpeaking(true);
-      const res = await fetch("http://127.0.0.1:8000/tts", {
+      const res = await fetch(`${API_BASE_URL}/tts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: speechText, language: lang }),
@@ -844,7 +845,7 @@ function App() {
       formData.append("file", file);
       formData.append("district", selectedDistrict);
 
-      const apiRes = await fetch("http://127.0.0.1:8000/analyze", {
+      const apiRes = await fetch(`${API_BASE_URL}/analyze`, {
         method: "POST",
         body: formData,
       });
@@ -905,7 +906,7 @@ function App() {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/analyze",
+        `${API_BASE_URL}/analyze`,
         {
           method: "POST",
           body: formData,
@@ -960,7 +961,7 @@ function App() {
       formData.append("district", selectedDistrict);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/download-report",
+        `${API_BASE_URL}/download-report`,
         {
           method: "POST",
           body: formData,
@@ -1011,7 +1012,7 @@ function App() {
       formData.append("farm_size", farmSizeText);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/download-pmfby-certificate",
+        `${API_BASE_URL}/download-pmfby-certificate`,
         {
           method: "POST",
           body: formData,
@@ -1050,7 +1051,7 @@ function App() {
     if (!chem1 || !chem2) return;
     setCheckingCompat(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/check-compatibility", {
+      const res = await fetch(`${API_BASE_URL}/check-compatibility`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chem1, chem2 }),
@@ -1076,7 +1077,7 @@ function App() {
       formData.append("crop", result?.plant || "Tomato");
       formData.append("disease", result?.disease || "Early Blight");
 
-      const res = await fetch("http://127.0.0.1:8000/compare-recovery", {
+      const res = await fetch(`${API_BASE_URL}/compare-recovery`, {
         method: "POST",
         body: formData,
       });

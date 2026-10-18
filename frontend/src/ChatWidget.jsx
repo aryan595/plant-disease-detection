@@ -9,9 +9,10 @@ import {
   getLocalizedManagement,
   getLocalizedPrevention,
 } from "./diseaseTranslations";
+import { API_BASE_URL } from "./config";
 import "./ChatWidget.css";
 
-const API_URL = "http://127.0.0.1:8000/chat";
+const API_URL = `${API_BASE_URL}/chat`;
 const CHAT_STORAGE_KEY = "plantHealthChat.messages.v1";
 const MAX_STORED_MESSAGES = 50;
 const MAX_REQUEST_MESSAGES = 10;

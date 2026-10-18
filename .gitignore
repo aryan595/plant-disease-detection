@@ -30,6 +30,7 @@ data/splits/
 
 # Trained model checkpoints
 models/*.pth
+!models/efficientnet_b0_combined_balanced_best.pth
 models/*.pt
 models/*.onnx
 models/*.safetensors

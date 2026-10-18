@@ -1,8 +1,7 @@
 /**
  * AgriSense API Configuration
- * Supports local development, custom remote API URLs via VITE_API_URL,
- * or relative URL when served from the same domain.
+ * - If VITE_API_URL is provided (e.g. on Vercel pointing to Render/HuggingFace), use it.
+ * - Otherwise (local development), use "" so requests route through Vite's local proxy
+ *   with zero CORS or network resolution errors.
  */
-export const API_BASE_URL =
-  (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "") ||
-  (import.meta.env.DEV ? "http://127.0.0.1:8000" : "");
+export const API_BASE_URL = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");

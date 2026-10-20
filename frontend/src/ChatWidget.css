@@ -1133,7 +1133,11 @@
   padding: 12px 20px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+  .plant-chat-widget.is-open .plant-chat-launcher {
+    display: none;
+  }
+
   .plant-chat-launcher {
     right: 14px;
     bottom: max(14px, env(safe-area-inset-bottom));
@@ -1178,16 +1182,6 @@
 
   .plant-chat-lang-select {
     max-width: 74px;
-  }
-
-  .plant-chat-voice-mode-toggle {
-    padding: 5px 7px;
-    font-size: 0;
-  }
-
-  .plant-chat-voice-mode-toggle::before {
-    content: "🎙️";
-    font-size: 1rem;
   }
 
   .plant-chat-context {

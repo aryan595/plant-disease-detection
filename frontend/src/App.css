@@ -6147,6 +6147,47 @@ body {
   }
 }
 
+/* Mobile guardrails: no desktop-sized child may widen the document. */
+@media (max-width: 900px) {
+  html,
+  body,
+  #root,
+  .app {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .main-content,
+  .scan-context-grid,
+  .voice-hero-banner,
+  .crop-selector-dock,
+  .workspace,
+  .image-panel,
+  .result-panel {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .voice-hero-banner {
+    align-items: flex-start;
+  }
+
+  .voice-hero-content {
+    min-width: 0;
+  }
+
+  .voice-hero-text {
+    min-width: 0;
+  }
+
+  .voice-hero-text h3,
+  .voice-hero-text p {
+    overflow-wrap: anywhere;
+  }
+}
+
 
 /* =========================================
    Dark-surface consistency pass

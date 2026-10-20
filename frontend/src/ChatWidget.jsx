@@ -1100,7 +1100,7 @@ export default function ChatWidget({
   };
 
   return (
-    <div className="plant-chat-widget">
+    <div className={`plant-chat-widget${isOpen ? " is-open" : ""}`}>
       {/* Floating launcher */}
       <button
         type="button"
@@ -1156,19 +1156,6 @@ export default function ChatWidget({
                 </select>
               </div>
 
-              {/* 1:1 ChatGPT Voice Mode button */}
-              <button
-                type="button"
-                className={`plant-chat-voice-mode-toggle ${
-                  voiceModeActive ? "active" : ""
-                }`}
-                onClick={toggleVoiceMode}
-                title={voiceModeActive ? text.stopVoice : text.voiceModeBtn}
-                aria-label={voiceModeActive ? text.stopVoice : text.voiceModeBtn}
-              >
-                {voiceModeActive ? "🎙️ Live" : "🎙️ Voice"}
-              </button>
-
               {/* Reset chat button */}
               <button
                 type="button"
@@ -1178,6 +1165,16 @@ export default function ChatWidget({
                 aria-label={text.newChat}
               >
                 ↺
+              </button>
+
+              <button
+                type="button"
+                className="plant-chat-icon-button plant-chat-close-button"
+                onClick={handleToggleOpen}
+                title={text.close}
+                aria-label={text.close}
+              >
+                ×
               </button>
             </div>
           </header>

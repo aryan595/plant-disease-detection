@@ -6147,6 +6147,103 @@ body {
   }
 }
 
+/* Mobile header: primary choices only. The dashboard already exposes model and
+   weather detail, so the top bar should remain calm and completely usable. */
+@media (max-width: 760px) {
+  .header {
+    padding: 15px 16px 14px;
+    gap: 14px;
+  }
+
+  .brand-group {
+    width: 100%;
+  }
+
+  .logo-title {
+    font-size: 1.18rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .header-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    gap: 8px;
+  }
+
+  .location-cluster,
+  .utility-cluster {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .location-cluster {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 5px;
+  }
+
+  .district-control {
+    min-width: 0;
+    padding: 6px 9px;
+  }
+
+  .district-selector {
+    width: 100%;
+    max-width: none;
+    font-size: 0.9rem;
+  }
+
+  .gps-pill-btn,
+  .gps-active-pill {
+    min-height: 42px;
+    padding: 6px 11px;
+  }
+
+  .weather-quick-pill,
+  .model-status-badge {
+    display: none;
+  }
+
+  .utility-cluster {
+    gap: 8px;
+  }
+
+  .language-control {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    min-height: 42px;
+    padding: 6px 10px;
+  }
+
+  .language-selector {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.88rem;
+  }
+
+  .pwa-pill-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    min-width: 44px;
+    min-height: 42px;
+    padding: 0;
+  }
+
+  .pwa-pill-btn .pwa-text {
+    display: none;
+  }
+}
+
 /* Mobile guardrails: no desktop-sized child may widen the document. */
 @media (max-width: 900px) {
   html,
@@ -6754,6 +6851,68 @@ body {
 .tankmix-checker-section select option {
   background: #08191c;
   color: #dff5ec;
+}
+
+/* Keep these last: earlier desktop rules deliberately use intrinsic widths. */
+@media (max-width: 760px) {
+  .header-toolbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .location-cluster,
+  .utility-cluster {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .location-cluster {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 8px !important;
+    padding: 5px !important;
+  }
+
+  .utility-cluster {
+    display: flex !important;
+    gap: 8px !important;
+  }
+
+  .district-control,
+  .language-control {
+    min-width: 0 !important;
+  }
+
+  .district-selector,
+  .language-selector {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .weather-quick-pill,
+  .model-status-badge {
+    display: none !important;
+  }
+
+  .language-control {
+    flex: 1 1 auto !important;
+  }
+
+  .pwa-pill-btn {
+    display: grid !important;
+    place-items: center;
+    width: 44px !important;
+    min-width: 44px !important;
+    padding: 0 !important;
+  }
+
+  .pwa-pill-btn .pwa-text {
+    display: none !important;
+  }
 }
 
 

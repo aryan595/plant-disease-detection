@@ -899,7 +899,8 @@ async def analyze(
         is_healthy=is_healthy
     )
 
-    weather_data = fetch_live_weather(district)
+    # Weather enriches advice but should never delay the primary diagnosis.
+    weather_data = fetch_live_weather(district, prefer_live=False)
 
     progression_data = evaluate_progression_warning(
         disease_key=best_class,

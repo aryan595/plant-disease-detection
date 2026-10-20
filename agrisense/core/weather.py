@@ -68,11 +68,41 @@ _WEATHER_CACHE = {}
 _CACHE_TTL_SECONDS = 300  # 5 minutes
 
 
+def _localized_weather_fallback(
+    district: str,
+    district_mr: str,
+    is_gps: bool,
+    lat: float,
+    lon: float,
+    nearest_district: str,
+    nearest_district_mr: str,
+    distance_km: float,
+) -> Dict:
+    """Return a deterministic advisory baseline without a network dependency."""
+    return {
+        "source": "AgriSense Localized Meteorological Norms",
+        "district": district,
+        "district_mr": district_mr,
+        "is_gps": is_gps,
+        "lat": lat,
+        "lon": lon,
+        "nearest_district": nearest_district,
+        "nearest_district_mr": nearest_district_mr,
+        "distance_km": distance_km,
+        "temperature_c": 27.5,
+        "humidity_percent": 78,
+        "wind_speed_kmh": 12.0,
+        "description": "Humid / Cloudy",
+        "success": False,
+    }
+
+
 def fetch_live_weather(
     district_key: str = "Pune (पुणे)",
     owm_api_key: Optional[str] = None,
     lat: Optional[float] = None,
-    lon: Optional[float] = None
+    lon: Optional[float] = None,
+    prefer_live: bool = True,
 ) -> Dict:
     """
     Fetch live ambient temperature, relative humidity, and precipitation with in-memory caching.
@@ -80,7 +110,10 @@ def fetch_live_weather(
     """
     now = time.time()
     is_gps = lat is not None and lon is not None
-    cache_key = f"gps_{round(lat, 3)}_{round(lon, 3)}" if is_gps else district_key
+    location_key = f"gps_{round(lat, 3)}_{round(lon, 3)}" if is_gps else district_key
+    # Analysis uses a fast advisory baseline; keep it separate from a cached
+    # live observation returned by the dedicated weather route.
+    cache_key = f"{location_key}|{'live' if prefer_live else 'analysis'}"
 
     if cache_key in _WEATHER_CACHE:
         cached_data, timestamp = _WEATHER_CACHE[cache_key]
@@ -102,6 +135,28 @@ def fetch_live_weather(
         dist_km = 0.0
         display_district = district_key
         display_district_mr = coords["name_mr"]
+
+    fallback_res = _localized_weather_fallback(
+        display_district,
+        display_district_mr,
+        is_gps,
+        target_lat,
+        target_lon,
+        closest_key,
+        coords["name_mr"],
+        dist_km,
+    )
+
+    # Diagnosis must not wait behind a third-party weather provider. The
+    # analysis endpoint deliberately uses this quick local advisory baseline;
+    # the dedicated /weather route can still request live observations.
+    if not prefer_live or os.getenv("ANALYSIS_WEATHER_MODE", "live").strip().lower() in {
+        "offline",
+        "local",
+        "fallback",
+    }:
+        _WEATHER_CACHE[cache_key] = (fallback_res, now)
+        return fallback_res
 
     # 1. Try OpenWeatherMap if key is available
     if owm_api_key or os.getenv("OPENWEATHERMAP_API_KEY"):
@@ -167,22 +222,6 @@ def fetch_live_weather(
         print(f"[AgriSense] Weather API fallback ({e})")
 
     # Offline / Fail-safe Default
-    fallback_res = {
-        "source": "AgriSense Localized Meteorological Norms",
-        "district": display_district,
-        "district_mr": display_district_mr,
-        "is_gps": is_gps,
-        "lat": target_lat,
-        "lon": target_lon,
-        "nearest_district": closest_key,
-        "nearest_district_mr": coords["name_mr"],
-        "distance_km": dist_km,
-        "temperature_c": 27.5,
-        "humidity_percent": 78,
-        "wind_speed_kmh": 12.0,
-        "description": "Humid / Cloudy",
-        "success": False
-    }
     _WEATHER_CACHE[cache_key] = (fallback_res, now)
     return fallback_res
 

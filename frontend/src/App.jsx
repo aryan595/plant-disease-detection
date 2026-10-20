@@ -157,7 +157,14 @@ function App() {
   const [selectedCrop, setSelectedCrop] = useState("all");
   const [imageViewMode, setImageViewMode] = useState("original"); // "original" | "heatmap" | "split"
 
+  const analysisStatusText = loading
+    ? "Waking the secure AI service and checking your leaf…"
+    : "";
+
   const usesVisualConditionGuide = explainabilityMode === "visual_condition_guide";
+  const analysisProgressText = usesVisualConditionGuide
+    ? "Classifying the image and preparing its visual condition guide"
+    : t.inferenceProgress;
   const visualGuideLabel = usesVisualConditionGuide
     ? (language === "mr" ? "पान स्थिती मार्गदर्शक" : "Leaf Condition Guide")
     : (language === "mr" ? "उष्णता नकाशा" : "AI Heatmap");
@@ -1772,14 +1779,14 @@ function App() {
 
                 <h2>{t.analyzingLeaf}</h2>
 
-                <p>{t.examiningImage}</p>
+                <p>{analysisStatusText || t.examiningImage}</p>
 
                 <div className="loading-progress">
                   <div className="loading-progress-fill" />
                 </div>
 
                 <span className="loading-caption">
-                  {t.inferenceProgress}
+                  {analysisProgressText}
                 </span>
               </div>
             )}

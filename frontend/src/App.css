@@ -3870,19 +3870,20 @@
 .compat-result-card h4 {
   margin: 0 0 6px 0;
   font-size: 1rem;
-  color: #0f172a;
+  /* color: #0f172a; */
 }
 
 .compat-result-card p {
   margin: 0 0 6px 0;
   font-size: 0.85rem;
-  color: #334155;
+  color: #788aa3;
 }
 
 .compat-result-card small {
   display: block;
   font-size: 0.8rem;
-  color: #475569;
+  /* color: #475569;\ */
+  color: #788aa3;
   font-style: italic;
 }
 
@@ -4042,7 +4043,7 @@
 }
 
 .pricing-table tr:hover {
-  background: #f8fafc;
+  /* background: #f8fafc; */
 }
 
 /* =========================================

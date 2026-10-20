@@ -162,6 +162,9 @@ function App() {
     : "";
 
   const usesVisualConditionGuide = explainabilityMode === "visual_condition_guide";
+  const timelineLocale = ["hi", "mr"].includes(language) ? language : "en";
+  const timelineText = (section, field) =>
+    section?.[`${field}_${timelineLocale}`] || section?.[`${field}_en`] || "";
   const analysisProgressText = usesVisualConditionGuide
     ? "Classifying the image and preparing its visual condition guide"
     : t.inferenceProgress;
@@ -2405,9 +2408,7 @@ function App() {
                   </div>
 
                   <span className="timeline-urgency-badge">
-                    {language === "mr"
-                      ? result.timeline.curative_window.urgency_mr
-                      : result.timeline.curative_window.urgency_en}
+                    {timelineText(result.timeline.curative_window, "urgency")}
                   </span>
                 </div>
 
@@ -2417,22 +2418,16 @@ function App() {
                     <div className="stage-top">
                       <span className="stage-num">01</span>
                       <span className="stage-badge past">
-                        {language === "mr"
-                          ? result.timeline.stage_1_cause.badge_mr
-                          : result.timeline.stage_1_cause.badge_en}
+                        {timelineText(result.timeline.stage_1_cause, "badge")}
                       </span>
                     </div>
 
                     <h4>
-                      {language === "mr"
-                        ? result.timeline.stage_1_cause.title_mr
-                        : result.timeline.stage_1_cause.title_en}
+                      {timelineText(result.timeline.stage_1_cause, "title")}
                     </h4>
 
                     <p>
-                      {language === "mr"
-                        ? result.timeline.stage_1_cause.description_mr
-                        : result.timeline.stage_1_cause.description_en}
+                      {timelineText(result.timeline.stage_1_cause, "description")}
                     </p>
                   </div>
 
@@ -2441,22 +2436,16 @@ function App() {
                     <div className="stage-top">
                       <span className="stage-num">02</span>
                       <span className="stage-badge current">
-                        {language === "mr"
-                          ? result.timeline.stage_2_current.badge_mr
-                          : result.timeline.stage_2_current.badge_en}
+                        {timelineText(result.timeline.stage_2_current, "badge")}
                       </span>
                     </div>
 
                     <h4>
-                      {language === "mr"
-                        ? result.timeline.stage_2_current.title_mr
-                        : result.timeline.stage_2_current.title_en}
+                      {timelineText(result.timeline.stage_2_current, "title")}
                     </h4>
 
                     <p>
-                      {language === "mr"
-                        ? result.timeline.stage_2_current.description_mr
-                        : result.timeline.stage_2_current.description_en}
+                      {timelineText(result.timeline.stage_2_current, "description")}
                     </p>
                   </div>
 
@@ -2465,22 +2454,16 @@ function App() {
                     <div className="stage-top">
                       <span className="stage-num">03</span>
                       <span className="stage-badge future">
-                        {language === "mr"
-                          ? result.timeline.stage_3_future.badge_mr
-                          : result.timeline.stage_3_future.badge_en}
+                        {timelineText(result.timeline.stage_3_future, "badge")}
                       </span>
                     </div>
 
                     <h4>
-                      {language === "mr"
-                        ? result.timeline.stage_3_future.title_mr
-                        : result.timeline.stage_3_future.title_en}
+                      {timelineText(result.timeline.stage_3_future, "title")}
                     </h4>
 
                     <p>
-                      {language === "mr"
-                        ? result.timeline.stage_3_future.description_mr
-                        : result.timeline.stage_3_future.description_en}
+                      {timelineText(result.timeline.stage_3_future, "description")}
                     </p>
                   </div>
                 </div>
@@ -2490,9 +2473,7 @@ function App() {
                   <div>
                     <strong>{t.curativeActionWindow}:</strong>{" "}
                     <span>
-                      {language === "mr"
-                        ? result.timeline.curative_window.action_mr
-                        : result.timeline.curative_window.action_en}
+                      {timelineText(result.timeline.curative_window, "action")}
                     </span>
                   </div>
                 </div>

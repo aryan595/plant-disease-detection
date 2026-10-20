@@ -42,12 +42,15 @@ CROP_DISEASE_ETIOLOGY = {
         "untreated_mr": "डागांमुळे पानांना छिद्रे पडून पानगळ होईल, ज्यामुळे फळांवर थेट ऊन पडून फळे खराब होतील."
     },
     "healthy": {
-        "cause_en": "Excellent cultural sanitation, balanced fertigation, and optimal natural canopy aeration.",
+        "cause_en": "The scan shows no visible lesion pattern consistent with the supported disease classes. Continue the hygiene, irrigation, and canopy practices that are keeping the crop protected.",
         "cause_mr": "उत्कृष्ट स्वच्छता, संतुलित खत व्यवस्थापन आणि झाडांमध्ये योग्य सूर्यप्रकाश व हवा.",
-        "pathology_en": "Vibrant chloroplast activity with strong cell wall integrity; foliage is free of parasitic pathogens.",
+        "cause_hi": "स्कैन में समर्थित रोग वर्गों जैसा कोई स्पष्ट दाग या घाव नहीं दिखा। स्वच्छता, सिंचाई और हवा के प्रवाह की वर्तमान अच्छी पद्धतियाँ जारी रखें।",
+        "pathology_en": "No meaningful visible disease area was detected in this image. This is an image-based assessment, so inspect both leaf surfaces during routine scouting.",
         "pathology_mr": "पाने पूर्णपणे निरोगी असून अन्न निर्मितीची प्रक्रिया अत्यंत जोमाने सुरू आहे.",
-        "untreated_en": "Plant will continue standard vegetative and reproductive development. Maintain routine preventive scouting.",
+        "pathology_hi": "इस तस्वीर में महत्वपूर्ण रोगग्रस्त भाग नहीं मिला। यह केवल तस्वीर पर आधारित आकलन है, इसलिए नियमित निरीक्षण में पत्ते के दोनों तरफ देखें।",
+        "untreated_en": "No curative spray is indicated from this result. Recheck weekly and act only if new spots, yellowing, or distortion appear.",
         "untreated_mr": "पीक जोमाने वाढत राहील. नियमित पाहणी सुरू ठेवा आणि रोग प्रतिबंधात्मक काळजी घ्या."
+        ,"untreated_hi": "इस परिणाम के आधार पर उपचारात्मक छिड़काव की आवश्यकता नहीं है। हर सप्ताह जाँच करें और नए धब्बे, पीलापन या विकृति दिखने पर ही कार्रवाई करें।"
     }
 }
 
@@ -78,22 +81,31 @@ def generate_disease_timeline(
 
     data = CROP_DISEASE_ETIOLOGY[archetype]
     is_healthy = archetype == "healthy"
+    stage_1_title_en = "Stage 1: Recent Crop Protection (Past 3–5 Days)" if is_healthy else "Stage 1: Infection & Pathogen Entry (Past 3–5 Days)"
+    stage_1_title_mr = "टप्पा १: मागील काळजी व संरक्षण (मागील ३ ते ५ दिवस)" if is_healthy else "टप्पा १: संसर्ग आणि बुरशीचा शिरकाव (मागील ३ ते ५ दिवस)"
+    stage_1_title_hi = "चरण 1: हाल की फसल सुरक्षा (पिछले 3–5 दिन)" if is_healthy else "चरण 1: संक्रमण और रोगाणु प्रवेश (पिछले 3–5 दिन)"
+    stage_2_title_hi = f"चरण 2: आज की पत्ती की स्थिति ({severity_level})"
+    stage_3_title_hi = "चरण 3: अगले 7–10 दिनों की देखभाल योजना"
 
     return {
         "archetype": archetype,
         "is_healthy": is_healthy,
         "stage_1_cause": {
-            "title_en": "Stage 1: Infection & Pathogen Entry (Past 3–5 Days)",
-            "title_mr": "टप्पा १: संसर्ग आणि बुरशीचा शिरकाव (मागील ३ ते ५ दिवस)",
+            "title_en": stage_1_title_en,
+            "title_mr": stage_1_title_mr,
+            "title_hi": stage_1_title_hi,
             "description_en": data["cause_en"],
             "description_mr": data["cause_mr"],
+            "description_hi": data.get("cause_hi", data["cause_en"]),
             "badge_en": "Past Infection",
             "badge_mr": "मागील संसर्ग",
+            "badge_hi": "हाल की स्थिति",
             "icon": "🌱"
         },
         "stage_2_current": {
             "title_en": f"Stage 2: Current Pathology Today ({severity_level})",
             "title_mr": f"टप्पा २: आजची रोगाची स्थिती ({severity_level})",
+            "title_hi": stage_2_title_hi,
             "description_en": (
                 f"Active visible symptoms currently encompass {affected_percentage}% of the leaf blade. "
                 f"{data['pathology_en']}"
@@ -102,22 +114,31 @@ def generate_disease_timeline(
                 f"पानाच्या सुमारे {affected_percentage}% भागावर लक्षणे दिसत आहेत. "
                 f"{data['pathology_mr']}"
             ),
+            "description_hi": (
+                f"पत्ती के लगभग {affected_percentage}% हिस्से में लक्षण दिखते हैं। "
+                f"{data.get('pathology_hi', data['pathology_en'])}"
+            ),
             "badge_en": f"{affected_percentage}% Area Infected",
             "badge_mr": f"{affected_percentage}% भाग बाधित",
+            "badge_hi": f"{affected_percentage}% प्रभावित क्षेत्र",
             "icon": "🔎"
         },
         "stage_3_future": {
             "title_en": "Stage 3: Forecast If Untreated (Next 7–10 Days)",
             "title_mr": "टप्पा ३: उपचार न केल्यास पुढील धोका (पुढील ७ ते १० दिवस)",
+            "title_hi": stage_3_title_hi,
             "description_en": data["untreated_en"],
             "description_mr": data["untreated_mr"],
+            "description_hi": data.get("untreated_hi", data["untreated_en"]),
             "badge_en": "Projected Outcome",
             "badge_mr": "संभाव्य नुकसान",
+            "badge_hi": "अगला कदम",
             "icon": "⚠️"
         },
         "curative_window": {
             "urgency_en": "High Action Window (Next 24 to 48 Hours)" if not is_healthy else "Routine Care",
             "urgency_mr": "तातडीने फवारणी करा (२४ ते ४८ तास)" if not is_healthy else "नियमित काळजी",
+            "urgency_hi": "अगले 24–48 घंटे में कार्रवाई" if not is_healthy else "नियमित देखभाल",
             "action_en": (
                 f"Apply prescribed fungicide spray within 24-48 hours to prevent spores spreading to adjacent leaves."
                 if not is_healthy else "Maintain optimal drip fertigation and scout weekly."
@@ -125,6 +146,10 @@ def generate_disease_timeline(
             "action_mr": (
                 f"रोगाचा पुढील पानांवर प्रसार रोखण्यासाठी २४ ते ४८ तासांच्या आत योग्य मात्रेनुसार फवारणी करा."
                 if not is_healthy else "नियमित पाहणी करा आणि संतुलित खतांचा वापर करा."
+            )
+            ,"action_hi": (
+                "बीजाणुओं को पास की पत्तियों तक फैलने से रोकने के लिए 24–48 घंटे में स्थानीय विशेषज्ञ की सलाह के अनुसार छिड़काव करें।"
+                if not is_healthy else "संतुलित सिंचाई बनाए रखें, हर सप्ताह निरीक्षण करें और केवल लक्षण दिखने पर ही उपचार करें।"
             )
         }
     }

@@ -321,32 +321,36 @@ def validate_plant_leaf(image: Image.Image):
     green_mask = (h >= 24) & (h <= 88) & (s >= 25) & (v >= 25)
     green_ratio = float(np.mean(green_mask))
 
+    # Diseased leaves are often red, brown, or yellow rather than green. Build
+    # foliage evidence before portrait checks so those lesions are not mistaken
+    # for skin tones by a colour-only heuristic.
+    yellow_mask = (h >= 14) & (h < 24) & (s >= 35) & (v >= 35)
+    yellow_ratio = float(np.mean(yellow_mask))
+    r = img_rgb[:, :, 0].astype(float)
+    g = img_rgb[:, :, 1].astype(float)
+    b = img_rgb[:, :, 2].astype(float)
+    exg_ratio = float(np.mean((2 * g - r - b) > 8))
+    foliage_evidence = (
+        green_ratio >= 0.08 or exg_ratio >= 0.06 or yellow_ratio >= 0.05
+    )
+
     # Stage 2: AI Human Face Detection (YuNet Neural Network)
     has_face, face_conf = check_human_face(img_rgb)
     if has_face:
-        # Confirm true human portrait (high confidence or skin presence without leaf foliage)
-        is_true_face = (face_conf >= 0.60) or (face_conf >= 0.35 and (skin_ratio > 0.05 or green_ratio < 0.15))
+        # A weak face detection must not override strong leaf evidence. YuNet can
+        # see face-like patterns in lesions, veins, and curled leaf margins.
+        is_true_face = (
+            face_conf >= 0.78
+            or (face_conf >= 0.55 and skin_ratio > 0.35 and not foliage_evidence)
+        )
         if is_true_face:
             return False, "HUMAN_DETECTED", (
                 f"🚫 Human face detected ({face_conf * 100:.0f}% confidence)! AgriSense is an agricultural crop disease detection system. "
                 "Please upload a clear photograph focused on a plant leaf (e.g., Tomato, Grape, Soybean), not a human face or selfie."
             )
 
-    # Chlorotic yellow halos/spots
-    yellow_mask = (h >= 14) & (h < 24) & (s >= 35) & (v >= 35)
-    yellow_ratio = float(np.mean(yellow_mask))
-    yellow_mask = (h >= 14) & (h < 24) & (s >= 35) & (v >= 35)
-    yellow_ratio = float(np.mean(yellow_mask))
-
-    # Excess Green Index (ExG = 2*G - R - B) - true biological chlorophyll indicator
-    r = img_rgb[:, :, 0].astype(float)
-    g = img_rgb[:, :, 1].astype(float)
-    b = img_rgb[:, :, 2].astype(float)
-    exg = 2 * g - r - b
-    exg_ratio = float(np.mean(exg > 8))
-
     # Check: Human Skin Dominance (e.g., selfie where face was off-angle, close-up of skin, body without leaf)
-    if skin_ratio > 0.10 and green_ratio < 0.08:
+    if skin_ratio > 0.45 and not foliage_evidence:
         return False, "HUMAN_DETECTED", (
             f"🚫 Human portrait or skin detected ({skin_ratio * 100:.0f}% skin coverage). "
             "AgriSense is designed for plant leaves. Please upload a photograph of a crop leaf."

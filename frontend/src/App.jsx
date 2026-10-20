@@ -2957,7 +2957,7 @@ function App() {
             </div>
 
             <div className="info-card">
-              <div className="info-number">95.58%</div>
+              <div className="info-number">97.58%</div>
 
               <div>
                 <h3>{t.testAccuracy}</h3>

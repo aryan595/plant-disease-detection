@@ -240,7 +240,8 @@
   display: flex;
   align-items: flex-end;
   gap: 7px;
-
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
 }
 
@@ -249,7 +250,6 @@
 }
 
 .plant-chat-user {
-  align-self: flex-end;
   justify-content: flex-end;
 }
 
@@ -290,6 +290,8 @@
 }
 
 .plant-chat-user .plant-chat-bubble {
+  width: fit-content;
+  max-width: min(82%, 470px);
   border-color: #14221a;
   border-radius: 14px 14px 4px 14px;
 

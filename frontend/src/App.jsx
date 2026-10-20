@@ -3319,7 +3319,7 @@ function App() {
               <div className="recovery-result-box">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <h4>{recoveryResult.status_badge}</h4>
-                  <strong style={{ color: "#29b75f", fontSize: "1.2rem" }}>
+                  <strong style={{ fontSize: "1.2rem" }}>
                     {recoveryResult.improvement_pct > 0 ? `+${recoveryResult.improvement_pct}% Improvement` : `${recoveryResult.improvement_pct}%`}
                   </strong>
                 </div>

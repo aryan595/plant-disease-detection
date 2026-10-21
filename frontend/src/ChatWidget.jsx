@@ -9,6 +9,7 @@ import {
   getLocalizedManagement,
   getLocalizedPrevention,
 } from "./diseaseTranslations";
+import { localizedAdvisory, localizedPlantName } from "./advisoryLocalization";
 import { API_BASE_URL } from "./config";
 import "./ChatWidget.css";
 
@@ -225,6 +226,26 @@ const UI_TEXT = {
     title: "మొక్కల ఆరోగ్య సహాయకుడు", subtitle: "1:1 AI వ్యవసాయ వైద్యుడు", greeting: "నమస్కారం రైతు మిత్రమా! 🌱 నేను మీ AI పంట వైద్యుడిని. పంట వ్యాధులు, లక్షణాలు, స్ప్రే మోతాదు లేదా రక్షణ గురించి అడగండి.", placeholder: "మీ పంట, వ్యాధి లేదా స్ప్రే గురించి అడగండి...", send: "పంపండి", newChat: "కొత్త చాట్", thinking: "AI వైద్యుడు ఆలోచిస్తున్నారు...", close: "చాట్ మూసివేయండి", open: "మొక్కల సహాయకుడిని తెరవండి", error: "ఏదో తప్పు జరిగింది. మళ్లీ ప్రయత్నించండి.", footer: "AI వ్యవసాయ సలహా. ముఖ్యమైన నిర్ణయాలకు స్థానిక వ్యవసాయ అధికారిని సంప్రదించండి.", powered: "Groq LLaMA 3.3 ద్వారా నడుస్తోంది", currentAnalysis: "ప్రస్తుత పంట విశ్లేషణ", quickPrompts: "త్వరిత ప్రశ్నలు", explainResult: "ఈ నిర్ధారణను వివరించండి", nextSteps: "ఇప్పుడు నేను ఏమి చేయాలి?", prevention: "మళ్లీ రాకుండా ఎలా నివారించాలి?", spokenUnsupported: "ఈ బ్రౌజర్‌లో ఆడియో అవుట్‌పుట్ అందుబాటులో లేదు.", voiceUnsupported: "ఈ బ్రౌజర్‌లో వాయిస్ ఇన్‌పుట్‌కు మద్దతు లేదు.", micDenied: "మైక్రోఫోన్ అనుమతి నిరాకరించబడింది.", voiceFailed: "వాయిస్ ఇన్‌పుట్ విఫలమైంది. మళ్లీ ప్రయత్నించండి.", listeningStopped: "వినడం ఆగిపోయింది. మళ్లీ మాట్లాడటానికి మైక్ నొక్కండి.", cannotStart: "వాయిస్ గుర్తింపును ప్రారంభించలేకపోయాం.", emptyResponse: "సహాయకుడు ఖాళీ సమాధానం ఇచ్చాడు.", voiceModeBtn: "1:1 వాయిస్ మోడ్", voiceModeLive: "లైవ్ వాయిస్ మోడ్", listeningVoice: "మీ మాట వింటున్నాం... మాట్లాడండి", thinkingVoice: "AI మీ పంటను విశ్లేషిస్తోంది...", speakingVoice: "AI మాట్లాడుతోంది... ఆపడానికి నొక్కండి", readyVoice: "వినడానికి సిద్ధం. మాట్లాడటానికి నొక్కండి", stopVoice: "వాయిస్ మోడ్ నుంచి బయటకు రండి", interrupt: "ఆపండి", doneSpeaking: "ఇప్పుడే పంపండి", autoSpeakOn: "ఆటో-స్పీక్: ఆన్", autoSpeakOff: "ఆటో-స్పీక్: ఆఫ్", switchLang: "భాష",
   },
 };
+
+const CHAT_EXTRA = {
+  en: {
+    launcher: "Ask Plant AI", specialist: "AI Specialist", voiceLive: "1:1 Voice Live", voiceHint: "Natural voice conversation", selectLanguage: "Select chatbot language", match: "match", stopSpeaking: "Stop speaking", readAnswer: "Read answer aloud", readAnswerNaturally: "Read answer aloud in a natural voice", listen: "Listen", stopListening: "Stop listening", startVoiceInput: "Start voice input", startVoiceInputSpeak: "Start voice input (speak)",
+  },
+  hi: {
+    launcher: "किसान AI डॉक्टर", specialist: "AI कृषि विशेषज्ञ", voiceLive: "1:1 लाइव वॉइस", voiceHint: "हिंदी में सीधा संवाद", selectLanguage: "चैटबॉट की भाषा चुनें", match: "मिलान", stopSpeaking: "बोलना रोकें", readAnswer: "उत्तर आवाज़ में सुनें", readAnswerNaturally: "उत्तर प्राकृतिक आवाज़ में सुनें", listen: "सुनें", stopListening: "सुनना रोकें", startVoiceInput: "वॉइस इनपुट शुरू करें", startVoiceInputSpeak: "बोलकर वॉइस इनपुट शुरू करें",
+  },
+  bn: {
+    launcher: "কৃষক AI ডাক্তার", specialist: "AI কৃষি বিশেষজ্ঞ", voiceLive: "১:১ লাইভ ভয়েস", voiceHint: "স্বাভাবিক কণ্ঠে সরাসরি কথোপকথন", selectLanguage: "চ্যাটবটের ভাষা বেছে নিন", match: "মিল", stopSpeaking: "কথা বলা থামান", readAnswer: "উত্তর শুনুন", readAnswerNaturally: "প্রাকৃতিক কণ্ঠে উত্তর শুনুন", listen: "শুনুন", stopListening: "শোনা বন্ধ করুন", startVoiceInput: "ভয়েস ইনপুট শুরু করুন", startVoiceInputSpeak: "বলে ভয়েস ইনপুট শুরু করুন",
+  },
+  ta: {
+    launcher: "AI பயிர் மருத்துவர்", specialist: "AI வேளாண் நிபுணர்", voiceLive: "1:1 நேரடி குரல்", voiceHint: "இயல்பான குரலில் நேரடி உரையாடல்", selectLanguage: "உரையாடல் உதவியாளர் மொழியைத் தேர்ந்தெடுக்கவும்", match: "பொருத்தம்", stopSpeaking: "பேசுவதை நிறுத்து", readAnswer: "பதிலை ஒலியாகக் கேளுங்கள்", readAnswerNaturally: "இயல்பான குரலில் பதிலை கேளுங்கள்", listen: "கேளுங்கள்", stopListening: "கேட்பதை நிறுத்து", startVoiceInput: "குரல் உள்ளீட்டைத் தொடங்கு", startVoiceInputSpeak: "பேசி குரல் உள்ளீட்டைத் தொடங்கு",
+  },
+  te: {
+    launcher: "రైతు AI వైద్యుడు", specialist: "AI వ్యవసాయ నిపుణుడు", voiceLive: "1:1 ప్రత్యక్ష వాయిస్", voiceHint: "సహజ స్వరంలో నేరుగా సంభాషణ", selectLanguage: "చాట్‌బాట్ భాషను ఎంచుకోండి", match: "సరిపోలిక", stopSpeaking: "మాట్లాడటం ఆపండి", readAnswer: "సమాధానాన్ని వినండి", readAnswerNaturally: "సహజ స్వరంలో సమాధానాన్ని వినండి", listen: "వినండి", stopListening: "వినడం ఆపండి", startVoiceInput: "వాయిస్ ఇన్‌పుట్ ప్రారంభించండి", startVoiceInputSpeak: "మాట్లాడి వాయిస్ ఇన్‌పుట్ ప్రారంభించండి",
+  },
+};
+
+Object.entries(CHAT_EXTRA).forEach(([language, copy]) => Object.assign(UI_TEXT[language], copy));
 
 const QUICK_MESSAGES = {
   en: {
@@ -495,28 +516,28 @@ function buildPlantContext(result, language = "en") {
   const isMr = language === "mr";
   const plant = isMr
     ? (result.plant_mr || getLocalizedPlant(result.plant, language) || result.plant)
-    : result.plant;
+    : localizedPlantName(result.plant, language);
   const disease = isMr
     ? (result.disease_mr || getLocalizedDisease(result.disease, language, result.class_name, result.plant) || result.disease)
-    : result.disease;
+    : localizedAdvisory("disease", result, language, result.disease);
   const description = isMr
     ? (result.description_mr || getLocalizedDescription(result.disease, language, result.description, result.class_name, result.plant) || result.description)
-    : result.description;
+    : localizedAdvisory("description", result, language, result.description);
   const rawSymptoms = isMr && result.symptoms_mr?.length
     ? result.symptoms_mr
     : (isMr
         ? getLocalizedSymptoms(result.disease, language, result.symptoms, result.class_name, result.plant)
-        : result.symptoms);
+    : localizedAdvisory("symptoms", result, language, result.symptoms));
   const rawManagement = isMr && result.management_mr?.length
     ? result.management_mr
     : (isMr
         ? getLocalizedManagement(result.disease, language, result.management, result.class_name, result.plant)
-        : result.management);
+    : localizedAdvisory("management", result, language, result.management));
   const rawPrevention = isMr && result.prevention_mr?.length
     ? result.prevention_mr
     : (isMr
         ? getLocalizedPrevention(result.disease, language, result.prevention, result.class_name, result.plant)
-        : result.prevention);
+    : localizedAdvisory("prevention", result, language, result.prevention));
 
   return {
     plant,
@@ -530,8 +551,8 @@ function buildPlantContext(result, language = "en") {
     prevention: Array.isArray(rawPrevention) ? rawPrevention.slice(0, 5) : [],
     top_3: Array.isArray(result.top_3)
       ? result.top_3.slice(0, 3).map((item) => ({
-          plant: isMr ? (item.plant_mr || getLocalizedPlant(item.plant, language) || item.plant) : item.plant,
-          disease: isMr ? (item.disease_mr || getLocalizedDisease(item.disease, language, item.class_name, item.plant) || item.disease) : item.disease,
+          plant: isMr ? (item.plant_mr || getLocalizedPlant(item.plant, language) || item.plant) : localizedPlantName(item.plant, language),
+          disease: isMr ? (item.disease_mr || getLocalizedDisease(item.disease, language, item.class_name, item.plant) || item.disease) : localizedAdvisory("disease", item, language, item.disease),
           confidence: item.confidence,
         }))
       : [],
@@ -1124,9 +1145,7 @@ export default function ChatWidget({
           <span className="plant-chat-launcher-label">
             {activeLanguage === "mr"
               ? "कृषी AI डॉक्टर"
-              : activeLanguage === "hi"
-              ? "किसान AI डॉक्टर"
-              : "Ask Plant AI"}
+              : text.launcher}
           </span>
         )}
       </button>
@@ -1143,7 +1162,9 @@ export default function ChatWidget({
                 <p>{text.subtitle}</p>
                 <span className="plant-chat-online">
                   <span className="plant-chat-online-dot" />
-                  {voiceModeActive ? "🎙️ 1:1 Voice Live" : "AI Specialist"}
+                  {voiceModeActive
+                    ? (activeLanguage === "mr" ? "🎙️ 1:1 Voice Live" : `🎙️ ${text.voiceLive}`)
+                    : (activeLanguage === "mr" ? "AI Specialist" : text.specialist)}
                 </span>
               </div>
             </div>
@@ -1156,7 +1177,7 @@ export default function ChatWidget({
                   className="plant-chat-lang-select"
                   value={activeLanguage}
                   onChange={(e) => handleLanguageSwitch(e.target.value)}
-                  aria-label="Select Chatbot Language"
+                  aria-label={activeLanguage === "mr" ? "Select Chatbot Language" : text.selectLanguage}
                 >
                   {SUPPORTED_LANGS.map((lang) => (
                     <option key={lang.code} value={lang.code}>
@@ -1197,7 +1218,7 @@ export default function ChatWidget({
                 {plantContext.plant} — {plantContext.disease}
               </strong>
               {typeof plantContext.confidence === "number" && (
-                <small>({plantContext.confidence.toFixed(1)}% match)</small>
+                <small>({plantContext.confidence.toFixed(1)}% {activeLanguage === "mr" ? "match" : text.match})</small>
               )}
             </div>
           )}
@@ -1226,9 +1247,7 @@ export default function ChatWidget({
                   <span className="voice-status-sub">
                     {activeLanguage === "mr"
                       ? "मराठीत स्पष्ट संवाद • ० एरर"
-                      : activeLanguage === "hi"
-                      ? "हिन्दी में सीधा संवाद • 0 एरर"
-                      : "Human-like natural voice • No asterisks"}
+                      : text.voiceHint}
                   </span>
                 </div>
               </div>
@@ -1288,7 +1307,7 @@ export default function ChatWidget({
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {message.content
                       .replace(/&lt;br\s*\/?&gt;/gi, "\n\n")
-                      .replace(/<br\s*\/?>/gi, "  \n")}
+                      .replace(/<br\s*\/?>/gi, "\n\n")}
                   </ReactMarkdown>
 
                   {message.role === "assistant" && (
@@ -1300,21 +1319,21 @@ export default function ChatWidget({
                       onClick={() => handleSpeak(message.content, index)}
                       aria-label={
                         speakingIndex === index
-                          ? "Stop speaking"
-                          : "Read answer aloud"
+                          ? (activeLanguage === "mr" ? "Stop speaking" : text.stopSpeaking)
+                          : (activeLanguage === "mr" ? "Read answer aloud" : text.readAnswer)
                       }
                       title={
                         speakingIndex === index
-                          ? "Stop speaking"
-                          : "Read answer aloud in natural human voice"
+                          ? (activeLanguage === "mr" ? "Stop speaking" : text.stopSpeaking)
+                          : (activeLanguage === "mr" ? "Read answer aloud in natural human voice" : text.readAnswerNaturally)
                       }
                     >
                       {speakingIndex === index ? (
                         <>
-                          <span className="pulse-dot" /> ⏹ Stop
+                          <span className="pulse-dot" /> ⏹ {activeLanguage === "mr" ? "Stop" : text.stopSpeaking}
                         </>
                       ) : (
-                        "🔊 Listen"
+                        `🔊 ${activeLanguage === "mr" ? "Listen" : text.listen}`
                       )}
                     </button>
                   )}
@@ -1403,10 +1422,14 @@ export default function ChatWidget({
               onClick={handleVoiceInput}
               disabled={loading}
               title={
-                isListening ? "Stop listening" : "Start voice input (Speak)"
+                isListening
+                  ? (activeLanguage === "mr" ? "Stop listening" : text.stopListening)
+                  : (activeLanguage === "mr" ? "Start voice input (Speak)" : text.startVoiceInputSpeak)
               }
               aria-label={
-                isListening ? "Stop listening" : "Start voice input"
+                isListening
+                  ? (activeLanguage === "mr" ? "Stop listening" : text.stopListening)
+                  : (activeLanguage === "mr" ? "Start voice input" : text.startVoiceInput)
               }
             >
               {isListening ? "■" : "🎙️"}

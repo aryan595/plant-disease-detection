@@ -8,8 +8,23 @@ import {
   getLocalizedManagement,
   getLocalizedPrevention,
 } from "./diseaseTranslations";
-import { localizedAdvisory, localizedTimeline, recoveryCopy } from "./advisoryLocalization";
-import { interfaceText, localizedDay, localizedForecastBadge, tabText } from "./interfaceLocalization";
+import {
+  localizedAdvisory,
+  localizedContext,
+  localizedPlantName,
+  localizedTimeline,
+  recoveryCopy,
+} from "./advisoryLocalization";
+import {
+  interfaceText,
+  localizedCropName,
+  localizedCompatibilityTitle,
+  localizedDay,
+  localizedDistrictName,
+  localizedForecastBadge,
+  localizedKendraType,
+  tabText,
+} from "./interfaceLocalization";
 import "./App.css";
 import ChatWidget from "./ChatWidget";
 import { API_BASE_URL } from "./config";
@@ -30,6 +45,16 @@ const CAMERA_TEXT = {
     failed: "Could not start the camera. Check whether another app is using it.",
     notReady: "The camera is not ready yet. Please wait a moment.",
     captureFailed: "Could not capture the photo. Please try again.",
+    validationTitle: "Image Validation Error",
+    humanTitle: "Human Face or Portrait Detected",
+    noLeafTitle: "No Plant Leaf Detected",
+    validationDetail: "This image cannot be used for plant analysis. Follow the photo guidance below and try again.",
+    guidanceTitle: "Diagnostic Image Guidelines for Farmers:",
+    guidanceOne: "Hold the camera steady and focus on a single crop leaf (Tomato, Potato, Grape, Soybean).",
+    guidanceTwo: "Ensure clear natural daylight without excessive shadow or lens glare.",
+    guidanceThree: "Keep human faces, selfies, animals, walls, or indoor screens completely out of the frame.",
+    selectLeaf: "Select Crop Leaf Image",
+    takeLeaf: "Take Leaf Photo",
   },
   hi: {
     takePhoto: "कैमरे से फोटो लें",
@@ -43,6 +68,16 @@ const CAMERA_TEXT = {
     failed: "कैमरा शुरू नहीं हो सका। जाँचें कि कोई अन्य ऐप कैमरे का उपयोग तो नहीं कर रहा।",
     notReady: "कैमरा अभी तैयार नहीं है। कृपया प्रतीक्षा करें।",
     captureFailed: "फोटो नहीं ली जा सकी। कृपया फिर प्रयास करें।",
+    validationTitle: "छवि सत्यापन त्रुटि",
+    humanTitle: "मानव चेहरा या पोर्ट्रेट मिला",
+    noLeafTitle: "पौधे का पत्ता नहीं मिला",
+    validationDetail: "इस छवि का उपयोग पौधे के विश्लेषण के लिए नहीं किया जा सकता। नीचे दिए गए फोटो निर्देशों का पालन करके फिर प्रयास करें।",
+    guidanceTitle: "किसानों के लिए निदान फोटो निर्देश:",
+    guidanceOne: "कैमरा स्थिर रखें और केवल एक फसल के पत्ते पर ध्यान दें (टमाटर, आलू, अंगूर या सोयाबीन)।",
+    guidanceTwo: "तेज छाया या लेंस की चमक के बिना साफ़ प्राकृतिक रोशनी सुनिश्चित करें।",
+    guidanceThree: "मानव चेहरा, सेल्फी, जानवर, दीवार या इनडोर स्क्रीन को फोटो से पूरी तरह बाहर रखें।",
+    selectLeaf: "फसल के पत्ते की तस्वीर चुनें",
+    takeLeaf: "पत्ते की फोटो लें",
   },
   mr: {
     takePhoto: "कॅमेऱ्याने फोटो काढा",
@@ -69,6 +104,16 @@ const CAMERA_TEXT = {
     failed: "ক্যামেরা চালু করা যায়নি। অন্য কোনো অ্যাপ ক্যামেরা ব্যবহার করছে কি না দেখুন।",
     notReady: "ক্যামেরা এখনও প্রস্তুত নয়। একটু অপেক্ষা করুন।",
     captureFailed: "ছবি তোলা যায়নি। আবার চেষ্টা করুন।",
+    validationTitle: "ছবি যাচাইকরণ ত্রুটি",
+    humanTitle: "মানুষের মুখ বা প্রতিকৃতি শনাক্ত হয়েছে",
+    noLeafTitle: "গাছের পাতা শনাক্ত হয়নি",
+    validationDetail: "এই ছবিটি উদ্ভিদ বিশ্লেষণের জন্য ব্যবহার করা যাবে না। নিচের ছবির নির্দেশনা মেনে আবার চেষ্টা করুন।",
+    guidanceTitle: "কৃষকের জন্য রোগ নির্ণয়ের ছবি নির্দেশনা:",
+    guidanceOne: "ক্যামেরা স্থির রাখুন এবং একটি ফসলের পাতায় ফোকাস করুন (টমেটো, আলু, আঙুর বা সয়াবিন)।",
+    guidanceTwo: "অতিরিক্ত ছায়া বা লেন্সের ঝলক ছাড়া পরিষ্কার প্রাকৃতিক আলো নিশ্চিত করুন।",
+    guidanceThree: "মানুষের মুখ, সেলফি, পশু, দেয়াল বা ঘরের স্ক্রিন ছবির বাইরে রাখুন।",
+    selectLeaf: "ফসলের পাতার ছবি বেছে নিন",
+    takeLeaf: "পাতার ছবি তুলুন",
   },
   ta: {
     takePhoto: "புகைப்படம் எடுக்கவும்",
@@ -82,9 +127,19 @@ const CAMERA_TEXT = {
     failed: "கேமராவைத் தொடங்க முடியவில்லை. வேறு செயலி கேமராவைப் பயன்படுத்துகிறதா எனச் சரிபார்க்கவும்.",
     notReady: "கேமரா இன்னும் தயாராகவில்லை. சிறிது காத்திருக்கவும்.",
     captureFailed: "புகைப்படம் எடுக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+    validationTitle: "படச் சரிபார்ப்பு பிழை",
+    humanTitle: "மனித முகம் அல்லது உருவப்படம் கண்டறியப்பட்டது",
+    noLeafTitle: "தாவர இலை கண்டறியப்படவில்லை",
+    validationDetail: "இந்தப் படத்தை தாவர பகுப்பாய்வுக்கு பயன்படுத்த முடியாது. கீழே உள்ள புகைப்பட வழிமுறைகளைப் பின்பற்றி மீண்டும் முயற்சிக்கவும்.",
+    guidanceTitle: "விவசாயிகளுக்கான நோயறிதல் புகைப்பட வழிமுறைகள்:",
+    guidanceOne: "கேமராவை நிலையாக வைத்து ஒரு பயிர் இலையில் மட்டும் கவனம் செலுத்தவும் (தக்காளி, உருளைக்கிழங்கு, திராட்சை அல்லது சோயாபீன்).",
+    guidanceTwo: "அதிக நிழல் அல்லது லென்ஸ் பளபளப்பு இல்லாமல் இயற்கை ஒளி இருப்பதை உறுதிசெய்யவும்.",
+    guidanceThree: "மனித முகம், செல்ஃபி, விலங்குகள், சுவர் அல்லது உட்புறத் திரைகளைப் படத்திற்கு வெளியே வைக்கவும்.",
+    selectLeaf: "பயிர் இலைப் படத்தைத் தேர்ந்தெடுக்கவும்",
+    takeLeaf: "இலையின் புகைப்படம் எடுக்கவும்",
   },
   te: {
-    takePhoto: "ఫోటో తీయండి", title: "మీ ఆకు ఫోటో తీయండి", hint: "ఆకును ఫ్రేమ్‌లో ఉంచి ఫోటో తీయండి.", capture: "ఫోటో తీయండి", close: "కెమెరాను మూసివేయండి", cancel: "రద్దు చేయండి", unavailable: "కెమెరా కోసం మద్దతు ఉన్న బ్రౌజర్ మరియు localhost లేదా HTTPS అవసరం.", denied: "కెమెరా అనుమతి నిరాకరించబడింది. బ్రౌజర్ సెట్టింగ్‌లలో అనుమతించండి.", failed: "కెమెరాను ప్రారంభించలేకపోయాం. మరొక యాప్ కెమెరాను ఉపయోగిస్తోందో చూడండి.", notReady: "కెమెరా ఇంకా సిద్ధంగా లేదు. కొద్దిసేపు వేచి ఉండండి.", captureFailed: "ఫోటో తీయలేకపోయాం. మళ్లీ ప్రయత్నించండి.",
+    takePhoto: "ఫోటో తీయండి", title: "మీ ఆకు ఫోటో తీయండి", hint: "ఆకును ఫ్రేమ్‌లో ఉంచి ఫోటో తీయండి.", capture: "ఫోటో తీయండి", close: "కెమెరాను మూసివేయండి", cancel: "రద్దు చేయండి", unavailable: "కెమెరా కోసం మద్దతు ఉన్న బ్రౌజర్ మరియు localhost లేదా HTTPS అవసరం.", denied: "కెమెరా అనుమతి నిరాకరించబడింది. బ్రౌజర్ సెట్టింగ్‌లలో అనుమతించండి.", failed: "కెమెరాను ప్రారంభించలేకపోయాం. మరొక యాప్ కెమెరాను ఉపయోగిస్తోందో చూడండి.", notReady: "కెమెరా ఇంకా సిద్ధంగా లేదు. కొద్దిసేపు వేచి ఉండండి.", captureFailed: "ఫోటో తీయలేకపోయాం. మళ్లీ ప్రయత్నించండి.", validationTitle: "చిత్ర ధృవీకరణ లోపం", humanTitle: "మనిషి ముఖం లేదా పోర్ట్రెయిట్ గుర్తించబడింది", noLeafTitle: "మొక్క ఆకు గుర్తించబడలేదు", validationDetail: "ఈ చిత్రాన్ని మొక్కల విశ్లేషణకు ఉపయోగించలేము. దిగువ ఫోటో మార్గదర్శకాలను పాటించి మళ్లీ ప్రయత్నించండి.", guidanceTitle: "రైతుల కోసం నిర్ధారణ ఫోటో మార్గదర్శకాలు:", guidanceOne: "కెమెరాను స్థిరంగా ఉంచి ఒకే పంట ఆకుపై దృష్టి పెట్టండి (టమాటా, బంగాళాదుంప, ద్రాక్ష లేదా సోయాబీన్).", guidanceTwo: "అధిక నీడ లేదా లెన్స్ మెరుపు లేకుండా సహజ కాంతి ఉండేలా చూసుకోండి.", guidanceThree: "మనిషి ముఖాలు, సెల్ఫీలు, జంతువులు, గోడలు లేదా ఇండోర్ స్క్రీన్లను ఫ్రేమ్‌కు పూర్తిగా దూరంగా ఉంచండి.", selectLeaf: "పంట ఆకు చిత్రాన్ని ఎంచుకోండి", takeLeaf: "ఆకు ఫోటో తీయండి",
   },
 };
 
@@ -147,6 +202,7 @@ function App() {
 
   const t = TRANSLATIONS[language] || TRANSLATIONS.en;
   const cameraText = CAMERA_TEXT[language] || CAMERA_TEXT.en;
+  const ui = interfaceText(language);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [result, setResult] = useState(null);
@@ -163,7 +219,7 @@ function App() {
   const [imageViewMode, setImageViewMode] = useState("original"); // "original" | "heatmap" | "split"
 
   const analysisStatusText = loading
-    ? "Waking the secure AI service and checking your leaf…"
+    ? (language === "mr" ? "Waking the secure AI service and checking your leaf…" : ui.wakeService)
     : "";
 
   const usesVisualConditionGuide = explainabilityMode === "visual_condition_guide";
@@ -176,18 +232,18 @@ function App() {
       || localizedTimeline(section, field, timelineLocale, result?.is_healthy);
   };
   const advisoryText = (kind, fallback) => localizedAdvisory(kind, result, language, fallback);
+  const contextText = (kind, fallback, level) => localizedContext(kind, language, fallback, level);
   const recoveryText = recoveryCopy(language);
-  const ui = interfaceText(language);
   const displayDistrict = (district) => {
     if (language === "mr") return district?.name_mr || district?.name || selectedDistrict;
-    return String(district?.name || district || selectedDistrict).replace(/\s*\([^)]*\)/g, "");
+    return localizedDistrictName(district?.name || district || selectedDistrict, language);
   };
   const analysisProgressText = usesVisualConditionGuide
-    ? "Classifying the image and preparing its visual condition guide"
+    ? (language === "mr" ? "Classifying the image and preparing its visual condition guide" : ui.preparingGuide)
     : t.inferenceProgress;
   const visualGuideLabel = usesVisualConditionGuide
-    ? (language === "mr" ? "पान स्थिती मार्गदर्शक" : "Leaf Condition Guide")
-    : (language === "mr" ? "उष्णता नकाशा" : "AI Heatmap");
+    ? (language === "mr" ? "पान स्थिती मार्गदर्शक" : ui.leafGuide)
+    : (language === "mr" ? "उष्णता नकाशा" : ui.heatmap);
 
   const [selectedDistrict, setSelectedDistrict] = useState("Pune (पुणे)");
   const [districts, setDistricts] = useState([
@@ -1240,7 +1296,7 @@ function App() {
               >
                 {districts.map((d) => (
                   <option key={d.id} value={d.name}>
-                    {language === "mr" ? d.name_mr : d.name.replace(/\s*\([^)]*\)/g, "").split(" - ")[0]}
+                    {displayDistrict(d)}
                   </option>
                 ))}
               </select>
@@ -1255,7 +1311,7 @@ function App() {
                   type="button"
                   className="gps-clear-btn"
                   onClick={handleClearGps}
-                  title={language === "mr" ? "जीपीएस रीसेट" : "Reset GPS"}
+                  title={language === "mr" ? "जीपीएस रीसेट" : ui.resetGps}
                 >
                   ✕
                 </button>
@@ -1266,10 +1322,10 @@ function App() {
                 className={`gps-pill-btn ${gpsLoading ? "loading" : ""}`}
                 onClick={handleFetchGpsLocation}
                 disabled={gpsLoading}
-                title={language === "mr" ? "थेट शेत GPS हवामान" : "Live Farm GPS"}
+                title={language === "mr" ? "थेट शेत GPS हवामान" : ui.liveGps}
               >
                 <span>{gpsLoading ? "⏳" : "🛰️"}</span>
-                <span>{gpsLoading ? (language === "mr" ? "शोधत आहे" : "Locating") : "GPS"}</span>
+                <span>{gpsLoading ? (language === "mr" ? "शोधत आहे" : ui.locating) : "GPS"}</span>
               </button>
             )}
 
@@ -1304,7 +1360,7 @@ function App() {
             </div>
 
             {/* Neural Model Status Badge */}
-            <div className="model-status-badge" title="Trained on 55 crop health classes">
+            <div className="model-status-badge" title={language === "mr" ? "Trained on 55 crop health classes" : `55 ${ui.cropClasses}`}>
               <span className="pulse-indicator"></span>
               <span>EfficientNet-B0</span>
             </div>
@@ -1314,10 +1370,10 @@ function App() {
               type="button"
               className={`pwa-pill-btn ${isAppInstalled ? "installed" : ""}`}
               onClick={handleInstallApp}
-              title={language === "mr" ? "ॲप इन्स्टॉल करा" : "Install AgriSense PWA"}
+              title={language === "mr" ? "ॲप इन्स्टॉल करा" : ui.installApp}
             >
               <span>{isAppInstalled ? "✓" : "📲"}</span>
-              <span className="pwa-text">{isAppInstalled ? (language === "mr" ? "इन्स्टॉल झाले" : "Installed") : (language === "mr" ? "ॲप" : "App")}</span>
+              <span className="pwa-text">{isAppInstalled ? (language === "mr" ? "इन्स्टॉल झाले" : ui.installed) : (language === "mr" ? "ॲप" : ui.installApp)}</span>
             </button>
           </div>
         </div>
@@ -1336,31 +1392,31 @@ function App() {
 
             <p>{t.heroDescription}</p>
 
-            <div className="dashboard-hero-signals" aria-label="Platform capabilities">
-              <span><i>✦</i> Explainable AI</span>
-              <span><i>◌</i> Local farm context</span>
-              <span><i>↗</i> Action-ready advice</span>
+            <div className="dashboard-hero-signals" aria-label={language === "mr" ? "Platform capabilities" : ui.platformCapabilities}>
+              <span><i>✦</i> {language === "mr" ? "Explainable AI" : ui.heroExplain}</span>
+              <span><i>◌</i> {language === "mr" ? "Local farm context" : ui.heroContext}</span>
+              <span><i>↗</i> {language === "mr" ? "Action-ready advice" : ui.heroAdvice}</span>
             </div>
           </div>
 
-          <aside className="hero-system-card" aria-label="AgriSense system readiness">
+          <aside className="hero-system-card" aria-label={language === "mr" ? "AgriSense system readiness" : ui.systemOnline}>
             <div className="system-card-topline">
               <span className="live-dot" />
-              <span>AI system online</span>
+              <span>{language === "mr" ? "AI system online" : ui.systemOnline}</span>
               <span className="system-card-code">ML / 55</span>
             </div>
             <div className="system-card-body">
               <div>
-                <span className="system-card-label">Plant intelligence</span>
+                <span className="system-card-label">{language === "mr" ? "Plant intelligence" : ui.plantIntelligence}</span>
                 <strong>55</strong>
-                <span className="system-card-meta">crop health classes</span>
+                <span className="system-card-meta">{language === "mr" ? "crop health classes" : ui.cropClasses}</span>
               </div>
               <div className="system-orbit" aria-hidden="true">
                 <span>✦</span>
               </div>
             </div>
             <div className="system-card-footer">
-              <span>Model confidence</span>
+              <span>{language === "mr" ? "Model accuracy" : ui.modelConfidence}</span>
               <strong>97.58%</strong>
               <div><i /></div>
             </div>
@@ -1368,7 +1424,7 @@ function App() {
         </section>
 
         {/* Farmer-First Navigation Dock */}
-        <nav className="farmer-nav-dock" aria-label="Farmer Navigation">
+        <nav className="farmer-nav-dock" aria-label={language === "mr" ? "Farmer Navigation" : ui.farmerNavigation}>
           <button
             type="button"
             className={`farmer-tab-btn ${activeTab === "diagnosis" ? "active" : ""}`}
@@ -1423,16 +1479,12 @@ function App() {
                   <h3>
                     {language === "mr"
                       ? "काही अडचण किंवा प्रश्न आहे का? थेट बोलून विचारा!"
-                      : language === "hi"
-                      ? "कोई समस्या या सवाल है? सीधे बोलकर पूछें!"
-                      : "Have questions about your crop? Speak directly to AI!"}
+                      : ui.voiceHeroTitle}
                   </h3>
                   <p>
                     {language === "mr"
                       ? "मराठी, हिंदी किंवा इंग्रजीत बोला. आमचा AI कृषी मित्र क्षणात मार्गदर्शन करेल."
-                      : language === "hi"
-                      ? "अपनी भाषा में बोलें। AI कृषि मित्र तुरंत सटीक सलाह देगा।"
-                      : "Voice-first agronomic advisory powered by local Krishi intelligence."}
+                      : ui.voiceHeroBody}
                   </p>
                 </div>
               </div>
@@ -1441,7 +1493,7 @@ function App() {
                 className="voice-hero-cta"
                 onClick={handleOpenVoiceChat}
               >
-                🎙️ {language === "mr" ? "आताच बोलून विचारा" : language === "hi" ? "बोलकर पूछें" : "Tap to Speak"}
+                🎙️ {language === "mr" ? "आताच बोलून विचारा" : ui.voiceHeroCta}
               </button>
             </div>
 
@@ -1449,7 +1501,7 @@ function App() {
             <div className="crop-selector-dock">
               <div className="crop-dock-header">
                 <span className="crop-dock-title">
-                  🌾 {language === "mr" ? "तुमचे पीक निवडा (AI अचूकतेसाठी):" : "Select Crop for Enhanced AI Accuracy:"}
+                  🌾 {language === "mr" ? "तुमचे पीक निवडा (AI अचूकतेसाठी):" : ui.cropSelector}
                 </span>
                 {selectedCrop !== "all" && (
                   <button
@@ -1457,7 +1509,7 @@ function App() {
                     className="clear-crop-btn"
                     onClick={() => setSelectedCrop("all")}
                   >
-                    {language === "mr" ? "सर्व पिके (Reset)" : "Show All Crops"}
+                    {language === "mr" ? "सर्व पिके (Reset)" : ui.allCrops}
                   </button>
                 )}
               </div>
@@ -1471,7 +1523,7 @@ function App() {
                   { id: "Corn_(maize)", name: "Corn", name_mr: "मका", icon: "corn" },
                   { id: "Apple", name: "Apple", name_mr: "सफरचंद", icon: "apple" },
                   { id: "Pepper,_bell", name: "Capsicum", name_mr: "मिरची", icon: "capsicum" },
-                ].map((c) => (
+                ].map((c, index) => (
                   <button
                     key={c.id}
                     type="button"
@@ -1479,7 +1531,7 @@ function App() {
                     onClick={() => setSelectedCrop(c.id)}
                   >
                     <span className="crop-icon"><AppIcon name={c.icon} /></span>
-                    <span className="crop-name">{language === "mr" ? c.name_mr : c.name}</span>
+                    <span className="crop-name">{language === "mr" ? c.name_mr : localizedCropName(index, language, c.name)}</span>
                   </button>
                 ))}
               </div>
@@ -1518,7 +1570,7 @@ function App() {
                   className={`view-mode-btn ${imageViewMode === "original" ? "active" : ""}`}
                   onClick={() => setImageViewMode("original")}
                 >
-                  📷 {language === "mr" ? "मूळ पान" : "Original"}
+                  📷 {language === "mr" ? "मूळ पान" : ui.original}
                 </button>
                 <button
                   type="button"
@@ -1532,7 +1584,7 @@ function App() {
                   className={`view-mode-btn ${imageViewMode === "split" ? "active" : ""}`}
                   onClick={() => setImageViewMode("split")}
                 >
-                  🔲 {language === "mr" ? "तुलना" : "Side-by-Side"}
+                  🔲 {language === "mr" ? "तुलना" : ui.sideBySide}
                 </button>
               </div>
             )}
@@ -1592,7 +1644,7 @@ function App() {
                   {imageViewMode === "split" && gradcamImage ? (
                     <div className="split-view-row">
                       <div className="split-view-col">
-                        <span className="split-label">📷 {language === "mr" ? "मूळ फोटो" : "Original"}</span>
+                        <span className="split-label">📷 {language === "mr" ? "मूळ फोटो" : ui.original}</span>
                         <img src={selectedImage.preview} alt="Original Leaf" className="main-preview-image split" />
                       </div>
                       <div className="split-view-col">
@@ -1630,7 +1682,7 @@ function App() {
             {/* Quick Sample Leaves for Immediate Testing */}
             <div className="quick-sample-section">
               <span className="sample-label">
-                ⚡ {language === "mr" ? "किंवा डेमो पान निवडा (त्वरीत चाचणी):" : language === "hi" ? "या डेमो पत्ती चुनें (त्वरित परीक्षण):" : "Or test with a sample leaf:"}
+                ⚡ {language === "mr" ? "किंवा डेमो पान निवडा (त्वरीत चाचणी):" : ui.sampleLabel}
               </span>
               <div className="sample-chips-row">
                 <button
@@ -1640,7 +1692,7 @@ function App() {
                   disabled={loading}
                   title="Test Tomato Septoria Leaf Spot sample"
                 >
-                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो सेप्टोरिया (User Photo)" : "Tomato Septoria (User Photo)"}
+                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो सेप्टोरिया (User Photo)" : ui.sampleSeptoria}
                 </button>
                 <button
                   type="button"
@@ -1649,7 +1701,7 @@ function App() {
                   disabled={loading}
                   title="Test Tomato Early Blight sample"
                 >
-                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो करपा" : "Tomato Early Blight"}
+                  <AppIcon name="tomato" /> {language === "mr" ? "टोमॅटो करपा" : ui.sampleBlight}
                 </button>
                 <button
                   type="button"
@@ -1658,7 +1710,7 @@ function App() {
                   disabled={loading}
                   title="Test Grape Black Rot sample"
                 >
-                  <AppIcon name="grape" /> {language === "mr" ? "द्राक्ष काळा करपा" : "Grape Black Rot"}
+                  <AppIcon name="grape" /> {language === "mr" ? "द्राक्ष काळा करपा" : ui.sampleRot}
                 </button>
                 <button
                   type="button"
@@ -1667,7 +1719,7 @@ function App() {
                   disabled={loading}
                   title="Test Soybean Rust sample"
                 >
-                  <AppIcon name="soybean" /> {language === "mr" ? "सोयाबीन तांबेरा" : "Soybean Rust"}
+                  <AppIcon name="soybean" /> {language === "mr" ? "सोयाबीन तांबेरा" : ui.sampleRust}
                 </button>
                 <button
                   type="button"
@@ -1676,7 +1728,7 @@ function App() {
                   disabled={loading}
                   title="Test Healthy Control Leaf"
                 >
-                  <AppIcon name="sprout" /> {language === "mr" ? "निरोगी पान" : "Healthy Leaf"}
+                  <AppIcon name="sprout" /> {language === "mr" ? "निरोगी पान" : ui.sampleHealthy}
                 </button>
               </div>
             </div>
@@ -1745,21 +1797,21 @@ function App() {
                   <div>
                     <h3>
                       {error.includes("Human") || error.includes("portrait") || error.includes("face")
-                        ? "Human Face or Portrait Detected"
+                        ? (language === "mr" ? "Human Face or Portrait Detected" : cameraText.humanTitle)
                         : error.includes("plant leaf") || error.includes("leaf")
-                          ? "No Plant Leaf Detected"
-                          : "Image Validation Error"}
+                          ? (language === "mr" ? "No Plant Leaf Detected" : cameraText.noLeafTitle)
+                          : (language === "mr" ? "Image Validation Error" : cameraText.validationTitle)}
                     </h3>
-                    <p className="error-detail-text">{error}</p>
+                    <p className="error-detail-text">{["en", "mr"].includes(language) ? error : cameraText.validationDetail}</p>
                   </div>
                 </div>
 
                 <div className="photo-guidance-box">
-                  <strong>📸 Diagnostic Image Guidelines for Farmers:</strong>
+                  <strong>📸 {language === "mr" ? "Diagnostic Image Guidelines for Farmers:" : cameraText.guidanceTitle}</strong>
                   <ul>
-                    <li>Hold the camera steady and focus on a single crop leaf (Tomato, Potato, Grape, Soybean).</li>
-                    <li>Ensure clear natural daylight without excessive shadow or lens glare.</li>
-                    <li>Keep human faces, selfies, animals, walls, or indoor screens completely out of the frame.</li>
+                    <li>{language === "mr" ? "Hold the camera steady and focus on a single crop leaf (Tomato, Potato, Grape, Soybean)." : cameraText.guidanceOne}</li>
+                    <li>{language === "mr" ? "Ensure clear natural daylight without excessive shadow or lens glare." : cameraText.guidanceTwo}</li>
+                    <li>{language === "mr" ? "Keep human faces, selfies, animals, walls, or indoor screens completely out of the frame." : cameraText.guidanceThree}</li>
                   </ul>
                 </div>
 
@@ -1769,14 +1821,14 @@ function App() {
                     className="retry-upload-button"
                     onClick={openFilePicker}
                   >
-                    🖼️ Select Crop Leaf Image
+                    🖼️ {language === "mr" ? "Select Crop Leaf Image" : cameraText.selectLeaf}
                   </button>
                   <button
                     type="button"
                     className="retry-camera-button"
                     onClick={startCamera}
                   >
-                    📷 Take Leaf Photo
+                    📷 {language === "mr" ? "Take Leaf Photo" : cameraText.takeLeaf}
                   </button>
                 </div>
               </div>
@@ -1817,7 +1869,7 @@ function App() {
                 <div className="panel-header">
                   <div>
                     <h2>{t.analysisResult}</h2>
-                    <p>AI-assisted plant assessment</p>
+                    <p>{language === "mr" ? "AI-assisted plant assessment" : ui.analysisSubtitle}</p>
                   </div>
 
                   <div
@@ -1840,7 +1892,7 @@ function App() {
                     <strong>
                       {language === "mr"
                         ? (result.plant_mr || getLocalizedPlant(result.plant, language))
-                        : result.plant}
+                        : localizedPlantName(result.plant, language)}
                     </strong>
                   </div>
 
@@ -1965,21 +2017,21 @@ function App() {
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("spray_mix")}
                   >
-                    🧪 {ui.tank}
+                    🧪 {language === "mr" ? "औषध मिश्रण व पंपाचे बजेट तपासा" : ui.tank}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("forecast")}
                   >
-                    ⛅ {ui.forecast}
+                    ⛅ {language === "mr" ? "७-दिवस हवामान व बुरशी धोका पहा" : ui.forecast}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("mandi_kendras")}
                   >
-                    🏪 {ui.kendras}
+                    🏪 {language === "mr" ? "जवळचे कृषी केंद्र व वाजवी भाव पहा" : ui.kendras}
                   </button>
                   {farmerMode && (
                     <button
@@ -1988,7 +2040,7 @@ function App() {
                       onClick={() => setFarmerMode(false)}
                       style={{ color: "#166534", fontWeight: "bold" }}
                     >
-                      🔍 {ui.guide}
+                      🔍 {language === "mr" ? "Grad-CAM उष्णता नकाशा व विमा क्लेम (Expert Mode)" : ui.guide}
                     </button>
                   )}
                 </div>
@@ -2010,7 +2062,7 @@ function App() {
                       >
                         {language === "mr" && result.severity.level_mr
                           ? result.severity.level_mr
-                          : result.severity.level}
+                          : contextText("severityLevel", result.severity.level, result.severity.level)}
                       </span>
                     </div>
 
@@ -2038,7 +2090,7 @@ function App() {
                     <p className="severity-desc">
                       {language === "mr" && result.severity.description_mr
                         ? result.severity.description_mr
-                        : result.severity.description_en}
+                        : contextText("severity", result.severity.description_en)}
                     </p>
                   </div>
                 )}
@@ -2056,8 +2108,9 @@ function App() {
                         <div>
                           <h4>{t.weatherRiskTitle}</h4>
                           <span className="weather-location">
-                            {result.weather_progression.district ||
-                              "Regional Microclimate"}
+                            {language === "mr"
+                              ? (result.weather_progression.district || "Regional Microclimate")
+                              : displayDistrict(result.weather_progression.district || selectedDistrict)}
                           </span>
                         </div>
                       </div>
@@ -2071,7 +2124,7 @@ function App() {
                         {language === "mr" &&
                         result.weather_progression.risk_level_mr
                           ? result.weather_progression.risk_level_mr
-                          : `${result.weather_progression.risk_level} Risk`}
+                          : contextText("risk", `${result.weather_progression.risk_level} Risk`, result.weather_progression.risk_level)}
                       </span>
                     </div>
 
@@ -2107,14 +2160,14 @@ function App() {
                         {language === "mr" &&
                         result.weather_progression.alert_title_mr
                           ? result.weather_progression.alert_title_mr
-                          : result.weather_progression.alert_title_en}
+                          : contextText("weatherTitle", result.weather_progression.alert_title_en)}
                       </strong>
 
                       <p>
                         {language === "mr" &&
                         result.weather_progression.alert_message_mr
                           ? result.weather_progression.alert_message_mr
-                          : result.weather_progression.alert_message_en}
+                          : contextText("weatherMessage", result.weather_progression.alert_message_en)}
                       </p>
 
                       {result.weather_progression
@@ -2127,8 +2180,7 @@ function App() {
                               .recommended_action_mr
                               ? result.weather_progression
                                   .recommended_action_mr
-                              : result.weather_progression
-                                  .recommended_action_en}
+                                  : contextText("action", result.weather_progression.recommended_action_en)}
                           </em>
                         </div>
                       )}
@@ -2151,7 +2203,7 @@ function App() {
                           <span className="spray-summary">
                             {language === "mr"
                               ? result.spray_window.summary_mr
-                              : result.spray_window.summary_en}
+                              : contextText("spraySummary", result.spray_window.summary_en)}
                           </span>
                         </div>
                       </div>
@@ -2179,7 +2231,7 @@ function App() {
                           <p>
                             {language === "mr"
                               ? result.spray_window.best_hours_mr
-                              : result.spray_window.best_hours_en}
+                              : contextText("bestHours", result.spray_window.best_hours_en)}
                           </p>
                         </div>
                       </div>
@@ -2191,7 +2243,7 @@ function App() {
                           <p>
                             {language === "mr"
                               ? result.spray_window.wind_note_mr
-                              : result.spray_window.wind_note_en}
+                              : contextText("wind", result.spray_window.wind_note_en)}
                           </p>
                         </div>
                       </div>
@@ -2203,7 +2255,7 @@ function App() {
                           <p>
                             {language === "mr"
                               ? result.spray_window.rain_note_mr
-                              : result.spray_window.rain_note_en}
+                              : contextText("rain", result.spray_window.rain_note_en)}
                           </p>
                         </div>
                       </div>
@@ -2215,7 +2267,7 @@ function App() {
                 {result.confidence_warning && (
                   <div className="confidence-warning">
                     <span>⚠️</span>
-                    <p>{result.confidence_warning}</p>
+                    <p>{contextText("confidence", result.confidence_warning)}</p>
                   </div>
                 )}
 
@@ -2251,7 +2303,7 @@ function App() {
                         </span>{" "}
                         {language === "mr"
                           ? (prediction.plant_mr || getLocalizedPlant(prediction.plant, language))
-                          : prediction.plant}
+                          : localizedPlantName(prediction.plant, language)}
                         {" — "}
                         {language === "mr"
                           ? (prediction.disease_mr || getLocalizedDisease(prediction.disease, language, prediction.class_name, prediction.plant))
@@ -2559,9 +2611,9 @@ function App() {
                 <div className="treatments-section-header">
                   <div>
                     <h3>💊 {t.treatmentsTitle}</h3>
-                    <p>ICAR & CIBRC Aligned Plant Protection Package</p>
+                    <p>{language === "mr" ? "ICAR & CIBRC Aligned Plant Protection Package" : ui.treatmentPackage}</p>
                   </div>
-                  <span className="cib-badge">ICAR / CIBRC Verified</span>
+                  <span className="cib-badge">{language === "mr" ? "ICAR / CIBRC Verified" : ui.verified}</span>
                 </div>
 
                 {/* Knapsack Pump Tank-Mix Calculator */}
@@ -2571,7 +2623,7 @@ function App() {
                       <h4>{t.tankMixCalculatorTitle}</h4>
                       <p>{t.tankMixSubtitle}</p>
                     </div>
-                    <span className="field-ready-badge">Farm Practical</span>
+                    <span className="field-ready-badge">{language === "mr" ? "Farm Practical" : ui.fieldReady}</span>
                   </div>
 
                   <div className="tank-calc-controls">
@@ -2610,21 +2662,21 @@ function App() {
 
                     <div className="control-group">
                       <div className="unit-toggle-header">
-                        <label>{language === "mr" ? "शेत क्षेत्र (जमीन प्रमाण):" : "Farm Land Area:"}</label>
+                        <label>{language === "mr" ? "शेत क्षेत्र (जमीन प्रमाण):" : `${ui.farmArea}:`}</label>
                         <div className="unit-toggle-pills">
                           <button
                             type="button"
                             className={`unit-pill ${landUnit === "guntha" ? "active" : ""}`}
                             onClick={() => { setLandUnit("guntha"); setFarmAcres(10); }}
                           >
-                            गुंठा (Guntha)
+                            {language === "mr" ? "गुंठा (Guntha)" : ui.guntha}
                           </button>
                           <button
                             type="button"
                             className={`unit-pill ${landUnit === "acre" ? "active" : ""}`}
                             onClick={() => { setLandUnit("acre"); setFarmAcres(1); }}
                           >
-                            एकर (Acre)
+                            {language === "mr" ? "एकर (Acre)" : ui.acre}
                           </button>
                         </div>
                       </div>
@@ -2638,7 +2690,7 @@ function App() {
                               className={`acre-chip ${farmAcres === g ? "active" : ""}`}
                               onClick={() => setFarmAcres(g)}
                             >
-                              {g} {language === "mr" ? "गुंठे" : "Gunthas"}
+                              {g} {language === "mr" ? "गुंठे" : ui.gunthas}
                             </button>
                           ))
                         ) : (
@@ -2649,7 +2701,7 @@ function App() {
                               className={`acre-chip ${farmAcres === a ? "active" : ""}`}
                               onClick={() => setFarmAcres(a)}
                             >
-                              {a} Acre
+                              {a} {language === "mr" ? "Acre" : ui.acre}
                             </button>
                           ))
                         )}
@@ -2693,7 +2745,7 @@ function App() {
                           </span>
                           <span className="tank-metric-sub">
                             {activeChem?.commercial_name ||
-                              "Prescribed Fungicide"}
+                              (language === "mr" ? "Prescribed Fungicide" : ui.prescribedFungicide)}
                           </span>
                         </div>
 
@@ -2705,7 +2757,7 @@ function App() {
                             {spreaderVol} ml
                           </span>
                           <span className="tank-metric-sub">
-                            Silicon Spreader (Rainfast)
+                            {language === "mr" ? "Silicon Spreader (Rainfast)" : ui.siliconSpreader}
                           </span>
                         </div>
 
@@ -2714,22 +2766,22 @@ function App() {
                             {t.totalTanksNeeded}
                           </span>
                           <span className="tank-metric-val">
-                            {totalTanks} Pumps ({totalWaterLiters}L)
+                            {totalTanks} {language === "mr" ? "Pumps" : ui.pumps} ({totalWaterLiters}L)
                           </span>
                           <span className="tank-metric-sub">
-                            {landUnit === "guntha" ? `${farmAcres} Guntha` : `${farmAcres} Acre`} canopy
+                            {landUnit === "guntha" ? `${farmAcres} ${language === "mr" ? "Guntha" : ui.guntha}` : `${farmAcres} ${language === "mr" ? "Acre" : ui.acre}`} {language === "mr" ? "canopy" : ui.canopy}
                           </span>
                         </div>
 
                         <div className="tank-metric-card">
                           <span className="tank-metric-label">
-                            {language === "mr" ? "एकूण अंदाजे खर्च" : "Total Chemical Budget"}
+                            {language === "mr" ? "एकूण अंदाजे खर्च" : ui.totalBudget}
                           </span>
                           <span className="tank-metric-val">
                             ~₹{totalEstCost}
                           </span>
                           <span className="tank-metric-sub">
-                            Total {totalChemWeightGrams}g chemical
+                            {language === "mr" ? `Total ${totalChemWeightGrams}g chemical` : `${ui.totalChemical} ${totalChemWeightGrams}g`}
                           </span>
                         </div>
                       </div>
@@ -2744,7 +2796,7 @@ function App() {
                     <div className="category-header">
                       <h4>🧪 {t.chemicalControls}</h4>
                       <span className="badge-tag chemical-tag">
-                        Targeted Curative
+                        {language === "mr" ? "Targeted Curative" : ui.targetedCurative}
                       </span>
                     </div>
 
@@ -2752,9 +2804,9 @@ function App() {
                     <div className="phi-harvest-card">
                       <div className="phi-harvest-header">
                         <span className="phi-harvest-title">
-                          ⏱️ {language === "mr" ? "काढणीसाठी शिल्लक दिवस (Harvest Countdown):" : "Days Remaining Until Harvest:"}
+                          ⏱️ {language === "mr" ? "काढणीसाठी शिल्लक दिवस (Harvest Countdown):" : ui.harvestTitle}
                         </span>
-                        <span className="phi-days-badge">{daysToHarvest} {language === "mr" ? "दिवस" : "Days"}</span>
+                        <span className="phi-days-badge">{daysToHarvest} {language === "mr" ? "दिवस" : ui.days}</span>
                       </div>
                       <input
                         type="range"
@@ -2767,7 +2819,7 @@ function App() {
                       <small className="phi-hint">
                         {language === "mr"
                           ? "काढणीच्या आधी रासायनिक औषधांचा अंश (MRL Residue) फळात राहू नये म्हणून प्रतीक्षा कालावधी (PHI) तपासला जातो."
-                          : "Pre-Harvest Interval (PHI) ensures safe food consumption and prevents export rejection."}
+                          : ui.safeFoodHint}
                       </small>
                     </div>
 
@@ -2799,7 +2851,7 @@ function App() {
 
                                 {chem.phi_days && (
                                   <span className={`phi-pill ${isPhiViolation ? 'phi-warn' : 'phi-safe'}`}>
-                                    ⏱️ PHI: {chem.phi_days} days
+                                    ⏱️ {language === "mr" ? `PHI: ${chem.phi_days} days` : ui.phiDays(chem.phi_days)}
                                   </span>
                                 )}
                               </div>
@@ -2808,12 +2860,12 @@ function App() {
                                 <div className="phi-hazard-alert">
                                   ⚠️ {language === "mr"
                                     ? `धोका: काढणीस फक्त ${daysToHarvest} दिवस शिल्लक आहेत (किमान प्रतीक्षा: ${chem.phi_days} दिवस). रासायनिक अवशेषांचा धोका असल्याने ही फवारणी करू नका! सेंद्रिय पर्याय वापरा.`
-                                    : `RESIDUE HAZARD: Harvest in ${daysToHarvest} days (Minimum wait: ${chem.phi_days} days). Do NOT spray! Switch to 0-day bio-fungicides.`}
+                                    : ui.residueHazard(daysToHarvest, chem.phi_days)}
                                 </div>
                               )}
 
                               <p className="treatment-notes">
-                                {chem.instructions}
+                                {language === "mr" ? chem.instructions : ui.labelDirections}
                               </p>
                             </div>
                           );
@@ -2830,7 +2882,7 @@ function App() {
                     <div className="category-header">
                       <h4>🌱 {t.organicControls}</h4>
                       <span className="badge-tag organic-tag">
-                        100% Eco-Safe Bio-Control
+                        {language === "mr" ? "100% Eco-Safe Bio-Control" : ui.ecoSafe}
                       </span>
                     </div>
 
@@ -2860,7 +2912,7 @@ function App() {
                             </div>
 
                             <p className="treatment-notes">
-                              {org.notes}
+                              {language === "mr" ? org.notes : ui.labelDirections}
                             </p>
                           </div>
                         )
@@ -3023,9 +3075,9 @@ function App() {
                   <span className="compat-badge" style={{ background: compatibilityResult.badge_color }}>
                     {compatibilityResult.status}
                   </span>
-                  <h4>{language === "mr" ? compatibilityResult.title_mr : compatibilityResult.title_en}</h4>
-                  <p>{language === "mr" ? compatibilityResult.explanation_mr : compatibilityResult.explanation_en}</p>
-                  <small>💡 {compatibilityResult.recommendation}</small>
+                  <h4>{language === "mr" ? compatibilityResult.title_mr : localizedCompatibilityTitle(compatibilityResult.status, language)}</h4>
+                  <p>{language === "mr" ? compatibilityResult.explanation_mr : ui.compatibilityTip}</p>
+                  <small>💡 {language === "mr" ? compatibilityResult.recommendation : ui.compatibilityTip}</small>
                 </div>
               )}
             </section>
@@ -3038,7 +3090,7 @@ function App() {
                     <h4>🎒 {t.tankMixCalculatorTitle}</h4>
                     <p>{t.tankMixSubtitle}</p>
                   </div>
-                  <span className="field-ready-badge">Farm Practical</span>
+                  <span className="field-ready-badge">{language === "mr" ? "Farm Practical" : ui.fieldReady}</span>
                 </div>
 
                 <div className="tank-calc-controls">
@@ -3071,21 +3123,21 @@ function App() {
 
                   <div className="control-group">
                     <div className="unit-toggle-header">
-                      <label>{language === "mr" ? "शेत क्षेत्र (जमीन प्रमाण):" : "Farm Land Area:"}</label>
+                      <label>{language === "mr" ? "शेत क्षेत्र (जमीन प्रमाण):" : `${ui.farmArea}:`}</label>
                       <div className="unit-toggle-pills">
                         <button
                           type="button"
                           className={`unit-pill ${landUnit === "guntha" ? "active" : ""}`}
                           onClick={() => { setLandUnit("guntha"); setFarmAcres(10); }}
                         >
-                          गुंठा (Guntha)
+                          {language === "mr" ? "गुंठा (Guntha)" : ui.guntha}
                         </button>
                         <button
                           type="button"
                           className={`unit-pill ${landUnit === "acre" ? "active" : ""}`}
                           onClick={() => { setLandUnit("acre"); setFarmAcres(1); }}
                         >
-                          एकर (Acre)
+                          {language === "mr" ? "एकर (Acre)" : ui.acre}
                         </button>
                       </div>
                     </div>
@@ -3099,7 +3151,7 @@ function App() {
                             className={`acre-chip ${farmAcres === g ? "active" : ""}`}
                             onClick={() => setFarmAcres(g)}
                           >
-                            {g} {language === "mr" ? "गुंठे" : "Gunthas"}
+                            {g} {language === "mr" ? "गुंठे" : ui.gunthas}
                           </button>
                         ))
                       ) : (
@@ -3110,7 +3162,7 @@ function App() {
                             className={`acre-chip ${farmAcres === a ? "active" : ""}`}
                             onClick={() => setFarmAcres(a)}
                           >
-                            {a} Acre
+                            {a} {language === "mr" ? "Acre" : ui.acre}
                           </button>
                         ))
                       )}
@@ -3140,22 +3192,22 @@ function App() {
                       <div className="tank-metric-card primary">
                         <span className="tank-metric-label">{t.chemicalDosePerTank}</span>
                         <span className="tank-metric-val">{dosePerTank} g / ml</span>
-                        <span className="tank-metric-sub">{activeChem.commercial_name || "Prescribed Fungicide"}</span>
+                        <span className="tank-metric-sub">{activeChem.commercial_name || (language === "mr" ? "Prescribed Fungicide" : ui.prescribedFungicide)}</span>
                       </div>
                       <div className="tank-metric-card">
                         <span className="tank-metric-label">{t.spreaderDosePerTank}</span>
                         <span className="tank-metric-val">{spreaderVol} ml</span>
-                        <span className="tank-metric-sub">Silicon Spreader (Rainfast)</span>
+                        <span className="tank-metric-sub">{language === "mr" ? "Silicon Spreader (Rainfast)" : ui.siliconSpreader}</span>
                       </div>
                       <div className="tank-metric-card">
                         <span className="tank-metric-label">{t.totalTanksNeeded}</span>
-                        <span className="tank-metric-val">{totalTanks} Pumps ({totalWaterLiters}L)</span>
-                        <span className="tank-metric-sub">{landUnit === "guntha" ? `${farmAcres} Guntha` : `${farmAcres} Acre`} canopy</span>
+                        <span className="tank-metric-val">{totalTanks} {language === "mr" ? "Pumps" : ui.pumps} ({totalWaterLiters}L)</span>
+                        <span className="tank-metric-sub">{landUnit === "guntha" ? `${farmAcres} ${language === "mr" ? "Guntha" : ui.guntha}` : `${farmAcres} ${language === "mr" ? "Acre" : ui.acre}`} {language === "mr" ? "canopy" : ui.canopy}</span>
                       </div>
                       <div className="tank-metric-card">
-                        <span className="tank-metric-label">{language === "mr" ? "एकूण अंदाजे खर्च" : "Total Chemical Budget"}</span>
+                        <span className="tank-metric-label">{language === "mr" ? "एकूण अंदाजे खर्च" : ui.totalBudget}</span>
                         <span className="tank-metric-val">~₹{totalEstCost}</span>
-                        <span className="tank-metric-sub">Total {totalChemWeightGrams}g chemical</span>
+                        <span className="tank-metric-sub">{language === "mr" ? `Total ${totalChemWeightGrams}g chemical` : `${ui.totalChemical} ${totalChemWeightGrams}g`}</span>
                       </div>
                     </div>
                   );
@@ -3166,9 +3218,9 @@ function App() {
               <div className="phi-harvest-card" style={{ marginTop: "16px" }}>
                 <div className="phi-harvest-header">
                   <span className="phi-harvest-title">
-                    ⏱️ {language === "mr" ? "काढणीसाठी शिल्लक दिवस (Pre-Harvest Interval - PHI):" : "Days Remaining Until Crop Harvest:"}
+                    ⏱️ {language === "mr" ? "काढणीसाठी शिल्लक दिवस (Pre-Harvest Interval - PHI):" : ui.harvestTitle}
                   </span>
-                  <span className="phi-days-badge">{daysToHarvest} {language === "mr" ? "दिवस" : "Days"}</span>
+                  <span className="phi-days-badge">{daysToHarvest} {language === "mr" ? "दिवस" : ui.days}</span>
                 </div>
                 <input
                   type="range"
@@ -3181,7 +3233,7 @@ function App() {
                 <small className="phi-hint">
                   {language === "mr"
                     ? "काढणीच्या १० ते १४ दिवस आधी रासायनिक फवारणी टाळावी, अन्यथा पिकावर विषारी औषध शिल्लक राहू शकते."
-                    : "Ensure chemical spray is completely suspended before harvest to avoid chemical residue."}
+                    : ui.harvestHint}
                 </small>
               </div>
             </div>
@@ -3221,27 +3273,27 @@ function App() {
           <>
             {kendrasData ? (
               <section className="krishi-kendra-section">
-                <h3>🏪 {language === "mr" ? `अधिकृत कृषी सेवा केंद्र व वाजवी दर (${selectedDistrict})` : `Registered Krishi Seva Kendras & Pricing (${selectedDistrict})`}</h3>
+                <h3>🏪 {language === "mr" ? `अधिकृत कृषी सेवा केंद्र व वाजवी दर (${selectedDistrict})` : ui.kendraTitle(displayDistrict(selectedDistrict))}</h3>
                 <div className="kendras-grid">
                   {kendrasData.kendras.map((k, idx) => (
                     <div key={idx} className="kendra-card">
                       <strong>{k.name}</strong>
                       <p>📍 {k.address}</p>
-                      <p>🏷️ {k.type}</p>
+                      <p>🏷️ {localizedKendraType(k.type, language)}</p>
                       <a href={`tel:${k.phone}`}>📞 {k.phone}</a>
                     </div>
                   ))}
                 </div>
 
-                <h4>🏷️ {language === "mr" ? "प्रमाणित कीटकनाशक व बुरशीनाशक वाजवी दर मार्गदर्शक (Fair MRP Guide)" : "CIB&RC Agrochemical Fair MRP Benchmark"}</h4>
+                <h4>🏷️ {language === "mr" ? "प्रमाणित कीटकनाशक व बुरशीनाशक वाजवी दर मार्गदर्शक (Fair MRP Guide)" : ui.benchmark}</h4>
                 <div className="pricing-table-wrap">
                   <table className="pricing-table">
                     <thead>
                       <tr>
-                        <th>{language === "mr" ? "औषध घटक (Formulation)" : "Formulation"}</th>
-                        <th>{language === "mr" ? "पॅकिंग (Pack)" : "Pack"}</th>
-                        <th>{language === "mr" ? "वाजवी MRP दर" : "Fair Price (INR)"}</th>
-                        <th>{language === "mr" ? "प्रसिद्ध ब्रँड्स" : "Brands"}</th>
+                        <th>{language === "mr" ? "औषध घटक (Formulation)" : ui.formulation}</th>
+                        <th>{language === "mr" ? "पॅकिंग (Pack)" : ui.pack}</th>
+                        <th>{language === "mr" ? "वाजवी MRP दर" : ui.fairPrice}</th>
+                        <th>{language === "mr" ? "प्रसिद्ध ब्रँड्स" : ui.brands}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -3259,7 +3311,7 @@ function App() {
               </section>
             ) : (
               <div style={{ textAlign: "center", padding: "40px", color: "#64748b" }}>
-                ⏳ {language === "mr" ? "कृषी केंद्र माहिती लोड होत आहे..." : "Loading Krishi Kendra directory..."}
+                ⏳ {language === "mr" ? "कृषी केंद्र माहिती लोड होत आहे..." : ui.loadingKendras}
               </div>
             )}
           </>

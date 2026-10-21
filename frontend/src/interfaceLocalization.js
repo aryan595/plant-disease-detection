@@ -27,8 +27,80 @@ const COPY = {
   },
 };
 
+// These are the interface strings that were previously embedded directly in
+// components. Keeping them here prevents an English fallback from leaking
+// into a selected Indian language.
+const COMPLETE = {
+  en: {
+    voiceHeroTitle: "Have questions about your crop? Speak directly to AI!", voiceHeroBody: "Voice-first agronomic advisory powered by local crop intelligence.", voiceHeroCta: "Tap to Speak",
+    cropSelector: "Select Crop for Enhanced AI Accuracy:", allCrops: "Show All Crops", original: "Original", sideBySide: "Side-by-Side", sampleLabel: "Or test with a sample leaf:",
+    sampleSeptoria: "Tomato Septoria (User Photo)", sampleBlight: "Tomato Early Blight", sampleRot: "Grape Black Rot", sampleRust: "Soybean Rust", sampleHealthy: "Healthy Leaf",
+    farmPractical: "Farm Practical", farmArea: "Farm land area", guntha: "Guntha", gunthas: "Gunthas", acre: "Acre", acres: "Acres", prescribedFungicide: "Prescribed fungicide", siliconSpreader: "Silicon spreader (rainfast)", pumps: "Pumps", canopy: "canopy", totalBudget: "Total chemical budget", totalChemical: "Total chemical", harvestTitle: "Days Remaining Until Crop Harvest:", days: "Days", harvestHint: "Stop chemical spraying before harvest to avoid chemical residue.",
+    treatmentPackage: "Plant protection package", verified: "Verified guidance", kendraTitle: (district) => `Registered Krishi Seva Kendras & Pricing (${district})`, benchmark: "CIB&RC Agrochemical Fair MRP Benchmark", formulation: "Formulation", pack: "Pack", fairPrice: "Fair Price (INR)", brands: "Brands", loadingKendras: "Loading Krishi Kendra directory…", address: "Address", dealerType: "Dealer type", compatible: "Compatible", caution: "Use caution", avoid: "Avoid mixing", recommendation: "Recommendation",
+  },
+  hi: {
+    voiceHeroTitle: "फसल के बारे में प्रश्न हैं? सीधे AI से पूछें!", voiceHeroBody: "स्थानीय फसल जानकारी पर आधारित आवाज़-आधारित कृषि सलाह।", voiceHeroCta: "बोलकर पूछें", cropSelector: "बेहतर AI सटीकता के लिए फसल चुनें:", allCrops: "सभी फसलें दिखाएँ", original: "मूल", sideBySide: "साथ-साथ", sampleLabel: "या नमूना पत्ती से परीक्षण करें:", sampleSeptoria: "टमाटर सेप्टोरिया (उपयोगकर्ता फोटो)", sampleBlight: "टमाटर अगेती झुलसा", sampleRot: "अंगूर काला सड़न", sampleRust: "सोयाबीन रतुआ", sampleHealthy: "स्वस्थ पत्ता", farmPractical: "खेत के लिए उपयोगी", farmArea: "खेती का क्षेत्र", guntha: "गुंठा", gunthas: "गुंठे", acre: "एकड़", acres: "एकड़", prescribedFungicide: "अनुशंसित फफूंदनाशक", siliconSpreader: "सिलिकॉन स्प्रेडर (वर्षा-रोधी)", pumps: "पंप", canopy: "फसल छत्र", totalBudget: "कुल रसायन बजट", totalChemical: "कुल रसायन", harvestTitle: "फसल कटाई तक शेष दिन:", days: "दिन", harvestHint: "रासायनिक अवशेष से बचने के लिए कटाई से पहले रासायनिक स्प्रे बंद करें।", treatmentPackage: "फसल सुरक्षा पैकेज", verified: "सत्यापित मार्गदर्शन", kendraTitle: (district) => `पंजीकृत कृषि सेवा केंद्र और मूल्य (${district})`, benchmark: "CIB&RC कृषि-रसायन उचित MRP मानक", formulation: "संयोजन", pack: "पैक", fairPrice: "उचित मूल्य (₹)", brands: "ब्रांड", loadingKendras: "कृषि केंद्र सूची लोड हो रही है…", address: "पता", dealerType: "विक्रेता प्रकार", compatible: "संगत", caution: "सावधानी से उपयोग करें", avoid: "मिश्रण न करें", recommendation: "सुझाव",
+  },
+  mr: {},
+  bn: {
+    voiceHeroTitle: "ফসল নিয়ে প্রশ্ন আছে? সরাসরি AI-কে জিজ্ঞাসা করুন!", voiceHeroBody: "স্থানীয় ফসল তথ্যভিত্তিক কণ্ঠনির্ভর কৃষি পরামর্শ।", voiceHeroCta: "বলে জিজ্ঞাসা করুন", cropSelector: "উন্নত AI নির্ভুলতার জন্য ফসল বেছে নিন:", allCrops: "সব ফসল দেখুন", original: "মূল", sideBySide: "পাশাপাশি", sampleLabel: "অথবা একটি নমুনা পাতা দিয়ে পরীক্ষা করুন:", sampleSeptoria: "টমেটো সেপ্টোরিয়া (ব্যবহারকারীর ছবি)", sampleBlight: "টমেটোর প্রারম্ভিক ঝলসা", sampleRot: "আঙুরের কালো পচন", sampleRust: "সয়াবিন রস্ট", sampleHealthy: "সুস্থ পাতা", farmPractical: "খেতের জন্য ব্যবহারযোগ্য", farmArea: "খেতের এলাকা", guntha: "গুন্ঠা", gunthas: "গুন্ঠা", acre: "একর", acres: "একর", prescribedFungicide: "প্রস্তাবিত ছত্রাকনাশক", siliconSpreader: "সিলিকন স্প্রেডার (বৃষ্টি-প্রতিরোধী)", pumps: "পাম্প", canopy: "ফসল আচ্ছাদন", totalBudget: "মোট রাসায়নিক বাজেট", totalChemical: "মোট রাসায়নিক", harvestTitle: "ফসল কাটার আগে বাকি দিন:", days: "দিন", harvestHint: "রাসায়নিক অবশিষ্ট এড়াতে ফসল কাটার আগে রাসায়নিক স্প্রে বন্ধ করুন।", treatmentPackage: "ফসল সুরক্ষা প্যাকেজ", verified: "যাচাইকৃত নির্দেশনা", kendraTitle: (district) => `নিবন্ধিত কৃষি সেবা কেন্দ্র ও মূল্য (${district})`, benchmark: "CIB&RC কৃষি-রাসায়ন ন্যায্য MRP মানদণ্ড", formulation: "ফর্মুলেশন", pack: "প্যাক", fairPrice: "ন্যায্য মূল্য (₹)", brands: "ব্র্যান্ড", loadingKendras: "কৃষি কেন্দ্রের তালিকা লোড হচ্ছে…", address: "ঠিকানা", dealerType: "বিক্রেতার ধরন", compatible: "সামঞ্জস্যপূর্ণ", caution: "সতর্কতার সাথে ব্যবহার করুন", avoid: "মেশাবেন না", recommendation: "পরামর্শ",
+  },
+  ta: {
+    voiceHeroTitle: "உங்கள் பயிரைப் பற்றி கேள்விகள் உள்ளதா? AI-யிடம் நேரடியாக கேளுங்கள்!", voiceHeroBody: "உள்ளூர் பயிர் தகவலின் அடிப்படையிலான குரல் வேளாண் ஆலோசனை.", voiceHeroCta: "பேசிக் கேளுங்கள்", cropSelector: "சிறந்த AI துல்லியத்திற்கு பயிரைத் தேர்ந்தெடுக்கவும்:", allCrops: "அனைத்து பயிர்களையும் காண்க", original: "மூலம்", sideBySide: "அருகருகே", sampleLabel: "அல்லது மாதிரி இலையுடன் சோதிக்கவும்:", sampleSeptoria: "தக்காளி செப்டோரியா (பயனர் படம்)", sampleBlight: "தக்காளி ஆரம்பக் கருகல்", sampleRot: "திராட்சை கருப்பழுகல்", sampleRust: "சோயாபீன் துரு", sampleHealthy: "ஆரோக்கியமான இலை", farmPractical: "பண்ணைக்கு ஏற்றது", farmArea: "வயல் பரப்பளவு", guntha: "குண்டா", gunthas: "குண்டா", acre: "ஏக்கர்", acres: "ஏக்கர்", prescribedFungicide: "பரிந்துரைக்கப்பட்ட பூஞ்சைக் கொல்லி", siliconSpreader: "சிலிகான் பரப்பி (மழை எதிர்ப்பு)", pumps: "பம்புகள்", canopy: "பயிர் பரப்பு", totalBudget: "மொத்த ரசாயன செலவு", totalChemical: "மொத்த ரசாயனம்", harvestTitle: "அறுவடைக்கு மீதமுள்ள நாட்கள்:", days: "நாட்கள்", harvestHint: "ரசாயன எச்சத்தைத் தவிர்க்க அறுவடைக்கு முன் ரசாயனத் தெளிப்பை நிறுத்தவும்.", treatmentPackage: "பயிர் பாதுகாப்புத் தொகுப்பு", verified: "சரிபார்க்கப்பட்ட வழிகாட்டல்", kendraTitle: (district) => `பதிவுசெய்யப்பட்ட வேளாண் சேவை மையங்கள் மற்றும் விலை (${district})`, benchmark: "CIB&RC வேளாண்-ரசாயன நியாயமான MRP அளவுகோல்", formulation: "கலவை", pack: "பேக்", fairPrice: "நியாயமான விலை (₹)", brands: "பிராண்டுகள்", loadingKendras: "வேளாண் மைய பட்டியல் ஏற்றப்படுகிறது…", address: "முகவரி", dealerType: "விற்பனையாளர் வகை", compatible: "இணக்கமானது", caution: "எச்சரிக்கையுடன் பயன்படுத்தவும்", avoid: "கலக்க வேண்டாம்", recommendation: "பரிந்துரை",
+  },
+  te: {
+    voiceHeroTitle: "మీ పంట గురించి ప్రశ్నలున్నాయా? నేరుగా AIని అడగండి!", voiceHeroBody: "స్థానిక పంట సమాచారంతో కూడిన వాయిస్ ఆధారిత వ్యవసాయ సలహా.", voiceHeroCta: "మాట్లాడి అడగండి", cropSelector: "మెరుగైన AI ఖచ్చితత్వం కోసం పంటను ఎంచుకోండి:", allCrops: "అన్ని పంటలను చూపండి", original: "అసలు", sideBySide: "పక్కపక్కన", sampleLabel: "లేదా నమూనా ఆకుతో పరీక్షించండి:", sampleSeptoria: "టమాటా సెప్టోరియా (వినియోగదారు ఫోటో)", sampleBlight: "టమాటా ప్రారంభ మాడుడు", sampleRot: "ద్రాక్ష నల్ల తెగులు", sampleRust: "సోయాబీన్ తుప్పు", sampleHealthy: "ఆరోగ్యకరమైన ఆకు", farmPractical: "పొలం కోసం ఉపయోగకరం", farmArea: "పొల విస్తీర్ణం", guntha: "గుంఠా", gunthas: "గుంఠాలు", acre: "ఎకరం", acres: "ఎకరాలు", prescribedFungicide: "సిఫార్సు చేసిన శిలీంధ్రనాశిని", siliconSpreader: "సిలికాన్ స్ప్రెడర్ (వర్ష నిరోధక)", pumps: "పంపులు", canopy: "పంట విస్తీర్ణం", totalBudget: "మొత్తం రసాయన బడ్జెట్", totalChemical: "మొత్తం రసాయనం", harvestTitle: "పంట కోతకు మిగిలిన రోజులు:", days: "రోజులు", harvestHint: "రసాయన అవశేషాలను నివారించడానికి కోతకు ముందు రసాయన స్ప్రేను ఆపండి.", treatmentPackage: "పంట సంరక్షణ ప్యాకేజీ", verified: "ధృవీకరించిన మార్గదర్శకం", kendraTitle: (district) => `నమోదైన వ్యవసాయ సేవా కేంద్రాలు మరియు ధరలు (${district})`, benchmark: "CIB&RC వ్యవసాయ రసాయన న్యాయమైన MRP ప్రమాణం", formulation: "సూత్రీకరణ", pack: "ప్యాక్", fairPrice: "న్యాయమైన ధర (₹)", brands: "బ్రాండ్లు", loadingKendras: "వ్యవసాయ కేంద్రాల జాబితా లోడ్ అవుతోంది…", address: "చిరునామా", dealerType: "డీలర్ రకం", compatible: "అనుకూలం", caution: "జాగ్రత్తగా ఉపయోగించండి", avoid: "కలపవద్దు", recommendation: "సిఫార్సు",
+  },
+};
+
+const EXTRA = {
+  en: {
+    heroExplain: "Explainable AI", heroContext: "Local farm context", heroAdvice: "Action-ready advice", systemOnline: "AI system online", plantIntelligence: "Plant intelligence", cropClasses: "crop health classes", modelConfidence: "Model confidence", installApp: "Install app", installed: "Installed", locating: "Locating", liveGps: "Live farm GPS", resetGps: "Reset GPS", platformCapabilities: "Platform capabilities", farmerNavigation: "Farmer navigation", leafGuide: "Leaf Condition Guide", heatmap: "AI Heatmap", wakeService: "Waking the secure AI service and checking your leaf…", preparingGuide: "Classifying the image and preparing its leaf condition guide",
+  },
+  hi: {
+    heroExplain: "समझने योग्य AI", heroContext: "स्थानीय खेत का संदर्भ", heroAdvice: "तुरंत उपयोगी सलाह", systemOnline: "AI प्रणाली ऑनलाइन", plantIntelligence: "पौधा बुद्धिमत्ता", cropClasses: "फसल स्वास्थ्य श्रेणियाँ", modelConfidence: "मॉडल विश्वसनीयता", installApp: "ऐप इंस्टॉल करें", installed: "इंस्टॉल हो गया", locating: "खोज रहा है", liveGps: "खेत का लाइव GPS", resetGps: "GPS रीसेट करें", platformCapabilities: "प्लेटफ़ॉर्म क्षमताएँ", farmerNavigation: "किसान नेविगेशन", leafGuide: "पत्ती स्थिति मार्गदर्शिका", heatmap: "AI ताप-मानचित्र", wakeService: "सुरक्षित AI सेवा शुरू की जा रही है और पत्ते की जाँच हो रही है…", preparingGuide: "तस्वीर का वर्गीकरण और पत्ती स्थिति मार्गदर्शिका तैयार हो रही है",
+  },
+  bn: {
+    heroExplain: "ব্যাখ্যাযোগ্য AI", heroContext: "স্থানীয় খামারের প্রেক্ষাপট", heroAdvice: "কাজের উপযোগী পরামর্শ", systemOnline: "AI ব্যবস্থা অনলাইনে", plantIntelligence: "উদ্ভিদ বুদ্ধিমত্তা", cropClasses: "ফসল স্বাস্থ্য শ্রেণি", modelConfidence: "মডেল নির্ভরযোগ্যতা", installApp: "অ্যাপ ইনস্টল করুন", installed: "ইনস্টল হয়েছে", locating: "খোঁজা হচ্ছে", liveGps: "খামারের লাইভ GPS", resetGps: "GPS রিসেট", platformCapabilities: "প্ল্যাটফর্মের ক্ষমতা", farmerNavigation: "কৃষক নেভিগেশন", leafGuide: "পাতার অবস্থা নির্দেশিকা", heatmap: "AI তাপ-মানচিত্র", wakeService: "নিরাপদ AI পরিষেবা চালু করে পাতাটি পরীক্ষা করা হচ্ছে…", preparingGuide: "ছবি শ্রেণিবিন্যাস করে পাতার অবস্থা নির্দেশিকা তৈরি হচ্ছে",
+  },
+  ta: {
+    heroExplain: "விளக்கக்கூடிய AI", heroContext: "உள்ளூர் பண்ணைச் சூழல்", heroAdvice: "உடனடியாகச் செயல்படுத்தக்கூடிய ஆலோசனை", systemOnline: "AI அமைப்பு ஆன்லைனில் உள்ளது", plantIntelligence: "தாவர நுண்ணறிவு", cropClasses: "பயிர் நல வகைகள்", modelConfidence: "மாதிரி நம்பகத்தன்மை", installApp: "செயலியை நிறுவுக", installed: "நிறுவப்பட்டது", locating: "கண்டறிகிறது", liveGps: "பண்ணை நேரடி GPS", resetGps: "GPS மீட்டமை", platformCapabilities: "தள திறன்கள்", farmerNavigation: "விவசாயி வழிசெலுத்தல்", leafGuide: "இலை நிலை வழிகாட்டி", heatmap: "AI வெப்ப வரைபடம்", wakeService: "பாதுகாப்பான AI சேவை தொடங்கி இலை பரிசோதிக்கப்படுகிறது…", preparingGuide: "படத்தை வகைப்படுத்தி இலை நிலை வழிகாட்டி தயாராகிறது",
+  },
+  te: {
+    heroExplain: "వివరించగల AI", heroContext: "స్థానిక పొలం సందర్భం", heroAdvice: "అమలు చేయగల సలహా", systemOnline: "AI వ్యవస్థ ఆన్‌లైన్‌లో ఉంది", plantIntelligence: "మొక్కల మేధస్సు", cropClasses: "పంట ఆరోగ్య తరగతులు", modelConfidence: "మోడల్ విశ్వసనీయత", installApp: "యాప్‌ను ఇన్‌స్టాల్ చేయండి", installed: "ఇన్‌స్టాల్ అయింది", locating: "గుర్తిస్తోంది", liveGps: "పొలం ప్రత్యక్ష GPS", resetGps: "GPS రీసెట్", platformCapabilities: "ప్లాట్‌ఫామ్ సామర్థ్యాలు", farmerNavigation: "రైతు నావిగేషన్", leafGuide: "ఆకు స్థితి మార్గదర్శి", heatmap: "AI వేడి పటం", wakeService: "సురక్షిత AI సేవ ప్రారంభమై ఆకును పరిశీలిస్తోంది…", preparingGuide: "చిత్రాన్ని వర్గీకరించి ఆకు స్థితి మార్గదర్శి సిద్ధమవుతోంది",
+  },
+};
+
+const DETAIL = {
+  en: {
+    analysisSubtitle: "AI-assisted plant assessment", treatmentPackage: "ICAR & CIBRC aligned plant protection package", verified: "ICAR / CIBRC verified", fieldReady: "Farm practical", targetedCurative: "Targeted curative treatment", ecoSafe: "Eco-safe bio-control", safeFoodHint: "The pre-harvest interval helps prevent residues and keeps food safe.", residueHazard: (days, phi) => `Residue hazard: only ${days} days remain before harvest (minimum wait: ${phi} days). Do not spray; choose a suitable bio-control option.`, labelDirections: "Use only according to the product label and local agricultural guidance.", phiDays: (days) => `PHI: ${days} days`, loading: "Loading…", compatibilityTip: "Follow label directions and local agricultural advice before mixing products.",
+  },
+  hi: {
+    analysisSubtitle: "AI-सहायित पौधा आकलन", treatmentPackage: "ICAR और CIBRC अनुरूप फसल सुरक्षा पैकेज", verified: "ICAR / CIBRC सत्यापित", fieldReady: "खेत के लिए उपयोगी", targetedCurative: "लक्षित उपचार", ecoSafe: "पर्यावरण-अनुकूल जैव नियंत्रण", safeFoodHint: "कटाई-पूर्व अंतराल अवशेषों को रोकने और भोजन को सुरक्षित रखने में मदद करता है।", residueHazard: (days, phi) => `अवशेष का खतरा: कटाई में केवल ${days} दिन शेष हैं (न्यूनतम प्रतीक्षा: ${phi} दिन)। स्प्रे न करें; उपयुक्त जैविक विकल्प चुनें।`, labelDirections: "उत्पाद लेबल और स्थानीय कृषि सलाह के अनुसार ही उपयोग करें।", phiDays: (days) => `कटाई-पूर्व अंतराल: ${days} दिन`, loading: "लोड हो रहा है…", compatibilityTip: "उत्पाद मिलाने से पहले लेबल निर्देश और स्थानीय कृषि सलाह का पालन करें।",
+  },
+  mr: {},
+  bn: {
+    analysisSubtitle: "AI-সহায়িত উদ্ভিদ মূল্যায়ন", treatmentPackage: "ICAR ও CIBRC অনুযায়ী ফসল সুরক্ষা প্যাকেজ", verified: "ICAR / CIBRC যাচাইকৃত", fieldReady: "খেতের জন্য ব্যবহারযোগ্য", targetedCurative: "লক্ষ্যভিত্তিক চিকিৎসা", ecoSafe: "পরিবেশবান্ধব জৈব নিয়ন্ত্রণ", safeFoodHint: "ফসল কাটার আগের বিরতি অবশিষ্টাংশ এড়াতে এবং খাবার নিরাপদ রাখতে সাহায্য করে।", residueHazard: (days, phi) => `অবশিষ্টাংশের ঝুঁকি: ফসল কাটতে মাত্র ${days} দিন বাকি (ন্যূনতম অপেক্ষা: ${phi} দিন)। স্প্রে করবেন না; উপযুক্ত জৈব বিকল্প নিন।`, labelDirections: "পণ্যের লেবেল ও স্থানীয় কৃষি পরামর্শ অনুযায়ী ব্যবহার করুন।", phiDays: (days) => `ফসল কাটার পূর্ববর্তী বিরতি: ${days} দিন`, loading: "লোড হচ্ছে…", compatibilityTip: "পণ্য মেশানোর আগে লেবেলের নির্দেশ ও স্থানীয় কৃষি পরামর্শ মেনে চলুন।",
+  },
+  ta: {
+    analysisSubtitle: "AI உதவியுடன் தாவர மதிப்பீடு", treatmentPackage: "ICAR மற்றும் CIBRC வழிகாட்டுதலுடன் பயிர் பாதுகாப்புத் தொகுப்பு", verified: "ICAR / CIBRC சரிபார்க்கப்பட்டது", fieldReady: "பண்ணைக்கு ஏற்றது", targetedCurative: "இலக்கு சிகிச்சை", ecoSafe: "சூழலுக்கு உகந்த உயிரியல் கட்டுப்பாடு", safeFoodHint: "அறுவடைக்கு முன் இடைவெளி எச்சங்களைத் தவிர்த்து உணவைப் பாதுகாக்க உதவுகிறது.", residueHazard: (days, phi) => `எச்ச அபாயம்: அறுவடைக்கு ${days} நாட்கள் மட்டுமே உள்ளன (குறைந்தபட்ச காத்திருப்பு: ${phi} நாட்கள்). தெளிக்க வேண்டாம்; பொருத்தமான உயிரியல் மாற்றைத் தேர்ந்தெடுக்கவும்.`, labelDirections: "பொருள் லேபிள் மற்றும் உள்ளூர் வேளாண் வழிகாட்டுதலின்படி மட்டுமே பயன்படுத்தவும்.", phiDays: (days) => `அறுவடைக்கு முன் இடைவெளி: ${days} நாட்கள்`, loading: "ஏற்றப்படுகிறது…", compatibilityTip: "பொருட்களை கலப்பதற்கு முன் லேபிள் வழிமுறைகளையும் உள்ளூர் வேளாண் ஆலோசனையையும் பின்பற்றவும்.",
+  },
+  te: {
+    analysisSubtitle: "AI సహాయంతో మొక్కల అంచనా", treatmentPackage: "ICAR మరియు CIBRC మార్గదర్శకాలతో పంట రక్షణ ప్యాకేజీ", verified: "ICAR / CIBRC ధృవీకరించబడింది", fieldReady: "పొలం కోసం ఉపయోగకరం", targetedCurative: "లక్ష్యిత చికిత్స", ecoSafe: "పర్యావరణ అనుకూల జీవ నియంత్రణ", safeFoodHint: "కోతకు ముందు విరామం అవశేషాలను నివారించి ఆహార భద్రతకు సహాయపడుతుంది.", residueHazard: (days, phi) => `అవశేషాల ప్రమాదం: కోతకు ఇంకా ${days} రోజులు మాత్రమే ఉన్నాయి (కనీస నిరీక్షణ: ${phi} రోజులు). స్ప్రే చేయవద్దు; సరైన జీవ నియంత్రణ ఎంపికను ఎంచుకోండి.`, labelDirections: "ఉత్పత్తి లేబుల్ మరియు స్థానిక వ్యవసాయ మార్గదర్శకాల ప్రకారం మాత్రమే ఉపయోగించండి.", phiDays: (days) => `కోతకు ముందు విరామం: ${days} రోజులు`, loading: "లోడ్ అవుతోంది…", compatibilityTip: "ఉత్పత్తులను కలపడానికి ముందు లేబుల్ సూచనలు మరియు స్థానిక వ్యవసాయ సలహాను పాటించండి.",
+  },
+};
+
 export function interfaceText(language) {
-  return COPY[language] || COPY.en;
+  return {
+    ...COPY.en,
+    ...(COPY[language] || {}),
+    ...COMPLETE.en,
+    ...(COMPLETE[language] || {}),
+    ...EXTRA.en,
+    ...(EXTRA[language] || {}),
+    ...DETAIL.en,
+    ...(DETAIL[language] || {}),
+  };
 }
 
 export function localizedForecastBadge(value, language) {
@@ -40,6 +112,53 @@ export function localizedForecastBadge(value, language) {
 export function localizedDay(value, language) {
   const suffix = String(value || "").replace(/^day\s*/i, "");
   return suffix ? `${interfaceText(language).day} ${suffix}` : value;
+}
+
+const CROP_NAMES = {
+  en: ["All Crops", "Tomato", "Grapes", "Potato", "Soybean", "Corn", "Apple", "Capsicum"],
+  hi: ["सभी फसलें", "टमाटर", "अंगूर", "आलू", "सोयाबीन", "मक्का", "सेब", "शिमला मिर्च"],
+  bn: ["সব ফসল", "টমেটো", "আঙুর", "আলু", "সয়াবিন", "ভুট্টা", "আপেল", "ক্যাপসিকাম"],
+  ta: ["அனைத்து பயிர்கள்", "தக்காளி", "திராட்சை", "உருளைக்கிழங்கு", "சோயாபீன்", "மக்காச்சோளம்", "ஆப்பிள்", "குடைமிளகாய்"],
+  te: ["అన్ని పంటలు", "టమాటా", "ద్రాక్ష", "బంగాళాదుంప", "సోయాబీన్", "మొక్కజొన్న", "ఆపిల్", "క్యాప్సికం"],
+};
+
+const DISTRICTS = {
+  hi: { Pune: "पुणे", Nashik: "नासिक", Sangli: "सांगली", Kolhapur: "कोल्हापुर", Narayangaon: "नारायणगांव", Solapur: "सोलापुर", Ahmednagar: "अहमदनगर", Satara: "सतारा", Nagpur: "नागपुर", Amravati: "अमरावती", Jalgaon: "जलगांव", Baramati: "बारामती" },
+  bn: { Pune: "পুনে", Nashik: "নাসিক", Sangli: "সাংলি", Kolhapur: "কোলহাপুর", Solapur: "সোলাপুর", Nagpur: "নাগপুর" },
+  ta: { Pune: "புனே", Nashik: "நாசிக்", Sangli: "சாங்லி", Kolhapur: "கோலாப்பூர்", Solapur: "சோலாப்பூர்", Nagpur: "நாக்பூர்" },
+  te: { Pune: "పూణే", Nashik: "నాసిక్", Sangli: "సాంగ్లీ", Kolhapur: "కొల్హాపూర్", Solapur: "సోలాపూర్", Nagpur: "నాగపూర్" },
+};
+
+export function localizedCropName(index, language, fallback) {
+  return CROP_NAMES[language]?.[index] || fallback;
+}
+
+export function localizedDistrictName(value, language) {
+  const text = String(value || "");
+  const baseName = text.replace(/\s*\([^)]*\)/g, "").split(" - ")[0].trim();
+  if (language === "en" || language === "mr") return baseName;
+  const match = Object.entries(DISTRICTS[language] || {}).find(([name]) => baseName.startsWith(name));
+  return match ? baseName.replace(match[0], match[1]) : baseName;
+}
+
+export function localizedKendraType(value, language) {
+  if (language === "en" || language === "mr") return value;
+  const type = String(value || "").toLowerCase();
+  const values = {
+    hi: type.includes("government") ? "सरकारी सहकारी केंद्र" : "अधिकृत विक्रेता", bn: type.includes("government") ? "সরকারি সমবায় কেন্দ্র" : "অনুমোদিত বিক্রেতা", ta: type.includes("government") ? "அரசு கூட்டுறவு மையம்" : "அங்கீகரிக்கப்பட்ட விற்பனையாளர்", te: type.includes("government") ? "ప్రభుత్వ సహకార కేంద్రం" : "అధీకృత డీలర్",
+  };
+  return values[language] || value;
+}
+
+export function localizedCompatibilityTitle(status, language) {
+  if (language === "en" || language === "mr") return status || "";
+  const labels = {
+    hi: { COMPATIBLE: "मिश्रण के लिए सुरक्षित", SAME_CHEMICAL: "एक ही उत्पाद चुना गया", CAUTION: "सावधानी आवश्यक", INCOMPATIBLE: "मिश्रण असंगत है", DANGEROUS: "मिश्रण खतरनाक है", REDUNDANT: "अनावश्यक मिश्रण" },
+    bn: { COMPATIBLE: "মেশানোর জন্য নিরাপদ", SAME_CHEMICAL: "একই পণ্য নির্বাচিত", CAUTION: "সতর্কতা প্রয়োজন", INCOMPATIBLE: "মিশ্রণ অসামঞ্জস্যপূর্ণ", DANGEROUS: "মিশ্রণ বিপজ্জনক", REDUNDANT: "অপ্রয়োজনীয় মিশ্রণ" },
+    ta: { COMPATIBLE: "கலக்க பாதுகாப்பானது", SAME_CHEMICAL: "ஒரே பொருள் தேர்ந்தெடுக்கப்பட்டது", CAUTION: "எச்சரிக்கை தேவை", INCOMPATIBLE: "கலவை பொருந்தாது", DANGEROUS: "கலவை ஆபத்தானது", REDUNDANT: "தேவையற்ற கலவை" },
+    te: { COMPATIBLE: "కలపడానికి సురక్షితం", SAME_CHEMICAL: "అదే ఉత్పత్తి ఎంచుకోబడింది", CAUTION: "జాగ్రత్త అవసరం", INCOMPATIBLE: "మిశ్రమం అనుకూలం కాదు", DANGEROUS: "మిశ్రమం ప్రమాదకరం", REDUNDANT: "అనవసరమైన మిశ్రమం" },
+  };
+  return labels[language]?.[status] || status || "";
 }
 
 const TABS = {

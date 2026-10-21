@@ -8,6 +8,7 @@ import {
   getLocalizedManagement,
   getLocalizedPrevention,
 } from "./diseaseTranslations";
+import { localizedAdvisory, localizedTimeline, recoveryCopy } from "./advisoryLocalization";
 import "./App.css";
 import ChatWidget from "./ChatWidget";
 import { API_BASE_URL } from "./config";
@@ -162,9 +163,16 @@ function App() {
     : "";
 
   const usesVisualConditionGuide = explainabilityMode === "visual_condition_guide";
-  const timelineLocale = ["hi", "mr"].includes(language) ? language : "en";
-  const timelineText = (section, field) =>
-    section?.[`${field}_${timelineLocale}`] || section?.[`${field}_en`] || "";
+  const timelineLocale = language;
+  const timelineText = (section, field) => {
+    if (!["en", "mr"].includes(timelineLocale)) {
+      return localizedTimeline(section, field, timelineLocale, result?.is_healthy);
+    }
+    return section?.[`${field}_${timelineLocale}`]
+      || localizedTimeline(section, field, timelineLocale, result?.is_healthy);
+  };
+  const advisoryText = (kind, fallback) => localizedAdvisory(kind, result, language, fallback);
+  const recoveryText = recoveryCopy(language);
   const analysisProgressText = usesVisualConditionGuide
     ? "Classifying the image and preparing its visual condition guide"
     : t.inferenceProgress;
@@ -1837,9 +1845,9 @@ function App() {
                     <strong>
                       {result.is_healthy
                         ? t.healthy
-                        : (language === "mr"
-                            ? (result.disease_mr || getLocalizedDisease(result.disease, language, result.class_name, result.plant))
-                            : result.disease)}
+                    : (language === "mr"
+                      ? (result.disease_mr || getLocalizedDisease(result.disease, language, result.class_name, result.plant))
+                      : advisoryText("disease", result.disease))}
                     </strong>
                   </div>
                 </div>
@@ -2394,7 +2402,7 @@ function App() {
               <p>
                 {language === "mr"
                   ? (result.description_mr || getLocalizedDescription(result.disease, language, result.description, result.class_name, result.plant))
-                  : result.description}
+                  : advisoryText("description", result.description)}
               </p>
             </div>
 
@@ -2498,7 +2506,7 @@ function App() {
                     ? result.symptoms_mr
                     : (language === "mr"
                         ? getLocalizedSymptoms(result.disease, language, result.symptoms, result.class_name, result.plant)
-                        : result.symptoms)
+                        : advisoryText("symptoms", result.symptoms))
                   ).map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -2518,7 +2526,7 @@ function App() {
                     ? result.management_mr
                     : (language === "mr"
                         ? getLocalizedManagement(result.disease, language, result.management, result.class_name, result.plant)
-                        : result.management)
+                        : advisoryText("management", result.management))
                   ).map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -2538,7 +2546,7 @@ function App() {
                     ? result.prevention_mr
                     : (language === "mr"
                         ? getLocalizedPrevention(result.disease, language, result.prevention, result.class_name, result.plant)
-                        : result.prevention)
+                        : advisoryText("prevention", result.prevention))
                   ).map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -3261,8 +3269,8 @@ function App() {
         {/* Crop Recovery Comparison Tracker */}
         {activeTab === "recovery" && (
           <section className="recovery-tracker-section">
-            <h3>📈 {language === "mr" ? "फवारणीनंतरचा गुण व रोगमुक्ती तपासणी (Recovery Tracker)" : "Crop Disease Recovery & Efficacy Tracker"}</h3>
-            <p>{language === "mr" ? "फवारणीपूर्वीचा (Day 0) आणि फवारणीनंतरचा (Day 5) फोटो अपलोड करून रोग किती टक्के नियंत्रणात आला ते तपासा." : "Upload 'Before Spray' and 'After Spray' leaf photos to verify treatment efficacy and lesion suppression percentage."}</p>
+            <h3>📈 {language === "mr" ? "फवारणीनंतरचा गुण व रोगमुक्ती तपासणी (Recovery Tracker)" : recoveryText?.[0] || "Crop Disease Recovery & Efficacy Tracker"}</h3>
+            <p>{language === "mr" ? "फवारणीपूर्वीचा (Day 0) आणि फवारणीनंतरचा (Day 5) फोटो अपलोड करून रोग किती टक्के नियंत्रणात आला ते तपासा." : recoveryText?.[1] || "Upload 'Before Spray' and 'After Spray' leaf photos to verify treatment efficacy and lesion suppression percentage."}</p>
 
             <div className="recovery-upload-grid">
               <label className="recovery-dropzone">
@@ -3279,7 +3287,7 @@ function App() {
                 ) : (
                   <div>
                     <AppIcon name="camera" className="recovery-upload-icon" />
-                    <p><strong>{language === "mr" ? "१. फवारणीपूर्वीचा फोटो (Day 0)" : "1. Before Spray Photo"}</strong></p>
+                    <p><strong>{language === "mr" ? "१. फवारणीपूर्वीचा फोटो (Day 0)" : recoveryText?.[2] || "1. Before Spray Photo"}</strong></p>
                   </div>
                 )}
               </label>
@@ -3298,7 +3306,7 @@ function App() {
                 ) : (
                   <div>
                     <AppIcon name="sprout" className="recovery-upload-icon" />
-                    <p><strong>{language === "mr" ? "२. फवारणीनंतरचा फोटो (Day 4-7)" : "2. After Spray Photo"}</strong></p>
+                    <p><strong>{language === "mr" ? "२. फवारणीनंतरचा फोटो (Day 4-7)" : recoveryText?.[3] || "2. After Spray Photo"}</strong></p>
                   </div>
                 )}
               </label>
@@ -3310,7 +3318,7 @@ function App() {
               onClick={handleCompareRecovery}
               disabled={!recoveryBefore || !recoveryAfter || recoveryLoading}
             >
-              {recoveryLoading ? "⏳ Comparing..." : language === "mr" ? "गुण व सुधारणा तपासा" : "Compare Recovery Score"}
+              {recoveryLoading ? `⏳ ${recoveryText?.[5] || "Comparing..."}` : language === "mr" ? "गुण व सुधारणा तपासा" : recoveryText?.[4] || "Compare Recovery Score"}
             </button>
 
             {recoveryError && <div className="phi-hazard-alert">⚠️ {recoveryError}</div>}

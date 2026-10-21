@@ -4,6 +4,7 @@ export const LANGUAGES = [
   { value: "mr", label: "मराठी" },
   { value: "bn", label: "বাংলা" },
   { value: "ta", label: "தமிழ்" },
+  { value: "te", label: "తెలుగు" },
 ];
 
 export const TRANSLATIONS = {
@@ -641,4 +642,27 @@ export const TRANSLATIONS = {
     curativeActionWindow: "சிகிச்சை தெளிப்பு காலக்கெடு",
     shareWhatsApp: "📲 வாட்ஸ்அப்பில் ஆலோசனையைப் பகிரவும்",
   },
+};
+
+// Telugu uses the complete English key set as a safe fallback, with the
+// high-visibility interface labels localized. Dynamic crop advice is handled
+// separately in advisoryLocalization.js for every supported language.
+TRANSLATIONS.te = {
+  ...TRANSLATIONS.en,
+  language: "భాష",
+  appSubtitle: "AI ఆధారిత మొక్కల ఆరోగ్య విశ్లేషణ",
+  heroTitle: "మొక్కల వ్యాధులను గుర్తించండి",
+  heroDescription: "ఆకు చిత్రాన్ని అప్‌లోడ్ చేసి, సాధ్యమైన మొక్కల వ్యాధులను AI ద్వారా గుర్తించండి.",
+  leafImage: "ఆకు చిత్రం",
+  analysisResult: "విశ్లేషణ ఫలితం",
+  plant: "మొక్క",
+  detectedCondition: "గుర్తించిన స్థితి",
+  modelConfidence: "మోడల్ విశ్వసనీయత",
+  commonSymptoms: "సాధారణ లక్షణాలు",
+  management: "నిర్వహణ",
+  prevention: "నివారణ",
+  diseaseTimelineTitle: "వ్యాధి కారణం మరియు పురోగతి కాలక్రమం",
+  diseaseTimelineSubtitle: "సంక్రమణ కారణం, నేటి స్థితి మరియు తదుపరి చర్యలు",
+  curativeActionWindow: "చర్య తీసుకునే సమయం",
+  recovery: "కోలుకునే స్థితి",
 };

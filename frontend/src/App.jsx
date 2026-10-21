@@ -9,6 +9,7 @@ import {
   getLocalizedPrevention,
 } from "./diseaseTranslations";
 import { localizedAdvisory, localizedTimeline, recoveryCopy } from "./advisoryLocalization";
+import { interfaceText, localizedDay, localizedForecastBadge, tabText } from "./interfaceLocalization";
 import "./App.css";
 import ChatWidget from "./ChatWidget";
 import { API_BASE_URL } from "./config";
@@ -81,6 +82,9 @@ const CAMERA_TEXT = {
     failed: "கேமராவைத் தொடங்க முடியவில்லை. வேறு செயலி கேமராவைப் பயன்படுத்துகிறதா எனச் சரிபார்க்கவும்.",
     notReady: "கேமரா இன்னும் தயாராகவில்லை. சிறிது காத்திருக்கவும்.",
     captureFailed: "புகைப்படம் எடுக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+  },
+  te: {
+    takePhoto: "ఫోటో తీయండి", title: "మీ ఆకు ఫోటో తీయండి", hint: "ఆకును ఫ్రేమ్‌లో ఉంచి ఫోటో తీయండి.", capture: "ఫోటో తీయండి", close: "కెమెరాను మూసివేయండి", cancel: "రద్దు చేయండి", unavailable: "కెమెరా కోసం మద్దతు ఉన్న బ్రౌజర్ మరియు localhost లేదా HTTPS అవసరం.", denied: "కెమెరా అనుమతి నిరాకరించబడింది. బ్రౌజర్ సెట్టింగ్‌లలో అనుమతించండి.", failed: "కెమెరాను ప్రారంభించలేకపోయాం. మరొక యాప్ కెమెరాను ఉపయోగిస్తోందో చూడండి.", notReady: "కెమెరా ఇంకా సిద్ధంగా లేదు. కొద్దిసేపు వేచి ఉండండి.", captureFailed: "ఫోటో తీయలేకపోయాం. మళ్లీ ప్రయత్నించండి.",
   },
 };
 
@@ -173,6 +177,11 @@ function App() {
   };
   const advisoryText = (kind, fallback) => localizedAdvisory(kind, result, language, fallback);
   const recoveryText = recoveryCopy(language);
+  const ui = interfaceText(language);
+  const displayDistrict = (district) => {
+    if (language === "mr") return district?.name_mr || district?.name || selectedDistrict;
+    return String(district?.name || district || selectedDistrict).replace(/\s*\([^)]*\)/g, "");
+  };
   const analysisProgressText = usesVisualConditionGuide
     ? "Classifying the image and preparing its visual condition guide"
     : t.inferenceProgress;
@@ -1231,7 +1240,7 @@ function App() {
               >
                 {districts.map((d) => (
                   <option key={d.id} value={d.name}>
-                    {language === "mr" ? d.name_mr : d.name.split(" - ")[0]}
+                    {language === "mr" ? d.name_mr : d.name.replace(/\s*\([^)]*\)/g, "").split(" - ")[0]}
                   </option>
                 ))}
               </select>
@@ -1366,7 +1375,7 @@ function App() {
             onClick={() => setActiveTab("diagnosis")}
           >
             <span className="farmer-tab-icon"><AppIcon name="scan" /></span>
-            <span>{language === "mr" ? "रोग निदान (Scanner)" : language === "hi" ? "रोग निदान" : "Diagnosis"}</span>
+            <span>{tabText(language, 0)}</span>
           </button>
           <button
             type="button"
@@ -1374,7 +1383,7 @@ function App() {
             onClick={() => setActiveTab("spray_mix")}
           >
             <span className="farmer-tab-icon"><AppIcon name="spray" /></span>
-            <span>{language === "mr" ? "फवारणी व मिश्रण (Spray)" : language === "hi" ? "स्प्रे एवं मिश्रण" : "Spray & Tank-Mix"}</span>
+            <span>{tabText(language, 1)}</span>
           </button>
           <button
             type="button"
@@ -1382,7 +1391,7 @@ function App() {
             onClick={() => setActiveTab("forecast")}
           >
             <span className="farmer-tab-icon"><AppIcon name="forecast" /></span>
-            <span>{language === "mr" ? "हवामान अंदाज (Forecast)" : language === "hi" ? "मौसम जोखिम" : "7-Day Risk"}</span>
+            <span>{tabText(language, 2)}</span>
           </button>
           <button
             type="button"
@@ -1390,7 +1399,7 @@ function App() {
             onClick={() => setActiveTab("mandi_kendras")}
           >
             <span className="farmer-tab-icon"><AppIcon name="market" /></span>
-            <span>{language === "mr" ? "बाजारभाव व केंद्रे (Mandi)" : language === "hi" ? "मंडी व केंद्र" : "Mandi & Dealers"}</span>
+            <span>{tabText(language, 3)}</span>
           </button>
           <button
             type="button"
@@ -1398,7 +1407,7 @@ function App() {
             onClick={() => setActiveTab("recovery")}
           >
             <span className="farmer-tab-icon"><AppIcon name="recovery" /></span>
-            <span>{language === "mr" ? "सुधारणा ट्रॅकर (Recovery)" : language === "hi" ? "सुधार ट्रैकर" : "Recovery"}</span>
+            <span>{tabText(language, 4)}</span>
           </button>
         </nav>
 
@@ -1878,7 +1887,7 @@ function App() {
                 {/* Farmer Mode vs Expert Mode Switcher */}
                 <div className="mode-switch-wrapper">
                   <div className="mode-switch-info">
-                    <span>{farmerMode ? "👨‍🌾 शेतकरी सोपा मोड (थेट औषध प्रमाण व व्हॉट्सॲप)" : "🔬 सविस्तर तज्ज्ञ मोड (Grad-CAM व विमा क्लेम)"}</span>
+                    <span>{farmerMode ? `👨‍🌾 ${ui.farmerInfo}` : `🔬 ${ui.expertInfo}`}</span>
                   </div>
                   <div className="mode-switch-pill">
                     <button
@@ -1886,14 +1895,14 @@ function App() {
                       className={`mode-pill-btn ${farmerMode ? "active" : ""}`}
                       onClick={() => setFarmerMode(true)}
                     >
-                      👨‍🌾 {language === "mr" ? "शेतकरी मोड" : "Farmer Mode"}
+                      👨‍🌾 {ui.farmer}
                     </button>
                     <button
                       type="button"
                       className={`mode-pill-btn ${!farmerMode ? "active" : ""}`}
                       onClick={() => setFarmerMode(false)}
                     >
-                      🔬 {language === "mr" ? "तज्ज्ञ मोड" : "Expert Mode"}
+                      🔬 {ui.expert}
                     </button>
                   </div>
                 </div>
@@ -1904,18 +1913,10 @@ function App() {
                     <span className="spoken-sound-icon">{isSpeaking ? "🔊" : "📢"}</span>
                     <div className="spoken-prescription-text">
                       <strong>
-                        {language === "mr"
-                          ? "AI डॉक्टरांचा सल्ला आवाजात ऐका"
-                          : language === "hi"
-                          ? "AI डॉक्टर की सलाह आवाज़ में सुनें"
-                          : "Listen to Spoken Agronomic Advisory"}
+                        {ui.voiceTitle}
                       </strong>
                       <span>
-                        {language === "mr"
-                          ? "निदान, तीव्रता व थेट १५L पंपाचे फवारणी प्रमाण एका क्लिकवर ऐका."
-                          : language === "hi"
-                          ? "निदान, रोग तीव्रता और 15L पंप की खुराक सुनें।"
-                          : "Complete voice diagnosis & knapsack pump dosing in your language."}
+                        {ui.voiceDescription}
                       </span>
                     </div>
                   </div>
@@ -1925,9 +1926,9 @@ function App() {
                     onClick={handleSpeakAdvisory}
                   >
                     {isSpeaking ? (
-                      <>⏹️ {language === "mr" ? "थांबवा" : "Stop"}</>
+                      <>⏹️ {ui.stop}</>
                     ) : (
-                      <>🔊 {language === "mr" ? "आवाजात ऐका" : language === "hi" ? "आवाज़ में सुनें" : "Play Voice"}</>
+                      <>🔊 {ui.play}</>
                     )}
                   </button>
                 </div>
@@ -1936,25 +1937,23 @@ function App() {
                 {farmerMode && (
                   <div className="farmer-direct-dose-box">
                     <div className="farmer-direct-dose-header">
-                      <h4>🎒 {language === "mr" ? "१५ लिटर पंपासाठी थेट औषध प्रमाण:" : language === "hi" ? "15 लीटर पंप के लिए सीधी खुराक:" : "15L Knapsack Pump Direct Prescription:"}</h4>
+                      <h4>🎒 {ui.doseTitle}</h4>
                       <span className="farmer-dose-pill">
                         {result.treatment_advisory?.chemical_treatments?.[0]?.commercial_name || "Mancozeb 75% WP"}
                       </span>
                     </div>
                     <div className="farmer-direct-dose-instruction">
                       👉 {result.confidence_status === "inconclusive"
-                        ? (language === "mr"
-                            ? "विश्वास स्तर कमी असल्याने फवारणीची शिफारस थांबवली आहे. कृपया पानाचा जवळून स्पष्ट फोटो काढून पुनर्परीक्षण करा."
-                            : "Prescription on hold due to low confidence. Please re-scan leaf with a clear close-up.")
+                        ? ui.hold
                         : result.is_healthy
-                          ? (language === "mr" ? "पीक पूर्णपणे निरोगी आहे. कोणत्याही रासायनिक फवारणीची गरज नाही." : "Crop is completely healthy. No chemical spray needed.")
-                          : (language === "mr" 
-                              ? `१५ लिटर पंपाच्या पाण्यात ${result.treatment_advisory?.chemical_treatments?.[0]?.dosage_per_liter ? (result.treatment_advisory.chemical_treatments[0].dosage_per_liter * 15).toFixed(0) : '३०'} ग्रॅम/मिली औषध आणि १० मिली स्टीकर (Spreader) मिसळून फवारणी करा.`
-                              : `Mix ${(result.treatment_advisory?.chemical_treatments?.[0]?.dosage_per_liter ? (result.treatment_advisory.chemical_treatments[0].dosage_per_liter * 15).toFixed(0) : '30')}g/ml of ${(result.treatment_advisory?.chemical_treatments?.[0]?.commercial_name || 'fungicide')} + 10ml wetting sticker per 15-liter knapsack tank.`
-                            )}
+                          ? ui.healthy
+                          : ui.dose(
+                            result.treatment_advisory?.chemical_treatments?.[0]?.dosage_per_liter ? (result.treatment_advisory.chemical_treatments[0].dosage_per_liter * 15).toFixed(0) : "30",
+                            result.treatment_advisory?.chemical_treatments?.[0]?.commercial_name || "fungicide"
+                          )}
                     </div>
                     <p className="farmer-direct-dose-tips">
-                      ⏰ {language === "mr" ? "फवारणीची योग्य वेळ: सकाळी ९ वाजेपूर्वी किंवा संध्याकाळी ४ नंतर शांत हवेत." : "Ideal spray time: Calm morning before 9 AM or evening after 4 PM."}
+                      ⏰ {ui.ideal}
                     </p>
                   </div>
                 )}
@@ -1966,21 +1965,21 @@ function App() {
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("spray_mix")}
                   >
-                    🧪 {language === "mr" ? "औषध मिश्रण व पंपाचे बजेट तपासा" : "Check Spray Tank Mix"}
+                    🧪 {ui.tank}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("forecast")}
                   >
-                    ⛅ {language === "mr" ? "७-दिवस हवामान व बुरशी धोका पहा" : "View 7-Day Weather Risk"}
+                    ⛅ {ui.forecast}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("mandi_kendras")}
                   >
-                    🏪 {language === "mr" ? "जवळचे कृषी केंद्र व वाजवी भाव पहा" : "Find Krishi Kendras"}
+                    🏪 {ui.kendras}
                   </button>
                   {farmerMode && (
                     <button
@@ -1989,7 +1988,7 @@ function App() {
                       onClick={() => setFarmerMode(false)}
                       style={{ color: "#166534", fontWeight: "bold" }}
                     >
-                      🔍 {language === "mr" ? "Grad-CAM उष्णता नकाशा व विमा क्लेम (Expert Mode)" : "View Grad-CAM & Insurance Claim"}
+                      🔍 {ui.guide}
                     </button>
                   )}
                 </div>
@@ -2256,7 +2255,7 @@ function App() {
                         {" — "}
                         {language === "mr"
                           ? (prediction.disease_mr || getLocalizedDisease(prediction.disease, language, prediction.class_name, prediction.plant))
-                          : prediction.disease}
+                          : advisoryText("disease", prediction.disease)}
                       </span>
 
                       <strong>
@@ -2272,22 +2271,22 @@ function App() {
                 {result.mandi_rates && (
                   <div className="mandi-rates-card">
                     <div className="mandi-card-header">
-                      <span className="mandi-badge">🌾 APMC MARKET RATES (बाजारभाव)</span>
+                      <span className="mandi-badge">🌾 {ui.marketBadge}</span>
                       <span className="mandi-trend">{result.mandi_rates.trend}</span>
                     </div>
                     <div className="mandi-market-title">
-                      <strong>{result.mandi_rates.market_name}</strong>
+                      <strong>{language === "en" ? "Pune Gultekdi Market Yard" : ui.marketName}</strong>
                     </div>
                     <div className="mandi-price-grid">
                       <div className="mandi-stat-box modal-box">
-                        <span className="mandi-stat-lbl">सरासरी भाव (Modal Rate)</span>
-                        <span className="mandi-stat-val">₹{result.mandi_rates.modal_price?.toLocaleString()} / क्विंटल</span>
-                        <small>(~₹{result.mandi_rates.kg_price} / किलो)</small>
+                        <span className="mandi-stat-lbl">{ui.modalRate}</span>
+                        <span className="mandi-stat-val">₹{result.mandi_rates.modal_price?.toLocaleString()} / {ui.quintal}</span>
+                        <small>(~₹{result.mandi_rates.kg_price} / {ui.kg})</small>
                       </div>
                       <div className="mandi-stat-box range-box">
-                        <span className="mandi-stat-lbl">किमान - कमाल भाव (Range)</span>
+                        <span className="mandi-stat-lbl">{ui.range}</span>
                         <span className="mandi-stat-val">₹{result.mandi_rates.min_price} - ₹{result.mandi_rates.max_price}</span>
-                        <small>आवक: {result.mandi_rates.arrivals_qtl?.toLocaleString()} क्विंटल</small>
+                        <small>{ui.arrivals}: {result.mandi_rates.arrivals_qtl?.toLocaleString()} {ui.quintal}</small>
                       </div>
                     </div>
                   </div>
@@ -2296,15 +2295,15 @@ function App() {
                 {/* Consult AI Doctor Card */}
                 <div className="ai-doctor-card">
                   <div className="ai-doctor-text">
-                    <h4>💬 {language === "mr" ? "शंका आहे? AI कृषी डॉक्टरांशी चर्चा करा" : language === "hi" ? "AI कृषि डॉक्टर से सलाह लें" : "Need Advice? Consult AI Plant Doctor"}</h4>
-                    <p>{language === "mr" ? "या रोगाचे व्यवस्थापन, फवारणी व खतांबद्दल मराठीत विचारा." : language === "hi" ? "कीटनाशक मात्रा और फसल सुरक्षा के बारे में तुरंत पूछें।" : "Get instant answers on dosage, safety intervals, and crop management."}</p>
+                    <h4>💬 {ui.adviceTitle}</h4>
+                    <p>{ui.adviceText}</p>
                   </div>
                   <button
                     type="button"
                     className="ai-doctor-btn"
                     onClick={handleOpenChatWithDiagnosis}
                   >
-                    💬 {language === "mr" ? "चॅट सुरू करा" : language === "hi" ? "चैट शुरू करें" : "Open AI Chat"}
+                    💬 {ui.openChat}
                   </button>
                 </div>
 
@@ -2990,11 +2989,11 @@ function App() {
         {activeTab === "spray_mix" && (
           <>
             <section className="tankmix-checker-section">
-              <h3>🧪 {language === "mr" ? "रासायनिक मिश्रण सुसंगतता व फवारणी (Tank-Mix & Spray Safety)" : "Chemical Tank-Mix & Spray Safety Checker"}</h3>
-              <p>{language === "mr" ? "दोन औषधे किंवा खते एकाच पंपात मिसळण्यापूर्वी रासायनिक विरोध किंवा पाने जळण्याचा धोका तपासा." : "Verify whether two chemicals or foliar fertilizers can be mixed safely in the same spray tank."}</p>
+              <h3>🧪 {ui.mixTitle}</h3>
+              <p>{ui.mixText}</p>
               <div className="tankmix-select-grid">
                 <div className="compat-field">
-                  <label>{language === "mr" ? "औषध १ (Chemical 1):" : "Product 1:"}</label>
+                  <label>{ui.product1}:</label>
                   <select value={chem1} onChange={(e) => setChem1(e.target.value)}>
                     {chemicalsList.map((c) => (
                       <option key={c.id} value={c.id}>{c.name} ({c.category})</option>
@@ -3002,7 +3001,7 @@ function App() {
                   </select>
                 </div>
                 <div className="compat-field">
-                  <label>{language === "mr" ? "औषध २ (Chemical 2):" : "Product 2:"}</label>
+                  <label>{ui.product2}:</label>
                   <select value={chem2} onChange={(e) => setChem2(e.target.value)}>
                     {chemicalsList.map((c) => (
                       <option key={c.id} value={c.id}>{c.name} ({c.category})</option>
@@ -3015,7 +3014,7 @@ function App() {
                   onClick={handleCheckCompatibility}
                   disabled={checkingCompat}
                 >
-                  {checkingCompat ? "⏳ Checking..." : language === "mr" ? "सुसंगतता तपासा" : "Check Mix"}
+                  {checkingCompat ? "⏳" : ui.checkMix}
                 </button>
               </div>
 
@@ -3194,16 +3193,16 @@ function App() {
           <>
             {forecastData && forecastData.forecast_days ? (
               <section className="forecast-section">
-                <h3>📅 {language === "mr" ? `७ दिवसांचा हवामान व बुरशी प्रादुर्भाव अंदाज (${forecastData.district_mr})` : `7-Day Weather & Epidemic Forecast (${forecastData.district})`}</h3>
-                <p>{language === "mr" ? "हवामानानुसार पुढील ७ दिवसांतील बुरशी रोगाचा संभाव्य धोका व फवारणीसाठी योग्य दिवस." : "Daily forecast of fungal infection pressure, rain wash-off risks, and optimal spray windows."}</p>
+                <h3>📅 {ui.forecastTitle(language === "mr" ? forecastData.district_mr : displayDistrict(forecastData.district))}</h3>
+                <p>{ui.forecastText}</p>
                 <div className="forecast-grid">
                   {forecastData.forecast_days.map((day, i) => (
                     <div key={i} className="forecast-day-card">
-                      <div className="forecast-day-date">{day.date}</div>
+                      <div className="forecast-day-date">{localizedDay(day.date, language)}</div>
                       <div className="forecast-day-temp">{day.temp_range}</div>
                       <div className="forecast-day-rain">🌧️ {day.rain_mm}mm ({day.rain_probability}%)</div>
                       <span className="forecast-day-badge" style={{ background: day.badge_color }}>
-                        {day.risk_badge}
+                        {localizedForecastBadge(day.risk_badge, language)}
                       </span>
                     </div>
                   ))}
@@ -3211,7 +3210,7 @@ function App() {
               </section>
             ) : (
               <div style={{ textAlign: "center", padding: "40px", color: "#64748b" }}>
-                ⏳ {language === "mr" ? "हवामान अंदाज लोड होत आहे..." : "Loading 7-Day Forecast..."}
+                ⏳ {ui.loadingForecast}
               </div>
             )}
           </>
@@ -3414,33 +3413,33 @@ function App() {
 
       {/* Maharashtra Kisan Helpline Directory */}
       <section className="kisan-helpline-card">
-        <h3>📞 {language === 'mr' ? 'शेतकरी मदत व संपर्क केंद्र (महाराष्ट्र)' : language === 'hi' ? 'किसान हेल्पलाइन एवं सहायता केंद्र' : 'Kisan Support & Agronomy Helplines (Maharashtra)'}</h3>
+        <h3>📞 {ui.helpline}</h3>
         <div className="helpline-grid">
           <a href="tel:18001801551" className="helpline-item">
             <span className="helpline-icon">🌾</span>
             <div>
-              <strong>{language === 'mr' ? 'किसान कॉल सेंटर (टोल-फ्री)' : language === 'hi' ? 'किसान कॉल सेंटर (टोल-फ्री)' : 'Kisan Call Centre (Toll-Free)'}</strong>
+              <strong>{ui.callCentre}</strong>
               <span>📞 1800-180-1551</span>
             </div>
           </a>
           <a href="tel:18002334000" className="helpline-item">
             <span className="helpline-icon">🚜</span>
             <div>
-              <strong>{language === 'mr' ? 'महाराष्ट्र कृषी विभाग हेल्पलाइन' : language === 'hi' ? 'महाराष्ट्र कृषि विभाग हेल्पलाइन' : 'Maharashtra Krishi Helpline'}</strong>
+              <strong>{ui.stateHelpline}</strong>
               <span>📞 1800-233-4000</span>
             </div>
           </a>
           <a href="tel:02426243208" className="helpline-item">
             <span className="helpline-icon">🏛️</span>
             <div>
-              <strong>{language === 'mr' ? 'महात्मा फुले कृषी विद्यापीठ (राहुरी)' : language === 'hi' ? 'महात्मा फुले कृषि विश्वविद्यालय (राहुरी)' : 'MPKV Rahuri Agronomy Cell'}</strong>
+              <strong>{ui.university}</strong>
               <span>📞 02426-243208</span>
             </div>
           </a>
           <a href="tel:02025537033" className="helpline-item">
             <span className="helpline-icon">🔬</span>
             <div>
-              <strong>{language === 'mr' ? 'कृषी विज्ञान केंद्र (KVK Pune/Baramati)' : language === 'hi' ? 'कृषि विज्ञान केंद्र (KVK)' : 'Krishi Vigyan Kendra (KVK)'}</strong>
+              <strong>{ui.kvk}</strong>
               <span>📞 020-25537033</span>
             </div>
           </a>

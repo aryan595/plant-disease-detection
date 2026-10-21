@@ -23,6 +23,7 @@ export const SUPPORTED_LANGS = [
   { code: "mr", label: "Marathi", native: "मराठी" },
   { code: "bn", label: "Bengali", native: "বাংলা" },
   { code: "ta", label: "Tamil", native: "தமிழ்" },
+  { code: "te", label: "Telugu", native: "తెలుగు" },
 ];
 
 const UI_TEXT = {
@@ -220,6 +221,9 @@ const UI_TEXT = {
     autoSpeakOff: "தானியங்கி குரல்: ஆஃப்",
     switchLang: "மொழி",
   },
+  te: {
+    title: "మొక్కల ఆరోగ్య సహాయకుడు", subtitle: "1:1 AI వ్యవసాయ వైద్యుడు", greeting: "నమస్కారం రైతు మిత్రమా! 🌱 నేను మీ AI పంట వైద్యుడిని. పంట వ్యాధులు, లక్షణాలు, స్ప్రే మోతాదు లేదా రక్షణ గురించి అడగండి.", placeholder: "మీ పంట, వ్యాధి లేదా స్ప్రే గురించి అడగండి...", send: "పంపండి", newChat: "కొత్త చాట్", thinking: "AI వైద్యుడు ఆలోచిస్తున్నారు...", close: "చాట్ మూసివేయండి", open: "మొక్కల సహాయకుడిని తెరవండి", error: "ఏదో తప్పు జరిగింది. మళ్లీ ప్రయత్నించండి.", footer: "AI వ్యవసాయ సలహా. ముఖ్యమైన నిర్ణయాలకు స్థానిక వ్యవసాయ అధికారిని సంప్రదించండి.", powered: "Groq LLaMA 3.3 ద్వారా నడుస్తోంది", currentAnalysis: "ప్రస్తుత పంట విశ్లేషణ", quickPrompts: "త్వరిత ప్రశ్నలు", explainResult: "ఈ నిర్ధారణను వివరించండి", nextSteps: "ఇప్పుడు నేను ఏమి చేయాలి?", prevention: "మళ్లీ రాకుండా ఎలా నివారించాలి?", spokenUnsupported: "ఈ బ్రౌజర్‌లో ఆడియో అవుట్‌పుట్ అందుబాటులో లేదు.", voiceUnsupported: "ఈ బ్రౌజర్‌లో వాయిస్ ఇన్‌పుట్‌కు మద్దతు లేదు.", micDenied: "మైక్రోఫోన్ అనుమతి నిరాకరించబడింది.", voiceFailed: "వాయిస్ ఇన్‌పుట్ విఫలమైంది. మళ్లీ ప్రయత్నించండి.", listeningStopped: "వినడం ఆగిపోయింది. మళ్లీ మాట్లాడటానికి మైక్ నొక్కండి.", cannotStart: "వాయిస్ గుర్తింపును ప్రారంభించలేకపోయాం.", emptyResponse: "సహాయకుడు ఖాళీ సమాధానం ఇచ్చాడు.", voiceModeBtn: "1:1 వాయిస్ మోడ్", voiceModeLive: "లైవ్ వాయిస్ మోడ్", listeningVoice: "మీ మాట వింటున్నాం... మాట్లాడండి", thinkingVoice: "AI మీ పంటను విశ్లేషిస్తోంది...", speakingVoice: "AI మాట్లాడుతోంది... ఆపడానికి నొక్కండి", readyVoice: "వినడానికి సిద్ధం. మాట్లాడటానికి నొక్కండి", stopVoice: "వాయిస్ మోడ్ నుంచి బయటకు రండి", interrupt: "ఆపండి", doneSpeaking: "ఇప్పుడే పంపండి", autoSpeakOn: "ఆటో-స్పీక్: ఆన్", autoSpeakOff: "ఆటో-స్పీక్: ఆఫ్", switchLang: "భాష",
+  },
 };
 
 const QUICK_MESSAGES = {
@@ -248,6 +252,11 @@ const QUICK_MESSAGES = {
     next: "15 லிட்டர் தெளிப்பான் பம்பில் என்ன மருந்து, எவ்வளவு அளவு கலந்து அடிக்க வேண்டும்?",
     prevent: "இந்த நோய் மீண்டும் பரவாமல் இருக்க என்ன முன்னெச்சரிக்கை எடுக்க வேண்டும்?",
   },
+  te: {
+    explain: "నా ప్రస్తుత పంట విశ్లేషణలో కనిపించిన వ్యాధిని సులభమైన తెలుగులో వివరించండి.",
+    next: "15 లీటర్ల స్ప్రే పంపులో ఏ మందు, ఎంత మోతాదులో కలపాలి?",
+    prevent: "ఈ వ్యాధి మళ్లీ వ్యాపించకుండా ఎలా నివారించాలి?",
+  },
 };
 
 function getText(language) {
@@ -265,6 +274,7 @@ function getSpeechLanguage(language) {
     mr: "mr-IN",
     bn: "bn-IN",
     ta: "ta-IN",
+    te: "te-IN",
   };
   return locales[language] || "en-IN";
 }

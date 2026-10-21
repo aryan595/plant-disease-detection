@@ -1402,21 +1402,21 @@ function App() {
           <aside className="hero-system-card" aria-label={language === "mr" ? "AgriSense system readiness" : ui.systemOnline}>
             <div className="system-card-topline">
               <span className="live-dot" />
-              <span>{language === "mr" ? "AI system online" : ui.systemOnline}</span>
+              <span>{language === "mr" ? "AI प्रणाली ऑनलाइन" : ui.systemOnline}</span>
               <span className="system-card-code">ML / 55</span>
             </div>
             <div className="system-card-body">
               <div>
-                <span className="system-card-label">{language === "mr" ? "Plant intelligence" : ui.plantIntelligence}</span>
+                <span className="system-card-label">{language === "mr" ? "वनस्पती बुद्धिमत्ता" : ui.plantIntelligence}</span>
                 <strong>55</strong>
-                <span className="system-card-meta">{language === "mr" ? "crop health classes" : ui.cropClasses}</span>
+                <span className="system-card-meta">{language === "mr" ? "पीक आरोग्य वर्ग" : ui.cropClasses}</span>
               </div>
               <div className="system-orbit" aria-hidden="true">
                 <span>✦</span>
               </div>
             </div>
             <div className="system-card-footer">
-              <span>{language === "mr" ? "Model accuracy" : ui.modelConfidence}</span>
+              <span>{language === "mr" ? "मॉडल विश्वसनीयता" : ui.modelConfidence}</span>
               <strong>97.58%</strong>
               <div><i /></div>
             </div>

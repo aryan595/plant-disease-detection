@@ -18,7 +18,7 @@ const CHAT_STORAGE_KEY = "plantHealthChat.messages.v1";
 const MAX_STORED_MESSAGES = 50;
 const MAX_REQUEST_MESSAGES = 10;
 
-export const SUPPORTED_LANGS = [
+const SUPPORTED_LANGS = [
   { code: "en", label: "English", native: "English" },
   { code: "hi", label: "Hindi", native: "हिन्दी" },
   { code: "mr", label: "Marathi", native: "मराठी" },
@@ -304,7 +304,7 @@ function getSpeechLanguage(language) {
  * Strips ALL Markdown, HTML, asterisks, hashes, brackets, bullets, emojis,
  * and formats agricultural measurements into natural human-spoken words.
  */
-export function cleanTextForSpeech(markdown, lang = "en") {
+function cleanTextForSpeech(markdown, lang = "en") {
   if (!markdown) return "";
 
   let text = markdown
@@ -564,17 +564,10 @@ export default function ChatWidget({
   language = "en",
   onLanguageChange = null,
 }) {
-  // Local active language state to allow switching directly in the bot
-  const [botLanguage, setBotLanguage] = useState(language);
-
-  // Sync with prop if parent changes language externally
-  useEffect(() => {
-    if (language && language !== botLanguage) {
-      setBotLanguage(language);
-    }
-  }, [language]);
-
-  const activeLanguage = UI_TEXT[botLanguage] ? botLanguage : "en";
+  // The parent owns the application language. Keeping this derived avoids a
+  // second, stale chat-language state and means a header language change is
+  // reflected immediately in the assistant.
+  const activeLanguage = UI_TEXT[language] ? language : "en";
 
   const [isOpen, setIsOpen] = useState(false);
   const [messageHistory, setMessageHistory] = useState(() =>
@@ -593,6 +586,7 @@ export default function ChatWidget({
   const [autoSpeak, setAutoSpeak] = useState(true);
 
   const recognitionRef = useRef(null);
+  const startVoiceInputRef = useRef(null);
   const shouldKeepListeningRef = useRef(false);
   const voiceRestartTimerRef = useRef(null);
   const autoSubmitTimerRef = useRef(null);
@@ -663,7 +657,7 @@ export default function ChatWidget({
       }
       if (event.detail?.startVoice) {
         setTimeout(() => {
-          handleVoiceInput();
+          startVoiceInputRef.current?.();
         }, 350);
       }
     };
@@ -743,8 +737,6 @@ export default function ChatWidget({
     if (!UI_TEXT[newLangCode]) return;
     stopAllAudio();
     stopVoiceInput();
-    setBotLanguage(newLangCode);
-
     if (onLanguageChange) {
       onLanguageChange(newLangCode);
     }
@@ -1104,6 +1096,13 @@ export default function ChatWidget({
       startVoiceInput();
     }
   };
+
+  // The global "open chat with voice" event is registered before this handler
+  // is declared. A ref keeps that long-lived listener current without creating
+  // a stale closure or re-registering it for every render.
+  useEffect(() => {
+    startVoiceInputRef.current = handleVoiceInput;
+  });
 
   // Toggle 1:1 ChatGPT Voice Mode
   const toggleVoiceMode = () => {

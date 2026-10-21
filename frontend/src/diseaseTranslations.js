@@ -1974,7 +1974,7 @@ export function findDiseaseEntry(diseaseName, plantName = null, classKey = null)
   const targetDisease = normalize(diseaseName);
   const targetPlant = plantName ? normalize(plantName) : null;
 
-  for (const [key, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
+  for (const [, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
     const entryDisease = normalize(entry.disease);
     const entryPlant = normalize(entry.plant);
 
@@ -1990,7 +1990,7 @@ export function findDiseaseEntry(diseaseName, plantName = null, classKey = null)
   }
 
   // Partial match fallback
-  for (const [key, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
+  for (const [, entry] of Object.entries(DISEASE_TRANSLATIONS_MR)) {
     const entryDisease = normalize(entry.disease);
     if (targetDisease && (targetDisease.includes(entryDisease) || entryDisease.includes(targetDisease))) {
       return entry;

@@ -281,21 +281,23 @@ function App() {
 
   // PWA and Live GPS States
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [isAppInstalled, setIsAppInstalled] = useState(false);
+  const [isAppInstalled, setIsAppInstalled] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    const standaloneDisplayMode = typeof window.matchMedia === "function"
+      && window.matchMedia("(display-mode: standalone)").matches;
+
+    return Boolean(standaloneDisplayMode || window.navigator.standalone === true);
+  });
   const [gpsActive, setGpsActive] = useState(false);
   const [gpsCoords, setGpsCoords] = useState(null);
   const [gpsLoading, setGpsLoading] = useState(false);
   const [, setGpsError] = useState(null);
 
-  // PWA beforeinstallprompt and standalone detection
+  // PWA install events are external browser events. Standalone mode itself is
+  // captured by the lazy state initializer above, avoiding a second render at
+  // application start.
   useEffect(() => {
-    if (
-      window.matchMedia("(display-mode: standalone)").matches ||
-      window.navigator.standalone === true
-    ) {
-      setIsAppInstalled(true);
-    }
-
     const handleBeforeInstall = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);

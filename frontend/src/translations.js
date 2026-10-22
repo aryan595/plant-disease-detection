@@ -133,6 +133,11 @@ export const TRANSLATIONS = {
     diseaseTimelineSubtitle: "Pathogen entry origin, current tissue state, and untreated 7-10 day forecast",
     curativeActionWindow: "Curative Spray Window",
     shareWhatsApp: "📲 Share Advisory on WhatsApp",
+    signIn: "Sign In",
+    signUp: "Sign Up",
+    signOut: "Sign Out",
+    farmerProfile: "Farmer Profile",
+    savedScans: "Saved Scans",
   },
 
   hi: {
@@ -260,6 +265,11 @@ export const TRANSLATIONS = {
     diseaseTimelineSubtitle: "संक्रमण का कारण, आज की स्थिति और बिना उपचार के 7-10 दिन का प्रभाव",
     curativeActionWindow: "उपचारात्मक छिड़काव अवधि",
     shareWhatsApp: "📲 व्हाट्सएप पर सलाह साझा करें",
+    signIn: "लॉगिन",
+    signUp: "साइन अप",
+    signOut: "लॉगआउट",
+    farmerProfile: "किसान प्रोफ़ाइल",
+    savedScans: "सहेजे गए स्कैन",
   },
 
   mr: {
@@ -387,6 +397,11 @@ export const TRANSLATIONS = {
     diseaseTimelineSubtitle: "रोग कसा शिरला, आजची अवस्था आणि उपचार न केल्यास ७-१० दिवसांतील संभाव्य नुकसान",
     curativeActionWindow: "उपचारात्मक फवारणी कालावधी",
     shareWhatsApp: "📲 व्हॉट्सॲपवर सल्ला शेअर करा",
+    signIn: "लॉगिन",
+    signUp: "साइन अप",
+    signOut: "बाहेर पडा",
+    farmerProfile: "शेतकरी प्रोफाइल",
+    savedScans: "जतन केलेले स्कॅन",
   },
 
   bn: {
@@ -514,6 +529,11 @@ export const TRANSLATIONS = {
     diseaseTimelineSubtitle: "সংক্রমণের উৎস, বর্তমান অবস্থা এবং চিকিৎসা ছাড়া পরবর্তী ফলাফল",
     curativeActionWindow: "উপশমকারী স্প্রে করার সময়সীমা",
     shareWhatsApp: "📲 হোয়াটসঅ্যাপে পরামর্শ শেয়ার করুন",
+    signIn: "সাইন ইন",
+    signUp: "সাইন আপ",
+    signOut: "সাইন আউট",
+    farmerProfile: "কৃষক প্রোফাইল",
+    savedScans: "সংরক্ষিত স্ক্যান",
   },
 
   ta: {
@@ -641,6 +661,11 @@ export const TRANSLATIONS = {
     diseaseTimelineSubtitle: "தொற்று ஏற்பட்ட விதம், தற்போதைய நிலை மற்றும் சிகிச்சை இல்லாத பாதிப்பு",
     curativeActionWindow: "சிகிச்சை தெளிப்பு காலக்கெடு",
     shareWhatsApp: "📲 வாட்ஸ்அப்பில் ஆலோசனையைப் பகிரவும்",
+    signIn: "உள்நுழைக",
+    signUp: "பதிவு செய்க",
+    signOut: "வெளியேறு",
+    farmerProfile: "விவசாயி சுயவிவரம்",
+    savedScans: "சேமிக்கப்பட்ட ஸ்கேன்கள்",
   },
 };
 

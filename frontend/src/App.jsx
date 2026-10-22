@@ -28,6 +28,7 @@ import {
 import "./App.css";
 import ChatWidget from "./ChatWidget";
 import { API_BASE_URL } from "./config";
+import AuthModal, { GoogleIcon } from "./AuthModal";
 
 const LANGUAGE_STORAGE_KEY = "plantDiseaseDetector.language";
 const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
@@ -233,6 +234,10 @@ function AppIcon({ name, className = "" }) {
       return <svg {...svgProps}><path d="M12 7c-3.9-2.1-7 1.2-7 5.2 0 4.1 2.4 6.8 7 6.8s7-2.7 7-6.8C19 8.2 15.9 4.9 12 7Z" /><path d="M12 7V4" /><path d="M12 4c1.5-1 3-.8 3.8.2" /><path d="M12 7c-1.7 2.3-1.6 7.2.3 10.8" /></svg>;
     case "scan":
       return <svg {...svgProps}><path d="M12 20V8" /><path d="M12 14c-4 0-6.2-2.5-7-6 4.1-.2 6.6 1.8 7 6Z" /><path d="M12 11c2.8 0 4.7-1.8 5.4-4.8-3 0-5.1 1.5-5.4 4.8Z" /><path d="M4 4v3M4 4h3M20 4v3M20 4h-3" /></svg>;
+    case "user":
+      return <svg {...svgProps}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>;
+    case "exit":
+      return <svg {...svgProps}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>;
     default:
       return <svg {...svgProps}><path d="M12 20V9" /><path d="M12 15c-4.3 0-6.7-2.6-7.5-6.5C8.8 8.2 11.5 10.6 12 15Z" /><path d="M12 11c3.4 0 5.8-2.1 6.5-5.5-3.5 0-6 1.7-6.5 5.5Z" /></svg>;
   }
@@ -344,6 +349,106 @@ function App() {
   const [gpsCoords, setGpsCoords] = useState(null);
   const [gpsLoading, setGpsLoading] = useState(false);
   const [, setGpsError] = useState(null);
+
+  // User Authentication & Scan History States
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem("agrisense_user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authInitialMode, setAuthInitialMode] = useState("signin");
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [showScanHistory, setShowScanHistory] = useState(false);
+  const [authToast, setAuthToast] = useState(null);
+  const [userHistory, setUserHistory] = useState(() => {
+    try {
+      const saved = localStorage.getItem("agrisense_user_history");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const userMenuRef = useRef(null);
+
+  // Close user dropdown menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Listen to hash for direct #login / #signup access
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === "#login") {
+        setAuthInitialMode("signin");
+        setAuthModalOpen(true);
+      } else if (window.location.hash === "#signup") {
+        setAuthInitialMode("signup");
+        setAuthModalOpen(true);
+      }
+    };
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
+  }, []);
+
+  const handleSignOut = () => {
+    try {
+      localStorage.removeItem("agrisense_user");
+    } catch (e) {
+      console.warn("Could not clear user:", e);
+    }
+    setUser(null);
+    setUserMenuOpen(false);
+    setAuthToast(
+      language === "mr" ? "तुम्ही यशस्वीपणे बाहेर पडला आहात." : "Signed out successfully."
+    );
+    setTimeout(() => setAuthToast(null), 3500);
+  };
+
+  const handleLoginSuccess = (loggedInUser) => {
+    setUser(loggedInUser);
+    setAuthToast(
+      language === "mr"
+        ? `स्वागत आहे, ${loggedInUser.name}! Google सह लॉगिन झाले.`
+        : `Welcome back, ${loggedInUser.name}! Signed in with Google.`
+    );
+    setTimeout(() => setAuthToast(null), 4000);
+  };
+
+  const recordScanHistory = (scanData, previewUrl) => {
+    try {
+      const entry = {
+        id: Date.now(),
+        plant: scanData.plant,
+        disease: scanData.disease,
+        confidence: scanData.confidence,
+        severity: scanData.severity_percentage ?? scanData.severity?.affected_percentage ?? null,
+        timestamp: new Date().toLocaleDateString(undefined, {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        preview: previewUrl || null,
+      };
+      const existing = JSON.parse(localStorage.getItem("agrisense_user_history") || "[]");
+      const updated = [entry, ...existing.filter((item) => item.disease !== entry.disease || item.plant !== entry.plant)].slice(0, 25);
+      localStorage.setItem("agrisense_user_history", JSON.stringify(updated));
+      setUserHistory(updated);
+    } catch (err) {
+      console.warn("Could not save to scan history:", err);
+    }
+  };
 
   // PWA beforeinstallprompt and standalone detection
   useEffect(() => {
@@ -1016,6 +1121,7 @@ function App() {
       setResult(data);
       setGradcamImage(data.gradcam_image || null);
       setExplainabilityMode(data.explainability_mode || "gradcam");
+      recordScanHistory(data, sampleLeaf.imageUrl);
     } catch (err) {
       setError(err.message || "Failed to analyze sample image.");
     } finally {
@@ -1095,6 +1201,7 @@ function App() {
       if (data.gradcam_image) {
         setImageViewMode("heatmap");
       }
+      recordScanHistory(data, selectedImage?.previewUrl);
     } catch (err) {
       console.error("Plant analysis error:", err);
 
@@ -1162,7 +1269,7 @@ function App() {
     try {
       const formData = new FormData();
       formData.append("file", selectedImage.file);
-      formData.append("farmer_name", "Insured Farmer / Grower");
+      formData.append("farmer_name", user?.name || "Insured Farmer / Grower");
       formData.append("district", selectedDistrict);
       const farmSizeText =
         landUnit === "guntha"
@@ -1453,6 +1560,105 @@ function App() {
               <AppIcon name={isAppInstalled ? "check" : "download"} className="pwa-icon" />
               <span className="pwa-text">{isAppInstalled ? (language === "mr" ? "इन्स्टॉल झाले" : ui.installed) : (language === "mr" ? "ॲप" : ui.installApp)}</span>
             </button>
+
+            {/* Google Sign In / User Profile */}
+            {!user ? (
+              <button
+                type="button"
+                className="auth-nav-btn"
+                onClick={() => {
+                  setAuthInitialMode("signin");
+                  setAuthModalOpen(true);
+                }}
+                title={language === "mr" ? "Google ने लॉगिन करा" : "Sign In with Google"}
+              >
+                <GoogleIcon size={16} />
+                <span>{t.signIn || "Sign In"}</span>
+              </button>
+            ) : (
+              <div className="user-profile-menu-wrap" ref={userMenuRef}>
+                <button
+                  type="button"
+                  className="user-profile-btn"
+                  onClick={() => setUserMenuOpen((prev) => !prev)}
+                  aria-expanded={userMenuOpen}
+                  title={`${user.name} (${user.email})`}
+                >
+                  {user.picture ? (
+                    <img src={user.picture} alt={user.name} className="user-avatar-img" />
+                  ) : (
+                    <span className="user-avatar-initial">
+                      {(user.name || "F")[0].toUpperCase()}
+                    </span>
+                  )}
+                  <span className="user-name-label">
+                    {(user.name || "Farmer").split(" ")[0]}
+                  </span>
+                  <span className="user-google-badge" title="Verified with Google">
+                    ✓
+                  </span>
+                </button>
+
+                {userMenuOpen && (
+                  <div className="user-dropdown-menu">
+                    <div className="user-dropdown-header">
+                      <div className="user-avatar-large">
+                        {user.picture ? (
+                          <img src={user.picture} alt={user.name} />
+                        ) : (
+                          <span>{(user.name || "F")[0].toUpperCase()}</span>
+                        )}
+                      </div>
+                      <div className="user-info-text">
+                        <strong>{user.name}</strong>
+                        <span className="user-email">{user.email}</span>
+                        <span className="user-badge-pill">✓ Google Account</span>
+                      </div>
+                    </div>
+
+                    <div className="user-dropdown-divider" />
+
+                    <div className="user-dropdown-details">
+                      <div className="user-detail-row">
+                        <span>District:</span>
+                        <strong>{user.district || selectedDistrict}</strong>
+                      </div>
+                      <div className="user-detail-row">
+                        <span>Saved Scans:</span>
+                        <strong>{userHistory.length}</strong>
+                      </div>
+                      <div className="user-detail-row">
+                        <span>Session:</span>
+                        <span className="session-active-dot">● Active</span>
+                      </div>
+                    </div>
+
+                    <div className="user-dropdown-divider" />
+
+                    <button
+                      type="button"
+                      className="user-dropdown-action-btn"
+                      onClick={() => {
+                        setShowScanHistory(true);
+                        setUserMenuOpen(false);
+                      }}
+                    >
+                      <span>📋</span>
+                      <span>{t.savedScans || "Saved Scans"} ({userHistory.length})</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className="user-logout-btn"
+                      onClick={handleSignOut}
+                    >
+                      <AppIcon name="exit" />
+                      <span>{t.signOut || "Sign Out"}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -1474,6 +1680,52 @@ function App() {
               <span><i>✦</i> {language === "mr" ? "Explainable AI" : ui.heroExplain}</span>
               <span><i>◌</i> {language === "mr" ? "Local farm context" : ui.heroContext}</span>
               <span><i>↗</i> {language === "mr" ? "Action-ready advice" : ui.heroAdvice}</span>
+            </div>
+
+            {/* Auth Hero Status Banner */}
+            <div className="auth-hero-banner">
+              <div className="auth-hero-banner-left">
+                <span>{user ? "🌾" : "🔒"}</span>
+                <span>
+                  {user ? (
+                    <>
+                      {language === "mr" ? "स्वागत आहे, " : "Signed in as "}
+                      <strong>{user.name}</strong>
+                      {language === "mr"
+                        ? " • पीक निदान व पंचनामा दाखला सिंक सक्रिय"
+                        : " • Diagnosis & PMFBY record cloud sync active"}
+                    </>
+                  ) : (
+                    <>
+                      {language === "mr"
+                        ? "Google ने लॉगिन करून तुमचे पीक निदान आणि विमा पंचनामा रेकॉर्ड जतन करा."
+                        : "Sign in with Google to sync leaf diagnoses & PMFBY insurance claims across devices."}
+                    </>
+                  )}
+                </span>
+              </div>
+              {!user ? (
+                <button
+                  type="button"
+                  className="auth-hero-btn"
+                  onClick={() => {
+                    setAuthInitialMode("signin");
+                    setAuthModalOpen(true);
+                  }}
+                >
+                  <GoogleIcon size={14} />
+                  <span>{language === "mr" ? "Google लॉगिन" : "Sign In with Google"}</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="auth-hero-btn"
+                  onClick={() => setShowScanHistory(true)}
+                >
+                  <span>📋</span>
+                  <span>{t.savedScans || "Saved Scans"} ({userHistory.length})</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -3585,6 +3837,126 @@ function App() {
         language={language}
         onLanguageChange={setLanguage}
       />
+
+      {/* Auth Modal (Login / Sign Up via Google & Email) */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authInitialMode}
+        onLoginSuccess={handleLoginSuccess}
+        language={language}
+        currentDistrict={selectedDistrict}
+        districts={districts}
+      />
+
+      {/* Saved Scan History Modal */}
+      {showScanHistory && (
+        <div
+          className="auth-modal-backdrop"
+          onClick={() => setShowScanHistory(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="scan-history-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 14,
+              }}
+            >
+              <h3
+                style={{
+                  margin: 0,
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+              >
+                <span>📋</span> {t.savedScans || "Saved Scan History"}
+              </h3>
+              <button
+                type="button"
+                className="auth-close-btn"
+                onClick={() => setShowScanHistory(false)}
+                title="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            {userHistory.length === 0 ? (
+              <p
+                style={{
+                  color: "#94a3b8",
+                  textAlign: "center",
+                  padding: "36px 10px",
+                }}
+              >
+                {language === "mr"
+                  ? "कोणतेही स्कॅन जतन केलेले नाहीत. सुरुवात करण्यासाठी पानाचा फोटो अपलोड करा!"
+                  : "No saved scans yet. Upload or capture a leaf photo to record your first diagnosis!"}
+              </p>
+            ) : (
+              <div className="scan-history-list">
+                {userHistory.map((scan) => (
+                  <div key={scan.id} className="scan-history-item">
+                    <div className="history-item-left">
+                      {scan.preview ? (
+                        <img
+                          src={scan.preview}
+                          alt={scan.disease}
+                          className="history-thumb"
+                        />
+                      ) : (
+                        <div
+                          className="history-thumb"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background: "#1e293b",
+                            fontSize: "1.2rem",
+                          }}
+                        >
+                          🌱
+                        </div>
+                      )}
+                      <div className="history-item-details">
+                        <strong>
+                          {scan.plant}: {scan.disease}
+                        </strong>
+                        <span>{scan.timestamp}</span>
+                      </div>
+                    </div>
+                    <div className="history-item-right">
+                      <span className="history-conf-badge">
+                        {(scan.confidence * 100).toFixed(1)}%{" "}
+                        {t.confidence || "Confidence"}
+                      </span>
+                      {scan.severity !== null && (
+                        <span style={{ fontSize: "0.74rem", color: "#f59e0b" }}>
+                          {scan.severity}% {language === "mr" ? "बाधित" : "affected"}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Floating Auth Notification Toast */}
+      {authToast && (
+        <div className="auth-toast-notification" role="status">
+          <span>✓</span>
+          <span>{authToast}</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { getAuthText } from "./authLocalization";
+import {
+  isSupabaseConfigured,
+  signInWithGoogleSupabase,
+  signInWithEmailSupabase,
+  signUpWithEmailSupabase,
+  saveProfileToSupabase,
+} from "./supabase";
 import "./AuthModal.css";
 
 // Official Google "G" multicolor SVG icon
@@ -144,23 +151,33 @@ export default function AuthModal({
     }
   }, [isOpen, mode, userDistrict, primaryCrop]);
 
-  const saveAndComplete = (user) => {
+  const saveAndComplete = async (user) => {
     try {
       localStorage.setItem("agrisense_user", JSON.stringify(user));
     } catch (e) {
       console.warn("Could not save user to localStorage:", e);
     }
+
+    // Also persist profile to Supabase database table `profiles`
+    if (isSupabaseConfigured) {
+      try {
+        await saveProfileToSupabase(user);
+      } catch (e) {
+        console.warn("Could not save profile to Supabase:", e);
+      }
+    }
+
     setLoading(false);
     onLoginSuccess(user);
     onClose();
   };
 
   // Trigger Google Login
-  const handleGoogleClick = () => {
+  const handleGoogleClick = async () => {
     setErrorMessage("");
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-    // If real Google Client ID is configured and GIS is available, trigger One Tap / popup
+    // 1. If real Google Client ID is configured and GIS is available, trigger One Tap / popup
+    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (googleClientId && window.google?.accounts?.id) {
       try {
         window.google.accounts.id.prompt();
@@ -170,21 +187,19 @@ export default function AuthModal({
       }
     }
 
-    // Otherwise show the Google Account Selector (works instantly in dev / local environment)
-    setShowDemoChooser(true);
+    // 2. Open Google Account Chooser immediately without broken redirects
+    setShowDemoChooser((prev) => !prev);
   };
 
-  // Instant sign in as Google Demo Farmer
+  // Instant sign in as Google Demo Farmer or Custom Google Account
   const handleDemoGoogleSignIn = (farmerType = "default") => {
     setLoading(true);
     setTimeout(() => {
+      const isCustom = farmerType === "custom" && customGoogleEmail;
       const demoUser = {
-        id: "google_109283746501928374650",
-        name: farmerType === "custom" && customGoogleName ? customGoogleName : "Ramesh Patil",
-        email:
-          farmerType === "custom" && customGoogleEmail
-            ? customGoogleEmail
-            : "ramesh.patil.farmer@gmail.com",
+        id: isCustom ? `google_${Date.now()}` : "google_109283746501928374650",
+        name: isCustom && customGoogleName ? customGoogleName.trim() : "Ramesh Patil",
+        email: isCustom ? customGoogleEmail.trim() : "ramesh.patil.farmer@gmail.com",
         picture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
         provider: "google",
         district: userDistrict || "Pune",
@@ -194,11 +209,11 @@ export default function AuthModal({
         createdAt: new Date().toISOString(),
       };
       saveAndComplete(demoUser);
-    }, 450);
+    }, 350);
   };
 
-  // Handle standard email form submit
-  const handleEmailSubmit = (e) => {
+  // Handle email form submit
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
@@ -219,6 +234,68 @@ export default function AuthModal({
 
     setLoading(true);
 
+    // If Supabase is configured, use Supabase Database & Auth
+    if (isSupabaseConfigured) {
+      try {
+        if (mode === "signup") {
+          const res = await signUpWithEmailSupabase(email.trim(), password, {
+            fullName: fullName.trim(),
+            primaryCrop,
+            district: userDistrict,
+          });
+          const u = res?.user;
+          const userObj = {
+            id: u?.id || `user_${Date.now()}`,
+            name: fullName.trim(),
+            email: email.trim(),
+            picture: null,
+            provider: "supabase",
+            district: userDistrict,
+            primaryCrop,
+            verified: Boolean(u?.email_confirmed_at),
+            role: "farmer",
+            createdAt: new Date().toISOString(),
+          };
+          saveAndComplete(userObj);
+        } else {
+          const res = await signInWithEmailSupabase(email.trim(), password);
+          const u = res?.user;
+          const userObj = {
+            id: u?.id || `user_${Date.now()}`,
+            name: u?.user_metadata?.full_name || email.split("@")[0].replace(/[._]/g, " "),
+            email: email.trim(),
+            picture: u?.user_metadata?.avatar_url || null,
+            provider: "supabase",
+            district: u?.user_metadata?.district || userDistrict,
+            primaryCrop: u?.user_metadata?.primary_crop || primaryCrop,
+            verified: Boolean(u?.email_confirmed_at),
+            role: "farmer",
+            createdAt: u?.created_at || new Date().toISOString(),
+          };
+          saveAndComplete(userObj);
+        }
+        return;
+      } catch (err) {
+        console.error("Supabase email auth error:", err);
+        const errMsg = err.message || "";
+        if (
+          errMsg.toLowerCase().includes("rate limit") ||
+          err.code === "over_email_send_rate_limit" ||
+          err.status === 429
+        ) {
+          setErrorMessage(
+            "Supabase email rate limit reached. In Supabase Dashboard -> Authentication -> Providers -> Email, turn OFF 'Confirm email'. For now, you can sign in with Google Farmer above!"
+          );
+          setShowDemoChooser(true);
+        } else {
+          setErrorMessage(errMsg || "Authentication error.");
+        }
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Fallback if Supabase credentials are not set
     setTimeout(() => {
       const user = {
         id: `user_${Date.now()}`,
@@ -233,7 +310,7 @@ export default function AuthModal({
         createdAt: new Date().toISOString(),
       };
       saveAndComplete(user);
-    }, 500);
+    }, 450);
   };
 
   if (!isOpen) return null;

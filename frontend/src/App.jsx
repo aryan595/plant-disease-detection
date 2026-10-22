@@ -29,6 +29,14 @@ import "./App.css";
 import ChatWidget from "./ChatWidget";
 import { API_BASE_URL } from "./config";
 import AuthModal, { GoogleIcon } from "./AuthModal";
+import {
+  isSupabaseConfigured,
+  supabase,
+  getSupabaseUser,
+  saveScanToSupabase,
+  fetchScanHistoryFromSupabase,
+  signOutSupabase,
+} from "./supabase";
 
 const LANGUAGE_STORAGE_KEY = "plantDiseaseDetector.language";
 const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
@@ -401,8 +409,65 @@ function App() {
     return () => window.removeEventListener("hashchange", checkHash);
   }, []);
 
-  const handleSignOut = () => {
+  // Supabase session sync & real-time auth state listener
+  useEffect(() => {
+    if (!isSupabaseConfigured || !supabase) return;
+
+    // Check existing active session
+    getSupabaseUser().then((sbUser) => {
+      if (sbUser) {
+        setUser(sbUser);
+        localStorage.setItem("agrisense_user", JSON.stringify(sbUser));
+        fetchScanHistoryFromSupabase(sbUser.id).then((dbScans) => {
+          if (dbScans && dbScans.length > 0) {
+            setUserHistory(dbScans);
+            localStorage.setItem("agrisense_user_history", JSON.stringify(dbScans));
+          }
+        });
+      }
+    });
+
+    // Listen to Supabase auth events (e.g. Google OAuth redirect)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session?.user) {
+        const u = session.user;
+        const profile = {
+          id: u.id,
+          name: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split("@")[0] || "Farmer",
+          email: u.email,
+          picture: u.user_metadata?.avatar_url || u.user_metadata?.picture || null,
+          provider: u.app_metadata?.provider || "supabase",
+          district: u.user_metadata?.district || selectedDistrict || "Pune",
+          primaryCrop: u.user_metadata?.primary_crop || "Tomato",
+          verified: true,
+          createdAt: u.created_at,
+        };
+        setUser(profile);
+        localStorage.setItem("agrisense_user", JSON.stringify(profile));
+
+        // Sync scan history from Supabase PostgreSQL database
+        fetchScanHistoryFromSupabase(u.id).then((dbScans) => {
+          if (dbScans && dbScans.length > 0) {
+            setUserHistory(dbScans);
+            localStorage.setItem("agrisense_user_history", JSON.stringify(dbScans));
+          }
+        });
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+        localStorage.removeItem("agrisense_user");
+      }
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
     try {
+      if (isSupabaseConfigured) {
+        await signOutSupabase();
+      }
       localStorage.removeItem("agrisense_user");
     } catch (e) {
       console.warn("Could not clear user:", e);
@@ -425,7 +490,7 @@ function App() {
     setTimeout(() => setAuthToast(null), 4000);
   };
 
-  const recordScanHistory = (scanData, previewUrl) => {
+  const recordScanHistory = async (scanData, previewUrl) => {
     try {
       const entry = {
         id: Date.now(),
@@ -441,6 +506,12 @@ function App() {
         }),
         preview: previewUrl || null,
       };
+
+      // Save to Supabase PostgreSQL database if user is logged in
+      if (isSupabaseConfigured && user?.id) {
+        saveScanToSupabase(user.id, entry);
+      }
+
       const existing = JSON.parse(localStorage.getItem("agrisense_user_history") || "[]");
       const updated = [entry, ...existing.filter((item) => item.disease !== entry.disease || item.plant !== entry.plant)].slice(0, 25);
       localStorage.setItem("agrisense_user_history", JSON.stringify(updated));

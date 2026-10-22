@@ -6363,7 +6363,7 @@ body {
   border-color: rgba(155, 239, 216, 0.14);
   background: rgba(6, 19, 22, 0.76);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.018);
-  color: #a9c3ba;
+  /* color: #a9c3ba; */
 }
 
 .sample-label,
@@ -6915,6 +6915,711 @@ body {
   .pwa-pill-btn .pwa-text {
     display: none !important;
   }
+}
+
+/* Theme control: the default (dark) styles above remain the source of truth.
+   Light mode is intentionally isolated under .theme-light. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgba(157, 239, 216, 0.18);
+  border-radius: 999px;
+  background: rgba(12, 28, 31, 0.78);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.16);
+  color: #c9fff0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: rgba(120, 245, 188, 0.5);
+  background: rgba(18, 70, 63, 0.86);
+  transform: translateY(-1px);
+}
+
+.theme-toggle .app-icon,
+.pwa-icon,
+.cluster-icon.app-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.weather-quick-pill > span:not(.weather-divider) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.weather-quick-pill .app-icon {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.inline-icon-label,
+.mode-pill-btn,
+.spoken-play-btn,
+.farmer-direct-dose-header h4,
+.farmer-direct-dose-instruction,
+.farmer-direct-dose-tips,
+.quick-crosslink-btn,
+.view-mode-btn,
+.camera-button,
+.split-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.inline-icon-label .app-icon,
+.mode-pill-btn .app-icon,
+.spoken-play-btn .app-icon,
+.farmer-direct-dose-header .app-icon,
+.farmer-direct-dose-instruction > .app-icon,
+.farmer-direct-dose-tips > .app-icon,
+.quick-crosslink-btn .app-icon,
+.view-mode-btn .app-icon,
+.camera-button .app-icon,
+.split-label .app-icon,
+.weather-icon .app-icon,
+.spray-icon .app-icon,
+.detail-icon .app-icon,
+.spoken-sound-icon .app-icon,
+.empty-icon .app-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.crop-dock-title,
+.severity-title,
+.mandi-badge,
+.ai-doctor-text h4,
+.ai-doctor-btn,
+.forecast-section > h3,
+.krishi-kendra-section > h3,
+.recovery-tracker-section > h3,
+.kisan-helpline-card > h3,
+.kendra-card p,
+.kendra-card a,
+.helpline-item > div > span,
+.forecast-day-rain,
+.disease-card-icon,
+.curative-icon,
+.healthy-message > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.crop-dock-title .app-icon,
+.severity-title .app-icon,
+.mandi-badge .app-icon,
+.ai-doctor-text h4 .app-icon,
+.ai-doctor-btn .app-icon,
+.forecast-section > h3 .app-icon,
+.krishi-kendra-section > h3 .app-icon,
+.recovery-tracker-section > h3 .app-icon,
+.kisan-helpline-card > h3 .app-icon,
+.kendra-card p .app-icon,
+.kendra-card a .app-icon,
+.helpline-item > div > span .app-icon,
+.forecast-day-rain .app-icon,
+.disease-card-icon .app-icon,
+.curative-icon .app-icon,
+.healthy-message > span .app-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.app.theme-light {
+  --night-0: #eef5f3;
+  --night-1: #f7fbfa;
+  --night-2: #e7f1ee;
+  --night-panel: rgba(255, 255, 255, 0.72);
+  --night-panel-hi: rgba(250, 255, 253, 0.86);
+  --night-line: rgba(24, 92, 70, 0.16);
+  --night-line-strong: rgba(15, 128, 92, 0.34);
+  --night-text: #132a25;
+  --night-muted: #557068;
+  --night-mint: #087c59;
+  --night-teal: #088b81;
+  --night-cyan: #147da8;
+  --night-shadow: 0 18px 42px rgba(31, 71, 60, 0.11), inset 0 1px rgba(255, 255, 255, 0.8);
+  color: #132a25;
+  background:
+    radial-gradient(ellipse 52% 34% at 2% -5%, rgba(87, 211, 165, 0.3), transparent 74%),
+    radial-gradient(ellipse 45% 28% at 97% 4%, rgba(101, 189, 232, 0.25), transparent 76%),
+    linear-gradient(145deg, #f6fbf9 0%, #e8f2ef 48%, #f3f8f7 100%) !important;
+}
+
+.app.theme-light::before {
+  border-color: rgba(31, 126, 98, 0.08) !important;
+  opacity: 0.54;
+}
+
+.app.theme-light::after {
+  background: rgba(42, 169, 186, 0.12) !important;
+}
+
+.theme-light .header {
+  border-bottom-color: rgba(41, 102, 82, 0.13) !important;
+  background: rgba(247, 252, 250, 0.83) !important;
+  box-shadow: 0 10px 28px rgba(24, 67, 54, 0.09) !important;
+}
+
+.theme-light .header-subtitle,
+.theme-light .panel-header p,
+.theme-light .empty-result p,
+.theme-light .result-panel p,
+.theme-light .image-panel p,
+.theme-light .forecast-section > p,
+.theme-light .recovery-tracker-section > p,
+.theme-light .tankmix-checker-section > p,
+.theme-light .kendra-card p,
+.theme-light .footer {
+  color: #557068 !important;
+}
+
+.theme-light .toolbar-cluster,
+.theme-light .location-cluster,
+.theme-light .language-control,
+.theme-light .model-status-badge,
+.theme-light .pwa-pill-btn,
+.theme-light .theme-toggle,
+.theme-light .weather-quick-pill,
+.theme-light .gps-active-pill,
+.theme-light .gps-pill-btn {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  box-shadow: 0 5px 18px rgba(31, 77, 62, 0.07) !important;
+  color: #21453b !important;
+}
+
+.theme-light .theme-toggle:hover,
+.theme-light .gps-pill-btn:hover:not(:disabled),
+.theme-light .pwa-pill-btn:hover {
+  border-color: rgba(11, 129, 94, 0.42) !important;
+  background: #e9faf3 !important;
+  color: #075a43 !important;
+}
+
+.theme-light .district-selector,
+.theme-light .language-selector,
+.theme-light .compat-field select,
+.theme-light .tankmix-checker-section select {
+  color: #1b3b32 !important;
+  color-scheme: light !important;
+}
+
+.theme-light .compat-field select,
+.theme-light .tankmix-checker-section select {
+  border-color: rgba(25, 100, 78, 0.18) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+}
+
+.theme-light .compat-field select option,
+.theme-light .tankmix-checker-section select option {
+  background: #ffffff !important;
+  color: #1b3b32 !important;
+}
+
+.theme-light .farmer-nav-dock,
+.theme-light .crop-selector-dock,
+.theme-light .image-panel,
+.theme-light .result-panel,
+.theme-light .disease-info-section,
+.theme-light .gradcam-section,
+.theme-light .info-card,
+.theme-light .tankmix-checker-section,
+.theme-light .forecast-section,
+.theme-light .krishi-kendra-section,
+.theme-light .recovery-tracker-section,
+.theme-light .kisan-helpline-card {
+  border-color: rgba(27, 102, 80, 0.15) !important;
+  background: rgba(255, 255, 255, 0.66) !important;
+  box-shadow: 0 16px 36px rgba(29, 74, 60, 0.1) !important;
+}
+
+.theme-light .panel-header,
+.theme-light .pricing-table th,
+.theme-light .pricing-table td,
+.theme-light .footer {
+  border-color: rgba(27, 102, 80, 0.13) !important;
+}
+
+.theme-light .panel-header h2,
+.theme-light .disease-info-section h2,
+.theme-light .gradcam-section h2,
+.theme-light .info-card h3,
+.theme-light .result-panel h2,
+.theme-light .result-panel h3,
+.theme-light .result-panel h4,
+.theme-light .forecast-section h3,
+.theme-light .krishi-kendra-section h3,
+.theme-light .krishi-kendra-section h4,
+.theme-light .recovery-tracker-section h3,
+.theme-light .tankmix-checker-section h3,
+.theme-light .treatments-section h3,
+.theme-light .disease-info-card h3,
+.theme-light .top-predictions h3 {
+  color: #15372e !important;
+}
+
+.theme-light .upload-area,
+.theme-light .empty-result,
+.theme-light .loading-result,
+.theme-light .recovery-dropzone {
+  border-color: rgba(11, 126, 91, 0.32) !important;
+  background: rgba(244, 252, 248, 0.66) !important;
+}
+
+.theme-light .prediction-summary,
+.theme-light .confidence-box,
+.theme-light .top-predictions,
+.theme-light .mode-switch-wrapper,
+.theme-light .treatment-category-card,
+.theme-light .tank-calculator-box,
+.theme-light .description-card,
+.theme-light .disease-info-card,
+.theme-light .gradcam-explanation-box,
+.theme-light .weather-progression-card,
+.theme-light .spray-window-card,
+.theme-light .severity-box,
+.theme-light .spoken-prescription-card,
+.theme-light .farmer-direct-dose-box,
+.theme-light .mandi-rates-card,
+.theme-light .ai-doctor-card,
+.theme-light .forecast-day-card,
+.theme-light .kendra-card,
+.theme-light .helpline-item {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(253, 255, 254, 0.8) !important;
+  box-shadow: 0 8px 20px rgba(31, 77, 62, 0.07) !important;
+}
+
+.theme-light .prediction-item,
+.theme-light .quick-crosslink-btn,
+.theme-light .sample-chip,
+.theme-light .crop-pill,
+.theme-light .view-mode-btn,
+.theme-light .mode-pill-btn,
+.theme-light .change-image-button,
+.theme-light .pmfby-pdf-button,
+.theme-light .whatsapp-share-button,
+.theme-light .reset-button {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #24483d !important;
+}
+
+.theme-light .farmer-tab-btn,
+.theme-light .crop-pill,
+.theme-light .sample-chip,
+.theme-light .view-mode-btn {
+  color: #365b50 !important;
+}
+
+.theme-light .farmer-tab-btn.active,
+.theme-light .crop-pill.active,
+.theme-light .mode-pill-btn.active {
+  border-color: rgba(255, 255, 255, 0.72) !important;
+  background: linear-gradient(135deg, #08765b, #109a81) !important;
+  color: #ffffff !important;
+}
+
+.theme-light .hero-system-card,
+.theme-light .dashboard-hero-copy,
+.theme-light .voice-hero-banner {
+  box-shadow: 0 16px 34px rgba(26, 80, 64, 0.12) !important;
+}
+
+.theme-light .footer {
+  background: rgba(245, 251, 248, 0.78) !important;
+}
+
+@media (max-width: 760px) {
+  .theme-toggle {
+    display: grid !important;
+    width: 44px;
+    min-width: 44px;
+    place-items: center;
+    padding: 0;
+  }
+
+  .theme-toggle-label {
+    display: none;
+  }
+}
+
+/* Complete the light surface pass for the legacy dashboard layers that use
+   intentionally opaque night backgrounds later in this stylesheet. */
+.theme-light .logo-title {
+  background: linear-gradient(135deg, #e8fff3 0%, #00562e 0%, #55cef8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-title {
+  color:#0369a1
+}
+
+.theme-light .dashboard-hero-copy {
+  border-color: rgba(16, 113, 83, 0.17) !important;
+  background:
+    radial-gradient(circle at 84% 28%, rgba(72, 199, 157, 0.22), transparent 34%),
+    linear-gradient(125deg, rgba(250, 255, 252, 0.92), rgba(226, 245, 238, 0.8)) !important;
+}
+
+.theme-light .dashboard-hero-copy::after {
+  border-color: rgba(14, 133, 95, 0.13) !important;
+  box-shadow: 0 0 0 30px rgba(54, 182, 137, 0.05), 0 0 0 61px rgba(54, 182, 137, 0.035) !important;
+}
+
+.theme-light .dashboard-hero h1,
+.theme-light .dashboard-hero h1::first-line {
+  color: #123c31 !important;
+}
+
+.theme-light .dashboard-hero-copy > p,
+.theme-light .dashboard-hero-signals span {
+  color: #456a5e !important;
+}
+
+.theme-light .dashboard-hero-signals span {
+  border-color: rgba(20, 108, 81, 0.14) !important;
+  background: rgba(255, 255, 255, 0.64) !important;
+}
+
+.theme-light .dashboard-hero-signals i {
+  color: #087b5b !important;
+}
+
+.theme-light .hero-system-card {
+  border-color: rgba(17, 109, 83, 0.17) !important;
+  background:
+    radial-gradient(circle at 84% 20%, rgba(72, 194, 232, 0.22), transparent 28%),
+    radial-gradient(circle at 42% 92%, rgba(70, 202, 151, 0.2), transparent 38%),
+    linear-gradient(145deg, rgba(252, 255, 254, 0.94), rgba(226, 243, 238, 0.84)) !important;
+}
+
+.theme-light .system-card-topline,
+.theme-light .system-card-footer,
+.theme-light .system-card-label,
+.theme-light .system-card-meta {
+  color: #52756a !important;
+}
+
+.theme-light .system-card-body strong,
+.theme-light .system-card-footer strong {
+  color: #153b31 !important;
+}
+
+.theme-light .system-card-code {
+  color: #087b5b !important;
+}
+
+.theme-light .system-card-footer {
+  border-top-color: rgba(26, 105, 82, 0.14) !important;
+}
+
+.theme-light .system-card-footer div {
+  background: rgba(29, 133, 100, 0.14) !important;
+}
+
+.theme-light .farmer-nav-dock {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(250, 254, 252, 0.78) !important;
+}
+
+.theme-light .farmer-tab-btn:not(.active),
+.theme-light .crop-pill,
+.theme-light .sample-chip,
+.theme-light .view-mode-btn {
+  border-color: rgba(25, 100, 78, 0.14) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #315d50 !important;
+}
+
+.theme-light .voice-hero-banner {
+  border-color: rgba(9, 119, 88, 0.2) !important;
+  background:
+    radial-gradient(circle at 8% 2%, rgba(119, 232, 191, 0.38), transparent 35%),
+    radial-gradient(circle at 90% 100%, rgba(78, 188, 226, 0.3), transparent 42%),
+    linear-gradient(132deg, #e3f8ef, #d9f2f1 48%, #e5f1f7) !important;
+}
+
+.theme-light .voice-hero-text h3,
+.theme-light .voice-hero-text p {
+  color: #17483b !important;
+}
+
+.theme-light .voice-hero-avatar,
+.theme-light .voice-hero-cta {
+  border-color: rgba(10, 119, 87, 0.24) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #087557 !important;
+}
+
+.theme-light .crop-selector-dock {
+  border-color: rgba(25, 100, 78, 0.15) !important;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(237, 249, 245, 0.8)) !important;
+}
+
+.theme-light .crop-dock-title,
+.theme-light .clear-crop-btn {
+  color: #174e3f !important;
+}
+
+.theme-light .image-panel {
+  background: #f8fcfa !important;
+}
+
+.theme-light .scan-panel-ambient {
+  background:
+    linear-gradient(90deg, rgba(247, 253, 250, 0.94) 0%, rgba(233, 248, 241, 0.8) 47%, rgba(240, 250, 247, 0.84) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(225, 244, 237, 0.36)),
+    url("./assets/leaf-scan-atmosphere.png") center / cover !important;
+  opacity: 0.42 !important;
+}
+
+.theme-light .upload-area {
+  box-shadow: inset 0 0 34px rgba(45, 130, 96, 0.05) !important;
+}
+
+.theme-light .upload-area h3,
+.theme-light .empty-result h2,
+.theme-light .loading-result h2 {
+  color: #183f34 !important;
+}
+
+.theme-light .upload-area p,
+.theme-light .upload-formats,
+.theme-light .sample-label,
+.theme-light .selected-file {
+  color: #5c796f !important;
+}
+
+.theme-light .camera-button {
+  border-color: rgba(12, 116, 86, 0.24) !important;
+  background: rgba(255, 255, 255, 0.84) !important;
+  color: #096f54 !important;
+}
+
+.theme-light .empty-result,
+.theme-light .loading-result {
+  background: rgba(248, 253, 250, 0.88) !important;
+}
+
+.theme-light .result-content,
+.theme-light .description-card,
+.theme-light .disease-info-card,
+.theme-light .treatment-category-card,
+.theme-light .tank-calculator-box,
+.theme-light .weather-progression-card,
+.theme-light .spray-window-card,
+.theme-light .severity-box,
+.theme-light .top-predictions,
+.theme-light .spoken-prescription-card,
+.theme-light .farmer-direct-dose-box,
+.theme-light .mandi-rates-card,
+.theme-light .ai-doctor-card,
+.theme-light .gradcam-explanation-box,
+.theme-light .forecast-day-card,
+.theme-light .kendra-card,
+.theme-light .recovery-dropzone,
+.theme-light .helpline-item,
+.theme-light .prediction-summary,
+.theme-light .confidence-box,
+.theme-light .mode-switch-wrapper,
+.theme-light .quick-sample-section,
+.theme-light .analysis-complete-note,
+.theme-light .confidence-warning,
+.theme-light .healthy-message,
+.theme-light .inconclusive-banner-box,
+.theme-light .gradcam-note,
+.theme-light .disease-timeline-section,
+.theme-light .timeline-card.stage-past,
+.theme-light .timeline-card.stage-current,
+.theme-light .timeline-card.stage-future,
+.theme-light .unit-toggle-pills,
+.theme-light .weather-metrics-grid,
+.theme-light .progression-action,
+.theme-light .pricing-table-wrap,
+.theme-light .kisan-helpline-card {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #294e43 !important;
+  box-shadow: 0 8px 20px rgba(31, 77, 62, 0.06) !important;
+}
+
+.theme-light .prediction-item,
+.theme-light .spray-detail-item,
+.theme-light .gradcam-point,
+.theme-light .weather-metric,
+.theme-light .tank-metric-card,
+.theme-light .treatment-item-card,
+.theme-light .mandi-stat-box,
+.theme-light .compat-result-card,
+.theme-light .recovery-result-box,
+.theme-light .pricing-table th,
+.theme-light .pricing-table td,
+.theme-light .pump-tab,
+.theme-light .unit-pill,
+.theme-light .acre-chip,
+.theme-light .phi-slider {
+  border-color: rgba(25, 100, 78, 0.14) !important;
+  background: rgba(249, 253, 251, 0.92) !important;
+  color: #294e43 !important;
+}
+
+.theme-light .result-content,
+.theme-light .disease-info-section,
+.theme-light .gradcam-section,
+.theme-light .result-content .label,
+.theme-light .subsection-header span,
+.theme-light .prediction-item,
+.theme-light .disease-info-card p,
+.theme-light .description-card p,
+.theme-light .gradcam-info p,
+.theme-light .info-card p,
+.theme-light .spray-detail-item p,
+.theme-light .spray-summary,
+.theme-light .gradcam-explanation-box p,
+.theme-light .gradcam-point p,
+.theme-light .weather-metric .metric-label,
+.theme-light .tank-metric-label,
+.theme-light .tank-metric-sub,
+.theme-light .treatment-notes,
+.theme-light .mandi-stat-lbl,
+.theme-light .mandi-stat-box small,
+.theme-light .recovery-result-box p,
+.theme-light .helpline-item span,
+.theme-light .timeline-header p,
+.theme-light .timeline-card p,
+.theme-light .curative-window-box span:not(.curative-icon),
+.theme-light .disclaimer,
+.theme-light .treatments-section-header p,
+.theme-light .treatments-section label {
+  color: #55746a !important;
+}
+
+.theme-light .result-content strong,
+.theme-light .disease-info-card h3,
+.theme-light .description-card h3,
+.theme-light .subsection-header h3,
+.theme-light .prediction-item strong,
+.theme-light .spray-detail-item strong,
+.theme-light .spray-title-group h4,
+.theme-light .gradcam-explanation-box h3,
+.theme-light .gradcam-point strong,
+.theme-light .weather-metric .metric-value,
+.theme-light .tank-metric-val,
+.theme-light .treatment-item-card strong,
+.theme-light .mandi-market-title,
+.theme-light .mandi-stat-val,
+.theme-light .recovery-result-box h4,
+.theme-light .kendra-card strong,
+.theme-light .kisan-helpline-card h3,
+.theme-light .helpline-item strong,
+.theme-light .timeline-header h3,
+.theme-light .timeline-card h4,
+.theme-light .curative-window-box strong,
+.theme-light .spoken-prescription-text strong,
+.theme-light .farmer-direct-dose-header h4,
+.theme-light .ai-doctor-text h4 {
+  color: #183e33 !important;
+}
+
+.theme-light .spoken-prescription-card,
+.theme-light .farmer-direct-dose-box,
+.theme-light .ai-doctor-card,
+.theme-light .spray-window-card.status-optimal,
+.theme-light .spray-window-card.status-caution,
+.theme-light .spray-window-card.status-avoid,
+.theme-light .mandi-rates-card,
+.theme-light .mandi-stat-box.modal-box,
+.theme-light .treatment-category-card.chemical,
+.theme-light .treatment-category-card.organic,
+.theme-light .phi-harvest-card,
+.theme-light .compat-result-card,
+.theme-light .recovery-result-box {
+  background: rgba(248, 253, 250, 0.9) !important;
+}
+
+.theme-light .mode-switch-info,
+.theme-light .spoken-prescription-text span,
+.theme-light .farmer-direct-dose-tips,
+.theme-light .ai-doctor-text p,
+.theme-light .healthy-message p,
+.theme-light .inconclusive-banner-box p {
+  color: #53756a !important;
+}
+
+.theme-light .mode-switch-pill {
+  border-color: rgba(25, 100, 78, 0.16) !important;
+  background: rgba(243, 251, 247, 0.88) !important;
+}
+
+.theme-light .mode-pill-btn {
+  color: #466b60 !important;
+}
+
+.theme-light .quick-crosslinks-bar,
+.theme-light .system-card-footer {
+  border-top-color: rgba(25, 100, 78, 0.14) !important;
+}
+
+.theme-light .quick-crosslink-btn,
+.theme-light .change-image-button,
+.theme-light .pmfby-pdf-button,
+.theme-light .whatsapp-share-button,
+.theme-light .reset-button {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1d5947 !important;
+}
+
+.theme-light .forecast-day-card,
+.theme-light .kendra-card,
+.theme-light .recovery-dropzone,
+.theme-light .helpline-item,
+.theme-light .pricing-table-wrap,
+.theme-light .gradcam-image-wrap {
+  background: rgba(255, 255, 255, 0.86) !important;
+  color: #294e43 !important;
+}
+
+.theme-light .point-icon,
+.theme-light .disease-card-icon,
+.theme-light .description-label {
+  border-color: rgba(16, 119, 88, 0.2) !important;
+  color: #087b5b !important;
+}
+
+.theme-light .mandi-badge,
+.theme-light .mandi-trend,
+.theme-light .field-ready-badge,
+.theme-light .cib-badge,
+.theme-light .badge-tag,
+.theme-light .timeline-urgency-badge,
+.theme-light .curative-window-box,
+.theme-light .disclaimer,
+.theme-light .stage-badge.past,
+.theme-light .stage-badge.current,
+.theme-light .stage-badge.future,
+.theme-light .dosage-pill,
+.theme-light .price-pill,
+.theme-light .phi-pill.phi-safe,
+.theme-light .phi-days-badge {
+  border-color: rgba(14, 125, 91, 0.2) !important;
+  background: rgba(221, 249, 234, 0.82) !important;
+  color: #087051 !important;
 }
 
 

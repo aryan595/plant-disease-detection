@@ -31,6 +31,7 @@ import { API_BASE_URL } from "./config";
 
 const LANGUAGE_STORAGE_KEY = "plantDiseaseDetector.language";
 const CHAT_LANGUAGE_KEY = "plantHealthChat.language.v1";
+const THEME_STORAGE_KEY = "plantDiseaseDetector.theme";
 
 const CAMERA_TEXT = {
   en: {
@@ -166,6 +167,56 @@ function AppIcon({ name, className = "" }) {
       return <svg {...svgProps}><path d="M4 19V5" /><path d="M4 19h16" /><path d="m7 15 4-4 3 2 5-6" /><path d="M16 7h3v3" /></svg>;
     case "camera":
       return <svg {...svgProps}><path d="M4 8h4l1.4-2h5.2L16 8h4v11H4z" /><circle cx="12" cy="13" r="3.1" /></svg>;
+    case "sun":
+      return <svg {...svgProps}><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>;
+    case "moon":
+      return <svg {...svgProps}><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" /></svg>;
+    case "pin":
+      return <svg {...svgProps}><path d="M20 10c0 5.2-8 11-8 11S4 15.2 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.4" /></svg>;
+    case "globe":
+      return <svg {...svgProps}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></svg>;
+    case "download":
+      return <svg {...svgProps}><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M5 21h14" /></svg>;
+    case "check":
+      return <svg {...svgProps}><path d="m5 12 4.2 4.2L19 6.5" /></svg>;
+    case "location":
+      return <svg {...svgProps}><path d="M5 12h14M12 5v14" /><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="2" /></svg>;
+    case "thermometer":
+      return <svg {...svgProps}><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0Z" /><path d="M12 10v6" /></svg>;
+    case "droplet":
+      return <svg {...svgProps}><path d="M12 3s6 6.2 6 10a6 6 0 0 1-12 0c0-3.8 6-10 6-10Z" /></svg>;
+    case "brain":
+      return <svg {...svgProps}><path d="M9 4a3 3 0 0 0-5 2.2A3.2 3.2 0 0 0 5 12a3 3 0 0 0 4 4.6V20" /><path d="M15 4a3 3 0 0 1 5 2.2A3.2 3.2 0 0 1 19 12a3 3 0 0 1-4 4.6V20" /><path d="M9 4c1.3 0 3 .9 3 2.5V20M15 4c-1.3 0-3 .9-3 2.5" /></svg>;
+    case "volume":
+      return <svg {...svgProps}><path d="M5 10v4h3l4 3V7l-4 3H5Z" /><path d="M16 9.5a4 4 0 0 1 0 5M18.5 7a7.5 7.5 0 0 1 0 10" /></svg>;
+    case "megaphone":
+      return <svg {...svgProps}><path d="M4 13v-3h3l8-4v11l-8-4H4Z" /><path d="m7 14 1 4h3l-1-3" /><path d="M19 9a4 4 0 0 1 0 5" /></svg>;
+    case "target":
+      return <svg {...svgProps}><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="m15 9 6-6M17 3h4v4" /></svg>;
+    case "clock":
+      return <svg {...svgProps}><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2" /></svg>;
+    case "wind":
+      return <svg {...svgProps}><path d="M3 8h12a3 3 0 1 0-3-3" /><path d="M3 12h16a3 3 0 1 1-3 3" /><path d="M3 16h8" /></svg>;
+    case "rain":
+      return <svg {...svgProps}><path d="M7 15a4 4 0 1 1 .9-7.9A5 5 0 0 1 18 9.2 3 3 0 0 1 17 15H7z" /><path d="m9 18-.5 2M13 18l-.5 2M17 18l-.5 2" /></svg>;
+    case "search":
+      return <svg {...svgProps}><circle cx="10.5" cy="10.5" r="5.5" /><path d="m15 15 5 5" /></svg>;
+    case "tools":
+      return <svg {...svgProps}><path d="M14 6a4 4 0 0 0-5 5L3 17l4 4 6-6a4 4 0 0 0 5-5l-3 2-3-3 2-3Z" /></svg>;
+    case "shield":
+      return <svg {...svgProps}><path d="M12 3 20 6v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z" /><path d="m8.7 12 2.2 2.2 4.5-4.5" /></svg>;
+    case "chart":
+      return <svg {...svgProps}><path d="M4 19V5M4 19h16" /><path d="m7 15 4-4 3 2 4-6" /><path d="M16 7h2v2" /></svg>;
+    case "calendar":
+      return <svg {...svgProps}><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /><path d="M8 14h.01M12 14h.01M16 14h.01" /></svg>;
+    case "phone":
+      return <svg {...svgProps}><path d="M7 3h3l1.5 4-2 1.4a14 14 0 0 0 6 6l1.4-2 4 1.5v3c0 1.1-.9 2-2 2C10.2 19 5 13.8 5 5c0-1.1.9-2 2-2Z" /></svg>;
+    case "building":
+      return <svg {...svgProps}><path d="M4 21h16M6 21V7l6-4 6 4v14M9 10h.01M15 10h.01M9 14h.01M15 14h.01" /></svg>;
+    case "tag":
+      return <svg {...svgProps}><path d="M3 12V5h7l9 9-7 7-9-9Z" /><circle cx="8" cy="9" r="1" /></svg>;
+    case "message":
+      return <svg {...svgProps}><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.7 8.7 0 0 1-3.2-.7L4 20l1.4-4.1A7.3 7.3 0 0 1 4 11.5 7.5 7.5 0 0 1 12 4a7.5 7.5 0 0 1 8 7.5Z" /></svg>;
     case "tomato":
       return <svg {...svgProps}><circle cx="12" cy="14" r="6.2" /><path d="M12 7.8V4" /><path d="m12 7.8-3-2.1" /><path d="m12 7.8 3-2.1" /><path d="m12 7.8 0-3" /></svg>;
     case "grape":
@@ -197,6 +248,13 @@ function App() {
         : "en";
     } catch {
       return "en";
+    }
+  });
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
+    } catch {
+      return "dark";
     }
   });
 
@@ -490,6 +548,15 @@ function App() {
       console.warn("Could not save the selected language.");
     }
   }, [language]);
+
+  // Keep the chosen display mode across visits; dark remains the untouched default.
+  useEffect(() => {
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      console.warn("Could not save the selected display mode.");
+    }
+  }, [theme]);
 
   // Attach the camera stream after the video element has rendered.
   useEffect(() => {
@@ -1262,7 +1329,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className={`app theme-${theme}`}>
       {/* Header */}
       {/* Modern Uncluttered Header */}
       <header className="header">
@@ -1283,7 +1350,7 @@ function App() {
           {/* Location & Microclimate Cluster */}
           <div className="toolbar-cluster location-cluster">
             <div className="district-control">
-              <span className="cluster-icon">📍</span>
+              <AppIcon name="pin" className="cluster-icon" />
               <select
                 id="app-district"
                 className="district-selector"
@@ -1324,7 +1391,7 @@ function App() {
                 disabled={gpsLoading}
                 title={language === "mr" ? "थेट शेत GPS हवामान" : ui.liveGps}
               >
-                <span>{gpsLoading ? "⏳" : "🛰️"}</span>
+                <AppIcon name={gpsLoading ? "clock" : "location"} />
                 <span>{gpsLoading ? (language === "mr" ? "शोधत आहे" : ui.locating) : "GPS"}</span>
               </button>
             )}
@@ -1332,9 +1399,9 @@ function App() {
             {/* Weather Quick Pill */}
             {districtWeather?.weather && (
               <div className="weather-quick-pill" title="Live Microclimate Weather">
-                <span>🌡️ {districtWeather.weather.temperature_c}°C</span>
+                <span><AppIcon name="thermometer" /> {districtWeather.weather.temperature_c}°C</span>
                 <span className="weather-divider">•</span>
-                <span>💧 {districtWeather.weather.humidity_percent}%</span>
+                <span><AppIcon name="droplet" /> {districtWeather.weather.humidity_percent}%</span>
               </div>
             )}
           </div>
@@ -1343,7 +1410,7 @@ function App() {
           <div className="toolbar-cluster utility-cluster">
             {/* Language Selector */}
             <div className="language-control">
-              <span className="cluster-icon">🌐</span>
+              <AppIcon name="globe" className="cluster-icon" />
               <select
                 id="app-language"
                 className="language-selector"
@@ -1359,6 +1426,17 @@ function App() {
               </select>
             </div>
 
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+              aria-pressed={theme === "light"}
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <AppIcon name={theme === "dark" ? "sun" : "moon"} />
+              <span className="theme-toggle-label">{theme === "dark" ? "Light" : "Dark"}</span>
+            </button>
+
             {/* Neural Model Status Badge */}
             <div className="model-status-badge" title={language === "mr" ? "Trained on 55 crop health classes" : `55 ${ui.cropClasses}`}>
               <span className="pulse-indicator"></span>
@@ -1372,7 +1450,7 @@ function App() {
               onClick={handleInstallApp}
               title={language === "mr" ? "ॲप इन्स्टॉल करा" : ui.installApp}
             >
-              <span>{isAppInstalled ? "✓" : "📲"}</span>
+              <AppIcon name={isAppInstalled ? "check" : "download"} className="pwa-icon" />
               <span className="pwa-text">{isAppInstalled ? (language === "mr" ? "इन्स्टॉल झाले" : ui.installed) : (language === "mr" ? "ॲप" : ui.installApp)}</span>
             </button>
           </div>
@@ -1501,7 +1579,7 @@ function App() {
             <div className="crop-selector-dock">
               <div className="crop-dock-header">
                 <span className="crop-dock-title">
-                  🌾 {language === "mr" ? "तुमचे पीक निवडा (AI अचूकतेसाठी):" : ui.cropSelector}
+                  <AppIcon name="sprout" /> {language === "mr" ? "तुमचे पीक निवडा (AI अचूकतेसाठी):" : ui.cropSelector}
                 </span>
                 {selectedCrop !== "all" && (
                   <button
@@ -1570,21 +1648,21 @@ function App() {
                   className={`view-mode-btn ${imageViewMode === "original" ? "active" : ""}`}
                   onClick={() => setImageViewMode("original")}
                 >
-                  📷 {language === "mr" ? "मूळ पान" : ui.original}
+                  <AppIcon name="camera" /> {language === "mr" ? "मूळ पान" : ui.original}
                 </button>
                 <button
                   type="button"
                   className={`view-mode-btn ${imageViewMode === "heatmap" ? "active" : ""}`}
                   onClick={() => setImageViewMode("heatmap")}
                 >
-                  🔥 {visualGuideLabel}
+                  <AppIcon name="target" /> {visualGuideLabel}
                 </button>
                 <button
                   type="button"
                   className={`view-mode-btn ${imageViewMode === "split" ? "active" : ""}`}
                   onClick={() => setImageViewMode("split")}
                 >
-                  🔲 {language === "mr" ? "तुलना" : ui.sideBySide}
+                  <AppIcon name="scan" /> {language === "mr" ? "तुलना" : ui.sideBySide}
                 </button>
               </div>
             )}
@@ -1620,7 +1698,7 @@ function App() {
               {!selectedImage && (
                 <>
                   <div className="upload-icon">
-                    {isDragging ? "📥" : "🍃"}
+                    <AppIcon name={isDragging ? "download" : "sprout"} />
                   </div>
 
                   <h3>
@@ -1644,11 +1722,11 @@ function App() {
                   {imageViewMode === "split" && gradcamImage ? (
                     <div className="split-view-row">
                       <div className="split-view-col">
-                        <span className="split-label">📷 {language === "mr" ? "मूळ फोटो" : ui.original}</span>
+                        <span className="split-label"><AppIcon name="camera" /> {language === "mr" ? "मूळ फोटो" : ui.original}</span>
                         <img src={selectedImage.preview} alt="Original Leaf" className="main-preview-image split" />
                       </div>
                       <div className="split-view-col">
-                        <span className="split-label">🔥 {visualGuideLabel}</span>
+                        <span className="split-label"><AppIcon name="target" /> {visualGuideLabel}</span>
                         <img
                           src={gradcamImage}
                           alt={usesVisualConditionGuide ? "Leaf condition guide" : "Grad-CAM lesion heatmap"}
@@ -1675,14 +1753,14 @@ function App() {
                 onClick={startCamera}
                 disabled={loading}
               >
-                📷 {cameraText.takePhoto}
+                <AppIcon name="camera" /> {cameraText.takePhoto}
               </button>
             </div>
 
             {/* Quick Sample Leaves for Immediate Testing */}
             <div className="quick-sample-section">
               <span className="sample-label">
-                ⚡ {language === "mr" ? "किंवा डेमो पान निवडा (त्वरीत चाचणी):" : ui.sampleLabel}
+                <AppIcon name="target" /> {language === "mr" ? "किंवा डेमो पान निवडा (त्वरीत चाचणी):" : ui.sampleLabel}
               </span>
               <div className="sample-chips-row">
                 <button
@@ -1836,7 +1914,7 @@ function App() {
 
             {!result && !loading && !error && (
               <div className="empty-result">
-                <div className="empty-icon">🧠</div>
+                <div className="empty-icon"><AppIcon name="brain" /></div>
 
                 <h2>{t.analysisResult}</h2>
 
@@ -1939,7 +2017,7 @@ function App() {
                 {/* Farmer Mode vs Expert Mode Switcher */}
                 <div className="mode-switch-wrapper">
                   <div className="mode-switch-info">
-                    <span>{farmerMode ? `👨‍🌾 ${ui.farmerInfo}` : `🔬 ${ui.expertInfo}`}</span>
+                    <span className="inline-icon-label"><AppIcon name={farmerMode ? "sprout" : "brain"} />{farmerMode ? ui.farmerInfo : ui.expertInfo}</span>
                   </div>
                   <div className="mode-switch-pill">
                     <button
@@ -1947,14 +2025,14 @@ function App() {
                       className={`mode-pill-btn ${farmerMode ? "active" : ""}`}
                       onClick={() => setFarmerMode(true)}
                     >
-                      👨‍🌾 {ui.farmer}
+                      <AppIcon name="sprout" /> {ui.farmer}
                     </button>
                     <button
                       type="button"
                       className={`mode-pill-btn ${!farmerMode ? "active" : ""}`}
                       onClick={() => setFarmerMode(false)}
                     >
-                      🔬 {ui.expert}
+                      <AppIcon name="brain" /> {ui.expert}
                     </button>
                   </div>
                 </div>
@@ -1962,7 +2040,7 @@ function App() {
                 {/* Spoken Audio Voice Prescription Card */}
                 <div className="spoken-prescription-card">
                   <div className="spoken-prescription-info">
-                    <span className="spoken-sound-icon">{isSpeaking ? "🔊" : "📢"}</span>
+                    <span className="spoken-sound-icon"><AppIcon name={isSpeaking ? "volume" : "megaphone"} /></span>
                     <div className="spoken-prescription-text">
                       <strong>
                         {ui.voiceTitle}
@@ -1978,9 +2056,9 @@ function App() {
                     onClick={handleSpeakAdvisory}
                   >
                     {isSpeaking ? (
-                      <>⏹️ {ui.stop}</>
+                      <><AppIcon name="check" /> {ui.stop}</>
                     ) : (
-                      <>🔊 {ui.play}</>
+                      <><AppIcon name="volume" /> {ui.play}</>
                     )}
                   </button>
                 </div>
@@ -1989,13 +2067,13 @@ function App() {
                 {farmerMode && (
                   <div className="farmer-direct-dose-box">
                     <div className="farmer-direct-dose-header">
-                      <h4>🎒 {ui.doseTitle}</h4>
+                      <h4><AppIcon name="spray" /> {ui.doseTitle}</h4>
                       <span className="farmer-dose-pill">
                         {result.treatment_advisory?.chemical_treatments?.[0]?.commercial_name || "Mancozeb 75% WP"}
                       </span>
                     </div>
                     <div className="farmer-direct-dose-instruction">
-                      👉 {result.confidence_status === "inconclusive"
+                      <AppIcon name="target" /> {result.confidence_status === "inconclusive"
                         ? ui.hold
                         : result.is_healthy
                           ? ui.healthy
@@ -2005,7 +2083,7 @@ function App() {
                           )}
                     </div>
                     <p className="farmer-direct-dose-tips">
-                      ⏰ {ui.ideal}
+                      <AppIcon name="clock" /> {ui.ideal}
                     </p>
                   </div>
                 )}
@@ -2017,21 +2095,21 @@ function App() {
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("spray_mix")}
                   >
-                    🧪 {language === "mr" ? "औषध मिश्रण व पंपाचे बजेट तपासा" : ui.tank}
+                    <AppIcon name="spray" /> {language === "mr" ? "औषध मिश्रण व पंपाचे बजेट तपासा" : ui.tank}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("forecast")}
                   >
-                    ⛅ {language === "mr" ? "७-दिवस हवामान व बुरशी धोका पहा" : ui.forecast}
+                    <AppIcon name="forecast" /> {language === "mr" ? "७-दिवस हवामान व बुरशी धोका पहा" : ui.forecast}
                   </button>
                   <button
                     type="button"
                     className="quick-crosslink-btn"
                     onClick={() => setActiveTab("mandi_kendras")}
                   >
-                    🏪 {language === "mr" ? "जवळचे कृषी केंद्र व वाजवी भाव पहा" : ui.kendras}
+                    <AppIcon name="market" /> {language === "mr" ? "जवळचे कृषी केंद्र व वाजवी भाव पहा" : ui.kendras}
                   </button>
                   {farmerMode && (
                     <button
@@ -2040,7 +2118,7 @@ function App() {
                       onClick={() => setFarmerMode(false)}
                       style={{ color: "#166534", fontWeight: "bold" }}
                     >
-                      🔍 {language === "mr" ? "Grad-CAM उष्णता नकाशा व विमा क्लेम (Expert Mode)" : ui.guide}
+                      <AppIcon name="search" /> {language === "mr" ? "Grad-CAM उष्णता नकाशा व विमा क्लेम (Expert Mode)" : ui.guide}
                     </button>
                   )}
                 </div>
@@ -2050,7 +2128,7 @@ function App() {
                   <div className="severity-box">
                     <div className="severity-header">
                       <span className="severity-title">
-                        📊 {t.severityAssessment}
+                        <AppIcon name="chart" /> {t.severityAssessment}
                       </span>
 
                       <span
@@ -2104,7 +2182,7 @@ function App() {
                   >
                     <div className="weather-progression-header">
                       <div className="weather-title-group">
-                        <span className="weather-icon">🌦️</span>
+                        <span className="weather-icon"><AppIcon name="forecast" /></span>
                         <div>
                           <h4>{t.weatherRiskTitle}</h4>
                           <span className="weather-location">
@@ -2173,7 +2251,7 @@ function App() {
                       {result.weather_progression
                         .recommended_action_en && (
                         <div className="progression-action">
-                          <span>💡</span>
+                          <span><AppIcon name="target" /></span>
                           <em>
                             {language === "mr" &&
                             result.weather_progression
@@ -2197,7 +2275,7 @@ function App() {
                   >
                     <div className="spray-window-header">
                       <div className="spray-title-group">
-                        <span className="spray-icon">🎯</span>
+                        <span className="spray-icon"><AppIcon name="target" /></span>
                         <div>
                           <h4>{t.sprayWindowCardTitle}</h4>
                           <span className="spray-summary">
@@ -2225,7 +2303,7 @@ function App() {
 
                     <div className="spray-details-grid">
                       <div className="spray-detail-item">
-                        <span className="detail-icon">⏰</span>
+                        <span className="detail-icon"><AppIcon name="clock" /></span>
                         <div>
                           <strong>{t.bestWindowToday}</strong>
                           <p>
@@ -2237,7 +2315,7 @@ function App() {
                       </div>
 
                       <div className="spray-detail-item">
-                        <span className="detail-icon">💨</span>
+                        <span className="detail-icon"><AppIcon name="wind" /></span>
                         <div>
                           <strong>{t.windDriftStatus}</strong>
                           <p>
@@ -2249,7 +2327,7 @@ function App() {
                       </div>
 
                       <div className="spray-detail-item">
-                        <span className="detail-icon">🌧️</span>
+                        <span className="detail-icon"><AppIcon name="rain" /></span>
                         <div>
                           <strong>{t.rainfastnessStatus}</strong>
                           <p>
@@ -2274,7 +2352,7 @@ function App() {
                 {/* Healthy result */}
                 {result.is_healthy && (
                   <div className="healthy-message">
-                    <span>🌿</span>
+                    <span><AppIcon name="sprout" /></span>
 
                     <div>
                       <strong>{t.noDiseaseDetected}</strong>
@@ -2323,7 +2401,7 @@ function App() {
                 {result.mandi_rates && (
                   <div className="mandi-rates-card">
                     <div className="mandi-card-header">
-                      <span className="mandi-badge">🌾 {ui.marketBadge}</span>
+                    <span className="mandi-badge"><AppIcon name="market" /> {ui.marketBadge}</span>
                       <span className="mandi-trend">{result.mandi_rates.trend}</span>
                     </div>
                     <div className="mandi-market-title">
@@ -2347,7 +2425,7 @@ function App() {
                 {/* Consult AI Doctor Card */}
                 <div className="ai-doctor-card">
                   <div className="ai-doctor-text">
-                    <h4>💬 {ui.adviceTitle}</h4>
+                    <h4><AppIcon name="message" /> {ui.adviceTitle}</h4>
                     <p>{ui.adviceText}</p>
                   </div>
                   <button
@@ -2355,7 +2433,7 @@ function App() {
                     className="ai-doctor-btn"
                     onClick={handleOpenChatWithDiagnosis}
                   >
-                    💬 {ui.openChat}
+                    <AppIcon name="message" /> {ui.openChat}
                   </button>
                 </div>
 
@@ -2528,7 +2606,7 @@ function App() {
                 </div>
 
                 <div className="curative-window-box">
-                  <span className="curative-icon">⚡</span>
+                  <span className="curative-icon"><AppIcon name="target" /></span>
                   <div>
                     <strong>{t.curativeActionWindow}:</strong>{" "}
                     <span>
@@ -2543,7 +2621,7 @@ function App() {
               {/* Symptoms */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">🔎</div>
+                  <div className="disease-card-icon"><AppIcon name="search" /></div>
                 </div>
 
                 <h3>
@@ -2567,7 +2645,7 @@ function App() {
               {/* Management */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">🛠️</div>
+                  <div className="disease-card-icon"><AppIcon name="tools" /></div>
                 </div>
 
                 <h3>{t.management}</h3>
@@ -2587,7 +2665,7 @@ function App() {
               {/* Prevention */}
               <div className="disease-info-card">
                 <div className="disease-card-top">
-                  <div className="disease-card-icon">🛡️</div>
+                  <div className="disease-card-icon"><AppIcon name="shield" /></div>
                 </div>
 
                 <h3>{t.prevention}</h3>
@@ -3245,14 +3323,14 @@ function App() {
           <>
             {forecastData && forecastData.forecast_days ? (
               <section className="forecast-section">
-                <h3>📅 {ui.forecastTitle(language === "mr" ? forecastData.district_mr : displayDistrict(forecastData.district))}</h3>
+                <h3><AppIcon name="calendar" /> {ui.forecastTitle(language === "mr" ? forecastData.district_mr : displayDistrict(forecastData.district))}</h3>
                 <p>{ui.forecastText}</p>
                 <div className="forecast-grid">
                   {forecastData.forecast_days.map((day, i) => (
                     <div key={i} className="forecast-day-card">
                       <div className="forecast-day-date">{localizedDay(day.date, language)}</div>
                       <div className="forecast-day-temp">{day.temp_range}</div>
-                      <div className="forecast-day-rain">🌧️ {day.rain_mm}mm ({day.rain_probability}%)</div>
+                      <div className="forecast-day-rain"><AppIcon name="rain" /> {day.rain_mm}mm ({day.rain_probability}%)</div>
                       <span className="forecast-day-badge" style={{ background: day.badge_color }}>
                         {localizedForecastBadge(day.risk_badge, language)}
                       </span>
@@ -3273,14 +3351,14 @@ function App() {
           <>
             {kendrasData ? (
               <section className="krishi-kendra-section">
-                <h3>🏪 {language === "mr" ? `अधिकृत कृषी सेवा केंद्र व वाजवी दर (${selectedDistrict})` : ui.kendraTitle(displayDistrict(selectedDistrict))}</h3>
+                <h3><AppIcon name="building" /> {language === "mr" ? `अधिकृत कृषी सेवा केंद्र व वाजवी दर (${selectedDistrict})` : ui.kendraTitle(displayDistrict(selectedDistrict))}</h3>
                 <div className="kendras-grid">
                   {kendrasData.kendras.map((k, idx) => (
                     <div key={idx} className="kendra-card">
                       <strong>{k.name}</strong>
                       <p>📍 {k.address}</p>
-                      <p>🏷️ {localizedKendraType(k.type, language)}</p>
-                      <a href={`tel:${k.phone}`}>📞 {k.phone}</a>
+                      <p><AppIcon name="tag" /> {localizedKendraType(k.type, language)}</p>
+                      <a href={`tel:${k.phone}`}><AppIcon name="phone" /> {k.phone}</a>
                     </div>
                   ))}
                 </div>
@@ -3320,7 +3398,7 @@ function App() {
         {/* Crop Recovery Comparison Tracker */}
         {activeTab === "recovery" && (
           <section className="recovery-tracker-section">
-            <h3>📈 {language === "mr" ? "फवारणीनंतरचा गुण व रोगमुक्ती तपासणी (Recovery Tracker)" : recoveryText?.[0] || "Crop Disease Recovery & Efficacy Tracker"}</h3>
+            <h3><AppIcon name="chart" /> {language === "mr" ? "फवारणीनंतरचा गुण व रोगमुक्ती तपासणी (Recovery Tracker)" : recoveryText?.[0] || "Crop Disease Recovery & Efficacy Tracker"}</h3>
             <p>{language === "mr" ? "फवारणीपूर्वीचा (Day 0) आणि फवारणीनंतरचा (Day 5) फोटो अपलोड करून रोग किती टक्के नियंत्रणात आला ते तपासा." : recoveryText?.[1] || "Upload 'Before Spray' and 'After Spray' leaf photos to verify treatment efficacy and lesion suppression percentage."}</p>
 
             <div className="recovery-upload-grid">
@@ -3465,34 +3543,34 @@ function App() {
 
       {/* Maharashtra Kisan Helpline Directory */}
       <section className="kisan-helpline-card">
-        <h3>📞 {ui.helpline}</h3>
+        <h3><AppIcon name="phone" /> {ui.helpline}</h3>
         <div className="helpline-grid">
           <a href="tel:18001801551" className="helpline-item">
-            <span className="helpline-icon">🌾</span>
+            <span className="helpline-icon"><AppIcon name="sprout" /></span>
             <div>
               <strong>{ui.callCentre}</strong>
-              <span>📞 1800-180-1551</span>
+              <span><AppIcon name="phone" /> 1800-180-1551</span>
             </div>
           </a>
           <a href="tel:18002334000" className="helpline-item">
-            <span className="helpline-icon">🚜</span>
+            <span className="helpline-icon"><AppIcon name="spray" /></span>
             <div>
               <strong>{ui.stateHelpline}</strong>
-              <span>📞 1800-233-4000</span>
+              <span><AppIcon name="phone" /> 1800-233-4000</span>
             </div>
           </a>
           <a href="tel:02426243208" className="helpline-item">
-            <span className="helpline-icon">🏛️</span>
+            <span className="helpline-icon"><AppIcon name="building" /></span>
             <div>
               <strong>{ui.university}</strong>
-              <span>📞 02426-243208</span>
+              <span><AppIcon name="phone" /> 02426-243208</span>
             </div>
           </a>
           <a href="tel:02025537033" className="helpline-item">
-            <span className="helpline-icon">🔬</span>
+            <span className="helpline-icon"><AppIcon name="brain" /></span>
             <div>
               <strong>{ui.kvk}</strong>
-              <span>📞 020-25537033</span>
+              <span><AppIcon name="phone" /> 020-25537033</span>
             </div>
           </a>
         </div>

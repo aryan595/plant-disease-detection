@@ -108,47 +108,67 @@ export default function AuthModal({
     if (!isOpen) return;
 
     const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    if (!googleClientId) return;
 
-    // Check if Google GIS library is ready and a Client ID is provided
-    if (googleClientId && window.google?.accounts?.id && googleBtnRef.current) {
-      try {
-        window.google.accounts.id.initialize({
-          client_id: googleClientId,
-          callback: (response) => {
-            if (response.credential) {
-              const decoded = parseJwt(response.credential);
-              if (decoded) {
-                const googleUser = {
-                  id: decoded.sub || `google_${Date.now()}`,
-                  name: decoded.name || "Google Farmer",
-                  email: decoded.email || "farmer@gmail.com",
-                  picture: decoded.picture || null,
-                  provider: "google",
-                  district: userDistrict,
-                  primaryCrop: primaryCrop,
-                  verified: true,
-                  token: response.credential,
-                  createdAt: new Date().toISOString(),
-                };
-                saveAndComplete(googleUser);
+    let timer;
+    let attempts = 0;
+
+    const initGis = () => {
+      if (window.google?.accounts?.id && googleBtnRef.current) {
+        try {
+          window.google.accounts.id.initialize({
+            client_id: googleClientId,
+            callback: (response) => {
+              if (response.credential) {
+                const decoded = parseJwt(response.credential);
+                if (decoded) {
+                  const googleUser = {
+                    id: decoded.sub || `google_${Date.now()}`,
+                    name: decoded.name || "Google Farmer",
+                    email: decoded.email || "farmer@gmail.com",
+                    picture: decoded.picture || null,
+                    provider: "google",
+                    district: userDistrict,
+                    primaryCrop: primaryCrop,
+                    verified: true,
+                    token: response.credential,
+                    createdAt: new Date().toISOString(),
+                  };
+                  saveAndComplete(googleUser);
+                }
               }
-            }
-          },
-          auto_select: false,
-        });
+            },
+            auto_select: false,
+          });
 
-        // Render official button into target
-        window.google.accounts.id.renderButton(googleBtnRef.current, {
-          theme: "filled_blue",
-          size: "large",
-          width: 320,
-          text: mode === "signup" ? "signup_with" : "signin_with",
-          shape: "pill",
-        });
-      } catch (err) {
-        console.warn("Google GIS initialization error:", err);
+          // Render official button into target
+          window.google.accounts.id.renderButton(googleBtnRef.current, {
+            theme: "filled_blue",
+            size: "large",
+            width: 320,
+            text: mode === "signup" ? "signup_with" : "signin_with",
+            shape: "pill",
+          });
+          return true;
+        } catch (err) {
+          console.warn("Google GIS initialization error:", err);
+        }
       }
+      return false;
+    };
+
+    if (!initGis()) {
+      timer = setInterval(() => {
+        attempts++;
+        if (initGis() || attempts > 20) {
+          clearInterval(timer);
+        }
+      }, 200);
     }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
   }, [isOpen, mode, userDistrict, primaryCrop]);
 
   const saveAndComplete = async (user) => {
@@ -426,21 +446,25 @@ export default function AuthModal({
 
           {/* Primary Action: Google Sign In / Sign Up */}
           <div className="google-auth-cluster">
-            {/* GIS Container (if real Google Client ID provided) */}
-            <div id="google-gis-btn-slot" ref={googleBtnRef} className="google-gis-container" />
+            {/* Official Google GIS Button (if VITE_GOOGLE_CLIENT_ID is provided) */}
+            {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+              <div id="google-gis-btn-slot" ref={googleBtnRef} className="google-gis-container" />
+            )}
 
-            {/* Always visible responsive Google Button */}
-            <button
-              type="button"
-              className="google-auth-button"
-              onClick={handleGoogleClick}
-              disabled={loading}
-            >
-              <GoogleIcon size={20} />
-              <span>
-                {mode === "signup" ? t.signUpWithGoogle : t.continueWithGoogle}
-              </span>
-            </button>
+            {/* Custom Google Button (shows when no Google Client ID is configured) */}
+            {!import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+              <button
+                type="button"
+                className="google-auth-button"
+                onClick={handleGoogleClick}
+                disabled={loading}
+              >
+                <GoogleIcon size={20} />
+                <span>
+                  {mode === "signup" ? t.signUpWithGoogle : t.continueWithGoogle}
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Google Account Selector Dialog (Instant Demo or Custom Google ID) */}
